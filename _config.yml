@@ -109,9 +109,9 @@ deploy:
 
 
 search:
-  path: ./source/search.xml
+  path: search.xml
   field: post
   content: true
-  template: ./source/search.xml
+  template: ./search.xml
 
 
