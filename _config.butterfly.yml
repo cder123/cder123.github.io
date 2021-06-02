@@ -56,9 +56,10 @@ algolia_search:
   hits:
     per_page: 6
 
-# Local search
+# local_search
 local_search:
   enable: true
+
 
 # Math (數學)
 # --------------------------------------
