@@ -1,0 +1,516 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2020-ASP.NET_WebForm_毕设笔记 | Cyw的笔记栈</title><meta name="keywords" content="C#"><meta name="author" content="CYW"><meta name="copyright" content="CYW"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="2020-ASP.NET_WebForm_毕设笔记[toc] 1. 整体概述1.1 该电子商城的页面   首页   分类页【包含：一级分类&#x2F;二级分类】   搜索页   商品详情页   注册页   登录页   忘记密码【即：修改密码页】 用户中心   基本信息页   地址管理   收款码管理   用户管理   商品管理     订单中心   订单详情   订单录入   购物车  1.2 功能模块图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020-ASP.NET_WebForm_毕设笔记">
+<meta property="og:url" content="http://cder123.github.io/2021/06/02/ASP.NET_WebForm_%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Cyw的笔记栈">
+<meta property="og:description" content="2020-ASP.NET_WebForm_毕设笔记[toc] 1. 整体概述1.1 该电子商城的页面   首页   分类页【包含：一级分类&#x2F;二级分类】   搜索页   商品详情页   注册页   登录页   忘记密码【即：修改密码页】 用户中心   基本信息页   地址管理   收款码管理   用户管理   商品管理     订单中心   订单详情   订单录入   购物车  1.2 功能模块图">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/01/2KV1yj.png">
+<meta property="article:published_time" content="2021-06-02T09:49:55.491Z">
+<meta property="article:modified_time" content="2021-06-02T09:49:45.010Z">
+<meta property="article:author" content="CYW">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/06/01/2KV1yj.png"><link rel="shortcut icon" href="https://z3.ax1x.com/2021/06/01/2KeKMQ.png"><link rel="canonical" href="http://cder123.github.io/2021/06/02/ASP.NET_WebForm_%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"简","msgToSimplifiedChinese":"繁"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2020-ASP.NET_WebForm_毕设笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-06-02 17:49:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KZgDs.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">30</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://z3.ax1x.com/2021/06/01/2KV1yj.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Cyw的笔记栈</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">2020-ASP.NET_WebForm_毕设笔记<a class="post-edit-link" href="null_posts/ASP.NET_WebForm_毕设笔记.md" title="编辑" target="_blank"><i class="fas fa-pencil-alt"></i></a></h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-02T09:49:55.491Z" title="发表于 2021-06-02 17:49:55">2021-06-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-06-02T09:49:45.010Z" title="更新于 2021-06-02 17:49:45">2021-06-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/C/">C#</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/ASP-NET/">ASP.NET</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="2020-ASP.NET_WebForm_毕设笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="2020-ASP-NET-WebForm-毕设笔记"><a href="#2020-ASP-NET-WebForm-毕设笔记" class="headerlink" title="2020-ASP.NET_WebForm_毕设笔记"></a>2020-ASP.NET_WebForm_毕设笔记</h1><p>[toc]</p>
+<h2 id="1-整体概述"><a href="#1-整体概述" class="headerlink" title="1. 整体概述"></a>1. 整体概述</h2><h3 id="1-1-该电子商城的页面"><a href="#1-1-该电子商城的页面" class="headerlink" title="1.1 该电子商城的页面"></a>1.1 该电子商城的<strong>页面</strong></h3><ul>
+<li>  首页</li>
+<li>  分类页【包含：一级分类/二级分类】</li>
+<li>  搜索页</li>
+<li>  商品详情页</li>
+<li>  注册页</li>
+<li>  登录页</li>
+<li>  忘记密码【即：修改密码页】</li>
+<li>用户中心<ul>
+<li>  基本信息页</li>
+<li>  地址管理</li>
+<li>  收款码管理</li>
+<li>  用户管理</li>
+<li>  商品管理</li>
+</ul>
+</li>
+<li>  订单中心</li>
+<li>  订单详情</li>
+<li>  订单录入</li>
+<li>  购物车</li>
+</ul>
+<h3 id="1-2-功能模块图"><a href="#1-2-功能模块图" class="headerlink" title="1.2 功能模块图"></a>1.2 功能模块图</h3><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/02/2QIm9S.png" alt="1"></p>
+<h3 id="1-3-样式"><a href="#1-3-样式" class="headerlink" title="1.3 样式"></a>1.3 样式</h3><ul>
+<li><p>  该项目主要使用 【Bootstrap4 +外联css + 内联css + Jquery 样式】</p>
+</li>
+<li><p>  由于需要使用 Bootstrap4 ，因此 在页面需要先导入Jquery ，再导入Bootstrap4 【因为Bootstrap4 有部分功能是基于Jquery开发的】  (本项目是在母版页导入)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;/App_Themes/主题1/jquery.min.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/App_Themes/主题1/bootstrap/js/bootstrap.bundle.min.js&quot;</span>&gt;</span>		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span>    </span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/App_Themes/主题1/bootstrap/js/bootstrap.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+<li><p>  在页面标签显示小图标：【分别设置  aspx   和  webconfig 】</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">&quot;icon&quot;</span> href=<span class="string">&quot;/App_Themes/主题1/img/GM.png&quot;</span> type=<span class="string">&quot;image/x-icon&quot;</span> /&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;shortcut icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./App_Themes/主题1/img/GM.png&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/x-icon&quot;</span> /&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//在system.webServer标签内部输入，且在IIS中注册.woff2格式</span><br><span class="line"><span class="tag">&lt;<span class="name">staticContent</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">mimeMap</span> <span class="attr">fileExtension</span>=<span class="string">&quot;.woff2&quot;</span> <span class="attr">mimeType</span>=<span class="string">&quot;application/x-font-woff&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">staticContent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>关联主题</p>
+<ul>
+<li>  在web.config文件中的<code>&lt;configuration&gt; &lt;configuration&gt;</code>内部输入：</li>
+</ul>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">system.web</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">pages</span> <span class="attr">theme</span>=<span class="string">&quot;主题1&quot;</span> /&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">compilation</span> <span class="attr">debug</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">sessionState</span> <span class="attr">mode</span>=<span class="string">&quot;StateServer&quot;</span> <span class="attr">cookieless</span>=<span class="string">&quot;false&quot;</span> 					<span class="attr">timeout</span>=<span class="string">&quot;480&quot;</span>/&gt;</span>  </span><br><span class="line">    	</span><br><span class="line"><span class="tag">&lt;/<span class="name">system.web</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在以上代码中 <strong>sessionState</strong> 标签是为了设置网站中的<strong>session有效时间</strong>，<ul>
+<li><strong>sessionState</strong>的几个属性的参数：      +   mode<strong>属性</strong>：<pre><code>  +   InProc：session保存在进程(IIS)内部，性能好，但容易丢失
+  +   StateServer：保存在进程外，需要启动`asp.net State Service的服务`，session在有效期内除非重启电脑或关闭服务，否则一直保存直到失效时间自动失效
+  +   SQLServer: 保存在数据库中，在标签中设置数据库的ip地址`stateConnectionString=&#39;tcpip=127.0.0.1:42424&#39;`，部分数据类型需要序列化      +   cookieless**属性**：
+  +   true:在浏览器禁用cookie，使用url保存cookie,使用这种方法保存cookie时如果要跳转页面，不能直接覆盖地址栏的值，否则session会失效
+      +   示例：`http://localhost/ABC/(ulqsek45heu)/default.aspx`【小括号内的就是SessionID】
+  +   false:【默认】，在浏览器启用cookie      +   timeout**属性**：
+  +   属性值为 **分钟数**，**默认 20 min**
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-收款码和商品图片"><a href="#1-4-收款码和商品图片" class="headerlink" title="1.4 收款码和商品图片"></a>1.4 收款码和商品图片</h3><p>收款码和商品图片  保存  在项目文件夹下，数据库中 保存 图片路径</p>
+<h3 id="1-5-数据库访问类"><a href="#1-5-数据库访问类" class="headerlink" title="1.5 数据库访问类"></a>1.5 数据库访问类</h3><p>数据库访问类的编写步骤：</p>
+<ul>
+<li>  在任一页面放置 数据源控件 ，以可视化的方式创建  <strong>连接字符串</strong></li>
+<li>  定义1个私有的静态 SqlConnection  属性，并 编写该属性的getter 访问器</li>
+<li>  编写 获取数据集的方法</li>
+<li>  编写 执行SQL语句的 方法</li>
+</ul>
+<h4 id="1-5-1-创建SQL连接"><a href="#1-5-1-创建SQL连接" class="headerlink" title="1.5.1 创建SQL连接"></a>1.5.1 创建SQL连接</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private static SqlConnection connection;    </span><br><span class="line">    //连接的getter 访问器</span><br><span class="line">public static SqlConnection Connection &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            string connectionString = ConfigurationManager.ConnectionStrings[&quot;OnlineMallConnectionString&quot;].ConnectionString;</span><br><span class="line">            if (connection == null || connection.State == ConnectionState.Closed) &#123;</span><br><span class="line">                connection = new SqlConnection(connectionString);</span><br><span class="line">                connection.Open();</span><br><span class="line">            &#125;</span><br><span class="line">            return connection;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="1-5-2-获取数据集的方法"><a href="#1-5-2-获取数据集的方法" class="headerlink" title="1.5.2 获取数据集的方法"></a>1.5.2 获取数据集的方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">    //获取数据集的方法</span><br><span class="line">    public static DataTable GetDataSet(string sql) &#123;</span><br><span class="line">        SqlCommand cmd = new SqlCommand(sql, Connection);</span><br><span class="line">        DataSet ds = new DataSet();</span><br><span class="line">        SqlDataAdapter da = new SqlDataAdapter(cmd);</span><br><span class="line">        da.Fill(ds);</span><br><span class="line">        return ds.Tables[0];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">//------------------------------------------------------------</span><br><span class="line">    //获取数据集的方法的重载</span><br><span class="line">    public static DataTable GetDataSet(string sql, SqlParameter[] sqlparameters) &#123;</span><br><span class="line">        SqlCommand cmd = new SqlCommand(sql, Connection);</span><br><span class="line">        foreach (SqlParameter arg in sqlparameters) &#123;</span><br><span class="line">            cmd.Parameters.Add(arg);</span><br><span class="line">        &#125;</span><br><span class="line">        DataSet ds = new DataSet();</span><br><span class="line">        SqlDataAdapter da = new SqlDataAdapter(cmd);</span><br><span class="line">        da.Fill(ds);</span><br><span class="line">        return ds.Tables[0];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="1-5-3-执行SQL语句的方法"><a href="#1-5-3-执行SQL语句的方法" class="headerlink" title="1.5.3 执行SQL语句的方法"></a>1.5.3 执行SQL语句的方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//执行sql语句的方法</span><br><span class="line"> public static int ExecuteSql(string sql)</span><br><span class="line"> &#123;</span><br><span class="line">     SqlCommand command = new SqlCommand(sql, Connection);</span><br><span class="line">     return command.ExecuteNonQuery();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> //执行SQL语句 所需的方法的重载</span><br><span class="line"> public static int ExecuteSql(String sql, SqlParameter[] sqlparameters)</span><br><span class="line"> &#123;</span><br><span class="line">     SqlCommand command = new SqlCommand(sql, Connection);</span><br><span class="line">     foreach (SqlParameter arg in sqlparameters)</span><br><span class="line">     &#123;</span><br><span class="line">         command.Parameters.Add(arg);</span><br><span class="line">     &#125;</span><br><span class="line">     return command.ExecuteNonQuery();</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="1-5-4-关闭连接"><a href="#1-5-4-关闭连接" class="headerlink" title="1.5.4 关闭连接"></a>1.5.4 关闭连接</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static bool CloseConn() &#123;</span><br><span class="line">    connection.Close();</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="1-6-数据库访问类的使用-示例"><a href="#1-6-数据库访问类的使用-示例" class="headerlink" title="1.6 数据库访问类的使用-示例"></a>1.6 数据库访问类的使用-示例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">//在后端文件中 引入命名空间</span><br><span class="line">using System.Data;</span><br><span class="line">using System.Data.SqlClient;</span><br><span class="line">using System.Collections;</span><br><span class="line"></span><br><span class="line">//--------------------获取数据集---------------------------------</span><br><span class="line">//第一种【获取数据集】</span><br><span class="line">	//创建sql语句字符串【在方法/事件内】</span><br><span class="line">	int Sid=10;</span><br><span class="line">	string sql_1 = &quot;select * from stuTable where SID=&quot;+Sid;</span><br><span class="line"></span><br><span class="line">	//获取数据集【表】    </span><br><span class="line">	DataTable StuDt =  DBClass.GetDataSet(sql_1);   </span><br><span class="line"></span><br><span class="line">	//关闭连接</span><br><span class="line">	DBClass.CloseConn();</span><br><span class="line"></span><br><span class="line">	// 声明 ArrayList 保存数据</span><br><span class="line">	ArrayList StuArr = new ArrayList();</span><br><span class="line"></span><br><span class="line">	//遍历数据集以获取所需数据</span><br><span class="line">    for(int i=0;i&lt;StuDt.Rows.Count;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        //StuArr保存 第 i 行 的第1个数据</span><br><span class="line">        //如果知道要取的值的列名，也可以根据列名取值</span><br><span class="line">        StuArr.Add(StuDt.Rows[i][0]);         </span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//第二种【获取数据集】</span><br><span class="line">	int Sid = 10;</span><br><span class="line">	string name = &quot;小明&quot;;</span><br><span class="line">	string sql = &quot;select * from stuTb where SID=@Sid and Sname=@name&quot;;</span><br><span class="line">	SqlParameter[] para = new SqlParameter[]</span><br><span class="line">    &#123;</span><br><span class="line">        new SqlParameter(&quot;@Sid&quot;,Sid),</span><br><span class="line">        new SqlParameter(&quot;@name&quot;,name)</span><br><span class="line">    &#125;</span><br><span class="line">	DBClass.GetDataSet(sql,para)；</span><br><span class="line"></span><br><span class="line">//-----------------------执行SQL----------------------------</span><br><span class="line">//第一种【执行SQL】</span><br><span class="line">    //执行sql语句(增/删/改) </span><br><span class="line">	string sql_2 = &quot;insert into StuTable values(10,&#x27;小米&#x27;,&#x27;计算机系&#x27;)&quot;;</span><br><span class="line">	int impact_Rows_Num = DBClass.ExecuteSql(sql_2);</span><br><span class="line"></span><br><span class="line">//第二种【执行SQL,类似获取数据集的第二种】</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//-----------------------判断单元格是否为空------------------------</span><br><span class="line">//判断单元格是否为空</span><br><span class="line">	 if (dt1.Rows[0][0] is DBNull)</span><br><span class="line">     &#123;</span><br><span class="line">         //代码。。。</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="1-7-母版页"><a href="#1-7-母版页" class="headerlink" title="1.7 母版页"></a>1.7 母版页</h3><p>母板页只放置公共部分，母版页中会有1个占位符。所有根据母版页生成的页面，其与母版页不同的代码，实际上都是写在占位符中的。并且，占位符可以根据需要，自己拖出占位符控件</p>
+<p>前端：</p>
+<ul>
+<li>  头部   ：个人中心，登录，注册，购物车等</li>
+<li>  底部   ：站点 相关信息</li>
+</ul>
+<p>后端：</p>
+<ul>
+<li><p>Page_Load事件 中 判断session中是否有用户名信息【即：是否登录】</p>
+<ul>
+<li>  若 没登录【默认】：显示 - 【首页，登录，注册，购物车等几个按钮】</li>
+<li>  若登录：清除头部nav 中的【登录，注册】按钮，替换上【个人中心按钮】</li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> this.top2.Controls.Remove(LoginPagebtn);</span><br><span class="line">//个人中心</span><br><span class="line">LinkButton myCenterPagebtn = new LinkButton();</span><br><span class="line"></span><br><span class="line">myCenterPagebtn.ID = &quot;myCenterPagebtn&quot;;</span><br><span class="line"></span><br><span class="line">myCenterPagebtn.CssClass = &quot;linkbtn&quot;;</span><br><span class="line"></span><br><span class="line">myCenterPagebtn.Text = Session[&quot;UserName&quot;].ToString() + &quot; 的个人中心&quot;;</span><br><span class="line"></span><br><span class="line">myCenterPagebtn.Click += new EventHandler(userbtn_Click);</span><br><span class="line"></span><br><span class="line">this.top2.Controls.Add(myCenterPagebtn);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>退出登录</strong>按钮的事件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//清除浏览器缓存    </span><br><span class="line">	public void ClearClientPageCache()</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        Response.Buffer = true;</span><br><span class="line">        Response.ExpiresAbsolute = DateTime.Now.AddDays(-1);</span><br><span class="line">        Response.Cache.SetExpires(DateTime.Now.AddDays(-1));</span><br><span class="line">        Response.Expires = 0;</span><br><span class="line">        Response.CacheControl = &quot;no-cache&quot;;</span><br><span class="line">        Response.Cache.SetNoStore();</span><br><span class="line"></span><br><span class="line">    &#125;    </span><br><span class="line">//退出登录</span><br><span class="line">    protected void LogOutbtn_Click(object sender, EventArgs e)</span><br><span class="line">    &#123;</span><br><span class="line">        Session[&quot;UserName&quot;] = null;</span><br><span class="line">        Session[&quot;UserPwd&quot;] = null;</span><br><span class="line">        ClearClientPageCache();</span><br><span class="line">        Response.Redirect(&quot;~/Default.aspx&quot;);</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="1-8-首页"><a href="#1-8-首页" class="headerlink" title="1.8 首页"></a>1.8 首页</h3><ul>
+<li><p>轮播图左侧——分类导航</p>
+<ul>
+<li>  设置好布局，子分类默认【display:none;】</li>
+<li>  鼠标触发jquery 的<strong>mouseenter</strong>事件时， display:block;</li>
+<li>  鼠标触发jquery 的<strong>mouseleave</strong>事件时， display:none;</li>
+<li>  左侧主分类<strong>前端</strong>使用 ul+li , li 的 id包含索引，在jQuery事件中利用索引*偏移量实现 【id =“cate-0”】 。<strong>后端</strong>利用 <code>div.innerHtml = “ html字符串 ”; </code>渲染</li>
+</ul>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;.left-nav&gt;li&quot;</span>).mouseenter(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> id = <span class="built_in">parseInt</span>(e.target.id.split(<span class="string">&quot;-&quot;</span>)[<span class="number">1</span>]);</span><br><span class="line">                $(<span class="string">&quot;.subCategory&quot;</span>).scrollTop(id * <span class="number">100</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+<li><p>  轮播图使用 Bootstrap4 的轮播图组件</p>
+</li>
+<li><p>商品卡片：</p>
+<ul>
+<li>  用 Hashtable  存放 单个商品的相关信息</li>
+<li>用 ArrayList  存放 页面中的所有商品【Hashtable  】</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-9-搜索页"><a href="#1-9-搜索页" class="headerlink" title="1.9 搜索页"></a>1.9 搜索页</h3><p>搜索框，数据库中返回数据，排序。</p>
+<h2 id="2-常用控件的使用技巧"><a href="#2-常用控件的使用技巧" class="headerlink" title="2. 常用控件的使用技巧"></a>2. 常用控件的使用技巧</h2><p><strong>注意：</strong></p>
+<ul>
+<li><p>所有 <strong>asp.net控件</strong> 最终都会<strong>编译</strong>成  <strong>html标签</strong> 呈现在浏览器</p>
+<ul>
+<li>  Label  -&gt;  span</li>
+<li>  TextBox  -&gt; input: textbox</li>
+<li>  Button   -&gt; input: submit</li>
+</ul>
+</li>
+<li><p>如果<strong>控件是动态生成</strong>的，需要在<strong>事件中访问当前操作的控件</strong>时，可以在new控件时将控件ID按自己的需求更改，将要传的参数通过分割符以字符串的形式与ID拼接，要在事件中使用时，先强制转化为控件，再进行字符串的分割等操作</p>
+<p>  示例：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//生成控件</span><br><span class="line">protected void Page_Load(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    Button btn_1 = new BUtton();</span><br><span class="line">    btn_1.ID = &quot;btn-1&quot;;    </span><br><span class="line">    btn_1.Text = &quot;点我&quot;;</span><br><span class="line">    btn_1.Click += new EventHandler(btn_1_Click);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">protected void btn_1_Click(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    //例如：该按钮的id格式为：btn-商品编号</span><br><span class="line">    //字符串的Split(&#x27;分隔符&#x27;);方法最后生成的是一个数组</span><br><span class="line">    Button  btn1 = (Button)sender;</span><br><span class="line">    string pid = btn1.ID.Split(&#x27;-&#x27;)[1];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  控件的操作</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//假设前端已经有了控件 Pannerl_1</span><br><span class="line">//后端</span><br><span class="line"></span><br><span class="line">	Button btn_1  = new Button();</span><br><span class="line"></span><br><span class="line">//添加控件</span><br><span class="line">	Pannerl_1。Controls.Add(控件名);</span><br><span class="line">//删除控件</span><br><span class="line">	Pannerl_1。Controls.Remove(控件名);</span><br><span class="line">//清空控件</span><br><span class="line">	Pannerl_1。Controls.Clear();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  表单控件的相关信息会传到  <strong>Request</strong> 的 <strong>formdata</strong> 中</li>
+</ul>
+<h3 id="2-1-事件："><a href="#2-1-事件：" class="headerlink" title="2.1 事件："></a>2.1 事件：</h3><ul>
+<li>  控件的事件名规则一般为<code>控件ID_事件</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//前端</span><br><span class="line">    &lt;asp:Button ID=&quot;btn_1&quot; Text=&quot;按钮1&quot; OnClick=&quot;btn_1_OnClick&quot;&gt;</span><br><span class="line">    &lt;/asp:Button&gt;</span><br><span class="line"></span><br><span class="line">//后端</span><br><span class="line">    protected void btn_1_OnClick(object sender, EventArgs e)  </span><br><span class="line">    &#123;</span><br><span class="line">        //相应的代码。。。</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  动态生成控件-绑定事件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//生成控件</span><br><span class="line">protected void Page_Load(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    Button btn_1 = new BUtton();    </span><br><span class="line">    btn_1.Text = &quot;点我&quot;;</span><br><span class="line">    //绑定事件</span><br><span class="line">    btn_1.Click += new EventHandler(btn_1_Click);</span><br><span class="line">&#125;</span><br><span class="line">//事件</span><br><span class="line">protected void btn_1_Click(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">   //事件代码。。。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="2-2-只需加载一次的代码"><a href="#2-2-只需加载一次的代码" class="headerlink" title="2.2 只需加载一次的代码"></a>2.2 只需加载一次的代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">protected void Page_Load(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    if(!isPostBack)&#123;</span><br><span class="line">        //第一次加载页面时，执行的代码</span><br><span class="line">    &#125; </span><br><span class="line">    //每次页面加载都执行的代码</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="2-3-Session的使用"><a href="#2-3-Session的使用" class="headerlink" title="2.3 Session的使用"></a>2.3 Session的使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">protected void Page_Load(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    //存session</span><br><span class="line">   		Session[&quot;username&quot;] = this.txtbox_1.Text.Trim();</span><br><span class="line">    </span><br><span class="line">    //取session【由于session是1个对象，因此使用时一般需要强制转化】</span><br><span class="line">    	string username = Session[&quot;username&quot;].toString();</span><br><span class="line">    </span><br><span class="line">    //判断Session是否为空</span><br><span class="line">    	if(!(Session[&quot;username&quot;] == null))</span><br><span class="line">        &#123;</span><br><span class="line">            //代码            </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="2-4-html标签-与-asp-net-控件"><a href="#2-4-html标签-与-asp-net-控件" class="headerlink" title="2.4 html标签 与 asp.net 控件"></a>2.4 html标签 与 asp.net 控件</h3><ul>
+<li><p>  后端控件  中加上1句 <code>CssClass=&quot;css类名&quot;</code>来设置相应的 css样式</p>
+</li>
+<li><p>  html标签 中加上1句 <code>runat=&quot;server&quot;</code> 就能在后端用 ID访问到</p>
+</li>
+</ul>
+<p>如：</p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前端</span></span><br><span class="line">	&lt;<span class="keyword">div</span> <span class="symbol">id</span>=<span class="string">&quot;a1&quot;</span> runat=<span class="string">&quot;server&quot;</span>&gt;你好！&lt;<span class="keyword">div</span>&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;asp:TextBox ID=<span class="string">&quot;txtbox_a&quot;</span> CssClass=<span class="string">&quot;txtbox_1&quot;</span> runat=<span class="string">&quot;server&quot;</span> &gt;	</span><br><span class="line">    &lt;/asp:TextBox&gt;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"><span class="comment">//后端</span></span><br><span class="line">	a1.innerHtml=<span class="string">&quot;hello world!&quot;</span>;</span><br><span class="line">	</span><br><span class="line">	txtbox_a.Text = <span class="string">&quot;你好&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="2-5-地址栏传参"><a href="#2-5-地址栏传参" class="headerlink" title="2.5 地址栏传参"></a>2.5 地址栏传参</h3><ul>
+<li>  当使用地址栏传参数时，如果参数中包含中文，必须先编码，然后再在后端获取参数后解码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//传参页-后端</span><br><span class="line">protected void imgbtn_Click(object sender, ImageClickEventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    if (this.searchInput.Text != &quot;&quot;) &#123;</span><br><span class="line">        //编码</span><br><span class="line">        string KW1 =Server.UrlEncode(this.txtbox_1.Text.Trim());</span><br><span class="line">        Response.Redirect(&quot;/Pages/Search/Search.aspx?kw=&quot;+KW1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//接受参数页-后端</span><br><span class="line">protected void go_Click(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    string tmp = Request[&quot;kw&quot;].toString();</span><br><span class="line">    //解码</span><br><span class="line">    string KW2 = Server.UrlEncode(tmp);</span><br><span class="line">    this.textbox_2.Text = KW2;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="2-6-ImageButton控件"><a href="#2-6-ImageButton控件" class="headerlink" title="2.6 ImageButton控件"></a>2.6 ImageButton控件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//前端 </span><br><span class="line">	&lt;asp:ImageButton CssClass=&quot;imgBtn&quot; ID=&quot;imgbtn&quot; runat=&quot;server&quot; ImageUrl=&quot;~/App_Themes/主题1/img/img.png&quot; OnClick=&quot;imgBtn_Click&quot; /&gt;</span><br><span class="line"></span><br><span class="line">//后端</span><br><span class="line">    protected void imgBtn_Click(object sender, ImageClickEventArgs e)</span><br><span class="line">    &#123;</span><br><span class="line">        search_Container.InnerHtml = &quot;&quot;;</span><br><span class="line">        Response.Redirect(&quot;./Search.aspx?kw=&quot; + 		Server.UrlEncode(this.txtbox_1.Value.Trim()));</span><br><span class="line">        ShowSearchItems(this.search_MaxBar_input.Value.Trim());</span><br><span class="line">    &#125;     </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="2-7-DropDownList控件"><a href="#2-7-DropDownList控件" class="headerlink" title="2.7 DropDownList控件"></a>2.7 DropDownList控件</h3><ul>
+<li><p>  DropDownList控件必须设置属性<code>AutoPostBack=&quot;True&quot;</code>以保证每次<strong>更改选项</strong>都能自动<strong>传到后端</strong></p>
+</li>
+<li><p>DropDownList控件中的选项可以是固定的，也可以是从数据库中查询得到的</p>
+<ul>
+<li>  <strong>固定</strong>的选项：</li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//前端</span><br><span class="line">	&lt;asp:DropDownList ID=&quot;dp_1&quot; class=&quot;dp_1&quot; runat=&quot;server&quot; AutoPostBack=&quot;True&quot;  </span><br><span class="line">        OnSelectedIndexChanged=&quot;dp_1_SelectedIndexChanged&quot;&gt;</span><br><span class="line">                &lt;asp:ListItem Selected=&quot;True&quot;&gt;按价格排序&lt;/asp:ListItem&gt;</span><br><span class="line">                &lt;asp:ListItem&gt;降序&lt;/asp:ListItem&gt;</span><br><span class="line">                &lt;asp:ListItem&gt;升序&lt;/asp:ListItem&gt;</span><br><span class="line">	&lt;/asp:DropDownList&gt;</span><br><span class="line">        </span><br><span class="line">//后端</span><br><span class="line">    protected void dp_1_SelectedIndexChanged(object sender, EventArgs e)</span><br><span class="line">    &#123;   </span><br><span class="line">        //ID为dp_1的DropDownList控件在选项更改时触发的事件。。。</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <strong>不固定</strong>【从数据库中获得】</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 利用数据库操作类中的获取数据集方法--&gt;提取数据并存到数组或arraylist中 </span><br><span class="line">// DropDownList的DataSource属性绑定数据集</span><br><span class="line">// 执行数据绑定方法</span><br><span class="line"></span><br><span class="line"> protected void Page_Load(object sender, EventArgs e)</span><br><span class="line"> &#123;</span><br><span class="line">     DataTable dt1 = DBClass.GetDataSet(&quot;select sid from stuTable&quot;);</span><br><span class="line">     </span><br><span class="line">     ArrayList arr1 = new ArrayList();</span><br><span class="line">     </span><br><span class="line">     for(int i=0;i&lt;dt1.Rows.Count;i++)</span><br><span class="line">     &#123;</span><br><span class="line">         arr1.Add(dt1.Rows[i][0]);         </span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     this.dp_1.DataSource = arr1;</span><br><span class="line">     this.dp_1.DataBind();     </span><br><span class="line">     </span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="2-8-GridView控件"><a href="#2-8-GridView控件" class="headerlink" title="2.8 GridView控件"></a>2.8 GridView控件</h3><p><strong>基本使用步骤：</strong></p>
+<ol>
+<li> 拖出控件</li>
+<li> 禁用自动生成列</li>
+<li> 手动添加 <strong>DataField</strong>,修改字段的headerText，并为每个DataField绑定数据库中的列</li>
+<li> 绑定数据源，并使用 GridView1.DataBind();</li>
+<li> 【必要时，可将<strong>DataField</strong>转化为<strong>模板字符串</strong>】</li>
+<li> 【添加命令字段（更新，删除，取消）】</li>
+<li> 【编写事件】</li>
+<li> 保存</li>
+</ol>
+<p><strong>编辑时的TextBox大小：</strong>调整<code>&lt;asp:BoundField&gt;&lt;/asp:BoundField&gt;</code>的<code>ControlStyle-Width</code>属性</p>
+<p><strong>获取当前操作的单元格的值：</strong></p>
+<ul>
+<li>  普通：<code>string str = e.Row.Cells[2].Text</code></li>
+<li>  编辑时：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string str = ((TextBox)(productManageGridView.Rows[e.RowIndex].Cells[6].Controls[0])).Text.Trim();</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h4 id="2-8-1-GridView-的-RowEditing事件"><a href="#2-8-1-GridView-的-RowEditing事件" class="headerlink" title="2.8.1   GridView 的 RowEditing事件"></a>2.8.1   GridView 的 RowEditing事件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//编辑</span><br><span class="line">	protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)</span><br><span class="line">    &#123;	</span><br><span class="line">        GridView1.EditIndex = e.NewEditIndex;</span><br><span class="line">        GridView1.DataBind();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="2-8-2-GridView-的-RowCancelingEdit事件"><a href="#2-8-2-GridView-的-RowCancelingEdit事件" class="headerlink" title="2.8.2  GridView 的 RowCancelingEdit事件"></a>2.8.2  GridView 的 RowCancelingEdit事件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//取消</span><br><span class="line">protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">        GridView1.EditIndex = -1;</span><br><span class="line">        GridView1.DataBind();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="2-8-3-GridView-的-RowDeleting事件"><a href="#2-8-3-GridView-的-RowDeleting事件" class="headerlink" title="2.8.3  GridView 的 RowDeleting事件"></a>2.8.3  GridView 的 RowDeleting事件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//删除</span><br><span class="line">protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    //执行删除</span><br><span class="line">        string delSql = &quot;  delete addTb where pid = 1 and name=&#x27;abc&#x27;  &quot; ;</span><br><span class="line">        DBClass.ExecuteSql(delSql);</span><br><span class="line">		</span><br><span class="line">	//执行完后退出编辑模式</span><br><span class="line">        GridView1.EditIndex = -1;</span><br><span class="line"></span><br><span class="line">    //重新从数据库中获取数据集，并与GridView绑定</span><br><span class="line">        GridView1.DataBind();        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="2-8-4-GridView-的-RowUpdating事件"><a href="#2-8-4-GridView-的-RowUpdating事件" class="headerlink" title="2.8.4  GridView 的 RowUpdating事件"></a>2.8.4  GridView 的 RowUpdating事件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    TextBox  currTxtBox = (TextBox)GridView1.Rows[e.RowIndex].Cells[1].Controls[0];</span><br><span class="line">    string addrStr = currTxtBox.Text;</span><br><span class="line"></span><br><span class="line">    string upSql = &quot;update addTb set address=&#x27;&quot;+addrStr+&quot;&#x27; where sid=35&quot; ;</span><br><span class="line">    DBClass.ExecuteSql(upSql);</span><br><span class="line">    GridView1.EditIndex = -1;</span><br><span class="line">    </span><br><span class="line">    //重新获取数据集，绑定数据源，绑定</span><br><span class="line">    GridView1.DataBind();</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="2-8-5-GridView-的-RowDataBound事件【表格前面显示-行号】"><a href="#2-8-5-GridView-的-RowDataBound事件【表格前面显示-行号】" class="headerlink" title="2.8.5  GridView 的 RowDataBound事件【表格前面显示  行号】"></a>2.8.5  GridView 的 RowDataBound事件【表格前面显示  行号】</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//前端：在gridview的columns标签内添加</span><br><span class="line">		&lt;asp:BoundField HeaderText=&quot;编号&quot; DataFormatString=&quot;&#123;0:Container.DataItemIndex&#125;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">//后端</span><br><span class="line">    	protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)</span><br><span class="line">    	&#123;</span><br><span class="line">            if (e.Row.RowIndex &gt;= 0)</span><br><span class="line">            &#123;</span><br><span class="line">                e.Row.Cells[0].Text = Convert.ToString(e.Row.DataItemIndex + 1);</span><br><span class="line">            &#125;</span><br><span class="line">    	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="2-8-6-GridView-删除1行时弹出提示信息"><a href="#2-8-6-GridView-删除1行时弹出提示信息" class="headerlink" title="2.8.6  GridView 删除1行时弹出提示信息"></a>2.8.6  GridView 删除1行时弹出提示信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//数据绑定</span><br><span class="line">    protected void productManageGridView_RowDataBound(object sender, GridViewRowEventArgs e)</span><br><span class="line">    &#123;</span><br><span class="line">        //如果是绑定数据行</span><br><span class="line">        if (e.Row.RowType == DataControlRowType.DataRow)</span><br><span class="line">        &#123;</span><br><span class="line">            if (e.Row.RowState == DataControlRowState.Normal || e.Row.RowState == DataControlRowState.Alternate)</span><br><span class="line">            &#123;</span><br><span class="line">               //cell[17]就是删除按钮，cell[2]是商品名</span><br><span class="line">                ((LinkButton)e.Row.Cells[17].Controls[0]).Attributes.Add(&quot;onclick&quot;, &quot;javascript:return confirm(&#x27;你确认要删除：\&quot;&quot; + e.Row.Cells[2].Text + &quot;\&quot;吗?&#x27;)&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //编号</span><br><span class="line">        if (e.Row.RowIndex &gt;= 0)</span><br><span class="line">        &#123;</span><br><span class="line">            e.Row.Cells[0].Text = Convert.ToString(e.Row.DataItemIndex + 1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="2-8-7-GridView-更改分页"><a href="#2-8-7-GridView-更改分页" class="headerlink" title="2.8.7  GridView 更改分页"></a>2.8.7  GridView 更改分页</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//前端：</span><br><span class="line">//GridView属性设置：</span><br><span class="line">//	允许分页，分页大小</span><br><span class="line">//	【即：AllowPaging=&quot;True&quot; PageSize=&quot;5&quot;】</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//后端</span><br><span class="line">		</span><br><span class="line">	//更改分页</span><br><span class="line">		protected void GridView_PageIndexChanging(object sender, GridViewPageEventArgs e)</span><br><span class="line">    	&#123;</span><br><span class="line">            this.productManageGridView.PageIndex = e.NewPageIndex;</span><br><span class="line">            this.productManageGridView.DataBind();</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="2-9-FileUpload-控件"><a href="#2-9-FileUpload-控件" class="headerlink" title="2.9 FileUpload 控件"></a>2.9 FileUpload 控件</h3><ul>
+<li>  FileUpload 控件一般结合Button使用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//前端</span><br><span class="line">&lt;asp:FileUpload ID=&quot;ImgFileUpload&quot; runat=&quot;server&quot; /&gt;</span><br><span class="line">&lt;asp:Button ID=&quot;okBtn&quot; runat=&quot;server&quot; Text=&quot;确定&quot; OnClick=&quot;okBtn_Click&quot; /&gt;  </span><br><span class="line">    </span><br><span class="line">//后端</span><br><span class="line">    </span><br><span class="line">//更新收款码</span><br><span class="line">protected void updateRecvCodeImgButton_Click(object sender, EventArgs e)</span><br><span class="line">&#123;</span><br><span class="line">    bool fileIsValid = false;</span><br><span class="line">        if (this.updateRecvCodeImgFileUpload.HasFile)</span><br><span class="line">        &#123;</span><br><span class="line">            String fileExtension = System.IO.Path.GetExtension(this.ImgFileUpload.FileName).ToLower();</span><br><span class="line">            String restrictExtension = &quot;.png&quot;;</span><br><span class="line">            //判断拓展名</span><br><span class="line">            if (fileExtension == restrictExtension)</span><br><span class="line">            &#123;</span><br><span class="line">                fileIsValid = true;</span><br><span class="line">            &#125;</span><br><span class="line">            //判断文件是否有效</span><br><span class="line">            if (fileIsValid == true) </span><br><span class="line">            &#123;</span><br><span class="line">                try</span><br><span class="line">                &#123;</span><br><span class="line">                    //保存图片</span><br><span class="line">                    string imgUrl_Pre = &quot;/PayCodeImg/&quot;;</span><br><span class="line">                    string imgUrl = imgUrl_Pre + Session[&quot;UserName&quot;].ToString() + &quot;.png&quot;;</span><br><span class="line">                    this.ImgFileUpload.SaveAs(Server.MapPath(imgUrl));</span><br><span class="line">                    this.Label1.Text = &quot;ok&quot;;</span><br><span class="line"></span><br><span class="line">                    //更新数据库</span><br><span class="line">                    string updateRecvCodeImg = &quot;update uTb set recvimg=&#x27;&quot; + Session[&quot;UserName&quot;].ToString() + &quot;.png&#x27; where name = &#x27;&quot; + Session[&quot;UserName&quot;].ToString() + &quot;&#x27;&quot;;</span><br><span class="line">                    DBClass.ExecuteSql(updateRecvCodeImg);</span><br><span class="line">                    DBClass.CloseConn();</span><br><span class="line">                &#125;</span><br><span class="line">                catch &#123;</span><br><span class="line">                    this.Label1.Text = &quot;文件上传不成功！&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">CYW</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://cder123.github.io/2021/06/02/ASP.NET_WebForm_%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0/">http://cder123.github.io/2021/06/02/ASP.NET_WebForm_毕设笔记/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cder123.github.io" target="_blank">Cyw的笔记栈</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C#</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/06/01/2KV1yj.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/06/02/Linux-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CentOS_7 配置笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/06/02/C# 编写 WebService【WebAPI】的简单示例/" title="C# 编写 WebService的示例"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-02</div><div class="title">C# 编写 WebService的示例</div></div></a></div><div><a href="/2021/06/02/ASP.NET — 入门笔记/" title="ASP.NET —— 入门笔记"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-02</div><div class="title">ASP.NET —— 入门笔记</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2020-ASP-NET-WebForm-%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0"><span class="toc-text">2020-ASP.NET_WebForm_毕设笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B4%E4%BD%93%E6%A6%82%E8%BF%B0"><span class="toc-text">1. 整体概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%AF%A5%E7%94%B5%E5%AD%90%E5%95%86%E5%9F%8E%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="toc-text">1.1 该电子商城的页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%9B%BE"><span class="toc-text">1.2 功能模块图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%A0%B7%E5%BC%8F"><span class="toc-text">1.3 样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%94%B6%E6%AC%BE%E7%A0%81%E5%92%8C%E5%95%86%E5%93%81%E5%9B%BE%E7%89%87"><span class="toc-text">1.4 收款码和商品图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E7%B1%BB"><span class="toc-text">1.5 数据库访问类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-1-%E5%88%9B%E5%BB%BASQL%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.5.1 创建SQL连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-2-%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">1.5.2 获取数据集的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-3-%E6%89%A7%E8%A1%8CSQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">1.5.3 执行SQL语句的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-4-%E5%85%B3%E9%97%AD%E8%BF%9E%E6%8E%A5"><span class="toc-text">1.5.4 关闭连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BF%E9%97%AE%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8-%E7%A4%BA%E4%BE%8B"><span class="toc-text">1.6 数据库访问类的使用-示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-%E6%AF%8D%E7%89%88%E9%A1%B5"><span class="toc-text">1.7 母版页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-%E9%A6%96%E9%A1%B5"><span class="toc-text">1.8 首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-%E6%90%9C%E7%B4%A2%E9%A1%B5"><span class="toc-text">1.9 搜索页</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%B8%E7%94%A8%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-text">2. 常用控件的使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BA%8B%E4%BB%B6%EF%BC%9A"><span class="toc-text">2.1 事件：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8F%AA%E9%9C%80%E5%8A%A0%E8%BD%BD%E4%B8%80%E6%AC%A1%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-text">2.2 只需加载一次的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Session%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">2.3 Session的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-html%E6%A0%87%E7%AD%BE-%E4%B8%8E-asp-net-%E6%8E%A7%E4%BB%B6"><span class="toc-text">2.4 html标签 与 asp.net 控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%9C%B0%E5%9D%80%E6%A0%8F%E4%BC%A0%E5%8F%82"><span class="toc-text">2.5 地址栏传参</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-ImageButton%E6%8E%A7%E4%BB%B6"><span class="toc-text">2.6 ImageButton控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-DropDownList%E6%8E%A7%E4%BB%B6"><span class="toc-text">2.7 DropDownList控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-GridView%E6%8E%A7%E4%BB%B6"><span class="toc-text">2.8 GridView控件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-1-GridView-%E7%9A%84-RowEditing%E4%BA%8B%E4%BB%B6"><span class="toc-text">2.8.1   GridView 的 RowEditing事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-2-GridView-%E7%9A%84-RowCancelingEdit%E4%BA%8B%E4%BB%B6"><span class="toc-text">2.8.2  GridView 的 RowCancelingEdit事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-3-GridView-%E7%9A%84-RowDeleting%E4%BA%8B%E4%BB%B6"><span class="toc-text">2.8.3  GridView 的 RowDeleting事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-4-GridView-%E7%9A%84-RowUpdating%E4%BA%8B%E4%BB%B6"><span class="toc-text">2.8.4  GridView 的 RowUpdating事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-5-GridView-%E7%9A%84-RowDataBound%E4%BA%8B%E4%BB%B6%E3%80%90%E8%A1%A8%E6%A0%BC%E5%89%8D%E9%9D%A2%E6%98%BE%E7%A4%BA-%E8%A1%8C%E5%8F%B7%E3%80%91"><span class="toc-text">2.8.5  GridView 的 RowDataBound事件【表格前面显示  行号】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-6-GridView-%E5%88%A0%E9%99%A41%E8%A1%8C%E6%97%B6%E5%BC%B9%E5%87%BA%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF"><span class="toc-text">2.8.6  GridView 删除1行时弹出提示信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-7-GridView-%E6%9B%B4%E6%94%B9%E5%88%86%E9%A1%B5"><span class="toc-text">2.8.7  GridView 更改分页</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9-FileUpload-%E6%8E%A7%E4%BB%B6"><span class="toc-text">2.9 FileUpload 控件</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By CYW</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
