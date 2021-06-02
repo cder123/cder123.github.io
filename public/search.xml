@@ -665,57 +665,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Kali-安装笔记</title>
-    <url>/2021/06/02/Kali-%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="KaLi——-笔记"><a href="#KaLi——-笔记" class="headerlink" title="KaLi—— 笔记"></a>KaLi—— 笔记</h1><p>[toc]<br>下载地址：【国内镜像】</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">搜狐：http://mirrors.sohu.com/</span><br><span class="line">网易：http://mirrors.163.com/</span><br><span class="line">阿里云：http://mirrors.aliyun.com/</span><br><span class="line">腾讯：http://android-mirror.bugly.qq.com:8080/（仅针对APP开发的软件，限流，不推荐）</span><br><span class="line">淘宝：http://npm.taobao.org/</span><br><span class="line"></span><br><span class="line">上海交通大学：http://ftp.sjtu.edu.cn/html/resources.xml（部分移动运营商出口状况不佳，无法访问）</span><br><span class="line">华中科技大学：http://mirror.hust.edu.cn/（当前已用容量估计：4.83T）</span><br><span class="line">清华大学：http://mirrors.tuna.tsinghua.edu.cn/（当前已用容量估计：9.8T）</span><br><span class="line">北京理工大学：http://mirror.bit.edu.cn/web/</span><br><span class="line">兰州大学：http://mirror.lzu.edu.cn/</span><br><span class="line">中国科技大学：http://mirrors.ustc.edu.cn/（当前已用容量估计：21.32T）</span><br><span class="line">大连东软信息学院：http://mirrors.neusoft.edu.cn/（当前已用容量估计：2.5T）</span><br><span class="line">东北大学：http://mirror.neu.edu.cn/</span><br><span class="line">大连理工大学：http://mirror.dlut.edu.cn/</span><br><span class="line">哈尔滨工业大学：http://run.hit.edu.cn/html/（部分联通运营商出口状况不佳，无法访问）</span><br><span class="line">北京交通大学：http://mirror.bjtu.edu.cn/cn/</span><br><span class="line">天津大学：http://mirror.tju.edu.cn（无法访问，ping超时）</span><br><span class="line">中国地质大学：http://mirrors.cug.edu.cn/（当前已用容量估计：2.3T）</span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">厦门大学：http://mirrors.xmu.edu.cn/</span><br><span class="line">中山大学：http://mirror.sysu.edu.cn/</span><br><span class="line">重庆大学：http://mirrors.cqu.edu.cn/（当前已用容量估计：3.93T）</span><br><span class="line">北京化工大学：http://ubuntu.buct.edu.cn/（Android SDK镜像仅供校内使用，当前已用容量估计：1.72T）</span><br><span class="line">南阳理工学院：http://mirror.nyist.edu.cn/</span><br><span class="line">中国科学院：http://www.opencas.org/mirrors/</span><br><span class="line">电子科技大学：http://ubuntu.uestc.edu.cn/（无法访问，ping超时）</span><br><span class="line">电子科技大学星辰工作室：http://mirrors.stuhome.net/（当前已用容量估计：1.08T）</span><br><span class="line">西北农林科技大学：http://mirrors.nwsuaf.edu.cn/（只做CentOS镜像，当前已用容量估计：140GB） </span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">台湾淡江大学: http://ftp.tku.edu.tw/Linux/</span><br><span class="line"></span><br><span class="line">首都在线科技股份有限公司（英文名Capital Online Data Service）：http://mirrors.yun-idc.com/</span><br><span class="line">中国电信天翼云：http://mirrors.ctyun.cn/</span><br><span class="line">noc.im：http://mirrors.noc.im/（当前已用容量估计：3.74T）</span><br><span class="line">常州贝特康姆软件技术有限公司：http://centos.bitcomm.cn/（只做CentOS镜像，当前已用容量估计：140GB）</span><br><span class="line">公云PubYun（母公司为贝特康姆）：http://mirrors.pubyun.com/</span><br><span class="line">Linux运维派：http://mirrors.skyshe.cn/（使用阿里云服务器，界面使用浙江大学的模板，首页维护，内容可访问）</span><br><span class="line">中国互联网络信息中心：http://mirrors.cnnic.cn/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">Fayea工作室：http://apache.fayea.com/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">开源中国社区 http://mirrors.oss.org.cn/</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p>参考【部分不一致】：<br><code>https://zhuanlan.zhihu.com/p/107667275?from_voters_page=true</code><br>文件= 》 新建虚拟机 =》 经典 = 》稍后安装 =》 Linux =》<br><img src="https://img-blog.csdnimg.cn/20201128190857420.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191053589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191208991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191337918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191517333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191551465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191640963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择第一项：图形化安装【由于我们刚才分配给虚拟机的内存太小（只有 512 MB），所以，只出现这种难看的界面】<br>然后：<br><img src="https://img-blog.csdnimg.cn/20201128191829246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191915611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191949932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202011281927033.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192721872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819281250.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192916509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192950314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193153727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193207605.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193225924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819325350.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193316391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193529659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在这里选择【图形界面的种类】<br><img src="https://img-blog.csdnimg.cn/20201128193622921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193744420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194928831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194957601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128195238913.png" alt="在这里插入图片描述"></p>
-<h2 id="2-初始设置"><a href="#2-初始设置" class="headerlink" title="2. 初始设置"></a>2. 初始设置</h2><h3 id="2-1-设置分辨率【以下为：2020-4版】"><a href="#2-1-设置分辨率【以下为：2020-4版】" class="headerlink" title="2.1 设置分辨率【以下为：2020.4版】"></a>2.1 设置分辨率【以下为：2020.4版】</h3><p><img src="https://img-blog.csdnimg.cn/20201128153043764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-2-设置网络"><a href="#2-2-设置网络" class="headerlink" title="2.2 设置网络"></a>2.2 设置网络</h3><p>使用VM中的 NAT 模式<br>要注意：</p>
-<ul>
-<li>物理机是否启用 vm 的 nat 服务</li>
-<li>是否将 网卡设为可共享- </li>
-<li><strong>锐捷校园网的客户端每隔一段时间就会关掉vm的nat服务</strong></li>
-<li>进入<code>/etc/network/interfaces</code>文件，仿照 lo0添加网卡，保存；重启服务 <code>/etc/init.d/networking restart</code></li>
-</ul>
-<p>使用VM中的 NAT 模式的<strong>步骤</strong>： </p>
-<ul>
-<li><code>win + R</code>，输入<code>services.msc</code> , 找到<code>VM NAT Server</code>服务，启动</li>
-<li>设置vmnet8 网卡的 ip 与 网关【两个要在同一网段】</li>
-<li>在vm 中打开虚拟网络编辑器，选择 vmnet8</li>
-<li>在下方填写 <strong>子网网段 和 掩码</strong> ，</li>
-<li>点击 NAT 设置，输入<strong>网关IP</strong>【该IP不能和物理机中vmnet8的IP相同，但要与物理机中vmnet8 的网关相同】</li>
-</ul>
-<h3 id="2-3-更改鼠标大小"><a href="#2-3-更改鼠标大小" class="headerlink" title="2.3 更改鼠标大小"></a>2.3 更改鼠标大小</h3><p><img src="https://img-blog.csdnimg.cn/20201130141604663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-4-调整-终端-字体"><a href="#2-4-调整-终端-字体" class="headerlink" title="2.4 调整 终端 字体"></a>2.4 调整 终端 字体</h3><p><img src="https://img-blog.csdnimg.cn/20201130142910861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-4-取消自动休眠"><a href="#2-4-取消自动休眠" class="headerlink" title="2.4 取消自动休眠"></a>2.4 取消自动休眠</h3><p><img src="https://img-blog.csdnimg.cn/20201130145923390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-4-更换软件安装源"><a href="#2-4-更换软件安装源" class="headerlink" title="2.4 更换软件安装源"></a>2.4 更换软件安装源</h3><ul>
-<li>打开终端</li>
-<li>切换到 root 用户</li>
-<li>注释掉 <code>/etc/apt/sources.list</code> 文件中的源，并换上国内源，保存</li>
-<li>切换回普通用户</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换用户</span></span><br><span class="line">sudo su</span><br><span class="line"><span class="comment"># 输入密码</span></span><br><span class="line">kali-test</span><br><span class="line"><span class="comment"># 更改软件安装源</span></span><br><span class="line">vim vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-<p>注释掉原来的内容，并复制 下列内容到 sources.list 中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#中科大</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#阿里云</span></span><br><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#清华大学</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#浙大</span></span><br><span class="line">deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#东软大学</span></span><br><span class="line">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#官方源</span></span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br></pre></td></tr></table></figure>
-
-<p><code>:wq</code>保存后，执行以下命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update  <span class="comment"># 取回更新的软件包列表信息</span></span><br><span class="line">apt-get upgrade <span class="comment"># 进行一次升级</span></span><br><span class="line">apt-get clean <span class="comment"># 删除已经下载的安装包</span></span><br><span class="line">reboot  <span class="comment">#重启</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>后端</category>
-        <category>操作系统</category>
-        <category>Linux使用</category>
-        <category>信息安全</category>
-        <category>系统安全</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript-笔记</title>
     <url>/2021/06/02/JavaScript-%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="JavaScript-笔记"><a href="#JavaScript-笔记" class="headerlink" title="JavaScript-笔记"></a>JavaScript-笔记</h1><p>[toc]</p>
@@ -948,45 +897,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL 8.0版本-安装篇</title>
-    <url>/2021/06/02/MySQL%208.0%E7%89%88%E6%9C%AC-%E5%AE%89%E8%A3%85%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="MySQL-8-0版本-安装篇"><a href="#MySQL-8-0版本-安装篇" class="headerlink" title="MySQL 8.0版本-安装篇"></a>MySQL 8.0版本-安装篇</h1><p>[toc]</p>
-<h3 id="1-MySQL免安装版下载-8-0-22"><a href="#1-MySQL免安装版下载-8-0-22" class="headerlink" title="1. MySQL免安装版下载(8.0.22)"></a>1. MySQL免安装版下载(8.0.22)</h3><p>进入：<a href="https://www.mysql.com/">MySQL官网</a><br><img src="https://img-blog.csdnimg.cn/2020112714302283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127143131278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127150613416.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20201127143501926.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>之后 等待下载。</p>
-<h3 id="2-MySQL的安装"><a href="#2-MySQL的安装" class="headerlink" title="2. MySQL的安装"></a>2. MySQL的安装</h3><h4 id="2-1-解压-下载好的压缩包【路径不为中文】"><a href="#2-1-解压-下载好的压缩包【路径不为中文】" class="headerlink" title="2.1 解压 下载好的压缩包【路径不为中文】"></a>2.1 解压 下载好的压缩包【路径不为中文】</h4><p><img src="https://img-blog.csdnimg.cn/20201127151330477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="2-2-创建-my-ini-配置文件-并生成初始密码"><a href="#2-2-创建-my-ini-配置文件-并生成初始密码" class="headerlink" title="2.2 创建 my.ini 配置文件,并生成初始密码"></a>2.2 创建 my.ini 配置文件,并生成初始密码</h4><p><strong>第一步：</strong><br>    在 bin 的同一级目录创建my.ini配置文件<br>配置文件中，需要更改的2部分为：</p>
-<ul>
-<li>basedir: 安装路径</li>
-<li>datadir：安装路径\data</li>
-</ul>
-<p>输入的配置：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"># 设置<span class="number">3306</span>端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64\Data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=<span class="number">200</span></span><br><span class="line"># 允许连接失败的次数。</span><br><span class="line">max_connect_errors=<span class="number">10</span></span><br><span class="line"># 服务端使用的字符集默认为utf8mb4</span><br><span class="line">character-<span class="built_in">set</span>-server=utf8mb4</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line"><span class="keyword">default</span>-storage-engine=INNODB</span><br><span class="line"># 默认使用“mysql_native_password”插件认证</span><br><span class="line">#mysql_native_password</span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br><span class="line">[client]</span><br><span class="line"># 设置mysql客户端连接服务端时默认使用的端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br></pre></td></tr></table></figure>
-<p><strong>第二步：</strong><br>以<strong>管理员</strong>身份运行 cmd，进入MySQL的 bin 目录，<br><img src="https://img-blog.csdnimg.cn/20201127152842804.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>为了生成Data目录和初始密码，输入：<br> <code>mysqld --initialize --console </code><br>若出现  如下报错：<br><img src="https://img-blog.csdnimg.cn/2020112715354489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>则 百度下载：vcruntime140_1.dll<br>并复制到以下目录<code>C:\Windows\System32</code>：<br><img src="https://img-blog.csdnimg.cn/20201127153801616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>复制完该文件后，<br>重新在 cmd 输入:  <code>mysqld --initialize --console</code><br><img src="https://img-blog.csdnimg.cn/20201127154427353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图红色部分为：随机生成的初始密码【记录下来，方便后面使用】</p>
-<h4 id="2-3-安装-启动-MySQL服务"><a href="#2-3-安装-启动-MySQL服务" class="headerlink" title="2.3 安装 + 启动 MySQL服务"></a>2.3 安装 + 启动 MySQL服务</h4><p><strong>安装：</strong><br>cmd输入：<code>mysqld --install [服务名]</code>,<br>其中，<strong>服务名可省略</strong><br>即：输入：<code>mysqld --install</code><br><strong>卸载服务：</strong> <code>mysqld --remove mysql</code><br><img src="https://img-blog.csdnimg.cn/20201127155811577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>启动：</strong> 两种方式</p>
-<ul>
-<li> cmd 中输入： <code>net start  mysql</code> 【如果服务<strong>没有设为自动</strong>，则每次开机都要输一遍】（关闭指令:<code>net stop mysql</code>）</li>
-<li><pre><code> 右键 “计算机” =》 “管理” =》 “服务” =》 找到 mysql =》启动
-</code></pre>
-【将其设为<strong>自动</strong>，这样可以不用每次开机都手动开启 mysql 服务】<h4 id="2-4-进入MySQL"><a href="#2-4-进入MySQL" class="headerlink" title="2.4 进入MySQL"></a>2.4 进入MySQL</h4>输入：<code>mysql -u root –p</code><br>输入刚才生成的初始密码【必须手动输入】<br>更改初始密码<br><code>ALTER USER &quot;root&quot;@&quot;localhost&quot; IDENTIFIED BY &quot;你的新密码&quot;;</code><h4 id="2-5-配置环境变量"><a href="#2-5-配置环境变量" class="headerlink" title="2.5 配置环境变量"></a>2.5 配置环境变量</h4>配置环境变量是为了在cmd下的任意目录中都能使用mysql</li>
-</ul>
-<p><strong>配置MySQL的主目录</strong><br><img src="https://img-blog.csdnimg.cn/20201128100208106.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>配置path</strong><br><img src="https://img-blog.csdnimg.cn/20201128100511736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3次确定</p>
-<h3 id="3-Navacat的安装"><a href="#3-Navacat的安装" class="headerlink" title="3. Navacat的安装"></a>3. Navacat的安装</h3><p>参考：<code>https://www.cnblogs.com/yanghongtao/p/10976526.html</code><br><img src="https://img-blog.csdnimg.cn/20201127163008138.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163020957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163104351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716311497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716312449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163146205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163332149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163344601.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163351105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163412973.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163421884.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163444278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163549530.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163600171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716361083.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163644942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163725455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163741557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163807439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="4-常用的MySQL命令"><a href="#4-常用的MySQL命令" class="headerlink" title="4. 常用的MySQL命令"></a>4. 常用的MySQL命令</h3><p>注意：MySQL的所有命令都以英文分号<kbd>;</kbd>结尾</p>
-<h4 id="4-1-显示所有数据库"><a href="#4-1-显示所有数据库" class="headerlink" title="4.1 显示所有数据库"></a>4.1 显示所有数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-2-创建数据库"><a href="#4-2-创建数据库" class="headerlink" title="4.2 创建数据库"></a>4.2 创建数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database School;</span><br></pre></td></tr></table></figure>
-<h4 id="4-3-删除数据库"><a href="#4-3-删除数据库" class="headerlink" title="4.3 删除数据库"></a>4.3 删除数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database School;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>SQL</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MarkDown 入门篇</title>
     <url>/2021/06/02/Markdown%E5%85%A5%E9%97%A8-%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="Markdown-入门语法-笔记"><a href="#Markdown-入门语法-笔记" class="headerlink" title="Markdown 入门语法-笔记"></a>Markdown 入门语法-笔记</h1><p>[toc]</p>
@@ -1059,6 +969,140 @@
       </categories>
       <tags>
         <tag>MarkDown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS_7 配置笔记</title>
+    <url>/2021/06/02/Linux-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="CentOS-7-配置笔记"><a href="#CentOS-7-配置笔记" class="headerlink" title="CentOS_7 配置笔记"></a>CentOS_7 配置笔记</h1><p>[toc]</p>
+<h2 id="1-JDK-安装"><a href="#1-JDK-安装" class="headerlink" title="1. JDK 安装"></a>1. JDK 安装</h2><ol>
+<li><p>下载：<code>https://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/8/jdk/x64/linux/</code></p>
+</li>
+<li><p>上传到CentOS:</p>
+<ul>
+<li>XShell在 <code>/usr.</code>下新建一个目录用于作为JAVA_HOME:<code>/usr/java/jdk</code></li>
+<li>XFTP将 jdk 上传到<code>/use/java/jdk</code>目录【上述目录】</li>
+</ul>
+</li>
+<li><p>解压【进入上述目录】： <code>tar -xzvf     jdk压缩包名     -C    目标目录</code>，<br> 即：<code>tar -xzvf OpenJDK8U-jdk_x64_linux_openj9_8u282b08_openj9-0.24.0.tar.gz -C /usr/java/jdk</code></p>
+</li>
+<li><p>给解压后的文件夹改一个短的名字：<code>mv ./jdk8u282-b08 ./jdk8</code></p>
+</li>
+<li><p>设置jdk的环境变量：</p>
+<ul>
+<li><p><code>echo  &quot;export JAVA_HOME=/usr/java/jdk/jdk8&quot; &gt;&gt; /etc/profile</code>    </p>
+</li>
+<li><p><code>echo  &quot;export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib&quot; &gt;&gt; /etc/profile</code></p>
+</li>
+<li><p><code>echo  &quot;export PATH=$JAVA_HOME/bin:$PATH&quot; &gt;&gt; /etc/profile</code></p>
+</li>
+</ul>
+</li>
+<li><p>使环境变量生效：<code>source /etc/profile</code></p>
+</li>
+<li><p>验证jdk使用可用：<code>java -version</code></p>
+</li>
+</ol>
+<h2 id="2-MySQL-安装"><a href="#2-MySQL-安装" class="headerlink" title="2. MySQL 安装"></a>2. MySQL 安装</h2><ol>
+<li>下载源：<code>wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</code></li>
+<li>安装源：<code>yum localinstall mysql57-community-release-el7-8.noarch.rpm</code></li>
+<li>检测源是否安装完成：<code>yum repolist enabled | grep &quot;mysql.*-community.*&quot;</code></li>
+<li>安装mysql：<code>yum install mysql-community-server</code></li>
+<li>启动mysql 服务：<code>systemctl enable mysqld</code></li>
+<li>查看mysql 版本：<code>rpm -aq | grep -i mysql</code></li>
+<li>重启mysql 服务：<code>systemctl restart mysqld</code></li>
+<li>查看初始密码：<code>grep &#39;A temporary password&#39; /var/log/mysqld.log</code></li>
+<li>更改初始密码：<code>mysqladmin -u root -p&#39;旧密码&#39; password &#39;新密码&#39;</code>【若报错，可设置复杂的密码】</li>
+<li>设置权限：<ul>
+<li>进入mysql：<code> mysql -uroot -p密码</code></li>
+<li>授予权限：<code>grant all privileges on *.* to &#39;用户名&#39;@&#39;ip地址&#39; identified by &#39;密码&#39; with grant option;</code>【ip地址可改为<code>%%</code>以表示所有ip】</li>
+</ul>
+</li>
+<li>设置轻应用服务器 防火墙的3306端口</li>
+<li>重启服务器</li>
+</ol>
+<p> <strong>测试 mysql 连接</strong><br> 下面使用 MySQL WorkBench远程连接到mysql:<br> <img src="https://z3.ax1x.com/2021/06/02/2QBlwj.png" alt="mysql workbench"></p>
+<h2 id="3-Nginx-安装"><a href="#3-Nginx-安装" class="headerlink" title="3. Nginx 安装"></a>3. Nginx 安装</h2><ol>
+<li>创建Nginx的根目录并进入：如：<code>/usr/nginx</code></li>
+<li>下载： <code>wget https://nginx.org/download/nginx-1.15.9.tar.gz</code></li>
+<li>解压：<code>tar -xvf nginx-1.15.9.tar.gz</code></li>
+<li>进入：<code>cd ./nginx-1.15.9</code></li>
+<li>解决make报错：<pre><code>-  `yum -y install make zlib-devel gcc-c++ libtool openssl openssl-devel`
+- `./configure `
+- `make &amp;&amp; make install`
+</code></pre>
+</li>
+<li>创建nginx用户：<code>useradd nginx</code></li>
+<li>配置nginx： <code>./configure --user=nginx --group=nginx --prefix=nginx安装目录 --with-http_stub_status_module --with-http_ssl_module  </code></li>
+<li>编译nginx： <code>make &amp;&amp; make install</code></li>
+<li>检查是否安装成功，命令：<code>cd /usr/local/nginx/sbin</code>、<code>./nginx -t</code></li>
+<li>创建软链接：<code>ln -s /usr/nginx安装目录/sbin/nginx /usr/sbin/</code></li>
+<li>安装完成后查看Nginx的相关环境配置信息是否正确 ，命令：<code>/usr/local/nginx/sbin/nginx –V</code></li>
+</ol>
+<p>Nginx命令：</p>
+<ul>
+<li>目录：<code>/usr/nginx/installFolder/</code></li>
+<li>启动Nginx：<code>cd /usr/nginx/installFolder/sbin</code> ，<code>./nginx</code></li>
+<li>停止Nginx：<code>pkill -9 nginx</code></li>
+<li>查看nginx进程号及运行情况：<code>ps -ef | grep nginx</code></li>
+<li>测试nginx是否运行正常：<code>浏览器：ip地址</code></li>
+</ul>
+<h2 id="4-httpd-的安装"><a href="#4-httpd-的安装" class="headerlink" title="4. httpd 的安装"></a>4. httpd 的安装</h2><ul>
+<li>下载安装：<code>yum -y install httpd</code></li>
+<li>设为启动项：<code>systemctl  enable  httpd</code></li>
+<li>启动httpd：<code>system restart  httpd</code></li>
+<li>查看是否运行成功：<code>systemctl status httpd</code> </li>
+<li>将编写好的html文件改为<code>index.html</code>，并传到<code>/var/www/html</code>目录中</li>
+<li>将80端口改为8080端口：<a href="https://jingyan.baidu.com/article/86112f136573352736978744.html">更改端口</a></li>
+<li>然后在服务器控制台开放8080端口，即可使用浏览器访问页面</li>
+</ul>
+]]></content>
+      <categories>
+        <category>后端</category>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL 8.0版本-安装篇</title>
+    <url>/2021/06/02/MySQL%208.0%E7%89%88%E6%9C%AC-%E5%AE%89%E8%A3%85%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="MySQL-8-0版本-安装篇"><a href="#MySQL-8-0版本-安装篇" class="headerlink" title="MySQL 8.0版本-安装篇"></a>MySQL 8.0版本-安装篇</h1><p>[toc]</p>
+<h3 id="1-MySQL免安装版下载-8-0-22"><a href="#1-MySQL免安装版下载-8-0-22" class="headerlink" title="1. MySQL免安装版下载(8.0.22)"></a>1. MySQL免安装版下载(8.0.22)</h3><p>进入：<a href="https://www.mysql.com/">MySQL官网</a><br><img src="https://img-blog.csdnimg.cn/2020112714302283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127143131278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127150613416.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201127143501926.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>之后 等待下载。</p>
+<h3 id="2-MySQL的安装"><a href="#2-MySQL的安装" class="headerlink" title="2. MySQL的安装"></a>2. MySQL的安装</h3><h4 id="2-1-解压-下载好的压缩包【路径不为中文】"><a href="#2-1-解压-下载好的压缩包【路径不为中文】" class="headerlink" title="2.1 解压 下载好的压缩包【路径不为中文】"></a>2.1 解压 下载好的压缩包【路径不为中文】</h4><p><img src="https://img-blog.csdnimg.cn/20201127151330477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="2-2-创建-my-ini-配置文件-并生成初始密码"><a href="#2-2-创建-my-ini-配置文件-并生成初始密码" class="headerlink" title="2.2 创建 my.ini 配置文件,并生成初始密码"></a>2.2 创建 my.ini 配置文件,并生成初始密码</h4><p><strong>第一步：</strong><br>    在 bin 的同一级目录创建my.ini配置文件<br>配置文件中，需要更改的2部分为：</p>
+<ul>
+<li>basedir: 安装路径</li>
+<li>datadir：安装路径\data</li>
+</ul>
+<p>输入的配置：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"># 设置<span class="number">3306</span>端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64\Data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=<span class="number">200</span></span><br><span class="line"># 允许连接失败的次数。</span><br><span class="line">max_connect_errors=<span class="number">10</span></span><br><span class="line"># 服务端使用的字符集默认为utf8mb4</span><br><span class="line">character-<span class="built_in">set</span>-server=utf8mb4</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line"><span class="keyword">default</span>-storage-engine=INNODB</span><br><span class="line"># 默认使用“mysql_native_password”插件认证</span><br><span class="line">#mysql_native_password</span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br><span class="line">[client]</span><br><span class="line"># 设置mysql客户端连接服务端时默认使用的端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br></pre></td></tr></table></figure>
+<p><strong>第二步：</strong><br>以<strong>管理员</strong>身份运行 cmd，进入MySQL的 bin 目录，<br><img src="https://img-blog.csdnimg.cn/20201127152842804.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>为了生成Data目录和初始密码，输入：<br> <code>mysqld --initialize --console </code><br>若出现  如下报错：<br><img src="https://img-blog.csdnimg.cn/2020112715354489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>则 百度下载：vcruntime140_1.dll<br>并复制到以下目录<code>C:\Windows\System32</code>：<br><img src="https://img-blog.csdnimg.cn/20201127153801616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>复制完该文件后，<br>重新在 cmd 输入:  <code>mysqld --initialize --console</code><br><img src="https://img-blog.csdnimg.cn/20201127154427353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图红色部分为：随机生成的初始密码【记录下来，方便后面使用】</p>
+<h4 id="2-3-安装-启动-MySQL服务"><a href="#2-3-安装-启动-MySQL服务" class="headerlink" title="2.3 安装 + 启动 MySQL服务"></a>2.3 安装 + 启动 MySQL服务</h4><p><strong>安装：</strong><br>cmd输入：<code>mysqld --install [服务名]</code>,<br>其中，<strong>服务名可省略</strong><br>即：输入：<code>mysqld --install</code><br><strong>卸载服务：</strong> <code>mysqld --remove mysql</code><br><img src="https://img-blog.csdnimg.cn/20201127155811577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>启动：</strong> 两种方式</p>
+<ul>
+<li> cmd 中输入： <code>net start  mysql</code> 【如果服务<strong>没有设为自动</strong>，则每次开机都要输一遍】（关闭指令:<code>net stop mysql</code>）</li>
+<li><pre><code> 右键 “计算机” =》 “管理” =》 “服务” =》 找到 mysql =》启动
+</code></pre>
+【将其设为<strong>自动</strong>，这样可以不用每次开机都手动开启 mysql 服务】<h4 id="2-4-进入MySQL"><a href="#2-4-进入MySQL" class="headerlink" title="2.4 进入MySQL"></a>2.4 进入MySQL</h4>输入：<code>mysql -u root –p</code><br>输入刚才生成的初始密码【必须手动输入】<br>更改初始密码<br><code>ALTER USER &quot;root&quot;@&quot;localhost&quot; IDENTIFIED BY &quot;你的新密码&quot;;</code><h4 id="2-5-配置环境变量"><a href="#2-5-配置环境变量" class="headerlink" title="2.5 配置环境变量"></a>2.5 配置环境变量</h4>配置环境变量是为了在cmd下的任意目录中都能使用mysql</li>
+</ul>
+<p><strong>配置MySQL的主目录</strong><br><img src="https://img-blog.csdnimg.cn/20201128100208106.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>配置path</strong><br><img src="https://img-blog.csdnimg.cn/20201128100511736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3次确定</p>
+<h3 id="3-Navacat的安装"><a href="#3-Navacat的安装" class="headerlink" title="3. Navacat的安装"></a>3. Navacat的安装</h3><p>参考：<code>https://www.cnblogs.com/yanghongtao/p/10976526.html</code><br><img src="https://img-blog.csdnimg.cn/20201127163008138.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163020957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163104351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716311497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716312449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163146205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163332149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163344601.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163351105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163412973.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163421884.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163444278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163549530.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163600171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716361083.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163644942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163725455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163741557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163807439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="4-常用的MySQL命令"><a href="#4-常用的MySQL命令" class="headerlink" title="4. 常用的MySQL命令"></a>4. 常用的MySQL命令</h3><p>注意：MySQL的所有命令都以英文分号<kbd>;</kbd>结尾</p>
+<h4 id="4-1-显示所有数据库"><a href="#4-1-显示所有数据库" class="headerlink" title="4.1 显示所有数据库"></a>4.1 显示所有数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-创建数据库"><a href="#4-2-创建数据库" class="headerlink" title="4.2 创建数据库"></a>4.2 创建数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database School;</span><br></pre></td></tr></table></figure>
+<h4 id="4-3-删除数据库"><a href="#4-3-删除数据库" class="headerlink" title="4.3 删除数据库"></a>4.3 删除数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database School;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -1291,6 +1335,266 @@
       </categories>
       <tags>
         <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/06/02/NodeJS-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="Node-js-入门笔记"><a href="#Node-js-入门笔记" class="headerlink" title="Node.js-入门笔记"></a>Node.js-入门笔记</h1><p>[toc]</p>
+<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>安装教程：<code>https://www.runoob.com/nodejs/nodejs-install-setup.html</code><br>【以windows为例：】</p>
+<ol>
+<li><p>【直接下载 .exe文件,然后配置环境变量】<br><a href="https://nodejs.org/dist/">下载地址：</a><br><code>https://nodejs.org/dist/</code></p>
+</li>
+<li><p>【下载 .msi安装包，配置环境变量】<br><a href="https://nodejs.org/en/download/">下载地址：</a><br><code>https://nodejs.org/en/download/</code></p>
+</li>
+</ol>
+<p>安装完毕后，打开 cmd ，检查 node.js 版本</p>
+<h2 id="二、Node-js-基础"><a href="#二、Node-js-基础" class="headerlink" title="二、Node.js 基础"></a>二、Node.js 基础</h2><h3 id="2-1-Node-js-的两种模式"><a href="#2-1-Node-js-的两种模式" class="headerlink" title="2.1 Node.js 的两种模式"></a>2.1 Node.js 的两种模式</h3><ul>
+<li><code>脚本模式</code>：先写代码，保存为<code>xxx.js</code>后，使用 node 运行</li>
+<li><code>交换模式</code>：实时运行 REPL【类似 python的 <code>IDLE</code>】，cmd中输入 <code>node</code></li>
+</ul>
+<h3 id="2-2-Node应用程序的组成部分"><a href="#2-2-Node应用程序的组成部分" class="headerlink" title="2.2 Node应用程序的组成部分"></a>2.2 Node应用程序的组成部分</h3><ol>
+<li>引入 required 模块：我们可以使用 require 指令来载入 Node.js 模块。</li>
+<li>创建服务器：服务器可以监听客户端的请求，类似于 Apache 、Nginx 等 HTTP 服务器。</li>
+<li>接收请求与响应请求 服务器很容易创建，客户端可以使用浏览器或终端发送 HTTP 请求，服务器接收请求后返回响应数据。</li>
+</ol>
+<h3 id="实例1："><a href="#实例1：" class="headerlink" title="实例1："></a>实例1：</h3><ol>
+<li>保存下列代码为 <code>1.js</code></li>
+<li>cmd中进入该文件所在目录，输入<code>node 1.js</code> 【1.js为文件名】</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># 请求node自带的http服务，并赋给变量http_s</span><br><span class="line">	<span class="keyword">var</span> http_s = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line">#  创建服务，并使用回调函数</span><br><span class="line">	http_s.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request,response</span>)</span>&#123;</span><br><span class="line">	</span><br><span class="line">		#  在浏览器中显示</span><br><span class="line">		response.writeHead(<span class="number">200</span>,&#123;<span class="string">&quot;Content-Type&quot;</span>:<span class="string">&quot;text/plain&quot;</span>&#125;);</span><br><span class="line">		response.end(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line"></span><br><span class="line">	&#125;).listen(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line">#  在node后端显示</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;Server running at http://127.0.0.1:8888/&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<img src="NodeJS-入门笔记/2Q6yQ0.png" alt="2Q6yQ0.png" border="0" />
+![2](https://z3.ax1x.com/2021/06/02/2Q64Y9.png)
+
+<p>小结：</p>
+<blockquote>
+<p>  实例1-要点：</p>
+<ul>
+<li>引入 <code>http</code>模块</li>
+<li>使用<code>http</code>模块的 <code>createServser( ).listen(端口号)</code></li>
+</ul>
+</blockquote>
+<h3 id="2-3-NPM-包管理器"><a href="#2-3-NPM-包管理器" class="headerlink" title="2.3  NPM 包管理器"></a>2.3  NPM 包管理器</h3><p>注意：【一般用<code> 淘宝的cnpm</code>代替 npm 】</p>
+<p>下载 NPM【使用淘宝镜像】:<br><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
+<h4 id="2-3-1-NPM-安装服务器上的程序："><a href="#2-3-1-NPM-安装服务器上的程序：" class="headerlink" title="2.3.1 NPM 安装服务器上的程序："></a>2.3.1 NPM 安装服务器上的程序：</h4><p>语法：<code>npm install 模块名</code><br>例如：<code>npm install express</code>   </p>
+<ul>
+<li>安装node中的web框架-express，</li>
+<li>下载到了工程目录的node_modules 目录下，</li>
+<li>因此，无需指定路径，</li>
+<li>可以直接引用<code>var express = require(&#39;express&#39;);</code></li>
+</ul>
+<h4 id="2-3-2-全局安装-和-本地安装"><a href="#2-3-2-全局安装-和-本地安装" class="headerlink" title="2.3.2 全局安装  和  本地安装"></a>2.3.2 全局安装  和  本地安装</h4><ul>
+<li>全局安装 ：<ul>
+<li><code>npm install express          # 本地安装</code></li>
+<li>安装包放在 ./node_modules 下（运行 npm 命令时所在的目录）</li>
+<li>通过 require() 来引入</li>
+</ul>
+</li>
+<li>本地安装 ：<ul>
+<li><code>npm install express -g   # 全局安装</code></li>
+<li>安装包放在 /usr/local 下或者你 node 的安装目录</li>
+<li> 可直接在命令行里使用</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-列出-全局安装-的所有模块"><a href="#1-列出-全局安装-的所有模块" class="headerlink" title="1. 列出 全局安装 的所有模块"></a>1. 列出 全局安装 的所有模块</h5><p>cmd中直接输入<code>npm list -g</code>【不要在REPL中输入】</p>
+<h5 id="2-列出-全局安装-的某个模块"><a href="#2-列出-全局安装-的某个模块" class="headerlink" title="2. 列出 全局安装 的某个模块"></a>2. 列出 全局安装 的某个模块</h5><p>cmd中直接输入<code>npm list 模块名</code></p>
+<h5 id="3-package-json"><a href="#3-package-json" class="headerlink" title="3. package.json"></a>3. package.json</h5><p>package.json 位于模块的目录下，用于定义包的属性</p>
+<h5 id="4-卸载、更新、搜索-模块"><a href="#4-卸载、更新、搜索-模块" class="headerlink" title="4. 卸载、更新、搜索  - 模块"></a>4. 卸载、更新、搜索  - 模块</h5><ul>
+<li><code>npm uninstall 模块名</code></li>
+<li><code>npm update 模块名</code></li>
+<li><code>npm search 模块名</code></li>
+</ul>
+<h2 id="三、案例"><a href="#三、案例" class="headerlink" title="三、案例"></a>三、案例</h2><h3 id="3-1-基础"><a href="#3-1-基础" class="headerlink" title="3.1 基础"></a>3.1 基础</h3><p>Node.js是 1个 让 js运行在服务器端的开发平台。<br>在以前，js代码需要借助 HTML 才能运行。</p>
+<ul>
+<li>使用运行 js的指令【在命令行下】：<code>node ./abc.js</code>，然后在浏览器<code>127.0.0.1:3000</code></li>
+<li>每次对js文件进行<strong>修改</strong>，就要<code>ctrl + c</code>,然后重新<code>node ./abc.js</code></li>
+<li>通用模板：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 请求模块</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建服务</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//设置字符集</span></span><br><span class="line">    res.setHeader(<span class="string">&quot;Content-Type&quot;</span>,<span class="string">&quot;text/html;charset=UTF8&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//输出</span></span><br><span class="line">    res.end(<span class="string">&quot;你好，世界~~!!&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听端口</span></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://z3.ax1x.com/2021/06/02/2QcSSI.png" alt="3"></p>
+<h3 id="3-2-res-write-与-res-end-的区别："><a href="#3-2-res-write-与-res-end-的区别：" class="headerlink" title="3.2 res.write( )  与 res.end( ) 的区别："></a>3.2 res.write( )  与 res.end( ) 的区别：</h3><p>【都可输出html标签】<br>    - res.write( )： 普通的输出，在其后必须要有 res.end( )；不能输出非字符串<br>    - res.end( )：最后一次输出，只要遇到 res.end( )，即使后面有 res.write( )也不执行；不能输出非字符串</p>
+<h3 id="3-3-前导-实例"><a href="#3-3-前导-实例" class="headerlink" title="3.3 前导-实例"></a>3.3 前导-实例</h3><p><img src="https://z3.ax1x.com/2021/06/02/2Qcl0U.png" alt="4"></p>
+<p><img src="https://z3.ax1x.com/2021/06/02/2QcstH.png" alt="5"></p>
+<h3 id="3-4-fs模块【异步读取本地文件】"><a href="#3-4-fs模块【异步读取本地文件】" class="headerlink" title="3.4 fs模块【异步读取本地文件】"></a>3.4 fs模块【异步读取本地文件】</h3><p><img src="https://z3.ax1x.com/2021/06/02/2Qc4HS.png" alt="6"></p>
+<h3 id="实例1：读取文件"><a href="#实例1：读取文件" class="headerlink" title="实例1：读取文件"></a>实例1：读取文件</h3><p><img src="https://z3.ax1x.com/2021/06/02/2QcLj0.png" alt="7"></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导入模块</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建 http服务</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置字符集</span></span><br><span class="line">    res.setHeader(<span class="string">&quot;Content-Type&quot;</span>,<span class="string">&quot;text/html;charset=UTF8&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取本地文件</span></span><br><span class="line">    fs.readFile(<span class="string">&quot;./public/1.html&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//console.log(req.url);</span></span><br><span class="line">        <span class="comment">//如果地址栏的域名的后面的地址为 “/abc”,则输出读取的内容，否则输出提示</span></span><br><span class="line">        <span class="keyword">if</span>(req.url == <span class="string">&quot;/abc&quot;</span>)&#123;</span><br><span class="line">            res.end(data);</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.end(<span class="string">&quot;无此页面！！&quot;</span>);</span><br><span class="line"></span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h3 id="实例2：路由1"><a href="#实例2：路由1" class="headerlink" title="实例2：路由1"></a>实例2：路由1</h3><p>传统：路由即文件夹<br>node.js: 颠覆传统，通过路由读取文件，实现顶层路由设计<br><img src="https://z3.ax1x.com/2021/06/02/2QgCC9.png" alt="8"></p>
+<h3 id="实例2：路由2-页面跳转"><a href="#实例2：路由2-页面跳转" class="headerlink" title="实例2：路由2-页面跳转"></a>实例2：路由2-页面跳转</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    res.setHeader(<span class="string">&quot;Content-Type&quot;</span>,<span class="string">&quot;text/html;charset=UTF8&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取地址栏的地址</span></span><br><span class="line">    <span class="keyword">let</span> url = req.url</span><br><span class="line"></span><br><span class="line">    <span class="comment">//匹配地址：/user/字符串1/字符串2</span></span><br><span class="line">    <span class="keyword">let</span> arr = url.match(<span class="regexp">/\/user\/(.+)\/(.+)$/</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(arr);</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">    <span class="keyword">if</span>(!arr)&#123;</span><br><span class="line">        res.end(<span class="string">&quot;&lt;h1&gt;无页面显示！！&lt;/h1&gt;&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数据模拟</span></span><br><span class="line">        <span class="keyword">let</span> user = &#123;</span><br><span class="line">            <span class="string">&#x27;zy&#x27;</span>:<span class="string">&quot;张毅&quot;</span>,</span><br><span class="line">            <span class="string">&#x27;wj&#x27;</span>:<span class="string">&quot;吴京&quot;</span>,</span><br><span class="line">            <span class="string">&#x27;xs&#x27;</span>:<span class="string">&#x27;许嵩&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> list = &#123;</span><br><span class="line">            <span class="string">&quot;post&quot;</span>:<span class="string">&quot;文章&quot;</span>,</span><br><span class="line">            <span class="string">&quot;ask&quot;</span>:<span class="string">&#x27;提问&#x27;</span>,</span><br><span class="line">            <span class="string">&quot;pic&quot;</span>:<span class="string">&quot;照片&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// arr[0]域名后的完整路径，arr[1]匹配的第一项，arr[1]匹配的第二项</span></span><br><span class="line">        <span class="keyword">let</span> item1 = arr[<span class="number">1</span>];  </span><br><span class="line">        <span class="keyword">let</span> item2 = arr[<span class="number">2</span>]; </span><br><span class="line">           </span><br><span class="line">		<span class="comment">//http://127.0.0.1:3000/user/wj/post</span></span><br><span class="line">        res.write(<span class="string">&quot;&lt;h1&gt;欢迎,&quot;</span>+user[item1]+<span class="string">&quot;&lt;/h1&gt;&quot;</span>);</span><br><span class="line">        res.write(<span class="string">&quot;&lt;h1&gt;&quot;</span>+list[item2]+<span class="string">&quot; 板块&lt;/h1&gt;&quot;</span>);    </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h3 id="实例3：路由-图片"><a href="#实例3：路由-图片" class="headerlink" title="实例3：路由-图片"></a>实例3：路由-图片</h3><p><img src="https://z3.ax1x.com/2021/06/02/2QgmUe.png" alt="9"></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    res.setHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;text/html;charset=UTF8&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> url = req.url;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (url == <span class="string">&quot;/user/jj&quot;</span>) &#123;</span><br><span class="line">        fs.readFile(<span class="string">&quot;./public/1/jj.html&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">            res.end(data);</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(url == <span class="string">&quot;/user/jj/jj.jpg&quot;</span>)&#123;</span><br><span class="line">        res.setHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;image/jpg;&quot;</span>);</span><br><span class="line">        fs.readFile(<span class="string">&quot;./public/img/jj.jpg&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">            res.end(data)</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        res.end(<span class="string">&quot;&lt;h1&gt;无此页面&lt;/h1&gt;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h3 id="实例4：路由-页面-图片"><a href="#实例4：路由-页面-图片" class="headerlink" title="实例4：路由-页面+图片"></a>实例4：路由-页面+图片</h3><p><img src="https://z3.ax1x.com/2021/06/02/2Qg8Df.png" alt="10"></p>
+<p><img src="https://z3.ax1x.com/2021/06/02/2QgtUg.png" alt="11"></p>
+<p>当需要请求的资源很多时，可使用 node 的 express 模块来静态化1个文件夹，使得文件夹内的文件无需单独设置路由就可直接加载。</p>
+<p><img src="https://z3.ax1x.com/2021/06/02/2Qg6VU.png" alt="12"></p>
+<h3 id="3-5-模块"><a href="#3-5-模块" class="headerlink" title="3.5 模块"></a>3.5 模块</h3><ol>
+<li>在 1个 HTML中引入多个 js 文件，则这些js文件共用1个宿主环境，公用作用域，所有的变量都属于 window对象</li>
+<li>require( “模块名”)<br><img src="https://z3.ax1x.com/2021/06/02/2Qgg54.png" alt="13"></li>
+<li>在Node中，所有的js文件的作用域都是隔离的【因为node没有window对象】，<br>为了使js文件可以向其他文件暴露出部分内容，可以使用 exports</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//模块文件</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">123</span>;</span><br><span class="line"><span class="built_in">exports</span>.a = a;</span><br><span class="line"></span><br><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">&quot;./1.1.5&quot;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a);	<span class="comment">// a就是导入的模块的对象，好处是有自己的命名空间</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="3-6-exports-和-module-exports-的区别："><a href="#3-6-exports-和-module-exports-的区别：" class="headerlink" title="3.6 exports 和 module.exports 的区别："></a>3.6 exports 和 module.exports 的区别：</h3><ul>
+<li>exports 可以暴露模块的多个参数</li>
+<li>module.exports 只暴露1个参数【通常为构造函数】</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//构造方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name,age,sex</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.sex = sex</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//成员方法</span></span><br><span class="line">People.prototype.sayHello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;我是&quot;</span>+<span class="built_in">this</span>.name+<span class="string">&quot;,今年&quot;</span>+<span class="built_in">this</span>.age+<span class="string">&quot;岁了，性别为&quot;</span>+<span class="built_in">this</span>.sex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//暴露构造方法</span></span><br><span class="line"><span class="built_in">module</span>.exports  = People</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> People = <span class="built_in">require</span>(<span class="string">&quot;./1.1.5&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> xiaoming  = <span class="keyword">new</span> People(<span class="string">&quot;小明&quot;</span>,<span class="number">20</span>,<span class="string">&quot;男&quot;</span>)</span><br><span class="line"></span><br><span class="line">xiaoming.sayHello();</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="3-7-导入模块"><a href="#3-7-导入模块" class="headerlink" title="3.7 导入模块"></a>3.7 导入模块</h3><p><img src="https://z3.ax1x.com/2021/06/02/2QgXRA.png" alt="14"></p>
+<p><img src="https://z3.ax1x.com/2021/06/02/2Q2es0.png" alt="15"></p>
+<h3 id="3-8-NPM"><a href="#3-8-NPM" class="headerlink" title="3.8 NPM"></a>3.8 NPM</h3><p><a href="https://www.npmjs.com/">npm社区</a><br><code>https://www.npmjs.com/</code></p>
+<p>在社区中搜索关键字，查找模块，根据文档安装和使用模块</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install 模块名</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Vue 入门-01</title>
+    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-01/</url>
+    <content><![CDATA[<h1 id="Vue入门-01"><a href="#Vue入门-01" class="headerlink" title="Vue入门-01"></a>Vue入门-01</h1><p>[toc]</p>
+<h2 id="1-Vue-的介绍"><a href="#1-Vue-的介绍" class="headerlink" title="1. Vue 的介绍"></a>1. Vue 的介绍</h2><p><code>https://cn.vuejs.org/v2/guide/</code><br><a href="https://cn.vuejs.org/v2/guide/">Vue官网教程</a><br><img src="https://img-blog.csdnimg.cn/20210117122819956.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1 安装"></a>1.1 安装</h3><h4 id="1-1-1-使用CDN【不用安装，但需要联网】"><a href="#1-1-1-使用CDN【不用安装，但需要联网】" class="headerlink" title="1.1.1 使用CDN【不用安装，但需要联网】"></a>1.1.1 使用CDN【不用安装，但需要联网】</h4><p>开发环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>生产环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 生产环境版本，优化了尺寸和速度 --&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-2-使用npm包管理器安装【不推荐新手】"><a href="#1-1-2-使用npm包管理器安装【不推荐新手】" class="headerlink" title="1.1.2 使用npm包管理器安装【不推荐新手】"></a>1.1.2 使用npm包管理器安装【不推荐新手】</h4><h3 id="1-2-Vue必备步骤"><a href="#1-2-Vue必备步骤" class="headerlink" title="1.2 Vue必备步骤"></a>1.2 Vue必备步骤</h3><p><img src="https://img-blog.csdnimg.cn/20210117124822974.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>Vue 以数据驱动的【即：根据数据来改变】</li>
+<li>Vue 的指令：<ul>
+<li>与 <code>标签属性相关</code>：使用 <code>:</code>   =》 <code>v-bind:src=&quot;key名&quot;</code></li>
+<li>与 <code>标签属性无关</code>：使用 <code>=</code>  =》  <code>v-if=&quot;false&quot;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-Vue-绑定数据"><a href="#1-3-Vue-绑定数据" class="headerlink" title="1.3 Vue 绑定数据"></a>1.3 Vue 绑定数据</h3><ul>
+<li>单向绑定【适用于 普通的标签】:  <code>Vue =渲染到=》HTML</code></li>
+<li>双向绑定【适用于 表单标签】： <code>Html的内容变，则Vue中也变；Vue内变，则Html中也变</code></li>
+</ul>
+<p>单项绑定-实例：<br><img src="https://img-blog.csdnimg.cn/20210117125749164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>双项绑定-实例：<br><img src="https://img-blog.csdnimg.cn/20210117130609985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-4-Vue-绑定属性"><a href="#1-4-Vue-绑定属性" class="headerlink" title="1.4 Vue 绑定属性"></a>1.4 Vue 绑定属性</h3><p><code>v-bind:属性名=“Vue中的变量”</code><br>例如：<br><img src="https://img-blog.csdnimg.cn/20210117131910842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-5-Vue-显示-隐藏"><a href="#1-5-Vue-显示-隐藏" class="headerlink" title="1.5 Vue 显示+隐藏"></a>1.5 Vue 显示+隐藏</h3><p>不显示内容：【将条件置为false】</p>
+<ul>
+<li>使用 <code>v-if</code>： 完全不渲染【连标签都没有】</li>
+<li>使用 <code>v-show</code>：渲染，但利用 CSS    中的 <code>display:none;</code> 来隐藏</li>
+</ul>
+<p><code>v-if=&quot;布尔值&quot;</code>实例：<br><img src="https://img-blog.csdnimg.cn/2021011713293566.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><code>v-show=“布尔值”</code>实例：<br><img src="https://img-blog.csdnimg.cn/20210117132536937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-6-Vue-循环"><a href="#1-6-Vue-循环" class="headerlink" title="1.6 Vue 循环"></a>1.6 Vue 循环</h3><p><code>v-for=“变量名 in 可遍历的对象”</code></p>
+<p><code>v-for</code>指令实例：<br><img src="https://img-blog.csdnimg.cn/20210117133639478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-7-Vue-绑定事件"><a href="#1-7-Vue-绑定事件" class="headerlink" title="1.7 Vue 绑定事件"></a>1.7 Vue 绑定事件</h3><p><code> v-on:click</code><br><img src="https://img-blog.csdnimg.cn/20210117134420764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-8-实例-1-：输入文本，查看预览效果"><a href="#1-8-实例-1-：输入文本，查看预览效果" class="headerlink" title="1.8 实例-1 ：输入文本，查看预览效果"></a>1.8 实例-1 ：输入文本，查看预览效果</h3><p><img src="https://img-blog.csdnimg.cn/20210117140218529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-9-实例-2-：勾选复选框-显示图片"><a href="#1-9-实例-2-：勾选复选框-显示图片" class="headerlink" title="1.9 实例-2 ：勾选复选框-显示图片"></a>1.9 实例-2 ：勾选复选框-显示图片</h3><p><img src="https://img-blog.csdnimg.cn/20210117141728671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-10-实例-3-：博客发布-简易版"><a href="#1-10-实例-3-：博客发布-简易版" class="headerlink" title="1.10 实例-3 ：博客发布-简易版"></a>1.10 实例-3 ：博客发布-简易版</h3><p><img src="https://img-blog.csdnimg.cn/20210117144208281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210117144242331.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="2-1-组件-自定义组件"><a href="#2-1-组件-自定义组件" class="headerlink" title="2.1 组件(自定义组件)"></a>2.1 组件(自定义组件)</h2><p>定义组件名时：使用 驼峰法 或 - 法<br>使用组件时，用 - 法<br>组件的属性在定义时要有双引号<kbd> "  "</kbd><br>组件的data的<strong>冒号后</strong>只能跟函数【函数的返回值可以是对象】，这点要与Vue对象区分开，且组件不能有el 键【这也与Vue对象不同】<br><img src="https://img-blog.csdnimg.cn/2021011715054395.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-2-1-自定义组件-实例："><a href="#2-2-1-自定义组件-实例：" class="headerlink" title="2.2.1 自定义组件-实例："></a>2.2.1 自定义组件-实例：</h3><p><img src="https://img-blog.csdnimg.cn/20210117151523122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="3-1-常用指令"><a href="#3-1-常用指令" class="headerlink" title="3.1 常用指令"></a>3.1 常用指令</h2><blockquote>
+<p>v-show： 显示、隐藏=》display:none;<br>v-if：显示、隐藏=》不渲染<br>v-else<br>v-else-if</p>
+</blockquote>
+<blockquote>
+<p>v-text：插入vue的data中的值，相当于{{ }}<br>v-html ：可以插入html代码</p>
+</blockquote>
+<blockquote>
+<p>v-bind：绑定属性<br>v-model：双向绑定数据<br>v-on：绑定事件，结合vue中的 `methods：{ 事件名：function(){ } } `来使用</p>
+</blockquote>
+<blockquote>
+<p>v-for：循环</p>
+</blockquote>
+<h3 id="3-1-1-v-text-和"><a href="#3-1-1-v-text-和" class="headerlink" title="3.1.1 v-text 和 "></a>3.1.1 v-text 和  {{ }} </h3><ul>
+<li><code>v-text</code>  : 等价于 {{ }}  ，当输出的内容为html代码时，{{}}原样输出，
+而`v-html`会根据输出内容渲染
+例如：
+【以下两条指令等价，但  {{}}   在js加载缓慢时可能为显示出来】</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;% raw %&#125; &#123;&#123; msg &#125;&#125; &#123;% endraw %&#125;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p v-text=&quot;msg&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210117153705654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+  为避免{{ }} 插值时  ，因为加载速度慢而渲染出 大括号，可使用`v-cloak`来避免出现大括号
+<p>【使用 <code>v-cloak</code>的前提是 在<code>&lt;style&gt; [v-cloak]&#123;display:none;&#125;&lt;/style&gt;</code>,然后在有 {{ }}  的标签中<code>v-cloak</code>】  </p>
+<p><img src="https://img-blog.csdnimg.cn/20210117172433827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="3-1-2-v-for"><a href="#3-1-2-v-for" class="headerlink" title="3.1.2 v-for"></a>3.1.2 v-for</h3><p><img src="https://img-blog.csdnimg.cn/20210117161917689.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="3-1-3-v-on"><a href="#3-1-3-v-on" class="headerlink" title="3.1.3 v-on"></a>3.1.3 v-on</h3><p><code>v-on</code>  等价于  <code>@</code></p>
+<p>例如【以下二者等价】：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;button v-on:click=&quot;alertMsg&quot;&gt;点击1&lt;/button&gt;</span><br><span class="line">           </span><br><span class="line">&lt;button @click=&quot;alertMsg&quot;&gt;点击2&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/2021011716304391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><code>冒泡事件</code>：内层元素触发事件后，外层元素也会触发事件<br>例如：<br><img src="https://img-blog.csdnimg.cn/20210117165840328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>冒泡事件：<code>@click=&quot;helloMsg&quot;</code> </li>
+<li>停止冒泡事件<code>事件.stop</code>：<code>v-on:click.stop=&quot;helloMsg&quot;</code> 即：<code>@click.stop=&quot;helloMsg&quot;</code> </li>
+<li>鼠标事件【只有mousedown 事件才触发】：<ul>
+<li><code>@mousedown.left=&quot;helloMsg&quot;</code>  ：鼠标左键</li>
+<li> <code>@mousedown.right=&quot;helloMsg&quot;</code>：鼠标右键</li>
+<li><code>@mousedown.middle=&quot;helloMsg&quot;</code>：鼠标滚轮 </li>
+</ul>
+</li>
+<li>键盘事件【键盘按下某个键时才触发，键盘码 / ctrl / shift 等】：</li>
+<li><code>@keydown.enter=&quot;hellMsg&quot;</code>：键盘按下回车</li>
+</ul>
+<h3 id="3-1-4-v-bind"><a href="#3-1-4-v-bind" class="headerlink" title="3.1.4 v-bind"></a>3.1.4 v-bind</h3><p><code>v-bind:</code> 绑定属性：  等价于 直接 <code>：</code><br>例如【以下二者等价】：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;img v-bind:src=&quot;imgSrc&quot; alt=&quot;&quot;&gt;</span><br><span class="line">&lt;img :src=&quot;imgSrc&quot; alt=&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-6-实例：tab切换【v-show-或-v-if】"><a href="#3-1-6-实例：tab切换【v-show-或-v-if】" class="headerlink" title="3.1.6 实例：tab切换【v-show 或 v-if】"></a>3.1.6 实例：tab切换【v-show 或 v-if】</h3><p>快捷生成标签：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210117155449125.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210117155505200.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210117160113765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>或<br><img src="https://img-blog.csdnimg.cn/20210117160332375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4. 注意事项"></a>4. 注意事项</h2><h3 id="4-1-取用Vue对象中的值"><a href="#4-1-取用Vue对象中的值" class="headerlink" title="4.1 取用Vue对象中的值"></a>4.1 取用Vue对象中的值</h3><p> 取用 Vue对象中的内容【设 vm为 Vue对象的名字】： <code>vm.$变量名</code><br><img src="https://img-blog.csdnimg.cn/20210117173258973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="4-2-watch-监听-指定属性-的属性值的变化"><a href="#4-2-watch-监听-指定属性-的属性值的变化" class="headerlink" title="4.2 .$watch:监听 指定属性 的属性值的变化"></a>4.2 <code>.$watch</code>:监听 指定属性 的属性值的变化</h3><p>第一种方式【Vue对象外】：<br><code>vm.$watch(&quot;属性名&quot;,function(新值，旧值)&#123; &#125;  )</code></p>
+<p>第二种方式【Vue对象内】：<br><img src="https://img-blog.csdnimg.cn/20210118163855925.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="4-3-Vue的生命周期"><a href="#4-3-Vue的生命周期" class="headerlink" title="4.3 Vue的生命周期"></a>4.3 Vue的生命周期</h3><h4 id="4-3-1-beforeCreate事件"><a href="#4-3-1-beforeCreate事件" class="headerlink" title="4.3.1 beforeCreate事件"></a>4.3.1 beforeCreate事件</h4><p>beforeCreate事件在new 完 Vue对象后马上触发，是第一个触发的事件【此时还没有事件的监听，即：<code>初始化之后，数据监听前（还没有数据）</code>】<br><img src="https://img-blog.csdnimg.cn/20210117182607184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="4-3-2-created事件【重要：绑定数据】"><a href="#4-3-2-created事件【重要：绑定数据】" class="headerlink" title="4.3.2 created事件【重要：绑定数据】"></a>4.3.2 created事件【重要：绑定数据】</h4><p>在 beforeCreate事件之后，dom元素之前【此时还没有事件的监听，即：<code>初始化之后，数据监听后（有数据了）</code>】，ajax赋值要在这个阶段之后</p>
+<h4 id="4-3-3-beforeMount-事件"><a href="#4-3-3-beforeMount-事件" class="headerlink" title="4.3.3 beforeMount 事件"></a>4.3.3 beforeMount 事件</h4><p> beforeMount 事件：在dom元素产生之后，渲染之前触发，【即：有{{ }}且还没有处理{{ }}的阶段】</p>
+<h4 id="4-3-4-mounted-事件【重要：绑定dom元素】"><a href="#4-3-4-mounted-事件【重要：绑定dom元素】" class="headerlink" title="4.3.4 mounted 事件【重要：绑定dom元素】"></a>4.3.4 mounted 事件【重要：绑定dom元素】</h4><p>mounted 事件：在dom元素渲染之后触发，【此时，已经可以识别元素】</p>
+<h4 id="4-3-5-beforeUpdate-事件"><a href="#4-3-5-beforeUpdate-事件" class="headerlink" title="4.3.5 beforeUpdate 事件"></a>4.3.5 beforeUpdate 事件</h4><p>beforeUpdate 事件：在监听阶段（即：vm.$watch(属性名，function(){})），如果属性发生变化，则在渲染之前触发该事件</p>
+<h4 id="4-3-6-updated-事件【重要：修改属性之后】"><a href="#4-3-6-updated-事件【重要：修改属性之后】" class="headerlink" title="4.3.6 updated 事件【重要：修改属性之后】"></a>4.3.6 updated 事件【重要：修改属性之后】</h4><p>updated 事件：在监听阶段，如果属性发生变化，则在渲染之后触发该事件</p>
+<h4 id="4-3-7-beforeDestroy-事件"><a href="#4-3-7-beforeDestroy-事件" class="headerlink" title="4.3.7 beforeDestroy 事件"></a>4.3.7 beforeDestroy 事件</h4><p>beforeDestroy 事件:销毁之前触发</p>
+<h4 id="4-3-8-Destroyed-事件"><a href="#4-3-8-Destroyed-事件" class="headerlink" title="4.3.8 Destroyed 事件"></a>4.3.8 Destroyed 事件</h4><p>beforeDestroy 事件:销毁之后触发</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -1540,136 +1844,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue 入门-01</title>
-    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-01/</url>
-    <content><![CDATA[<h1 id="Vue入门-01"><a href="#Vue入门-01" class="headerlink" title="Vue入门-01"></a>Vue入门-01</h1><p>[toc]</p>
-<h2 id="1-Vue-的介绍"><a href="#1-Vue-的介绍" class="headerlink" title="1. Vue 的介绍"></a>1. Vue 的介绍</h2><p><code>https://cn.vuejs.org/v2/guide/</code><br><a href="https://cn.vuejs.org/v2/guide/">Vue官网教程</a><br><img src="https://img-blog.csdnimg.cn/20210117122819956.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1 安装"></a>1.1 安装</h3><h4 id="1-1-1-使用CDN【不用安装，但需要联网】"><a href="#1-1-1-使用CDN【不用安装，但需要联网】" class="headerlink" title="1.1.1 使用CDN【不用安装，但需要联网】"></a>1.1.1 使用CDN【不用安装，但需要联网】</h4><p>开发环境：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>生产环境：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 生产环境版本，优化了尺寸和速度 --&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="1-1-2-使用npm包管理器安装【不推荐新手】"><a href="#1-1-2-使用npm包管理器安装【不推荐新手】" class="headerlink" title="1.1.2 使用npm包管理器安装【不推荐新手】"></a>1.1.2 使用npm包管理器安装【不推荐新手】</h4><h3 id="1-2-Vue必备步骤"><a href="#1-2-Vue必备步骤" class="headerlink" title="1.2 Vue必备步骤"></a>1.2 Vue必备步骤</h3><p><img src="https://img-blog.csdnimg.cn/20210117124822974.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li>Vue 以数据驱动的【即：根据数据来改变】</li>
-<li>Vue 的指令：<ul>
-<li>与 <code>标签属性相关</code>：使用 <code>:</code>   =》 <code>v-bind:src=&quot;key名&quot;</code></li>
-<li>与 <code>标签属性无关</code>：使用 <code>=</code>  =》  <code>v-if=&quot;false&quot;</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-Vue-绑定数据"><a href="#1-3-Vue-绑定数据" class="headerlink" title="1.3 Vue 绑定数据"></a>1.3 Vue 绑定数据</h3><ul>
-<li>单向绑定【适用于 普通的标签】:  <code>Vue =渲染到=》HTML</code></li>
-<li>双向绑定【适用于 表单标签】： <code>Html的内容变，则Vue中也变；Vue内变，则Html中也变</code></li>
-</ul>
-<p>单项绑定-实例：<br><img src="https://img-blog.csdnimg.cn/20210117125749164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>双项绑定-实例：<br><img src="https://img-blog.csdnimg.cn/20210117130609985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-4-Vue-绑定属性"><a href="#1-4-Vue-绑定属性" class="headerlink" title="1.4 Vue 绑定属性"></a>1.4 Vue 绑定属性</h3><p><code>v-bind:属性名=“Vue中的变量”</code><br>例如：<br><img src="https://img-blog.csdnimg.cn/20210117131910842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-5-Vue-显示-隐藏"><a href="#1-5-Vue-显示-隐藏" class="headerlink" title="1.5 Vue 显示+隐藏"></a>1.5 Vue 显示+隐藏</h3><p>不显示内容：【将条件置为false】</p>
-<ul>
-<li>使用 <code>v-if</code>： 完全不渲染【连标签都没有】</li>
-<li>使用 <code>v-show</code>：渲染，但利用 CSS    中的 <code>display:none;</code> 来隐藏</li>
-</ul>
-<p><code>v-if=&quot;布尔值&quot;</code>实例：<br><img src="https://img-blog.csdnimg.cn/2021011713293566.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><code>v-show=“布尔值”</code>实例：<br><img src="https://img-blog.csdnimg.cn/20210117132536937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-6-Vue-循环"><a href="#1-6-Vue-循环" class="headerlink" title="1.6 Vue 循环"></a>1.6 Vue 循环</h3><p><code>v-for=“变量名 in 可遍历的对象”</code></p>
-<p><code>v-for</code>指令实例：<br><img src="https://img-blog.csdnimg.cn/20210117133639478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-7-Vue-绑定事件"><a href="#1-7-Vue-绑定事件" class="headerlink" title="1.7 Vue 绑定事件"></a>1.7 Vue 绑定事件</h3><p><code> v-on:click</code><br><img src="https://img-blog.csdnimg.cn/20210117134420764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-8-实例-1-：输入文本，查看预览效果"><a href="#1-8-实例-1-：输入文本，查看预览效果" class="headerlink" title="1.8 实例-1 ：输入文本，查看预览效果"></a>1.8 实例-1 ：输入文本，查看预览效果</h3><p><img src="https://img-blog.csdnimg.cn/20210117140218529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-9-实例-2-：勾选复选框-显示图片"><a href="#1-9-实例-2-：勾选复选框-显示图片" class="headerlink" title="1.9 实例-2 ：勾选复选框-显示图片"></a>1.9 实例-2 ：勾选复选框-显示图片</h3><p><img src="https://img-blog.csdnimg.cn/20210117141728671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-10-实例-3-：博客发布-简易版"><a href="#1-10-实例-3-：博客发布-简易版" class="headerlink" title="1.10 实例-3 ：博客发布-简易版"></a>1.10 实例-3 ：博客发布-简易版</h3><p><img src="https://img-blog.csdnimg.cn/20210117144208281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210117144242331.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="2-1-组件-自定义组件"><a href="#2-1-组件-自定义组件" class="headerlink" title="2.1 组件(自定义组件)"></a>2.1 组件(自定义组件)</h2><p>定义组件名时：使用 驼峰法 或 - 法<br>使用组件时，用 - 法<br>组件的属性在定义时要有双引号<kbd> "  "</kbd><br>组件的data的<strong>冒号后</strong>只能跟函数【函数的返回值可以是对象】，这点要与Vue对象区分开，且组件不能有el 键【这也与Vue对象不同】<br><img src="https://img-blog.csdnimg.cn/2021011715054395.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-2-1-自定义组件-实例："><a href="#2-2-1-自定义组件-实例：" class="headerlink" title="2.2.1 自定义组件-实例："></a>2.2.1 自定义组件-实例：</h3><p><img src="https://img-blog.csdnimg.cn/20210117151523122.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="3-1-常用指令"><a href="#3-1-常用指令" class="headerlink" title="3.1 常用指令"></a>3.1 常用指令</h2><blockquote>
-<p>v-show： 显示、隐藏=》display:none;<br>v-if：显示、隐藏=》不渲染<br>v-else<br>v-else-if</p>
-</blockquote>
-<blockquote>
-<p>v-text：插入vue的data中的值，相当于{{ }}<br>v-html ：可以插入html代码</p>
-</blockquote>
-<blockquote>
-<p>v-bind：绑定属性<br>v-model：双向绑定数据<br>v-on：绑定事件，结合vue中的 `methods：{ 事件名：function(){ } } `来使用</p>
-</blockquote>
-<blockquote>
-<p>v-for：循环</p>
-</blockquote>
-<h3 id="3-1-1-v-text-和"><a href="#3-1-1-v-text-和" class="headerlink" title="3.1.1 v-text 和 "></a>3.1.1 v-text 和  {{ }} </h3><ul>
-<li><code>v-text</code>  : 等价于 {{ }}  ，当输出的内容为html代码时，{{}}原样输出，
-而`v-html`会根据输出内容渲染
-例如：
-【以下两条指令等价，但  {{}}   在js加载缓慢时可能为显示出来】</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;% raw %&#125; &#123;&#123; msg &#125;&#125; &#123;% endraw %&#125;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;p v-text=&quot;msg&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20210117153705654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-  为避免{{ }} 插值时  ，因为加载速度慢而渲染出 大括号，可使用`v-cloak`来避免出现大括号
-<p>【使用 <code>v-cloak</code>的前提是 在<code>&lt;style&gt; [v-cloak]&#123;display:none;&#125;&lt;/style&gt;</code>,然后在有 {{ }}  的标签中<code>v-cloak</code>】  </p>
-<p><img src="https://img-blog.csdnimg.cn/20210117172433827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="3-1-2-v-for"><a href="#3-1-2-v-for" class="headerlink" title="3.1.2 v-for"></a>3.1.2 v-for</h3><p><img src="https://img-blog.csdnimg.cn/20210117161917689.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="3-1-3-v-on"><a href="#3-1-3-v-on" class="headerlink" title="3.1.3 v-on"></a>3.1.3 v-on</h3><p><code>v-on</code>  等价于  <code>@</code></p>
-<p>例如【以下二者等价】：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;button v-on:click=&quot;alertMsg&quot;&gt;点击1&lt;/button&gt;</span><br><span class="line">           </span><br><span class="line">&lt;button @click=&quot;alertMsg&quot;&gt;点击2&lt;/button&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/2021011716304391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><code>冒泡事件</code>：内层元素触发事件后，外层元素也会触发事件<br>例如：<br><img src="https://img-blog.csdnimg.cn/20210117165840328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li>冒泡事件：<code>@click=&quot;helloMsg&quot;</code> </li>
-<li>停止冒泡事件<code>事件.stop</code>：<code>v-on:click.stop=&quot;helloMsg&quot;</code> 即：<code>@click.stop=&quot;helloMsg&quot;</code> </li>
-<li>鼠标事件【只有mousedown 事件才触发】：<ul>
-<li><code>@mousedown.left=&quot;helloMsg&quot;</code>  ：鼠标左键</li>
-<li> <code>@mousedown.right=&quot;helloMsg&quot;</code>：鼠标右键</li>
-<li><code>@mousedown.middle=&quot;helloMsg&quot;</code>：鼠标滚轮 </li>
-</ul>
-</li>
-<li>键盘事件【键盘按下某个键时才触发，键盘码 / ctrl / shift 等】：</li>
-<li><code>@keydown.enter=&quot;hellMsg&quot;</code>：键盘按下回车</li>
-</ul>
-<h3 id="3-1-4-v-bind"><a href="#3-1-4-v-bind" class="headerlink" title="3.1.4 v-bind"></a>3.1.4 v-bind</h3><p><code>v-bind:</code> 绑定属性：  等价于 直接 <code>：</code><br>例如【以下二者等价】：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;img v-bind:src=&quot;imgSrc&quot; alt=&quot;&quot;&gt;</span><br><span class="line">&lt;img :src=&quot;imgSrc&quot; alt=&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-1-6-实例：tab切换【v-show-或-v-if】"><a href="#3-1-6-实例：tab切换【v-show-或-v-if】" class="headerlink" title="3.1.6 实例：tab切换【v-show 或 v-if】"></a>3.1.6 实例：tab切换【v-show 或 v-if】</h3><p>快捷生成标签：</p>
-<p><img src="https://img-blog.csdnimg.cn/20210117155449125.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210117155505200.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210117160113765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>或<br><img src="https://img-blog.csdnimg.cn/20210117160332375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4. 注意事项"></a>4. 注意事项</h2><h3 id="4-1-取用Vue对象中的值"><a href="#4-1-取用Vue对象中的值" class="headerlink" title="4.1 取用Vue对象中的值"></a>4.1 取用Vue对象中的值</h3><p> 取用 Vue对象中的内容【设 vm为 Vue对象的名字】： <code>vm.$变量名</code><br><img src="https://img-blog.csdnimg.cn/20210117173258973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="4-2-watch-监听-指定属性-的属性值的变化"><a href="#4-2-watch-监听-指定属性-的属性值的变化" class="headerlink" title="4.2 .$watch:监听 指定属性 的属性值的变化"></a>4.2 <code>.$watch</code>:监听 指定属性 的属性值的变化</h3><p>第一种方式【Vue对象外】：<br><code>vm.$watch(&quot;属性名&quot;,function(新值，旧值)&#123; &#125;  )</code></p>
-<p>第二种方式【Vue对象内】：<br><img src="https://img-blog.csdnimg.cn/20210118163855925.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="4-3-Vue的生命周期"><a href="#4-3-Vue的生命周期" class="headerlink" title="4.3 Vue的生命周期"></a>4.3 Vue的生命周期</h3><h4 id="4-3-1-beforeCreate事件"><a href="#4-3-1-beforeCreate事件" class="headerlink" title="4.3.1 beforeCreate事件"></a>4.3.1 beforeCreate事件</h4><p>beforeCreate事件在new 完 Vue对象后马上触发，是第一个触发的事件【此时还没有事件的监听，即：<code>初始化之后，数据监听前（还没有数据）</code>】<br><img src="https://img-blog.csdnimg.cn/20210117182607184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="4-3-2-created事件【重要：绑定数据】"><a href="#4-3-2-created事件【重要：绑定数据】" class="headerlink" title="4.3.2 created事件【重要：绑定数据】"></a>4.3.2 created事件【重要：绑定数据】</h4><p>在 beforeCreate事件之后，dom元素之前【此时还没有事件的监听，即：<code>初始化之后，数据监听后（有数据了）</code>】，ajax赋值要在这个阶段之后</p>
-<h4 id="4-3-3-beforeMount-事件"><a href="#4-3-3-beforeMount-事件" class="headerlink" title="4.3.3 beforeMount 事件"></a>4.3.3 beforeMount 事件</h4><p> beforeMount 事件：在dom元素产生之后，渲染之前触发，【即：有{{ }}且还没有处理{{ }}的阶段】</p>
-<h4 id="4-3-4-mounted-事件【重要：绑定dom元素】"><a href="#4-3-4-mounted-事件【重要：绑定dom元素】" class="headerlink" title="4.3.4 mounted 事件【重要：绑定dom元素】"></a>4.3.4 mounted 事件【重要：绑定dom元素】</h4><p>mounted 事件：在dom元素渲染之后触发，【此时，已经可以识别元素】</p>
-<h4 id="4-3-5-beforeUpdate-事件"><a href="#4-3-5-beforeUpdate-事件" class="headerlink" title="4.3.5 beforeUpdate 事件"></a>4.3.5 beforeUpdate 事件</h4><p>beforeUpdate 事件：在监听阶段（即：vm.$watch(属性名，function(){})），如果属性发生变化，则在渲染之前触发该事件</p>
-<h4 id="4-3-6-updated-事件【重要：修改属性之后】"><a href="#4-3-6-updated-事件【重要：修改属性之后】" class="headerlink" title="4.3.6 updated 事件【重要：修改属性之后】"></a>4.3.6 updated 事件【重要：修改属性之后】</h4><p>updated 事件：在监听阶段，如果属性发生变化，则在渲染之后触发该事件</p>
-<h4 id="4-3-7-beforeDestroy-事件"><a href="#4-3-7-beforeDestroy-事件" class="headerlink" title="4.3.7 beforeDestroy 事件"></a>4.3.7 beforeDestroy 事件</h4><p>beforeDestroy 事件:销毁之前触发</p>
-<h4 id="4-3-8-Destroyed-事件"><a href="#4-3-8-Destroyed-事件" class="headerlink" title="4.3.8 Destroyed 事件"></a>4.3.8 Destroyed 事件</h4><p>beforeDestroy 事件:销毁之后触发</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue 入门-04</title>
-    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-04/</url>
-    <content><![CDATA[<h1 id="Vue入门-04"><a href="#Vue入门-04" class="headerlink" title="Vue入门-04"></a>Vue入门-04</h1><p>[toc]</p>
-<h2 id="1-1-Vuex"><a href="#1-1-Vuex" class="headerlink" title="1.1 Vuex"></a>1.1 Vuex</h2><p>使用 Vuex 可以在整个Vue项目中共享数据【类似 数据库的作用】<br>=》官方叫<code>状态管理模式</code><br><img src="https://img-blog.csdnimg.cn/20210122104027301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>项目中要使用 vuex 必须要 <code>use</code> 来应用【vue 的 router 也一样】<br><img src="https://img-blog.csdnimg.cn/20210122104249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> vuex 的路径：<code>/src/store/index.js</code><br> <img src="https://img-blog.csdnimg.cn/20210122104820568.png" alt="在这里插入图片描述"><br>首先，在<code>/store/index.js</code>文件中引入vuex，并导出1个store对象，<br>在<code>main.js</code>文件中导入 <code>/store/index.js</code>文件，并在Vue对象中注册<br><img src="https://img-blog.csdnimg.cn/202101221056369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210122105030964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122110141606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例1【获取数据】："><a href="#实例1【获取数据】：" class="headerlink" title="实例1【获取数据】："></a>实例1【获取数据】：</h3><ul>
-<li>store中的state里面写数据</li>
-<li>store中的getters方法</li>
-<li>在要使用数据的组件中导入vuex的 mapGetters</li>
-<li>在计算属性computed中 使用<code>...mapGetters([&quot;getter方法名1&quot;，“getter方法名2”])</code></li>
-<li>利用  来使用数据<br><img src="https://img-blog.csdnimg.cn/20210122113209775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/2021012211431555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例2【获取数据】："><a href="#实例2【获取数据】：" class="headerlink" title="实例2【获取数据】："></a>实例2【获取数据】：</h3><p><img src="https://img-blog.csdnimg.cn/20210122114921444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122115028541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例3-【设置数据】"><a href="#实例3-【设置数据】" class="headerlink" title="实例3 【设置数据】"></a>实例3 【设置数据】</h3><p><img src="https://img-blog.csdnimg.cn/20210122122416420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122122915950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue 入门-03</title>
     <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-03-%E7%BB%84%E4%BB%B6(%E9%83%A8%E5%88%86)+vue%E8%B7%AF%E7%94%B1/</url>
     <content><![CDATA[<h1 id="Vue入门-03"><a href="#Vue入门-03" class="headerlink" title="Vue入门-03"></a>Vue入门-03</h1><p>[toc]</p>
@@ -1755,6 +1929,31 @@
 <li><code>this.$router.push(&#123;name:&quot;路由名&quot;,params:&#123;参数名：参数值，参数名：参数值&#125;&#125;)</code></li>
 </ul>
 <h3 id="1-5-去掉使用路由时，地址栏上的-号"><a href="#1-5-去掉使用路由时，地址栏上的-号" class="headerlink" title="1.5 去掉使用路由时，地址栏上的#号"></a>1.5 去掉使用路由时，地址栏上的#号</h3><p><img src="https://img-blog.csdnimg.cn/2021012120374382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121204319530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue 入门-04</title>
+    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-04/</url>
+    <content><![CDATA[<h1 id="Vue入门-04"><a href="#Vue入门-04" class="headerlink" title="Vue入门-04"></a>Vue入门-04</h1><p>[toc]</p>
+<h2 id="1-1-Vuex"><a href="#1-1-Vuex" class="headerlink" title="1.1 Vuex"></a>1.1 Vuex</h2><p>使用 Vuex 可以在整个Vue项目中共享数据【类似 数据库的作用】<br>=》官方叫<code>状态管理模式</code><br><img src="https://img-blog.csdnimg.cn/20210122104027301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>项目中要使用 vuex 必须要 <code>use</code> 来应用【vue 的 router 也一样】<br><img src="https://img-blog.csdnimg.cn/20210122104249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> vuex 的路径：<code>/src/store/index.js</code><br> <img src="https://img-blog.csdnimg.cn/20210122104820568.png" alt="在这里插入图片描述"><br>首先，在<code>/store/index.js</code>文件中引入vuex，并导出1个store对象，<br>在<code>main.js</code>文件中导入 <code>/store/index.js</code>文件，并在Vue对象中注册<br><img src="https://img-blog.csdnimg.cn/202101221056369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210122105030964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122110141606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例1【获取数据】："><a href="#实例1【获取数据】：" class="headerlink" title="实例1【获取数据】："></a>实例1【获取数据】：</h3><ul>
+<li>store中的state里面写数据</li>
+<li>store中的getters方法</li>
+<li>在要使用数据的组件中导入vuex的 mapGetters</li>
+<li>在计算属性computed中 使用<code>...mapGetters([&quot;getter方法名1&quot;，“getter方法名2”])</code></li>
+<li>利用  来使用数据<br><img src="https://img-blog.csdnimg.cn/20210122113209775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2021012211431555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例2【获取数据】："><a href="#实例2【获取数据】：" class="headerlink" title="实例2【获取数据】："></a>实例2【获取数据】：</h3><p><img src="https://img-blog.csdnimg.cn/20210122114921444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122115028541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例3-【设置数据】"><a href="#实例3-【设置数据】" class="headerlink" title="实例3 【设置数据】"></a>实例3 【设置数据】</h3><p><img src="https://img-blog.csdnimg.cn/20210122122416420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122122915950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -1867,6 +2066,75 @@
       </categories>
       <tags>
         <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/06/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>kali-安装笔记</title>
+    <url>/2021/06/02/kali-%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="kali-安装笔记"><a href="#kali-安装笔记" class="headerlink" title="kali-安装笔记"></a>kali-安装笔记</h1><p>[toc]<br>下载地址：【国内镜像】</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">搜狐：http://mirrors.sohu.com/</span><br><span class="line">网易：http://mirrors.163.com/</span><br><span class="line">阿里云：http://mirrors.aliyun.com/</span><br><span class="line">腾讯：http://android-mirror.bugly.qq.com:8080/（仅针对APP开发的软件，限流，不推荐）</span><br><span class="line">淘宝：http://npm.taobao.org/</span><br><span class="line"></span><br><span class="line">上海交通大学：http://ftp.sjtu.edu.cn/html/resources.xml（部分移动运营商出口状况不佳，无法访问）</span><br><span class="line">华中科技大学：http://mirror.hust.edu.cn/（当前已用容量估计：4.83T）</span><br><span class="line">清华大学：http://mirrors.tuna.tsinghua.edu.cn/（当前已用容量估计：9.8T）</span><br><span class="line">北京理工大学：http://mirror.bit.edu.cn/web/</span><br><span class="line">兰州大学：http://mirror.lzu.edu.cn/</span><br><span class="line">中国科技大学：http://mirrors.ustc.edu.cn/（当前已用容量估计：21.32T）</span><br><span class="line">大连东软信息学院：http://mirrors.neusoft.edu.cn/（当前已用容量估计：2.5T）</span><br><span class="line">东北大学：http://mirror.neu.edu.cn/</span><br><span class="line">大连理工大学：http://mirror.dlut.edu.cn/</span><br><span class="line">哈尔滨工业大学：http://run.hit.edu.cn/html/（部分联通运营商出口状况不佳，无法访问）</span><br><span class="line">北京交通大学：http://mirror.bjtu.edu.cn/cn/</span><br><span class="line">天津大学：http://mirror.tju.edu.cn（无法访问，ping超时）</span><br><span class="line">中国地质大学：http://mirrors.cug.edu.cn/（当前已用容量估计：2.3T）</span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">厦门大学：http://mirrors.xmu.edu.cn/</span><br><span class="line">中山大学：http://mirror.sysu.edu.cn/</span><br><span class="line">重庆大学：http://mirrors.cqu.edu.cn/（当前已用容量估计：3.93T）</span><br><span class="line">北京化工大学：http://ubuntu.buct.edu.cn/（Android SDK镜像仅供校内使用，当前已用容量估计：1.72T）</span><br><span class="line">南阳理工学院：http://mirror.nyist.edu.cn/</span><br><span class="line">中国科学院：http://www.opencas.org/mirrors/</span><br><span class="line">电子科技大学：http://ubuntu.uestc.edu.cn/（无法访问，ping超时）</span><br><span class="line">电子科技大学星辰工作室：http://mirrors.stuhome.net/（当前已用容量估计：1.08T）</span><br><span class="line">西北农林科技大学：http://mirrors.nwsuaf.edu.cn/（只做CentOS镜像，当前已用容量估计：140GB） </span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">台湾淡江大学: http://ftp.tku.edu.tw/Linux/</span><br><span class="line"></span><br><span class="line">首都在线科技股份有限公司（英文名Capital Online Data Service）：http://mirrors.yun-idc.com/</span><br><span class="line">中国电信天翼云：http://mirrors.ctyun.cn/</span><br><span class="line">noc.im：http://mirrors.noc.im/（当前已用容量估计：3.74T）</span><br><span class="line">常州贝特康姆软件技术有限公司：http://centos.bitcomm.cn/（只做CentOS镜像，当前已用容量估计：140GB）</span><br><span class="line">公云PubYun（母公司为贝特康姆）：http://mirrors.pubyun.com/</span><br><span class="line">Linux运维派：http://mirrors.skyshe.cn/（使用阿里云服务器，界面使用浙江大学的模板，首页维护，内容可访问）</span><br><span class="line">中国互联网络信息中心：http://mirrors.cnnic.cn/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">Fayea工作室：http://apache.fayea.com/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">开源中国社区 http://mirrors.oss.org.cn/</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p>参考【部分不一致】：<br><code>https://zhuanlan.zhihu.com/p/107667275?from_voters_page=true</code><br>文件= 》 新建虚拟机 =》 经典 = 》稍后安装 =》 Linux =》<br><img src="https://img-blog.csdnimg.cn/20201128190857420.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191053589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191208991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191337918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191517333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191551465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191640963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择第一项：图形化安装【由于我们刚才分配给虚拟机的内存太小（只有 512 MB），所以，只出现这种难看的界面】<br>然后：<br><img src="https://img-blog.csdnimg.cn/20201128191829246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191915611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191949932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202011281927033.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192721872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819281250.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192916509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192950314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193153727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193207605.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193225924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819325350.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193316391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193529659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在这里选择【图形界面的种类】<br><img src="https://img-blog.csdnimg.cn/20201128193622921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193744420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194928831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194957601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128195238913.png" alt="在这里插入图片描述"></p>
+<h2 id="2-初始设置"><a href="#2-初始设置" class="headerlink" title="2. 初始设置"></a>2. 初始设置</h2><h3 id="2-1-设置分辨率【以下为：2020-4版】"><a href="#2-1-设置分辨率【以下为：2020-4版】" class="headerlink" title="2.1 设置分辨率【以下为：2020.4版】"></a>2.1 设置分辨率【以下为：2020.4版】</h3><p><img src="https://img-blog.csdnimg.cn/20201128153043764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-2-设置网络"><a href="#2-2-设置网络" class="headerlink" title="2.2 设置网络"></a>2.2 设置网络</h3><p>使用VM中的 NAT 模式<br>要注意：</p>
+<ul>
+<li>物理机是否启用 vm 的 nat 服务</li>
+<li>是否将 网卡设为可共享- </li>
+<li><strong>锐捷校园网的客户端每隔一段时间就会关掉vm的nat服务</strong></li>
+<li>进入<code>/etc/network/interfaces</code>文件，仿照 lo0添加网卡，保存；重启服务 <code>/etc/init.d/networking restart</code></li>
+</ul>
+<p>使用VM中的 NAT 模式的<strong>步骤</strong>： </p>
+<ul>
+<li><code>win + R</code>，输入<code>services.msc</code> , 找到<code>VM NAT Server</code>服务，启动</li>
+<li>设置vmnet8 网卡的 ip 与 网关【两个要在同一网段】</li>
+<li>在vm 中打开虚拟网络编辑器，选择 vmnet8</li>
+<li>在下方填写 <strong>子网网段 和 掩码</strong> ，</li>
+<li>点击 NAT 设置，输入<strong>网关IP</strong>【该IP不能和物理机中vmnet8的IP相同，但要与物理机中vmnet8 的网关相同】</li>
+</ul>
+<h3 id="2-3-更改鼠标大小"><a href="#2-3-更改鼠标大小" class="headerlink" title="2.3 更改鼠标大小"></a>2.3 更改鼠标大小</h3><p><img src="https://img-blog.csdnimg.cn/20201130141604663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-4-调整-终端-字体"><a href="#2-4-调整-终端-字体" class="headerlink" title="2.4 调整 终端 字体"></a>2.4 调整 终端 字体</h3><p><img src="https://img-blog.csdnimg.cn/20201130142910861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-4-取消自动休眠"><a href="#2-4-取消自动休眠" class="headerlink" title="2.4 取消自动休眠"></a>2.4 取消自动休眠</h3><p><img src="https://img-blog.csdnimg.cn/20201130145923390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-4-更换软件安装源"><a href="#2-4-更换软件安装源" class="headerlink" title="2.4 更换软件安装源"></a>2.4 更换软件安装源</h3><ul>
+<li>打开终端</li>
+<li>切换到 root 用户</li>
+<li>注释掉 <code>/etc/apt/sources.list</code> 文件中的源，并换上国内源，保存</li>
+<li>切换回普通用户</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换用户</span></span><br><span class="line">sudo su</span><br><span class="line"><span class="comment"># 输入密码</span></span><br><span class="line">kali-test</span><br><span class="line"><span class="comment"># 更改软件安装源</span></span><br><span class="line">vim vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>注释掉原来的内容，并复制 下列内容到 sources.list 中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#中科大</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#阿里云</span></span><br><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#清华大学</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#浙大</span></span><br><span class="line">deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#东软大学</span></span><br><span class="line">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#官方源</span></span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br></pre></td></tr></table></figure>
+
+<p><code>:wq</code>保存后，执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update  <span class="comment"># 取回更新的软件包列表信息</span></span><br><span class="line">apt-get upgrade <span class="comment"># 进行一次升级</span></span><br><span class="line">apt-get clean <span class="comment"># 删除已经下载的安装包</span></span><br><span class="line">reboot  <span class="comment">#重启</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>后端</category>
+        <category>操作系统</category>
+        <category>Linux</category>
+        <category>信息安全</category>
+        <category>系统安全</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -2056,24 +2324,6 @@
       <tags>
         <tag>法律</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/06/02/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>ASP.NET —— 入门笔记</title>
@@ -3087,11 +3337,25 @@
     <title>Windows操作系统使用-笔记</title>
     <url>/2021/06/02/Windows%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8-%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="Windows操作系统使用-笔记"><a href="#Windows操作系统使用-笔记" class="headerlink" title="Windows操作系统使用-笔记"></a>Windows操作系统使用-笔记</h1><p>[toc]</p>
-<h2 id="DOS"><a href="#DOS" class="headerlink" title="DOS"></a>DOS</h2><p><a href="https://blog.csdn.net/m0_46578592/article/details/110527563">批处理笔记-链接</a></p>
+<h2 id="1-Windows-磁盘管理"><a href="#1-Windows-磁盘管理" class="headerlink" title="1. Windows-磁盘管理"></a>1. Windows-磁盘管理</h2><p><img src="https://z3.ax1x.com/2021/06/02/2QD0v8.png" alt="windows磁盘管理"></p>
+<p><img src="https://z3.ax1x.com/2021/06/02/2QDg5n.png" alt="windows磁盘管理-2"></p>
+<h2 id="2-DOS"><a href="#2-DOS" class="headerlink" title="2. DOS"></a>2. DOS</h2><p><a href="https://blog.csdn.net/m0_46578592/article/details/110527563">批处理笔记-链接</a></p>
 <h4 id="1-更改cmd-的窗口背景色及字体颜色"><a href="#1-更改cmd-的窗口背景色及字体颜色" class="headerlink" title="1. 更改cmd 的窗口背景色及字体颜色"></a>1. 更改cmd 的<em>窗口背景色</em>及<em>字体颜色</em></h4><figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"> 颜色属性由两个十六进制数字指定 --(如： <span class="built_in">color</span> fc)</span><br><span class="line"></span><br><span class="line">		  第一个	 十六进制数字 对应于背景</span><br><span class="line"></span><br><span class="line">		  第二个    十六进制数字 对应于前景</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  每个数字</span><br><span class="line">	可以为以下任何值:</span><br><span class="line"></span><br><span class="line">			 <span class="number">0</span>=黑色       <span class="number">8</span>=灰色</span><br><span class="line"></span><br><span class="line">		  	 <span class="number">1</span>=蓝色       <span class="number">9</span>=淡蓝色</span><br><span class="line"></span><br><span class="line">		   	 <span class="number">2</span>=绿色       A=淡绿色</span><br><span class="line"></span><br><span class="line">		   	 <span class="number">3</span>=浅绿色     B=淡浅绿色</span><br><span class="line"></span><br><span class="line">	    	 <span class="number">4</span>=红色       C=淡红色</span><br><span class="line"></span><br><span class="line">	    	 <span class="number">5</span>=紫色       D=淡紫色</span><br><span class="line"></span><br><span class="line">	    	 <span class="number">6</span>=黄色       E=淡黄色</span><br><span class="line"></span><br><span class="line">	    	 <span class="number">7</span>=白色       F=亮白色  </span><br><span class="line"></span><br><span class="line">	  </span><br><span class="line"></span><br><span class="line">如果没有给定任何参数，此命令会将颜色还原到 <span class="built_in">cmd</span>.exe 启动时的颜色。</span><br><span class="line"></span><br><span class="line">		这个值来自当前控制台窗口、</span><br><span class="line">		/T 命令行开关,</span><br><span class="line">		或 DefaultColor 注册表	值。  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果尝试使用相同的	前景和背景颜色  来执行  <span class="built_in">COLOR</span> 命令，<span class="built_in">COLOR</span> 命令会将 <span class="keyword">ERRORLEVEL</span> 设置为 <span class="number">1</span>。  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">示例: &quot;<span class="built_in">COLOR</span> fc&quot; 在亮白色上产生淡红色</span><br><span class="line"></span><br><span class="line">	  <span class="built_in">color</span> <span class="number">0</span>a		//第一个对应于背景，第二个对应于前景		    	 </span><br></pre></td></tr></table></figure>
 
-<hr>
+
+
+
+
+
+
+
+
+
 <h4 id="2-ipconfig"><a href="#2-ipconfig" class="headerlink" title="2. ipconfig"></a>2. ipconfig</h4> <figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ipconfig</span>                       ... 显示信息</span><br><span class="line"></span><br><span class="line"><span class="built_in">ipconfig</span> /all                  ... 显示详细信息</span><br><span class="line"></span><br><span class="line"><span class="built_in">ipconfig</span> /renew                ... 更新所有适配器</span><br><span class="line"></span><br><span class="line"><span class="built_in">ipconfig</span> /renew EL*            ... 更新所有名称以 EL 开头的连接</span><br><span class="line"></span><br><span class="line"><span class="built_in">ipconfig</span> /release *<span class="built_in">Con</span>*        ... 释放所有匹配的连接，</span><br><span class="line">                                         例如“有线以太网连接 <span class="number">1</span>”或</span><br><span class="line">                                             “有线以太网连接 <span class="number">2</span>”</span><br><span class="line">                                             </span><br><span class="line"><span class="built_in">ipconfig</span> /allcompartments /all ... 显示有关所有隔离舱的详细信息                                             </span><br><span class="line"><span class="built_in">ipconfig</span> /allcompartments      ... 显示有关所有隔离舱的信息</span><br></pre></td></tr></table></figure>
+
+
+
+
 
 <h4 id="3-net-user-显示所有-网络用户账号"><a href="#3-net-user-显示所有-网络用户账号" class="headerlink" title="3. net user(显示所有 网络用户账号)"></a>3. net user(显示所有 网络用户账号)</h4><h4 id="4-文件管理"><a href="#4-文件管理" class="headerlink" title="4. 文件管理"></a>4. 文件管理</h4><blockquote>
 <p>   文件路径                                             : <code>D:\abc\1.txt</code><br>   列出文件(包括隐藏的)                       : <code>dir  /a    </code><br>   执行完命令后<strong>不退出cmd</strong>                 : <code>pause </code><br>   改变窗口<strong>标题</strong>                                    : <code>title 想要的标题</code><br>   <strong>清屏</strong>                                                   : <code>cls  </code><br>   <strong>读取</strong>文件                                           :<code> type 文件名</code><br>   将<strong>源文件内容</strong>输出到<strong>目标文件</strong>        : <code>copy 源文件 目标文件 </code>,<code>例如： copy con ./1.txt</code><br>   <strong>剪切</strong>文件                                       : <code>move  源文件全名     目标文件全名</code><br>   设置<strong>隐藏文件</strong>        : <code>attrib  +/- h   文件名.后缀</code>   ,其中： <code>h隐藏文件 , s系统级的文件 ，a追加写</code>  </p>
@@ -3126,13 +3390,23 @@
 <h4 id="8-查看本地开放的所有端口：-1个端口对应1个服务"><a href="#8-查看本地开放的所有端口：-1个端口对应1个服务" class="headerlink" title="8.  查看本地开放的所有端口：[1个端口对应1个服务]"></a>8.  查看本地开放的所有端口：[1个端口对应1个服务]</h4><blockquote>
 <p>  netstat -an</p>
 </blockquote>
-<h2 id="批处理脚本"><a href="#批处理脚本" class="headerlink" title="批处理脚本"></a>批处理脚本</h2><p>win10 启动路径：</p>
+<h2 id="3-批处理脚本"><a href="#3-批处理脚本" class="headerlink" title="3. 批处理脚本"></a>3. 批处理脚本</h2><p>win10 启动路径：</p>
 <ul>
 <li>  C:\ProgramData\Microsoft\Windows\Start Menu\Programs</li>
 </ul>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">后缀 	：  .bat</span><br><span class="line"></span><br><span class="line">作用	：  自上而下，执行命令，直到执行完所有命令（即使中间有命令无法执行，也不会停止）</span><br><span class="line"></span><br><span class="line">命令	：  dos命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	设置变量： <span class="builtin-name">set</span> <span class="attribute">a</span>=1</span><br><span class="line">	取变量	：  %a%</span><br><span class="line">	</span><br><span class="line">	由用户输入变量的值： <span class="builtin-name">set</span> /p a=</span><br><span class="line">	</span><br><span class="line">	位置变量(代表参数)： 如 shutdown -s -t %1</span><br><span class="line">	</span><br><span class="line">					0:代表批处理本身</span><br><span class="line">					1：代表第一个参数	</span><br><span class="line">	</span><br><span class="line">	跳转命令：  【  ：和 goto 连用  】	 </span><br></pre></td></tr></table></figure>
 
-<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h4 id="1-SID"><a href="#1-SID" class="headerlink" title="1. SID"></a>1. SID</h4><p>在 Windows中 每个登录到系统的用户都有相应的用户ID【UID】</p>
+
+
+
+
+
+
+
+
+
+
+<h2 id="4-用户管理"><a href="#4-用户管理" class="headerlink" title="4. 用户管理"></a>4. 用户管理</h2><h4 id="1-SID"><a href="#1-SID" class="headerlink" title="1. SID"></a>1. SID</h4><p>在 Windows中 每个登录到系统的用户都有相应的用户ID【UID】</p>
 <ul>
 <li>  用户ID = 系统ID（SID） + 用户编号</li>
 <li>  用户编号：管理员（500），普通（1000）</li>
@@ -3186,7 +3460,7 @@
 <li>  管理</li>
 <li>  用户/用户组</li>
 </ul>
-<h2 id="远程管理"><a href="#远程管理" class="headerlink" title="远程管理"></a>远程管理</h2><h4 id="1-远程桌面【端口号：3389】"><a href="#1-远程桌面【端口号：3389】" class="headerlink" title="1. 远程桌面【端口号：3389】"></a>1. 远程桌面【端口号：3389】</h4><p>步骤：【如果<strong>客户端不是管理员</strong>，则需要在<strong>服务器</strong>上将该用户加入 <strong>远程桌面用户组</strong>】</p>
+<h2 id="5-远程管理"><a href="#5-远程管理" class="headerlink" title="5. 远程管理"></a>5. 远程管理</h2><h4 id="1-远程桌面【端口号：3389】"><a href="#1-远程桌面【端口号：3389】" class="headerlink" title="1. 远程桌面【端口号：3389】"></a>1. 远程桌面【端口号：3389】</h4><p>步骤：【如果<strong>客户端不是管理员</strong>，则需要在<strong>服务器</strong>上将该用户加入 <strong>远程桌面用户组</strong>】</p>
 <ul>
 <li>  保证 客户端 和 服务器之间 能够 ping通</li>
 <li>服务器 允许被 远程访问：<ul>
@@ -3214,7 +3488,7 @@
 <ul>
 <li>  在service.msc中开启telnet服务[xp]，在cmd中使用telnet</li>
 </ul>
-<h2 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h2><p>【CIFS 协议，445端口（tcp和udp都有）】</p>
+<h2 id="6-文件共享"><a href="#6-文件共享" class="headerlink" title="6. 文件共享"></a>6. 文件共享</h2><p>【CIFS 协议，445端口（tcp和udp都有）】</p>
 <ul>
 <li>  右键</li>
 <li>  文件/文件夹</li>
@@ -3247,7 +3521,7 @@
 <li>  方法4：【防火墙的入站规则】</li>
 <li>  方法5：将删除共享的命令保存为批处理命令格式，然后放入启动目录</li>
 </ul>
-<h2 id="PE系统"><a href="#PE系统" class="headerlink" title="PE系统"></a>PE系统</h2><p>PE:微型维修系统，由于容量小，只能用于维修</p>
+<h2 id="7-PE系统"><a href="#7-PE系统" class="headerlink" title="7. PE系统"></a>7. PE系统</h2><p>PE:微型维修系统，由于容量小，只能用于维修</p>
 <p>使用PE破解window密码步骤:</p>
 <ul>
 <li>  制作PE U盘</li>
@@ -3258,7 +3532,7 @@
 <li>  切换回硬盘启动</li>
 <li>  使用修改后的密码</li>
 </ul>
-<h2 id="DHCP的部署与安全"><a href="#DHCP的部署与安全" class="headerlink" title="DHCP的部署与安全"></a>DHCP的部署与安全</h2><p>【udp:67和68端口】</p>
+<h2 id="8-DHCP的部署与安全"><a href="#8-DHCP的部署与安全" class="headerlink" title="8. DHCP的部署与安全"></a>8. DHCP的部署与安全</h2><p>【udp:67和68端口】</p>
 <ol>
 <li><p> dhcp相关：【ip，掩码，网关，dns， 租期】</p>
 </li>
@@ -3330,7 +3604,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="DNS服务器部署"><a href="#DNS服务器部署" class="headerlink" title="DNS服务器部署"></a>DNS服务器部署</h2><p>清除缓存DNS: <code>ipconfig  /flushdns</code></p>
+<h2 id="9-DNS服务器部署"><a href="#9-DNS服务器部署" class="headerlink" title="9. DNS服务器部署"></a>9. DNS服务器部署</h2><p>清除缓存DNS: <code>ipconfig  /flushdns</code></p>
 <p>查看dns缓存：<code>ipconfig  /displaydns</code></p>
 <ol>
 <li><p> www:主机名,即给服务器取个名字叫www，管理员取名时一般按功能取【可以<strong>自定义</strong>】</p>
@@ -3400,7 +3674,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="WEB服务器"><a href="#WEB服务器" class="headerlink" title="WEB服务器"></a>WEB服务器</h2><p>http: tcp 80 端口</p>
+<h2 id="10-WEB服务器"><a href="#10-WEB服务器" class="headerlink" title="10. WEB服务器"></a>10. WEB服务器</h2><p>http: tcp 80 端口</p>
 <p>htts: tcp 443 端口</p>
 <p>常用的web服务器发布软件：iis / apache/nginx/tomcat</p>
 <ol>
@@ -3411,7 +3685,8 @@
 </ol>
 </li>
 </ol>
-<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><p>端口号：tcp 20/21端口</p>
+<h2 id="11-FTP"><a href="#11-FTP" class="headerlink" title="11. FTP"></a>11. FTP</h2><p>【推荐软件】：<code>Wing FTP Server</code></p>
+<p>端口号：tcp 20/21端口</p>
 <p>ftp的两种工作模式：</p>
 <ul>
 <li>  主动模式</li>
@@ -3421,7 +3696,7 @@
 <p>建议：设置ftp站点时勾选所有ftp权限，具体权限的设置在ntfs中完成</p>
 <p>用户名和密码一般新建1个用户供他人使用</p>
 <p>推荐的第三方ftp服务软件【20人以内】：slyar ftp server ; serv-U【百人以内】</p>
-<h2 id="域和活动目录"><a href="#域和活动目录" class="headerlink" title="域和活动目录"></a>域和活动目录</h2><ol>
+<h2 id="12-域和活动目录"><a href="#12-域和活动目录" class="headerlink" title="12. 域和活动目录"></a>12. 域和活动目录</h2><ol>
 <li><p>  计算机一般有两种工作环境：    +   工作组【人人平等】    +   域【人人不平等】</p>
 </li>
 <li><p>  1个域 由 域控制器 (<strong>DC)</strong> 控制【通常：<strong>域控制器</strong>也是 <strong>域内的DNS服务器</strong>】</p>
@@ -3518,7 +3793,7 @@
 <li> <strong>组策略在域中是由OU下发的</strong></li>
 <li> 组策略下发后，用户的应用顺序【lsdou：本地-站点-域-组织单元】</li>
 <li> 开始-管理工具-组策略管理</li>
-<li> 组策略的3 种状态：【启用，禁止，未配置】</li>
+<li>组策略的3 种状态：【启用，禁止，未配置】</li>
 </ol>
 </li>
 </ol>
@@ -3550,7 +3825,7 @@
 <li> <strong>组策略在域中是由OU下发的</strong></li>
 <li> 组策略下发后，用户的应用顺序【lsdou：本地-站点-域-组织单元】</li>
 <li> 开始-管理工具-组策略管理</li>
-<li> 组策略的3 种状态：【启用，禁止，未配置】</li>
+<li>组策略的3 种状态：【启用，禁止，未配置】</li>
 </ol>
 </li>
 </ol>

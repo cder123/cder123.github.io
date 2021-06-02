@@ -1,13 +1,14 @@
 ﻿---
-title: Kali-安装笔记
+title: kali-安装笔记
 tag: Linux
 categories:
-  - [后端,操作系统,Linux使用]
+  - [后端,操作系统,Linux]
   - [信息安全,系统安全]
 
 ---
 
-# KaLi—— 笔记
+# kali-安装笔记
+
 [toc]
 下载地址：【国内镜像】
 
