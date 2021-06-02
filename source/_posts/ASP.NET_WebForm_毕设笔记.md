@@ -97,17 +97,19 @@ categories:
       </system.web>
     ```
 
+    
+
     +   在以上代码中 **sessionState** 标签是为了设置网站中的**session有效时间**，
         +    **sessionState**的几个属性的参数：
-            +   mode**属性**：
+            +   mode属性：
                 +   InProc：session保存在进程(IIS)内部，性能好，但容易丢失
                 +   StateServer：保存在进程外，需要启动`asp.net State Service的服务`，session在有效期内除非重启电脑或关闭服务，否则一直保存直到失效时间自动失效
                 +   SQLServer: 保存在数据库中，在标签中设置数据库的ip地址`stateConnectionString='tcpip=127.0.0.1:42424'`，部分数据类型需要序列化
-            +   cookieless**属性**：
-                +   true:在浏览器禁用cookie，使用url保存cookie,使用这种方法保存cookie时如果要跳转页面，不能直接覆盖地址栏的值，否则session会失效
-                    +   示例：`http://localhost/ABC/(ulqsek45heu)/default.aspx`【小括号内的就是SessionID】
-                +   false:【默认】，在浏览器启用cookie
-            +   timeout**属性**：
+            +   cookieless属性：
+                +   `true`:在浏览器禁用cookie，使用url保存cookie,使用这种方法保存cookie时如果要跳转页面，不能直接覆盖地址栏的值，否则session会失效
+                +   示例：`http://localhost/ABC/(ulqsek45heu)/default.aspx`【小括号内的就是SessionID】
+            	+   `false`:【默认】，在浏览器启用cookie
+           +   timeout属性：
                 +   属性值为 **分钟数**，**默认 20 min**
 
     
@@ -118,7 +120,7 @@ categories:
 
 ### 1.4 收款码和商品图片
 
-收款码和商品图片  保存  在项目文件夹下，数据库中 保存 图片路径
+收款码和商品图片  保存  在项目文件夹下，数据库中 保存 图片路径。
 
 
 
