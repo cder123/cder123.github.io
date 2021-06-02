@@ -665,81 +665,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MarkDown 入门篇</title>
-    <url>/2021/06/02/Markdown%E5%85%A5%E9%97%A8-%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Markdown-入门语法-笔记"><a href="#Markdown-入门语法-笔记" class="headerlink" title="Markdown 入门语法-笔记"></a>Markdown 入门语法-笔记</h1><p>[toc]</p>
-<h3 id="1-编写工具："><a href="#1-编写工具：" class="headerlink" title="1. 编写工具："></a>1. 编写工具：</h3><p>typora、vscode+插件、sublime+插件</p>
-<h3 id="2-标题："><a href="#2-标题：" class="headerlink" title="2. 标题："></a>2. 标题：</h3><p> 使用 “#”</p>
-<blockquote>
-<p><code># 一级标题</code><br><code>## 二级标题</code><br><code>### 三级标题</code><br><code>#### 四级标题</code><br><code>##### 五级标题</code><br><code>###### 六级标题</code>  </p>
-<h3 id="3-换行：空格-空格-Enter"><a href="#3-换行：空格-空格-Enter" class="headerlink" title="3. 换行：空格 + 空格 + Enter"></a>3. 换行：<kbd>空格</kbd> + <kbd>空格</kbd> + <kbd>Enter</kbd></h3></blockquote>
-<h3 id="4-斜体："><a href="#4-斜体：" class="headerlink" title="4. 斜体："></a>4. 斜体：</h3><p><code>*你好*</code> =&gt; <em>你好</em></p>
-<h3 id="5-粗体："><a href="#5-粗体：" class="headerlink" title="5. 粗体："></a>5. 粗体：</h3><p><code>**世界**</code>=&gt; <strong>世界</strong></p>
-<h3 id="6-粗斜体："><a href="#6-粗斜体：" class="headerlink" title="6. 粗斜体："></a>6. 粗斜体：</h3><p> <code>***你好，世界***</code>=&gt;<em><strong>你好，世界</strong></em></p>
-<h3 id="7-分割线："><a href="#7-分割线：" class="headerlink" title="7. 分割线："></a>7. 分割线：</h3><p><code>************</code></p>
-<h3 id="8-删除线："><a href="#8-删除线：" class="headerlink" title="8.  删除线："></a>8.  删除线：</h3><p><code>~~这是删除线~~</code>=&gt; <del>这是删除线</del></p>
-<h3 id="9-代码块："><a href="#9-代码块：" class="headerlink" title="9.  代码块："></a>9.  代码块：</h3><p>使用 `abc` 或者 ```abc```</p>
-<h3 id="10-无序列表："><a href="#10-无序列表：" class="headerlink" title="10. 无序列表："></a>10. 无序列表：</h3><ul>
-<li>第一级   </li>
-<li>第二级</li>
-</ul>
-<h3 id="11-有序列表："><a href="#11-有序列表：" class="headerlink" title="11. 有序列表："></a>11. 有序列表：</h3><ol>
-<li>abc</li>
-<li>def</li>
-<li>ghi </li>
-</ol>
-<h3 id="12-区块："><a href="#12-区块：" class="headerlink" title="12. 区块："></a>12. 区块：</h3><p>【 <kbd>></kbd> + <kbd>空格</kbd> 】</p>
-<pre><code>                    &gt;   第一级区块
-                    &gt;&gt;  第二级区块
-                    &gt;&gt;&gt; 第三级区块
-</code></pre>
-<h3 id="13-链接-："><a href="#13-链接-：" class="headerlink" title="13. 链接 ："></a>13. 链接 ：</h3><pre><code>            `[百度](http://www.baidu.com) ` :  
-</code></pre>
-<p><a href="https://www.baidu.com/">百度</a>                                  </p>
-<h3 id="14-图片"><a href="#14-图片" class="headerlink" title="14. 图片 :"></a>14. 图片 :</h3><p><code>![提示信息](地址)</code> ：</p>
-<h3 id="15-表格"><a href="#15-表格" class="headerlink" title="15. 表格 :"></a>15. 表格 :</h3><figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">//   -:   表示右对齐</span><br><span class="line">//  :-:   表示左对齐</span><br><span class="line">//   -： 表示居中对齐</span><br><span class="line">						|<span class="string">表头</span>|<span class="string">表头</span>|<span class="string">表头  </span>|</span><br><span class="line">						|<span class="string"> -: </span>|<span class="string"> :-: </span>|<span class="string"> :- </span>|</span><br><span class="line">						|<span class="string"> a  </span>|<span class="string">  b  </span>|<span class="string">  c  </span>|</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="center">姓名</th>
-<th align="center">年龄</th>
-<th align="center">性别</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">张三</td>
-<td align="center">15</td>
-<td align="center">男</td>
-</tr>
-<tr>
-<td align="center">李四</td>
-<td align="center">42</td>
-<td align="center">女</td>
-</tr>
-<tr>
-<td align="center">王五</td>
-<td align="center">64</td>
-<td align="center">男</td>
-</tr>
-<tr>
-<td align="center">马六</td>
-<td align="center">54</td>
-<td align="center">女</td>
-</tr>
-</tbody></table>
-<h3 id="16-目录"><a href="#16-目录" class="headerlink" title="16. 目录:"></a>16. 目录:</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">在开头目录位置处插入：				</span><br><span class="line"><span class="string">[TOC]</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>编程工具</category>
-        <category>文档编写工具</category>
-      </categories>
-      <tags>
-        <tag>MarkDown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript-笔记</title>
     <url>/2021/06/02/JavaScript-%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="JavaScript-笔记"><a href="#JavaScript-笔记" class="headerlink" title="JavaScript-笔记"></a>JavaScript-笔记</h1><p>[toc]</p>
@@ -1064,6 +989,81 @@
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MarkDown 入门篇</title>
+    <url>/2021/06/02/Markdown%E5%85%A5%E9%97%A8-%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="Markdown-入门语法-笔记"><a href="#Markdown-入门语法-笔记" class="headerlink" title="Markdown 入门语法-笔记"></a>Markdown 入门语法-笔记</h1><p>[toc]</p>
+<h3 id="1-编写工具："><a href="#1-编写工具：" class="headerlink" title="1. 编写工具："></a>1. 编写工具：</h3><p>typora、vscode+插件、sublime+插件</p>
+<h3 id="2-标题："><a href="#2-标题：" class="headerlink" title="2. 标题："></a>2. 标题：</h3><p> 使用 “#”</p>
+<blockquote>
+<p><code># 一级标题</code><br><code>## 二级标题</code><br><code>### 三级标题</code><br><code>#### 四级标题</code><br><code>##### 五级标题</code><br><code>###### 六级标题</code>  </p>
+<h3 id="3-换行：空格-空格-Enter"><a href="#3-换行：空格-空格-Enter" class="headerlink" title="3. 换行：空格 + 空格 + Enter"></a>3. 换行：<kbd>空格</kbd> + <kbd>空格</kbd> + <kbd>Enter</kbd></h3></blockquote>
+<h3 id="4-斜体："><a href="#4-斜体：" class="headerlink" title="4. 斜体："></a>4. 斜体：</h3><p><code>*你好*</code> =&gt; <em>你好</em></p>
+<h3 id="5-粗体："><a href="#5-粗体：" class="headerlink" title="5. 粗体："></a>5. 粗体：</h3><p><code>**世界**</code>=&gt; <strong>世界</strong></p>
+<h3 id="6-粗斜体："><a href="#6-粗斜体：" class="headerlink" title="6. 粗斜体："></a>6. 粗斜体：</h3><p> <code>***你好，世界***</code>=&gt;<em><strong>你好，世界</strong></em></p>
+<h3 id="7-分割线："><a href="#7-分割线：" class="headerlink" title="7. 分割线："></a>7. 分割线：</h3><p><code>************</code></p>
+<h3 id="8-删除线："><a href="#8-删除线：" class="headerlink" title="8.  删除线："></a>8.  删除线：</h3><p><code>~~这是删除线~~</code>=&gt; <del>这是删除线</del></p>
+<h3 id="9-代码块："><a href="#9-代码块：" class="headerlink" title="9.  代码块："></a>9.  代码块：</h3><p>使用 `abc` 或者 ```abc```</p>
+<h3 id="10-无序列表："><a href="#10-无序列表：" class="headerlink" title="10. 无序列表："></a>10. 无序列表：</h3><ul>
+<li>第一级   </li>
+<li>第二级</li>
+</ul>
+<h3 id="11-有序列表："><a href="#11-有序列表：" class="headerlink" title="11. 有序列表："></a>11. 有序列表：</h3><ol>
+<li>abc</li>
+<li>def</li>
+<li>ghi </li>
+</ol>
+<h3 id="12-区块："><a href="#12-区块：" class="headerlink" title="12. 区块："></a>12. 区块：</h3><p>【 <kbd>></kbd> + <kbd>空格</kbd> 】</p>
+<pre><code>                    &gt;   第一级区块
+                    &gt;&gt;  第二级区块
+                    &gt;&gt;&gt; 第三级区块
+</code></pre>
+<h3 id="13-链接-："><a href="#13-链接-：" class="headerlink" title="13. 链接 ："></a>13. 链接 ：</h3><pre><code>            `[百度](http://www.baidu.com) ` :  
+</code></pre>
+<p><a href="https://www.baidu.com/">百度</a>                                  </p>
+<h3 id="14-图片"><a href="#14-图片" class="headerlink" title="14. 图片 :"></a>14. 图片 :</h3><p><code>![提示信息](地址)</code> ：</p>
+<h3 id="15-表格"><a href="#15-表格" class="headerlink" title="15. 表格 :"></a>15. 表格 :</h3><figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">//   -:   表示右对齐</span><br><span class="line">//  :-:   表示左对齐</span><br><span class="line">//   -： 表示居中对齐</span><br><span class="line">						|<span class="string">表头</span>|<span class="string">表头</span>|<span class="string">表头  </span>|</span><br><span class="line">						|<span class="string"> -: </span>|<span class="string"> :-: </span>|<span class="string"> :- </span>|</span><br><span class="line">						|<span class="string"> a  </span>|<span class="string">  b  </span>|<span class="string">  c  </span>|</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">姓名</th>
+<th align="center">年龄</th>
+<th align="center">性别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">张三</td>
+<td align="center">15</td>
+<td align="center">男</td>
+</tr>
+<tr>
+<td align="center">李四</td>
+<td align="center">42</td>
+<td align="center">女</td>
+</tr>
+<tr>
+<td align="center">王五</td>
+<td align="center">64</td>
+<td align="center">男</td>
+</tr>
+<tr>
+<td align="center">马六</td>
+<td align="center">54</td>
+<td align="center">女</td>
+</tr>
+</tbody></table>
+<h3 id="16-目录"><a href="#16-目录" class="headerlink" title="16. 目录:"></a>16. 目录:</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">在开头目录位置处插入：				</span><br><span class="line"><span class="string">[TOC]</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>编程工具</category>
+        <category>文档编写工具</category>
+      </categories>
+      <tags>
+        <tag>MarkDown</tag>
       </tags>
   </entry>
   <entry>
@@ -1747,101 +1747,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue 入门-03</title>
-    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-03-%E7%BB%84%E4%BB%B6(%E9%83%A8%E5%88%86)+vue%E8%B7%AF%E7%94%B1/</url>
-    <content><![CDATA[<h1 id="Vue入门-03"><a href="#Vue入门-03" class="headerlink" title="Vue入门-03"></a>Vue入门-03</h1><p>[toc]</p>
-<h2 id="1-1-Vue-cli-安装"><a href="#1-1-Vue-cli-安装" class="headerlink" title="1.1 Vue cli 安装"></a>1.1 Vue cli 安装</h2><ol>
-<li>官网下载+安装 node.js：<a href="http://nodejs.cn/download/">node官网下载</a></li>
-<li>配置 node.js 的 镜像源：<code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></li>
-<li>安装 vue:<code>npm install @vue/cli -g</code></li>
-<li>使用cmd进入项目目录输入 vue ui 管理项目【不要关闭cmd】：<code>vue ui</code><br><img src="https://img-blog.csdnimg.cn/20210121093747655.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121093904458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094019976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094221635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094411293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094544103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094611966.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121095832299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121095919324.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>最终的目录下：<br><img src="https://img-blog.csdnimg.cn/20210121100242313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>展开 src目录：<br><img src="https://img-blog.csdnimg.cn/20210121100537873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121100556258.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121101042308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121101228593.png" alt="在这里插入图片描述"><h2 id="1-2-Vue-组件"><a href="#1-2-Vue-组件" class="headerlink" title="1.2 Vue 组件"></a>1.2 Vue 组件</h2>组件的其他笔记可参见  <a href="https://blog.csdn.net/m0_46578592/article/details/112737312">vue笔记01</a></li>
-</ol>
-<p> 组件的两种方式：</p>
-<ol>
-<li>方式1【内部】：在script标签内<br><img src="https://img-blog.csdnimg.cn/2021012111022074.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>方式2【单独在外部写成1个文件】：<code>App.Vue</code>文件<br>App.vue最终会挂载到 HTML中<br><img src="https://img-blog.csdnimg.cn/20210121110724470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121111817442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="组件的使用步骤"><a href="#组件的使用步骤" class="headerlink" title="组件的使用步骤"></a>组件的使用步骤</h2></li>
-</ol>
-<ul>
-<li>定义组件</li>
-<li>App.vue 文件【相当于Vue对象】 中 手动引入 (<code>import</code>)自定义的组件文件【相当于 组件】</li>
-<li>在App.vue模板中使用组件，编写事件</li>
-<li>自动挂载到 Html</li>
-<li><h3 id="1-2-1-创建组件并引入【外部组件】："><a href="#1-2-1-创建组件并引入【外部组件】：" class="headerlink" title="1.2.1 创建组件并引入【外部组件】："></a>1.2.1 创建组件并引入【外部组件】：</h3></li>
-</ul>
-<p>1.创建外部的组件<br><img src="https://img-blog.csdnimg.cn/20210121122353996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2. App.vue中导入刚才创建的组件：</p>
-<p>【@符号表示：根目录，此例中为App.vue所在的src目录】<br>此例中，<code>demo1</code> 表示 <code>demo.vue整个文件</code>，<code>Demo</code>才是<code>真正的名字</code><br>将 <code>demo1</code> 放到对象 <code>components</code> 对象内的过程就是<code>注册组件</code>【此时组件才可以使用】<br>【注册时，如果组件的 <strong>调用名字</strong> 和 <strong>导出名字</strong>  一模<strong>一样</strong>，则可直接省略<code>名字:名字</code>中的冒号及之后的名字来简写】<br><img src="https://img-blog.csdnimg.cn/20210121124527572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="1-2-1-1-实例1-组件使用时-传值给自定义的属性："><a href="#1-2-1-1-实例1-组件使用时-传值给自定义的属性：" class="headerlink" title="1.2.1.1 实例1 组件使用时 传值给自定义的属性："></a>1.2.1.1 实例1 组件使用时 传值给自定义的属性：</h4><p><img src="https://img-blog.csdnimg.cn/20210121130542732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021012113062640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>组件定义时的类型检查：<br><img src="https://img-blog.csdnimg.cn/20210121133534888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>自定义的属性 在定义时常用：</p>
-<ul>
-<li>type: 参见上图</li>
-<li>require: true/false</li>
-<li>default: 默认值<h4 id="1-2-1-2-实例2-【输入标题和内容，输出组件】："><a href="#1-2-1-2-实例2-【输入标题和内容，输出组件】：" class="headerlink" title="1.2.1.2 实例2 【输入标题和内容，输出组件】："></a>1.2.1.2 实例2 【输入标题和内容，输出组件】：</h4>组件定义：<br><img src="https://img-blog.csdnimg.cn/20210121132616948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ul>
-<h4 id="1-2-1-3-实例3-【给自创的组件-定义事件】："><a href="#1-2-1-3-实例3-【给自创的组件-定义事件】：" class="headerlink" title="1.2.1.3 实例3 【给自创的组件 定义事件】："></a>1.2.1.3 实例3 【给自创的组件 定义事件】：</h4><p>在 组件定义 的时候 在 methods键 后的对象内定义1个函数，函数内绑定 自定义的<code>事件名</code>和<code>要返回的数据</code>，在<code>App.vue</code>文件中定义事件【该<strong>事件作为参数</strong> 传给 组件的事件（即：回调函数的语法）】，</p>
-<h3 id="1-2-2-组件的内容-slot标签"><a href="#1-2-2-组件的内容-slot标签" class="headerlink" title="1.2.2 组件的内容 : slot标签"></a>1.2.2 组件的内容 : slot标签</h3><p>在定义时，用 <code>&lt;slot&gt;  &lt;/slot&gt;</code>作为 组件内容的占位符，当组件使用时，就会用 组件 包裹的部分来替换掉 slot 标签</p>
-<h2 id="1-3-Vue-路由"><a href="#1-3-Vue-路由" class="headerlink" title="1.3 Vue 路由"></a>1.3 Vue 路由</h2><p>Vue路由用到了组件，下图中 组件 router-view 相当于是 1个小页面，当点击router-link时，router-view 中的内容就会根据组件的内容改变【相当于 frame】</p>
-<p><a href="https://router.vuejs.org/zh/guide/#html">vue路由-官网</a><br><img src="https://img-blog.csdnimg.cn/20210119131025839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>组件调用：<br><img src="https://img-blog.csdnimg.cn/20210121132924901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-3-1-Vue-路由-前置知识实例："><a href="#1-3-1-Vue-路由-前置知识实例：" class="headerlink" title="1.3.1 Vue 路由-前置知识实例："></a>1.3.1 Vue 路由-前置知识实例：</h3><p>目标页面：【变化部分为 .container】<br><img src="https://img-blog.csdnimg.cn/20210121155547745.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="1-3-1-1-组件的-css-样式"><a href="#1-3-1-1-组件的-css-样式" class="headerlink" title="1.3.1.1 组件的 css 样式"></a>1.3.1.1 组件的 css 样式</h4><p>3种：</p>
-<ul>
-<li>默认【样式重名时，样式会污染出去】：<code>&lt;style&gt;       &lt;/style&gt;</code></li>
-<li>scoped【样式只在定义的文件中有效】: <code>&lt;style scoped&gt;      &lt;/style&gt;</code></li>
-</ul>
-<h4 id="1-3-1-2-left组件"><a href="#1-3-1-2-left组件" class="headerlink" title="1.3.1.2 left组件"></a>1.3.1.2 left组件</h4><p>router-view 跟着 router-link 变化<br><img src="https://img-blog.csdnimg.cn/20210121164057933.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121164906518.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图中，<br>path就是地址栏的变化，<br><code>/about</code> 最后导入的组件显示在 router-view 中</p>
-<p>实例1：【 <strong>left中 的点击 router-link</strong>  使    <strong>container 中的 router-view 变化</strong>】</p>
-<p><img src="https://img-blog.csdnimg.cn/20210121170344391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121170532683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121170714448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="基本路由的大致步骤小结"><a href="#基本路由的大致步骤小结" class="headerlink" title="基本路由的大致步骤小结"></a>基本路由的大致步骤小结</h3><p>【在默认的情况下，点击链接所在的组件，让router-view变化】：</p>
-<ul>
-<li>定义组件</li>
-<li>在App.vue中定义router-view</li>
-<li>在某个组件中定义router-link，且router-link标签的 to 属性绑定 地址</li>
-<li>在 views 目录下 定义组件，由于点击链接后显示</li>
-<li>在 router/index 中 绑定 地址栏的变化 与 导入组件的关系【注册路由】</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20210121172438231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="1-3-2-动态路由【地址栏传参数】"><a href="#1-3-2-动态路由【地址栏传参数】" class="headerlink" title="1.3.2 动态路由【地址栏传参数】"></a>1.3.2 动态路由【地址栏传参数】</h3><p><img src="https://img-blog.csdnimg.cn/20210121175810568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121180036456.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>HTML中如果需要获取地址栏的参数：<code> {{ $route.params.参数名}} </code><br>JS 中使用地址栏的参数：<br><img src="https://img-blog.csdnimg.cn/20210121191630300.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>实例1：</p>
-<ul>
-<li>目标：点击 left中的“博客” =》 右侧出现 博客的title,点击title,跳转到显示pid的界面【pid为地址栏中的博客id】</li>
-<li>主要 需修改 的文件：<ul>
-<li> left.vue组件</li>
-<li> 路由【包括：左侧导航栏的路由，博文列表中每1项的路由】</li>
-<li> Articels.vue组件: 存放博文列表</li>
-<li>article.vue：博文内容</li>
-</ul>
-</li>
-</ul>
-<p>left.vue组件：点击后显示博客的标题列表<br><img src="https://img-blog.csdnimg.cn/20210121190127215.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121190229322.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121190401380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121190544132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121191840694.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ol>
-<li>在 函数中使用 地址栏中的参数-实例：<br><code>this.$route.params.地址栏参数名</code><br>【假设 data 是 ajax 获取的数据集，根据地址栏的参数id 来匹配 data中的每一项，将不符合条件的过滤掉，最后取 过滤后的数组的第1项 来显示】<br><img src="https://img-blog.csdnimg.cn/20210121192834676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h3 id="子组件向父组件传值："><a href="#子组件向父组件传值：" class="headerlink" title="子组件向父组件传值："></a>子组件向父组件传值：</h3></li>
-</ol>
-<ul>
-<li>子组件 先 绑定<strong>方法</strong></li>
-<li>子组件的方法中 再 绑定<strong>事件</strong>：<code>$emit(&quot;小写的事件名&quot;，this.$data)</code></li>
-<li>父组件 的方法的参数名为data, </li>
-<li>父组件使用子组件时，将父组件中的<strong>方法</strong> =&gt; <strong>传入</strong> 子组件的<strong>事件</strong>中</li>
-</ul>
-<h3 id="组件嵌套的路由"><a href="#组件嵌套的路由" class="headerlink" title="组件嵌套的路由"></a>组件嵌套的路由</h3><p>要使用路由一般要有以下条件：</p>
-<ul>
-<li>路由注册【path，要导入的组件】:最重要</li>
-<li>route-view</li>
-<li>route-link<br><img src="https://img-blog.csdnimg.cn/20210121200043973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h3 id="1-4-命名路由"><a href="#1-4-命名路由" class="headerlink" title="1.4 命名路由"></a>1.4 命名路由</h3><img src="https://img-blog.csdnimg.cn/20210121202032986.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在 js 的方法中中可使用【name需要params；path需要拼接】：</li>
-<li> <code>this.$router.push(地址)</code>  </li>
-<li> <code>this.$router.push(&#123;path:&quot;地址&quot;,query:&#123;参数名：参数值，参数名：参数值&#125;&#125;)</code></li>
-<li> <code>this.$router.push(&#123;name:&quot;路由名&quot;&#125;)</code></li>
-<li><code>this.$router.push(&#123;name:&quot;路由名&quot;,params:&#123;参数名：参数值，参数名：参数值&#125;&#125;)</code></li>
-</ul>
-<h3 id="1-5-去掉使用路由时，地址栏上的-号"><a href="#1-5-去掉使用路由时，地址栏上的-号" class="headerlink" title="1.5 去掉使用路由时，地址栏上的#号"></a>1.5 去掉使用路由时，地址栏上的#号</h3><p><img src="https://img-blog.csdnimg.cn/2021012120374382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121204319530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue 入门-01</title>
     <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-01/</url>
     <content><![CDATA[<h1 id="Vue入门-01"><a href="#Vue入门-01" class="headerlink" title="Vue入门-01"></a>Vue入门-01</h1><p>[toc]</p>
@@ -1937,6 +1842,126 @@
 <h4 id="4-3-6-updated-事件【重要：修改属性之后】"><a href="#4-3-6-updated-事件【重要：修改属性之后】" class="headerlink" title="4.3.6 updated 事件【重要：修改属性之后】"></a>4.3.6 updated 事件【重要：修改属性之后】</h4><p>updated 事件：在监听阶段，如果属性发生变化，则在渲染之后触发该事件</p>
 <h4 id="4-3-7-beforeDestroy-事件"><a href="#4-3-7-beforeDestroy-事件" class="headerlink" title="4.3.7 beforeDestroy 事件"></a>4.3.7 beforeDestroy 事件</h4><p>beforeDestroy 事件:销毁之前触发</p>
 <h4 id="4-3-8-Destroyed-事件"><a href="#4-3-8-Destroyed-事件" class="headerlink" title="4.3.8 Destroyed 事件"></a>4.3.8 Destroyed 事件</h4><p>beforeDestroy 事件:销毁之后触发</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue 入门-03</title>
+    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-03-%E7%BB%84%E4%BB%B6(%E9%83%A8%E5%88%86)+vue%E8%B7%AF%E7%94%B1/</url>
+    <content><![CDATA[<h1 id="Vue入门-03"><a href="#Vue入门-03" class="headerlink" title="Vue入门-03"></a>Vue入门-03</h1><p>[toc]</p>
+<h2 id="1-1-Vue-cli-安装"><a href="#1-1-Vue-cli-安装" class="headerlink" title="1.1 Vue cli 安装"></a>1.1 Vue cli 安装</h2><ol>
+<li>官网下载+安装 node.js：<a href="http://nodejs.cn/download/">node官网下载</a></li>
+<li>配置 node.js 的 镜像源：<code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></li>
+<li>安装 vue:<code>npm install @vue/cli -g</code></li>
+<li>使用cmd进入项目目录输入 vue ui 管理项目【不要关闭cmd】：<code>vue ui</code><br><img src="https://img-blog.csdnimg.cn/20210121093747655.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121093904458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094019976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094221635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094411293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094544103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121094611966.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121095832299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121095919324.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>最终的目录下：<br><img src="https://img-blog.csdnimg.cn/20210121100242313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>展开 src目录：<br><img src="https://img-blog.csdnimg.cn/20210121100537873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121100556258.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121101042308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121101228593.png" alt="在这里插入图片描述"><h2 id="1-2-Vue-组件"><a href="#1-2-Vue-组件" class="headerlink" title="1.2 Vue 组件"></a>1.2 Vue 组件</h2>组件的其他笔记可参见  <a href="https://blog.csdn.net/m0_46578592/article/details/112737312">vue笔记01</a></li>
+</ol>
+<p> 组件的两种方式：</p>
+<ol>
+<li>方式1【内部】：在script标签内<br><img src="https://img-blog.csdnimg.cn/2021012111022074.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>方式2【单独在外部写成1个文件】：<code>App.Vue</code>文件<br>App.vue最终会挂载到 HTML中<br><img src="https://img-blog.csdnimg.cn/20210121110724470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121111817442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h2 id="组件的使用步骤"><a href="#组件的使用步骤" class="headerlink" title="组件的使用步骤"></a>组件的使用步骤</h2></li>
+</ol>
+<ul>
+<li>定义组件</li>
+<li>App.vue 文件【相当于Vue对象】 中 手动引入 (<code>import</code>)自定义的组件文件【相当于 组件】</li>
+<li>在App.vue模板中使用组件，编写事件</li>
+<li>自动挂载到 Html</li>
+<li><h3 id="1-2-1-创建组件并引入【外部组件】："><a href="#1-2-1-创建组件并引入【外部组件】：" class="headerlink" title="1.2.1 创建组件并引入【外部组件】："></a>1.2.1 创建组件并引入【外部组件】：</h3></li>
+</ul>
+<p>1.创建外部的组件<br><img src="https://img-blog.csdnimg.cn/20210121122353996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2. App.vue中导入刚才创建的组件：</p>
+<p>【@符号表示：根目录，此例中为App.vue所在的src目录】<br>此例中，<code>demo1</code> 表示 <code>demo.vue整个文件</code>，<code>Demo</code>才是<code>真正的名字</code><br>将 <code>demo1</code> 放到对象 <code>components</code> 对象内的过程就是<code>注册组件</code>【此时组件才可以使用】<br>【注册时，如果组件的 <strong>调用名字</strong> 和 <strong>导出名字</strong>  一模<strong>一样</strong>，则可直接省略<code>名字:名字</code>中的冒号及之后的名字来简写】<br><img src="https://img-blog.csdnimg.cn/20210121124527572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="1-2-1-1-实例1-组件使用时-传值给自定义的属性："><a href="#1-2-1-1-实例1-组件使用时-传值给自定义的属性：" class="headerlink" title="1.2.1.1 实例1 组件使用时 传值给自定义的属性："></a>1.2.1.1 实例1 组件使用时 传值给自定义的属性：</h4><p><img src="https://img-blog.csdnimg.cn/20210121130542732.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021012113062640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>组件定义时的类型检查：<br><img src="https://img-blog.csdnimg.cn/20210121133534888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>自定义的属性 在定义时常用：</p>
+<ul>
+<li>type: 参见上图</li>
+<li>require: true/false</li>
+<li>default: 默认值<h4 id="1-2-1-2-实例2-【输入标题和内容，输出组件】："><a href="#1-2-1-2-实例2-【输入标题和内容，输出组件】：" class="headerlink" title="1.2.1.2 实例2 【输入标题和内容，输出组件】："></a>1.2.1.2 实例2 【输入标题和内容，输出组件】：</h4>组件定义：<br><img src="https://img-blog.csdnimg.cn/20210121132616948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<h4 id="1-2-1-3-实例3-【给自创的组件-定义事件】："><a href="#1-2-1-3-实例3-【给自创的组件-定义事件】：" class="headerlink" title="1.2.1.3 实例3 【给自创的组件 定义事件】："></a>1.2.1.3 实例3 【给自创的组件 定义事件】：</h4><p>在 组件定义 的时候 在 methods键 后的对象内定义1个函数，函数内绑定 自定义的<code>事件名</code>和<code>要返回的数据</code>，在<code>App.vue</code>文件中定义事件【该<strong>事件作为参数</strong> 传给 组件的事件（即：回调函数的语法）】，</p>
+<h3 id="1-2-2-组件的内容-slot标签"><a href="#1-2-2-组件的内容-slot标签" class="headerlink" title="1.2.2 组件的内容 : slot标签"></a>1.2.2 组件的内容 : slot标签</h3><p>在定义时，用 <code>&lt;slot&gt;  &lt;/slot&gt;</code>作为 组件内容的占位符，当组件使用时，就会用 组件 包裹的部分来替换掉 slot 标签</p>
+<h2 id="1-3-Vue-路由"><a href="#1-3-Vue-路由" class="headerlink" title="1.3 Vue 路由"></a>1.3 Vue 路由</h2><p>Vue路由用到了组件，下图中 组件 router-view 相当于是 1个小页面，当点击router-link时，router-view 中的内容就会根据组件的内容改变【相当于 frame】</p>
+<p><a href="https://router.vuejs.org/zh/guide/#html">vue路由-官网</a><br><img src="https://img-blog.csdnimg.cn/20210119131025839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>组件调用：<br><img src="https://img-blog.csdnimg.cn/20210121132924901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-3-1-Vue-路由-前置知识实例："><a href="#1-3-1-Vue-路由-前置知识实例：" class="headerlink" title="1.3.1 Vue 路由-前置知识实例："></a>1.3.1 Vue 路由-前置知识实例：</h3><p>目标页面：【变化部分为 .container】<br><img src="https://img-blog.csdnimg.cn/20210121155547745.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="1-3-1-1-组件的-css-样式"><a href="#1-3-1-1-组件的-css-样式" class="headerlink" title="1.3.1.1 组件的 css 样式"></a>1.3.1.1 组件的 css 样式</h4><p>3种：</p>
+<ul>
+<li>默认【样式重名时，样式会污染出去】：<code>&lt;style&gt;       &lt;/style&gt;</code></li>
+<li>scoped【样式只在定义的文件中有效】: <code>&lt;style scoped&gt;      &lt;/style&gt;</code></li>
+</ul>
+<h4 id="1-3-1-2-left组件"><a href="#1-3-1-2-left组件" class="headerlink" title="1.3.1.2 left组件"></a>1.3.1.2 left组件</h4><p>router-view 跟着 router-link 变化<br><img src="https://img-blog.csdnimg.cn/20210121164057933.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121164906518.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图中，<br>path就是地址栏的变化，<br><code>/about</code> 最后导入的组件显示在 router-view 中</p>
+<p>实例1：【 <strong>left中 的点击 router-link</strong>  使    <strong>container 中的 router-view 变化</strong>】</p>
+<p><img src="https://img-blog.csdnimg.cn/20210121170344391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121170532683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121170714448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="基本路由的大致步骤小结"><a href="#基本路由的大致步骤小结" class="headerlink" title="基本路由的大致步骤小结"></a>基本路由的大致步骤小结</h3><p>【在默认的情况下，点击链接所在的组件，让router-view变化】：</p>
+<ul>
+<li>定义组件</li>
+<li>在App.vue中定义router-view</li>
+<li>在某个组件中定义router-link，且router-link标签的 to 属性绑定 地址</li>
+<li>在 views 目录下 定义组件，由于点击链接后显示</li>
+<li>在 router/index 中 绑定 地址栏的变化 与 导入组件的关系【注册路由】</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210121172438231.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="1-3-2-动态路由【地址栏传参数】"><a href="#1-3-2-动态路由【地址栏传参数】" class="headerlink" title="1.3.2 动态路由【地址栏传参数】"></a>1.3.2 动态路由【地址栏传参数】</h3><p><img src="https://img-blog.csdnimg.cn/20210121175810568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121180036456.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>HTML中如果需要获取地址栏的参数：<code> {{ $route.params.参数名}} </code><br>JS 中使用地址栏的参数：<br><img src="https://img-blog.csdnimg.cn/20210121191630300.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>实例1：</p>
+<ul>
+<li>目标：点击 left中的“博客” =》 右侧出现 博客的title,点击title,跳转到显示pid的界面【pid为地址栏中的博客id】</li>
+<li>主要 需修改 的文件：<ul>
+<li> left.vue组件</li>
+<li> 路由【包括：左侧导航栏的路由，博文列表中每1项的路由】</li>
+<li> Articels.vue组件: 存放博文列表</li>
+<li>article.vue：博文内容</li>
+</ul>
+</li>
+</ul>
+<p>left.vue组件：点击后显示博客的标题列表<br><img src="https://img-blog.csdnimg.cn/20210121190127215.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121190229322.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121190401380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121190544132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121191840694.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ol>
+<li>在 函数中使用 地址栏中的参数-实例：<br><code>this.$route.params.地址栏参数名</code><br>【假设 data 是 ajax 获取的数据集，根据地址栏的参数id 来匹配 data中的每一项，将不符合条件的过滤掉，最后取 过滤后的数组的第1项 来显示】<br><img src="https://img-blog.csdnimg.cn/20210121192834676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h3 id="子组件向父组件传值："><a href="#子组件向父组件传值：" class="headerlink" title="子组件向父组件传值："></a>子组件向父组件传值：</h3></li>
+</ol>
+<ul>
+<li>子组件 先 绑定<strong>方法</strong></li>
+<li>子组件的方法中 再 绑定<strong>事件</strong>：<code>$emit(&quot;小写的事件名&quot;，this.$data)</code></li>
+<li>父组件 的方法的参数名为data, </li>
+<li>父组件使用子组件时，将父组件中的<strong>方法</strong> =&gt; <strong>传入</strong> 子组件的<strong>事件</strong>中</li>
+</ul>
+<h3 id="组件嵌套的路由"><a href="#组件嵌套的路由" class="headerlink" title="组件嵌套的路由"></a>组件嵌套的路由</h3><p>要使用路由一般要有以下条件：</p>
+<ul>
+<li>路由注册【path，要导入的组件】:最重要</li>
+<li>route-view</li>
+<li>route-link<br><img src="https://img-blog.csdnimg.cn/20210121200043973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><h3 id="1-4-命名路由"><a href="#1-4-命名路由" class="headerlink" title="1.4 命名路由"></a>1.4 命名路由</h3><img src="https://img-blog.csdnimg.cn/20210121202032986.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在 js 的方法中中可使用【name需要params；path需要拼接】：</li>
+<li> <code>this.$router.push(地址)</code>  </li>
+<li> <code>this.$router.push(&#123;path:&quot;地址&quot;,query:&#123;参数名：参数值，参数名：参数值&#125;&#125;)</code></li>
+<li> <code>this.$router.push(&#123;name:&quot;路由名&quot;&#125;)</code></li>
+<li><code>this.$router.push(&#123;name:&quot;路由名&quot;,params:&#123;参数名：参数值，参数名：参数值&#125;&#125;)</code></li>
+</ul>
+<h3 id="1-5-去掉使用路由时，地址栏上的-号"><a href="#1-5-去掉使用路由时，地址栏上的-号" class="headerlink" title="1.5 去掉使用路由时，地址栏上的#号"></a>1.5 去掉使用路由时，地址栏上的#号</h3><p><img src="https://img-blog.csdnimg.cn/2021012120374382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121204319530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue 入门-04</title>
+    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-04/</url>
+    <content><![CDATA[<h1 id="Vue入门-04"><a href="#Vue入门-04" class="headerlink" title="Vue入门-04"></a>Vue入门-04</h1><p>[toc]</p>
+<h2 id="1-1-Vuex"><a href="#1-1-Vuex" class="headerlink" title="1.1 Vuex"></a>1.1 Vuex</h2><p>使用 Vuex 可以在整个Vue项目中共享数据【类似 数据库的作用】<br>=》官方叫<code>状态管理模式</code><br><img src="https://img-blog.csdnimg.cn/20210122104027301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>项目中要使用 vuex 必须要 <code>use</code> 来应用【vue 的 router 也一样】<br><img src="https://img-blog.csdnimg.cn/20210122104249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> vuex 的路径：<code>/src/store/index.js</code><br> <img src="https://img-blog.csdnimg.cn/20210122104820568.png" alt="在这里插入图片描述"><br>首先，在<code>/store/index.js</code>文件中引入vuex，并导出1个store对象，<br>在<code>main.js</code>文件中导入 <code>/store/index.js</code>文件，并在Vue对象中注册<br><img src="https://img-blog.csdnimg.cn/202101221056369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210122105030964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122110141606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例1【获取数据】："><a href="#实例1【获取数据】：" class="headerlink" title="实例1【获取数据】："></a>实例1【获取数据】：</h3><ul>
+<li>store中的state里面写数据</li>
+<li>store中的getters方法</li>
+<li>在要使用数据的组件中导入vuex的 mapGetters</li>
+<li>在计算属性computed中 使用<code>...mapGetters([&quot;getter方法名1&quot;，“getter方法名2”])</code></li>
+<li>利用  来使用数据<br><img src="https://img-blog.csdnimg.cn/20210122113209775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2021012211431555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例2【获取数据】："><a href="#实例2【获取数据】：" class="headerlink" title="实例2【获取数据】："></a>实例2【获取数据】：</h3><p><img src="https://img-blog.csdnimg.cn/20210122114921444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122115028541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例3-【设置数据】"><a href="#实例3-【设置数据】" class="headerlink" title="实例3 【设置数据】"></a>实例3 【设置数据】</h3><p><img src="https://img-blog.csdnimg.cn/20210122122416420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122122915950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -2052,31 +2077,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue 入门-04</title>
-    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-04/</url>
-    <content><![CDATA[<h1 id="Vue入门-04"><a href="#Vue入门-04" class="headerlink" title="Vue入门-04"></a>Vue入门-04</h1><p>[toc]</p>
-<h2 id="1-1-Vuex"><a href="#1-1-Vuex" class="headerlink" title="1.1 Vuex"></a>1.1 Vuex</h2><p>使用 Vuex 可以在整个Vue项目中共享数据【类似 数据库的作用】<br>=》官方叫<code>状态管理模式</code><br><img src="https://img-blog.csdnimg.cn/20210122104027301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>项目中要使用 vuex 必须要 <code>use</code> 来应用【vue 的 router 也一样】<br><img src="https://img-blog.csdnimg.cn/20210122104249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> vuex 的路径：<code>/src/store/index.js</code><br> <img src="https://img-blog.csdnimg.cn/20210122104820568.png" alt="在这里插入图片描述"><br>首先，在<code>/store/index.js</code>文件中引入vuex，并导出1个store对象，<br>在<code>main.js</code>文件中导入 <code>/store/index.js</code>文件，并在Vue对象中注册<br><img src="https://img-blog.csdnimg.cn/202101221056369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210122105030964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122110141606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例1【获取数据】："><a href="#实例1【获取数据】：" class="headerlink" title="实例1【获取数据】："></a>实例1【获取数据】：</h3><ul>
-<li>store中的state里面写数据</li>
-<li>store中的getters方法</li>
-<li>在要使用数据的组件中导入vuex的 mapGetters</li>
-<li>在计算属性computed中 使用<code>...mapGetters([&quot;getter方法名1&quot;，“getter方法名2”])</code></li>
-<li>利用  来使用数据<br><img src="https://img-blog.csdnimg.cn/20210122113209775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/2021012211431555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例2【获取数据】："><a href="#实例2【获取数据】：" class="headerlink" title="实例2【获取数据】："></a>实例2【获取数据】：</h3><p><img src="https://img-blog.csdnimg.cn/20210122114921444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122115028541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例3-【设置数据】"><a href="#实例3-【设置数据】" class="headerlink" title="实例3 【设置数据】"></a>实例3 【设置数据】</h3><p><img src="https://img-blog.csdnimg.cn/20210122122416420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122122915950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2021/06/02/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -2093,6 +2093,57 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>kali-安装笔记</title>
+    <url>/2021/06/02/kali-%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="kali-安装笔记"><a href="#kali-安装笔记" class="headerlink" title="kali-安装笔记"></a>kali-安装笔记</h1><p>[toc]<br>下载地址：【国内镜像】</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">搜狐：http://mirrors.sohu.com/</span><br><span class="line">网易：http://mirrors.163.com/</span><br><span class="line">阿里云：http://mirrors.aliyun.com/</span><br><span class="line">腾讯：http://android-mirror.bugly.qq.com:8080/（仅针对APP开发的软件，限流，不推荐）</span><br><span class="line">淘宝：http://npm.taobao.org/</span><br><span class="line"></span><br><span class="line">上海交通大学：http://ftp.sjtu.edu.cn/html/resources.xml（部分移动运营商出口状况不佳，无法访问）</span><br><span class="line">华中科技大学：http://mirror.hust.edu.cn/（当前已用容量估计：4.83T）</span><br><span class="line">清华大学：http://mirrors.tuna.tsinghua.edu.cn/（当前已用容量估计：9.8T）</span><br><span class="line">北京理工大学：http://mirror.bit.edu.cn/web/</span><br><span class="line">兰州大学：http://mirror.lzu.edu.cn/</span><br><span class="line">中国科技大学：http://mirrors.ustc.edu.cn/（当前已用容量估计：21.32T）</span><br><span class="line">大连东软信息学院：http://mirrors.neusoft.edu.cn/（当前已用容量估计：2.5T）</span><br><span class="line">东北大学：http://mirror.neu.edu.cn/</span><br><span class="line">大连理工大学：http://mirror.dlut.edu.cn/</span><br><span class="line">哈尔滨工业大学：http://run.hit.edu.cn/html/（部分联通运营商出口状况不佳，无法访问）</span><br><span class="line">北京交通大学：http://mirror.bjtu.edu.cn/cn/</span><br><span class="line">天津大学：http://mirror.tju.edu.cn（无法访问，ping超时）</span><br><span class="line">中国地质大学：http://mirrors.cug.edu.cn/（当前已用容量估计：2.3T）</span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">厦门大学：http://mirrors.xmu.edu.cn/</span><br><span class="line">中山大学：http://mirror.sysu.edu.cn/</span><br><span class="line">重庆大学：http://mirrors.cqu.edu.cn/（当前已用容量估计：3.93T）</span><br><span class="line">北京化工大学：http://ubuntu.buct.edu.cn/（Android SDK镜像仅供校内使用，当前已用容量估计：1.72T）</span><br><span class="line">南阳理工学院：http://mirror.nyist.edu.cn/</span><br><span class="line">中国科学院：http://www.opencas.org/mirrors/</span><br><span class="line">电子科技大学：http://ubuntu.uestc.edu.cn/（无法访问，ping超时）</span><br><span class="line">电子科技大学星辰工作室：http://mirrors.stuhome.net/（当前已用容量估计：1.08T）</span><br><span class="line">西北农林科技大学：http://mirrors.nwsuaf.edu.cn/（只做CentOS镜像，当前已用容量估计：140GB） </span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">台湾淡江大学: http://ftp.tku.edu.tw/Linux/</span><br><span class="line"></span><br><span class="line">首都在线科技股份有限公司（英文名Capital Online Data Service）：http://mirrors.yun-idc.com/</span><br><span class="line">中国电信天翼云：http://mirrors.ctyun.cn/</span><br><span class="line">noc.im：http://mirrors.noc.im/（当前已用容量估计：3.74T）</span><br><span class="line">常州贝特康姆软件技术有限公司：http://centos.bitcomm.cn/（只做CentOS镜像，当前已用容量估计：140GB）</span><br><span class="line">公云PubYun（母公司为贝特康姆）：http://mirrors.pubyun.com/</span><br><span class="line">Linux运维派：http://mirrors.skyshe.cn/（使用阿里云服务器，界面使用浙江大学的模板，首页维护，内容可访问）</span><br><span class="line">中国互联网络信息中心：http://mirrors.cnnic.cn/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">Fayea工作室：http://apache.fayea.com/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">开源中国社区 http://mirrors.oss.org.cn/</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p>参考【部分不一致】：<br><code>https://zhuanlan.zhihu.com/p/107667275?from_voters_page=true</code><br>文件= 》 新建虚拟机 =》 经典 = 》稍后安装 =》 Linux =》<br><img src="https://img-blog.csdnimg.cn/20201128190857420.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191053589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191208991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191337918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191517333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191551465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191640963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择第一项：图形化安装【由于我们刚才分配给虚拟机的内存太小（只有 512 MB），所以，只出现这种难看的界面】<br>然后：<br><img src="https://img-blog.csdnimg.cn/20201128191829246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191915611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191949932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202011281927033.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192721872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819281250.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192916509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192950314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193153727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193207605.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193225924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819325350.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193316391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193529659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在这里选择【图形界面的种类】<br><img src="https://img-blog.csdnimg.cn/20201128193622921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193744420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194928831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194957601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128195238913.png" alt="在这里插入图片描述"></p>
+<h2 id="2-初始设置"><a href="#2-初始设置" class="headerlink" title="2. 初始设置"></a>2. 初始设置</h2><h3 id="2-1-设置分辨率【以下为：2020-4版】"><a href="#2-1-设置分辨率【以下为：2020-4版】" class="headerlink" title="2.1 设置分辨率【以下为：2020.4版】"></a>2.1 设置分辨率【以下为：2020.4版】</h3><p><img src="https://img-blog.csdnimg.cn/20201128153043764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-2-设置网络"><a href="#2-2-设置网络" class="headerlink" title="2.2 设置网络"></a>2.2 设置网络</h3><p>使用VM中的 NAT 模式<br>要注意：</p>
+<ul>
+<li>物理机是否启用 vm 的 nat 服务</li>
+<li>是否将 网卡设为可共享- </li>
+<li><strong>锐捷校园网的客户端每隔一段时间就会关掉vm的nat服务</strong></li>
+<li>进入<code>/etc/network/interfaces</code>文件，仿照 lo0添加网卡，保存；重启服务 <code>/etc/init.d/networking restart</code></li>
+</ul>
+<p>使用VM中的 NAT 模式的<strong>步骤</strong>： </p>
+<ul>
+<li><code>win + R</code>，输入<code>services.msc</code> , 找到<code>VM NAT Server</code>服务，启动</li>
+<li>设置vmnet8 网卡的 ip 与 网关【两个要在同一网段】</li>
+<li>在vm 中打开虚拟网络编辑器，选择 vmnet8</li>
+<li>在下方填写 <strong>子网网段 和 掩码</strong> ，</li>
+<li>点击 NAT 设置，输入<strong>网关IP</strong>【该IP不能和物理机中vmnet8的IP相同，但要与物理机中vmnet8 的网关相同】</li>
+</ul>
+<h3 id="2-3-更改鼠标大小"><a href="#2-3-更改鼠标大小" class="headerlink" title="2.3 更改鼠标大小"></a>2.3 更改鼠标大小</h3><p><img src="https://img-blog.csdnimg.cn/20201130141604663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-4-调整-终端-字体"><a href="#2-4-调整-终端-字体" class="headerlink" title="2.4 调整 终端 字体"></a>2.4 调整 终端 字体</h3><p><img src="https://img-blog.csdnimg.cn/20201130142910861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-4-取消自动休眠"><a href="#2-4-取消自动休眠" class="headerlink" title="2.4 取消自动休眠"></a>2.4 取消自动休眠</h3><p><img src="https://img-blog.csdnimg.cn/20201130145923390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-4-更换软件安装源"><a href="#2-4-更换软件安装源" class="headerlink" title="2.4 更换软件安装源"></a>2.4 更换软件安装源</h3><ul>
+<li>打开终端</li>
+<li>切换到 root 用户</li>
+<li>注释掉 <code>/etc/apt/sources.list</code> 文件中的源，并换上国内源，保存</li>
+<li>切换回普通用户</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换用户</span></span><br><span class="line">sudo su</span><br><span class="line"><span class="comment"># 输入密码</span></span><br><span class="line">kali-test</span><br><span class="line"><span class="comment"># 更改软件安装源</span></span><br><span class="line">vim vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>注释掉原来的内容，并复制 下列内容到 sources.list 中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#中科大</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#阿里云</span></span><br><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#清华大学</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#浙大</span></span><br><span class="line">deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#东软大学</span></span><br><span class="line">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#官方源</span></span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br></pre></td></tr></table></figure>
+
+<p><code>:wq</code>保存后，执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update  <span class="comment"># 取回更新的软件包列表信息</span></span><br><span class="line">apt-get upgrade <span class="comment"># 进行一次升级</span></span><br><span class="line">apt-get clean <span class="comment"># 删除已经下载的安装包</span></span><br><span class="line">reboot  <span class="comment">#重启</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>后端</category>
+        <category>操作系统</category>
+        <category>Linux</category>
+        <category>信息安全</category>
+        <category>系统安全</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
   </entry>
   <entry>
     <title>劳动法-笔记</title>
@@ -2246,57 +2297,6 @@
       </categories>
       <tags>
         <tag>法律</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>kali-安装笔记</title>
-    <url>/2021/06/02/kali-%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="kali-安装笔记"><a href="#kali-安装笔记" class="headerlink" title="kali-安装笔记"></a>kali-安装笔记</h1><p>[toc]<br>下载地址：【国内镜像】</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">搜狐：http://mirrors.sohu.com/</span><br><span class="line">网易：http://mirrors.163.com/</span><br><span class="line">阿里云：http://mirrors.aliyun.com/</span><br><span class="line">腾讯：http://android-mirror.bugly.qq.com:8080/（仅针对APP开发的软件，限流，不推荐）</span><br><span class="line">淘宝：http://npm.taobao.org/</span><br><span class="line"></span><br><span class="line">上海交通大学：http://ftp.sjtu.edu.cn/html/resources.xml（部分移动运营商出口状况不佳，无法访问）</span><br><span class="line">华中科技大学：http://mirror.hust.edu.cn/（当前已用容量估计：4.83T）</span><br><span class="line">清华大学：http://mirrors.tuna.tsinghua.edu.cn/（当前已用容量估计：9.8T）</span><br><span class="line">北京理工大学：http://mirror.bit.edu.cn/web/</span><br><span class="line">兰州大学：http://mirror.lzu.edu.cn/</span><br><span class="line">中国科技大学：http://mirrors.ustc.edu.cn/（当前已用容量估计：21.32T）</span><br><span class="line">大连东软信息学院：http://mirrors.neusoft.edu.cn/（当前已用容量估计：2.5T）</span><br><span class="line">东北大学：http://mirror.neu.edu.cn/</span><br><span class="line">大连理工大学：http://mirror.dlut.edu.cn/</span><br><span class="line">哈尔滨工业大学：http://run.hit.edu.cn/html/（部分联通运营商出口状况不佳，无法访问）</span><br><span class="line">北京交通大学：http://mirror.bjtu.edu.cn/cn/</span><br><span class="line">天津大学：http://mirror.tju.edu.cn（无法访问，ping超时）</span><br><span class="line">中国地质大学：http://mirrors.cug.edu.cn/（当前已用容量估计：2.3T）</span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">厦门大学：http://mirrors.xmu.edu.cn/</span><br><span class="line">中山大学：http://mirror.sysu.edu.cn/</span><br><span class="line">重庆大学：http://mirrors.cqu.edu.cn/（当前已用容量估计：3.93T）</span><br><span class="line">北京化工大学：http://ubuntu.buct.edu.cn/（Android SDK镜像仅供校内使用，当前已用容量估计：1.72T）</span><br><span class="line">南阳理工学院：http://mirror.nyist.edu.cn/</span><br><span class="line">中国科学院：http://www.opencas.org/mirrors/</span><br><span class="line">电子科技大学：http://ubuntu.uestc.edu.cn/（无法访问，ping超时）</span><br><span class="line">电子科技大学星辰工作室：http://mirrors.stuhome.net/（当前已用容量估计：1.08T）</span><br><span class="line">西北农林科技大学：http://mirrors.nwsuaf.edu.cn/（只做CentOS镜像，当前已用容量估计：140GB） </span><br><span class="line">浙江大学：http://mirrors.zju.edu.cn/</span><br><span class="line">台湾淡江大学: http://ftp.tku.edu.tw/Linux/</span><br><span class="line"></span><br><span class="line">首都在线科技股份有限公司（英文名Capital Online Data Service）：http://mirrors.yun-idc.com/</span><br><span class="line">中国电信天翼云：http://mirrors.ctyun.cn/</span><br><span class="line">noc.im：http://mirrors.noc.im/（当前已用容量估计：3.74T）</span><br><span class="line">常州贝特康姆软件技术有限公司：http://centos.bitcomm.cn/（只做CentOS镜像，当前已用容量估计：140GB）</span><br><span class="line">公云PubYun（母公司为贝特康姆）：http://mirrors.pubyun.com/</span><br><span class="line">Linux运维派：http://mirrors.skyshe.cn/（使用阿里云服务器，界面使用浙江大学的模板，首页维护，内容可访问）</span><br><span class="line">中国互联网络信息中心：http://mirrors.cnnic.cn/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">Fayea工作室：http://apache.fayea.com/（只做Apache镜像，当前已用容量估计：120GB）</span><br><span class="line">开源中国社区 http://mirrors.oss.org.cn/</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p>参考【部分不一致】：<br><code>https://zhuanlan.zhihu.com/p/107667275?from_voters_page=true</code><br>文件= 》 新建虚拟机 =》 经典 = 》稍后安装 =》 Linux =》<br><img src="https://img-blog.csdnimg.cn/20201128190857420.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191053589.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191208991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191337918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191517333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191551465.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191640963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择第一项：图形化安装【由于我们刚才分配给虚拟机的内存太小（只有 512 MB），所以，只出现这种难看的界面】<br>然后：<br><img src="https://img-blog.csdnimg.cn/20201128191829246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191915611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128191949932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202011281927033.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192721872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819281250.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192916509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128192950314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193153727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193207605.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193225924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112819325350.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193316391.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193529659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在这里选择【图形界面的种类】<br><img src="https://img-blog.csdnimg.cn/20201128193622921.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128193744420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194928831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128194957601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201128195238913.png" alt="在这里插入图片描述"></p>
-<h2 id="2-初始设置"><a href="#2-初始设置" class="headerlink" title="2. 初始设置"></a>2. 初始设置</h2><h3 id="2-1-设置分辨率【以下为：2020-4版】"><a href="#2-1-设置分辨率【以下为：2020-4版】" class="headerlink" title="2.1 设置分辨率【以下为：2020.4版】"></a>2.1 设置分辨率【以下为：2020.4版】</h3><p><img src="https://img-blog.csdnimg.cn/20201128153043764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-2-设置网络"><a href="#2-2-设置网络" class="headerlink" title="2.2 设置网络"></a>2.2 设置网络</h3><p>使用VM中的 NAT 模式<br>要注意：</p>
-<ul>
-<li>物理机是否启用 vm 的 nat 服务</li>
-<li>是否将 网卡设为可共享- </li>
-<li><strong>锐捷校园网的客户端每隔一段时间就会关掉vm的nat服务</strong></li>
-<li>进入<code>/etc/network/interfaces</code>文件，仿照 lo0添加网卡，保存；重启服务 <code>/etc/init.d/networking restart</code></li>
-</ul>
-<p>使用VM中的 NAT 模式的<strong>步骤</strong>： </p>
-<ul>
-<li><code>win + R</code>，输入<code>services.msc</code> , 找到<code>VM NAT Server</code>服务，启动</li>
-<li>设置vmnet8 网卡的 ip 与 网关【两个要在同一网段】</li>
-<li>在vm 中打开虚拟网络编辑器，选择 vmnet8</li>
-<li>在下方填写 <strong>子网网段 和 掩码</strong> ，</li>
-<li>点击 NAT 设置，输入<strong>网关IP</strong>【该IP不能和物理机中vmnet8的IP相同，但要与物理机中vmnet8 的网关相同】</li>
-</ul>
-<h3 id="2-3-更改鼠标大小"><a href="#2-3-更改鼠标大小" class="headerlink" title="2.3 更改鼠标大小"></a>2.3 更改鼠标大小</h3><p><img src="https://img-blog.csdnimg.cn/20201130141604663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-4-调整-终端-字体"><a href="#2-4-调整-终端-字体" class="headerlink" title="2.4 调整 终端 字体"></a>2.4 调整 终端 字体</h3><p><img src="https://img-blog.csdnimg.cn/20201130142910861.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-4-取消自动休眠"><a href="#2-4-取消自动休眠" class="headerlink" title="2.4 取消自动休眠"></a>2.4 取消自动休眠</h3><p><img src="https://img-blog.csdnimg.cn/20201130145923390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="2-4-更换软件安装源"><a href="#2-4-更换软件安装源" class="headerlink" title="2.4 更换软件安装源"></a>2.4 更换软件安装源</h3><ul>
-<li>打开终端</li>
-<li>切换到 root 用户</li>
-<li>注释掉 <code>/etc/apt/sources.list</code> 文件中的源，并换上国内源，保存</li>
-<li>切换回普通用户</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换用户</span></span><br><span class="line">sudo su</span><br><span class="line"><span class="comment"># 输入密码</span></span><br><span class="line">kali-test</span><br><span class="line"><span class="comment"># 更改软件安装源</span></span><br><span class="line">vim vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-<p>注释掉原来的内容，并复制 下列内容到 sources.list 中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#中科大</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#阿里云</span></span><br><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#清华大学</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#浙大</span></span><br><span class="line">deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"> </span><br><span class="line"><span class="comment">#东软大学</span></span><br><span class="line">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line"> </span><br><span class="line"><span class="comment">#官方源</span></span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line"> </span><br><span class="line">deb http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian/ jessie-backports main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib</span><br></pre></td></tr></table></figure>
-
-<p><code>:wq</code>保存后，执行以下命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update  <span class="comment"># 取回更新的软件包列表信息</span></span><br><span class="line">apt-get upgrade <span class="comment"># 进行一次升级</span></span><br><span class="line">apt-get clean <span class="comment"># 删除已经下载的安装包</span></span><br><span class="line">reboot  <span class="comment">#重启</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>后端</category>
-        <category>操作系统</category>
-        <category>Linux</category>
-        <category>信息安全</category>
-        <category>系统安全</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -2483,12 +2483,12 @@
 
 <ul>
 <li>在以上代码中 <strong>sessionState</strong> 标签是为了设置网站中的<strong>session有效时间</strong>，<ul>
-<li><strong>sessionState</strong>的几个属性的参数：      +   mode<strong>属性</strong>：<pre><code>  +   InProc：session保存在进程(IIS)内部，性能好，但容易丢失
+<li><strong>sessionState</strong>的几个属性的参数：      +   mode属性：<pre><code>  +   InProc：session保存在进程(IIS)内部，性能好，但容易丢失
   +   StateServer：保存在进程外，需要启动`asp.net State Service的服务`，session在有效期内除非重启电脑或关闭服务，否则一直保存直到失效时间自动失效
-  +   SQLServer: 保存在数据库中，在标签中设置数据库的ip地址`stateConnectionString=&#39;tcpip=127.0.0.1:42424&#39;`，部分数据类型需要序列化      +   cookieless**属性**：
-  +   true:在浏览器禁用cookie，使用url保存cookie,使用这种方法保存cookie时如果要跳转页面，不能直接覆盖地址栏的值，否则session会失效
-      +   示例：`http://localhost/ABC/(ulqsek45heu)/default.aspx`【小括号内的就是SessionID】
-  +   false:【默认】，在浏览器启用cookie      +   timeout**属性**：
+  +   SQLServer: 保存在数据库中，在标签中设置数据库的ip地址`stateConnectionString=&#39;tcpip=127.0.0.1:42424&#39;`，部分数据类型需要序列化      +   cookieless属性：
+  +   `true`:在浏览器禁用cookie，使用url保存cookie,使用这种方法保存cookie时如果要跳转页面，不能直接覆盖地址栏的值，否则session会失效
+  +   示例：`http://localhost/ABC/(ulqsek45heu)/default.aspx`【小括号内的就是SessionID】
+  +   `false`:【默认】，在浏览器启用cookie     +   timeout属性：
   +   属性值为 **分钟数**，**默认 20 min**
 </code></pre>
 </li>
@@ -2497,7 +2497,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="1-4-收款码和商品图片"><a href="#1-4-收款码和商品图片" class="headerlink" title="1.4 收款码和商品图片"></a>1.4 收款码和商品图片</h3><p>收款码和商品图片  保存  在项目文件夹下，数据库中 保存 图片路径</p>
+<h3 id="1-4-收款码和商品图片"><a href="#1-4-收款码和商品图片" class="headerlink" title="1.4 收款码和商品图片"></a>1.4 收款码和商品图片</h3><p>收款码和商品图片  保存  在项目文件夹下，数据库中 保存 图片路径。</p>
 <h3 id="1-5-数据库访问类"><a href="#1-5-数据库访问类" class="headerlink" title="1.5 数据库访问类"></a>1.5 数据库访问类</h3><p>数据库访问类的编写步骤：</p>
 <ul>
 <li>  在任一页面放置 数据源控件 ，以可视化的方式创建  <strong>连接字符串</strong></li>
