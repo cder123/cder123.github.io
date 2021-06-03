@@ -764,6 +764,10 @@ public class Demo02 {
 
 
 
+
+
+
+
 数据库连接过程：
 
 -   连接 -> 执行 -> 释放  【这3个过程，浪费系统资源，开销大】
@@ -773,12 +777,23 @@ public class Demo02 {
 池化技术：
 
 >   提前准备好一些连接资源（如：conn对象，preparedStatement对象，ResultSet等），用户用完后，不释放资源，而是将资源重新放回池中。
+>
+>   **小结**：`数据库连接池`就是存放资源的`容器`。
 
 
 
 -   最小连接数：设为常用的连接数，如：10
 -   最大连接数：如：15
 -   等待超时：如：10 ms
+
+
+
+
+
+使用数据库连接池的好处：
+
+>   -   节约资源
+>   -   高效访问
 
 
 
@@ -795,6 +810,13 @@ public class Demo02 {
 使用以上的数据库连接池后，无需 再编写 数据库的连接代码。
 
 
+
+
+
+`数据库连接池`实现了：`javax.sql.DataSource`接口
+
+-   获取连接：`getConnection()`
+-   释放连接：连接池中的conn调用`conn.close()`，归还连接
 
 
 
@@ -993,7 +1015,33 @@ public class Demo {
 
 
 
-xml配置文件：
+
+
+使用的方式【2种】：
+
+-   硬编码：直接在代码中设置参数
+-   配置文件【配置文件名不可改】: `c3p0.properties` 或`c3p0-config.xml`
+
+
+
+`配置文件`应该存放在`src目录`下。
+
+
+
+
+
+C3P0的使用步骤：
+
+>   -   导入 JAR包：`mchange-commons-java-0.2.12.jar`+`c3p0-0.9.5.2.jar`
+>   -   定义配置文件：`src目录`下`c3p0-config.xml`
+>   -   创建数据库连接池：`CombopooledDadtaSource`对象
+>   -   获取连接：`comboPooledDadtaSource.getConnection();`
+
+
+
+
+
+`c3p0-config.xml`配置文件：【c3p0自动寻找项目中的本地配置文件】
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -1039,7 +1087,7 @@ public class C3P0Util {
 
     static {
         try {
-
+// 创建数据库连接池
             dataSource = new ComboPooledDataSource();
 
 
@@ -1115,4 +1163,340 @@ public class Demo {
 }
 
 ```
+
+
+
+
+
+
+
+### 6.3 Druid：
+
+Druid是阿里巴巴出的一款数据库连接池。
+
+
+
+使用步骤：
+
+>   -   导入JAR 包：`druid-1.0.9.jar`
+>   -   导入配置文件：
+>       -   `properties`格式的配置文件
+>       -   可以放在任意目录下
+>       -   配置文件名无要求
+>   -   通过工厂来获取数据库连接对象`Conn`：`DruidDataSourceFactory`
+>   -   执行数据库相关操作
+
+
+
+
+
+
+
+`Druid.properties`配置文件：
+
+```java
+driverClassName=com.mysql.jdbc.Driver
+url=jdbc:mysql://127.0.0.1:3306/School_1
+username=javaUser
+password=javaUser
+initialSize=5
+maxActive=10
+maxWait=3000
+```
+
+
+
+Druid工具类：
+
+```java
+package cn.DruidDemo;
+
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class DruidUtil {
+
+    private static DataSource dataSource = null;
+// 重点代码
+    static {
+        InputStream is = DruidUtil.class.getClassLoader().getResourceAsStream("druid.properties");
+        
+        Properties properties = new Properties();
+
+        try {
+            properties.load(is);
+// 创建连接池            
+            dataSource = DruidDataSourceFactory.createDataSource(properties);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+// 返回 静态的数据库连接池    
+   public static DataSource getDataSource(){
+       return dataSource;
+   }
+
+// 获取连接
+    public  static Connection getConnection()throws Exception{
+        return dataSource.getConnection();
+    }
+
+    
+// 归还资源    
+    public static void releaseConn(Connection conn, PreparedStatement ps, ResultSet rs){
+
+        try {
+            if(conn!=null){
+                conn.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        try {
+            if(ps!=null){
+                ps.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        try {
+            if(rs!=null){
+                rs.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+    }
+
+}
+
+```
+
+
+
+main方法：
+
+```java
+package cn.DruidDemo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class DruidDemo {
+    public static void main(String[] args) {
+
+        Connection conn = null;
+        PreparedStatement ps =null;
+        ResultSet rs = null;
+
+        try {
+// 获取连接            
+            conn = DruidUtil.getConnection();
+            String sql = "select * from stu where sid = ?;";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,3);
+            rs = ps.executeQuery();
+
+            if(rs.next())
+            System.out.println(rs.getString("sname"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DruidUtil.releaseConn(conn,ps,rs);
+        }
+    }
+    
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 6.4 JDBC Templete
+
+
+
+Spring 框架对 JDBC的简单封装：`JdbcTemplete对象`。
+
+【以下示例中，使用了`Druid示例`中的`获取DataSource的方法`：`DruidUtil.getDataSource();`】
+
+步骤：
+
+>   -   导入JAR包
+>       -   `commons-logging-1.2.jar`
+>       -   `spring-beans-5.0.0.RELEASE.jar`
+>       -   `spring-core-5.0.0.RELEASE.jar`
+>       -   `spring-jdbc-5.0.0.RELEASE.jar`
+>       -   `spring-tx-5.0.0.RELEASE.jar`
+>   -   通过` DataSource` 对象 来创建`JdbcTemplete `对象：
+>       -   `JdbcTemplete jt = new JdbcTemplete(dataSource);`
+>   -   调用` JdbcTemplete对象的方法`来进行 增、删、改、查。
+>       -   `update(sql,占位符对应的参数)`：增、删、改
+>       -   `queryForMap(sql,占位符对应的参数)`：查询的`结果集`封装为 `Map集合`，1条记录
+>       -   `queryForList(sql)`：查询的`结果集`封装为 `List集合`，多条记录
+>       -   `query(sql,BeanPropertyRowMapper)`：查询的`结果集`封装为 `JavaBean对象`
+>       -   `queryForObject(sql,Long.class)`：查询的`结果集`封装为 `对象`
+
+
+
+
+
+注意：
+
+-   以下代码中，为简化操作，直接使用了6.3小节的`DruidUtil.getDataSource();`来获取`DataSource`
+
+```java
+package cn.JdbcTemplete;
+
+import cn.DruidDemo.DruidUtil;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+public class Demo {
+    public static void main(String[] args) {
+        
+        JdbcTemplate jt = new JdbcTemplate(DruidUtil.getDataSource());
+        String sql = "update stu set spsw = ? where sid = ?";
+
+        // 传入sql语句、sql中的参数
+        int count = jt.update(sql,"abc123",3);
+
+        System.out.println(count);
+
+    }
+}
+
+```
+
+
+
+
+
+
+
+下面测试-增删改查的代码：
+
+```java
+package cn.JdbcTemplete;
+
+import cn.DruidDemo.DruidUtil;
+import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.Map;
+
+public class Demo2 {
+
+    private JdbcTemplate jt = new JdbcTemplate(DruidUtil.getDataSource());
+
+    
+    
+// 修改
+    @Test
+    public void jt_DML(){
+        String sql = "update stu set spsw = ? where sid =?;";
+        int count = jt.update(sql,"789",3);
+        System.out.println(count);
+    }
+    
+    
+    
+    
+
+// 查询【1条记录】  
+    @Test
+    public void jt_DQL(){
+        String sql = "select * from stu where sid =?;";
+
+        Map<String,Object> mp= jt.queryForMap(sql,2);
+        System.out.println(mp);
+    }
+
+    
+    
+    
+
+// 查询【此处会报错，因为数据不止一条记录，但queryForMap方法只转化1条记录，】
+    @Test
+    public void jt_DQL2(){
+        String sql = "select * from stu;";
+
+        Map<String,Object> mp= jt.queryForMap(sql);
+        System.out.println(mp);
+    }
+
+    
+    
+    
+    
+// 查询【多条记录】    
+    @Test
+    public void jt_DQL3(){
+        String sql = "select * from stu;";
+
+        List<Map<String,Object>> list1= jt.queryForList(sql);
+        System.out.println(list1);
+    }
+    
+    
+    
+    
+//  查询   
+      public void jt_DQL4(){
+        String sql = "select * from stu;";
+        
+        List<Student> list1 = jt.query(sql,new BeanPropertyRowMapper<Student>(Student.class);     
+
+        for (Student student : list1) {
+            System.out.println(student);
+        }
+    }
+                                       
+                                       
+                                       
+                                       
+// 查询【聚合函数】                                       
+   public void jt_DQL5(){
+        String sql = "select count(*) from stu;";
+       
+        Long total = jt.queryForObject(sql,Long.class);
+       
+        System.out.println(total);
+    }         
+                                       
+                                       
+
+}
+```
+
+
+
+
 
