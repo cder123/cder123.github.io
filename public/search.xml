@@ -1,52 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C# 编写 WebService的示例</title>
-    <url>/2021/06/02/C#%20%E7%BC%96%E5%86%99%20WebService%E3%80%90WebAPI%E3%80%91%E7%9A%84%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</url>
-    <content><![CDATA[<h1 id="C-编写-WebService的示例"><a href="#C-编写-WebService的示例" class="headerlink" title="C# 编写 WebService的示例"></a>C# 编写 WebService的示例</h1><p>@[toc]</p>
-<h3 id="1-示例环境"><a href="#1-示例环境" class="headerlink" title="1. 示例环境"></a>1. 示例环境</h3><ul>
-<li>windows server 2012</li>
-<li>Visual Studio 2012</li>
-<li>IIS 8<h3 id="2-新建web服务"><a href="#2-新建web服务" class="headerlink" title="2. 新建web服务"></a>2. 新建web服务</h3><img src="https://img-blog.csdnimg.cn/20201130183303271.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130183525310.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130183751637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130184425990.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ul>
-<p>默认生成以下代码：<br><img src="https://img-blog.csdnimg.cn/20201130184721801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>观察下图：<br><img src="https://img-blog.csdnimg.cn/20201130185048741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>由图可知：webservice其实就是 “方法” 的集合【即：一堆的方法】</p>
-<ol>
-<li>[WebMethod]是必须的，不能删除，<br>语法示例如下：<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">WebMethod(属性名=属性值)</span>]</span><br></pre></td></tr></table></figure>
-在一个<strong>WebService类</strong>中，一个 <strong>Public的方法 只有拥有</strong> <em><strong>WebMethod</strong></em>   <strong>才能被访问</strong> 。<br>WebMethod有6个属性：<blockquote>
+    <title>CCNA-笔记-02【非理论】</title>
+    <url>/2021/06/02/CCNA-%E7%AC%94%E8%AE%B0-02%E3%80%90%E9%9D%9E%E7%90%86%E8%AE%BA%E3%80%91/</url>
+    <content><![CDATA[<h1 id="CCNA-笔记-02【非理论】"><a href="#CCNA-笔记-02【非理论】" class="headerlink" title="CCNA-笔记-02【非理论】"></a>CCNA-笔记-02【非理论】</h1><p>[toc]</p>
+<h2 id="第二章-TCP-IP协议"><a href="#第二章-TCP-IP协议" class="headerlink" title="第二章 TCP / IP协议"></a>第二章 TCP / IP协议</h2><h3 id="1-协议分层"><a href="#1-协议分层" class="headerlink" title="1. 协议分层"></a>1. 协议分层</h3><p><img src="https://img-blog.csdnimg.cn/20201211110629118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="1-1-传输层"><a href="#1-1-传输层" class="headerlink" title="1.1 传输层"></a>1.1 传输层</h4><ul>
+<li>TCP：可靠，建立会话【消耗资源】，差错校验，分段传输，适用于：1个数据包传不完，需要分段传输，需要重传的场合，如：浏览网页、发邮件<br><code>netstat -n</code>查看会话</li>
+<li>UDP：不可靠，适用于：1个数据包就能传完。如：屏幕广播，QQ聊天，域名解析<h4 id="1-2-应用层"><a href="#1-2-应用层" class="headerlink" title="1.2 应用层"></a>1.2 应用层</h4></li>
+<li>HTTP    = tcp + 80</li>
+<li>HTTPS = tcp +443</li>
+<li>FTP      = tcp + 20 / 21  【20传数据(主动模式时20，被动模式由软件协商)，21做控制】</li>
+<li>SMTP = tcp + 25</li>
+<li>POP3 = tcp +110</li>
+<li>RDP = tcp + 3389</li>
+<li>DNS = TCP【同步数据】/ UDP【查dns，常用】 + 53</li>
+<li>CIFS【使用IP地址访问】 = tcp + 445</li>
+<li>CIFS【使用计算机名访问】 = tcp + 139 </li>
+<li>SQL Server【远程访问时】 = tcp + 1433</li>
+<li>Telnet  = tcp + 23</li>
+<li>SSH = tcp + 22<blockquote>
+<p><code>服务与端口的关系</code>：<br>用 端口 来区分使用的 服务</p>
 <ul>
-<li>Description</li>
-<li>EnableSession</li>
-<li>MessageName</li>
-<li>TransactionOption</li>
-<li>CacheDuration</li>
-<li>BufferResponse</li>
+<li>【服务 侦听 端口】</li>
+<li>【客户端请求服务】<br>【客户端请求的服务使用目标端口区分】<br>【服务停止，该侦听的端口就关闭】</li>
 </ul>
+<p>1个服务 占用 1个端口【不能重复】<br><code>netstat -a</code> 查看服务和端口情况【外部地址以主机名的形式显示】<br><code>netstat -an</code> 使用数字形式显示端口占用情况【外部地址以数字的形式显示】<br><code>netstat -anb </code> 查看进程与端口的对应关系<br><code>netstat -an | find &quot;80&quot;</code>:查看80端口的使用情况</p>
 </blockquote>
 </li>
-</ol>
-<p>示例：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 描述信息</span></span><br><span class="line">[<span class="meta">WebMethod(Description=<span class="meta-string">&quot;这是一个 add() 方法&quot;</span>)</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 允许该WebMethod方法访问session的值</span></span><br><span class="line"><span class="comment">// 默认情况下WebMethod不能访问session中的值</span></span><br><span class="line">[<span class="meta">WebMethod(EnableSession = true)</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>[WebMethod] 的下面 紧跟  <strong>“函数” 或 “方法”</strong><br>示例：</li>
-</ol>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">WebMethod(Description=<span class="meta-string">&quot;这是一个 add() 方法&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">add_1</span>(<span class="params"><span class="built_in">float</span> a ,<span class="built_in">float</span> b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">double</span> rst = a + b ;</span><br><span class="line">    <span class="keyword">return</span>  a + <span class="string">&quot; + &quot;</span> + b + <span class="string">&quot;= &quot;</span> + rst ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20201130214448900.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="3-调试页展示"><a href="#3-调试页展示" class="headerlink" title="3. 调试页展示"></a>3. 调试页展示</h3><p><img src="https://img-blog.csdnimg.cn/20201130192021518.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201130192112243.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130192320308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130195332859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20201130192558797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>由上图的<strong>地址栏</strong> 可知：<br>调用api的格式： <code>网址/方法名</code></p>
-<h3 id="4-WebService的发布"><a href="#4-WebService的发布" class="headerlink" title="4.  WebService的发布"></a>4.  WebService的发布</h3><p>要想让这个 <strong>api</strong> 能够 <strong>被</strong> 其他应用或网站 <strong>调用</strong>,必须要将api <strong>发布到服务器</strong>上。<br><img src="https://img-blog.csdnimg.cn/20201130195820565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200138942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200239892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200345118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200642890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200912717.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>发布后 在 VS中有成功的提示：<br><img src="https://img-blog.csdnimg.cn/20201130201000528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="5-在-IIS-中-部署-我们编写的-WebService"><a href="#5-在-IIS-中-部署-我们编写的-WebService" class="headerlink" title="5.  在 IIS 中 部署 我们编写的 WebService"></a>5.  在 IIS 中 部署 我们编写的 WebService</h3><p>打开 IIS，添加站点<br><img src="https://img-blog.csdnimg.cn/20201130201354329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>配置站点详情<br><img src="https://img-blog.csdnimg.cn/20201130203043434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>设置默认文档：<br><img src="https://img-blog.csdnimg.cn/20201130202135280.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130202415333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>浏览，以查看效果：<br><img src="https://img-blog.csdnimg.cn/20201130203500101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="6-新建项目-来-调用-API-以查看效果"><a href="#6-新建项目-来-调用-API-以查看效果" class="headerlink" title="6.  新建项目 来 调用 API 以查看效果"></a>6.  新建项目 来 调用 API 以查看效果</h3><p><img src="https://img-blog.csdnimg.cn/20201130203740919.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130204721379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130204943734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>添加服务引用【 只有添加了“ web服务引用”才能使用api 】<br><img src="https://img-blog.csdnimg.cn/20201130210234382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130215038728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>【如果没有在上1张图的步骤中修改默认的命名空间名称，且点击“高级”后没有出现“添加web引用” 按钮，则点击“取消”，再次出现点击 “高级”，点击“添加web引用”】<br><img src="https://img-blog.csdnimg.cn/20201130210826610.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130211154633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130211417250.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130213021827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130205628494.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130213338422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="6-测试效果"><a href="#6-测试效果" class="headerlink" title="6. 测试效果"></a>6. 测试效果</h3><p><img src="https://img-blog.csdnimg.cn/20201130213627533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130213644969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</ul>
+<p>不允许他人更改IP地址：</p>
+<ul>
+<li>禁用 Network Connections 服务。</li>
+</ul>
+<p>不允许共享资源：</p>
+<ul>
+<li>禁用 Workstation 服务。</li>
+</ul>
+<h5 id="1-2-1-实例：远程桌面："><a href="#1-2-1-实例：远程桌面：" class="headerlink" title="1.2.1 实例：远程桌面："></a>1.2.1 实例：远程桌面：</h5><p><img src="https://img-blog.csdnimg.cn/20201211114532201.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211114608755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211114641857.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211114714737.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一路“确定”<br>【使用RDP，注意<code>防火墙</code>是否允许】</p>
+<h5 id="1-2-2-实例：-安装服务"><a href="#1-2-2-实例：-安装服务" class="headerlink" title="1.2.2 实例： 安装服务"></a>1.2.2 实例： 安装服务</h5><p><img src="https://img-blog.csdnimg.cn/20201211120937700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211120950740.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211121049884.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="1-3-端口安全"><a href="#1-3-端口安全" class="headerlink" title="1.3 端口安全"></a>1.3 端口安全</h4><p>测试端口 开没开【现在weindow默认关闭telnet】：<code>telnet   ip地址   端口</code></p>
+<p>端口安全：</p>
+<ul>
+<li>TCP/IP筛选：<a href="https://jingyan.baidu.com/article/90bc8fc84f568ff653640cca.html">百度经验-TCP/IP筛选</a><br>服务器【win 2003 server】：右键网卡-》找到Tcp/IP筛选、防火墙</li>
+</ul>
+<h5 id="1-3-1-实例：打开防火墙"><a href="#1-3-1-实例：打开防火墙" class="headerlink" title="1.3.1 实例：打开防火墙"></a>1.3.1 实例：打开防火墙</h5><p><strong>场景：</strong>自己的计算机 只开启80端口，其他人只能访问我这台计算机的80端口，而我可以访问别人的其他端口<br>【即：入站和出站是不同的规则，我出去用的是临时打开的随机端口，会话结束就关闭这个临时端口】<br><img src="https://img-blog.csdnimg.cn/20201211124446917.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020121112452153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Ping 不通：可能是<code>防火墙</code>的问题<br>排除木马【可疑程序】<code>msconfig</code>查看计算机中的已安装的未知程序</p>
+<h4 id="1-4-IPSec-防木马，严格控制出入流量"><a href="#1-4-IPSec-防木马，严格控制出入流量" class="headerlink" title="1.4 IPSec:防木马，严格控制出入流量"></a>1.4 IPSec:防木马，严格控制出入流量</h4><p>防火墙和TCP/IP筛选：不控制出去的流量</p>
+<p>server: 使用 IPSec + TCP/IP筛选<br>Client:  使用防火墙【windows 防火墙依赖 <code>服务</code>】</p>
+<p>场景：web服务器：只允许80端口进出</p>
+<ul>
+<li>打开本地安全策略</li>
+<li>新建 策略</li>
+<li>拒绝 所有 - 应用 - 确定</li>
+<li>添加 - 从“80端口”</li>
+<li>应用-确定</li>
+<li>启用策略<br>策略：采用<code>最佳匹配</code>原则<h4 id="1-5-网络层协议"><a href="#1-5-网络层协议" class="headerlink" title="1.5 网络层协议"></a>1.5 网络层协议</h4><img src="https://img-blog.csdnimg.cn/20201211133044459.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211133104828.png" alt="在这里插入图片描述"><br>组播：<a href="https://blog.csdn.net/cong_xue/article/details/78639611?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160766496919725211917529%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=160766496919725211917529&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-10-78639611.pc_search_result_cache&utm_term=%E7%BB%84%E6%92%AD&spm=1018.2118.3001.4449">组播原理-链接</a><br>组播就是计算机都配成同一个组播地址，就加入了同一个组。<br>IGMP，就是在路由器上控制有没有必要将多播数据包传到绑定多播地址的计算机的一种协议。</li>
+</ul>
+<h4 id="1-6-ARP协议"><a href="#1-6-ARP协议" class="headerlink" title="1.6 ARP协议"></a>1.6 ARP协议</h4><p>PC1  =&gt; PC2</p>
+<ul>
+<li>PC1 将PC2的IP地址封装，广播询问  该IP  相对应的  MAC地址</li>
+<li>PC2收到后，返回响应</li>
+<li>其他PC收到后，发现不是发给自己的，就丢弃<br>查看IP 与 MAC 的对应关系：<code>arp -a </code><br>临时绑定MAC和IP地址：<code>arp -s  IP地址  MAC地址(带有-)</code><br>删除MAC与IP的对应关系：<code>arp -d </code></li>
+</ul>
+<h4 id="1-7-跨网段通信："><a href="#1-7-跨网段通信：" class="headerlink" title="1.7 跨网段通信："></a>1.7 跨网段通信：</h4><p><img src="https://img-blog.csdnimg.cn/20201211140109229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>PC1 发送广播ARP广播，得到网关R1的MAC地址，不断变换MAC源地址、目标MAC，直到找到目标PC2.</p>
+<ul>
+<li>MAC地址 决定了  <strong>下一跳</strong>给哪个设备。</li>
+<li>IP地址 决定了 <strong>最终</strong>给 哪个 计算机</li>
+<li>该跨网段的过程运用了<code>代理ARP</code>的原理：<ul>
+<li> 跨网段时，PC1将ARP请求发给网关，由网关【以网关自己的名义】去请求目的设备的ARP地址。</li>
+<li>如果PC1的ARP不是配成网关，而是直接将目的MAC地址配成跨网段的设备的MAC地址，则在ARP请求时，网关收到ARP请求，发现不是发给自己的包，就丢弃，所以这时不能跨网段通信。</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
-        <category>后端</category>
-        <category>C#</category>
+        <category>网络工程</category>
+        <category>CCNA</category>
       </categories>
       <tags>
-        <tag>C#</tag>
+        <tag>CCNA</tag>
       </tags>
   </entry>
   <entry>
@@ -177,85 +210,52 @@
       </tags>
   </entry>
   <entry>
-    <title>CCNA-笔记-02【非理论】</title>
-    <url>/2021/06/02/CCNA-%E7%AC%94%E8%AE%B0-02%E3%80%90%E9%9D%9E%E7%90%86%E8%AE%BA%E3%80%91/</url>
-    <content><![CDATA[<h1 id="CCNA-笔记-02【非理论】"><a href="#CCNA-笔记-02【非理论】" class="headerlink" title="CCNA-笔记-02【非理论】"></a>CCNA-笔记-02【非理论】</h1><p>[toc]</p>
-<h2 id="第二章-TCP-IP协议"><a href="#第二章-TCP-IP协议" class="headerlink" title="第二章 TCP / IP协议"></a>第二章 TCP / IP协议</h2><h3 id="1-协议分层"><a href="#1-协议分层" class="headerlink" title="1. 协议分层"></a>1. 协议分层</h3><p><img src="https://img-blog.csdnimg.cn/20201211110629118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="1-1-传输层"><a href="#1-1-传输层" class="headerlink" title="1.1 传输层"></a>1.1 传输层</h4><ul>
-<li>TCP：可靠，建立会话【消耗资源】，差错校验，分段传输，适用于：1个数据包传不完，需要分段传输，需要重传的场合，如：浏览网页、发邮件<br><code>netstat -n</code>查看会话</li>
-<li>UDP：不可靠，适用于：1个数据包就能传完。如：屏幕广播，QQ聊天，域名解析<h4 id="1-2-应用层"><a href="#1-2-应用层" class="headerlink" title="1.2 应用层"></a>1.2 应用层</h4></li>
-<li>HTTP    = tcp + 80</li>
-<li>HTTPS = tcp +443</li>
-<li>FTP      = tcp + 20 / 21  【20传数据(主动模式时20，被动模式由软件协商)，21做控制】</li>
-<li>SMTP = tcp + 25</li>
-<li>POP3 = tcp +110</li>
-<li>RDP = tcp + 3389</li>
-<li>DNS = TCP【同步数据】/ UDP【查dns，常用】 + 53</li>
-<li>CIFS【使用IP地址访问】 = tcp + 445</li>
-<li>CIFS【使用计算机名访问】 = tcp + 139 </li>
-<li>SQL Server【远程访问时】 = tcp + 1433</li>
-<li>Telnet  = tcp + 23</li>
-<li>SSH = tcp + 22<blockquote>
-<p><code>服务与端口的关系</code>：<br>用 端口 来区分使用的 服务</p>
-<ul>
-<li>【服务 侦听 端口】</li>
-<li>【客户端请求服务】<br>【客户端请求的服务使用目标端口区分】<br>【服务停止，该侦听的端口就关闭】</li>
+    <title>C# 编写 WebService的示例</title>
+    <url>/2021/06/02/C#%20%E7%BC%96%E5%86%99%20WebService%E3%80%90WebAPI%E3%80%91%E7%9A%84%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</url>
+    <content><![CDATA[<h1 id="C-编写-WebService的示例"><a href="#C-编写-WebService的示例" class="headerlink" title="C# 编写 WebService的示例"></a>C# 编写 WebService的示例</h1><p>@[toc]</p>
+<h3 id="1-示例环境"><a href="#1-示例环境" class="headerlink" title="1. 示例环境"></a>1. 示例环境</h3><ul>
+<li>windows server 2012</li>
+<li>Visual Studio 2012</li>
+<li>IIS 8<h3 id="2-新建web服务"><a href="#2-新建web服务" class="headerlink" title="2. 新建web服务"></a>2. 新建web服务</h3><img src="https://img-blog.csdnimg.cn/20201130183303271.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130183525310.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130183751637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130184425990.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
 </ul>
-<p>1个服务 占用 1个端口【不能重复】<br><code>netstat -a</code> 查看服务和端口情况【外部地址以主机名的形式显示】<br><code>netstat -an</code> 使用数字形式显示端口占用情况【外部地址以数字的形式显示】<br><code>netstat -anb </code> 查看进程与端口的对应关系<br><code>netstat -an | find &quot;80&quot;</code>:查看80端口的使用情况</p>
+<p>默认生成以下代码：<br><img src="https://img-blog.csdnimg.cn/20201130184721801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>观察下图：<br><img src="https://img-blog.csdnimg.cn/20201130185048741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>由图可知：webservice其实就是 “方法” 的集合【即：一堆的方法】</p>
+<ol>
+<li>[WebMethod]是必须的，不能删除，<br>语法示例如下：<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">WebMethod(属性名=属性值)</span>]</span><br></pre></td></tr></table></figure>
+在一个<strong>WebService类</strong>中，一个 <strong>Public的方法 只有拥有</strong> <em><strong>WebMethod</strong></em>   <strong>才能被访问</strong> 。<br>WebMethod有6个属性：<blockquote>
+<ul>
+<li>Description</li>
+<li>EnableSession</li>
+<li>MessageName</li>
+<li>TransactionOption</li>
+<li>CacheDuration</li>
+<li>BufferResponse</li>
+</ul>
 </blockquote>
 </li>
-</ul>
-<p>不允许他人更改IP地址：</p>
-<ul>
-<li>禁用 Network Connections 服务。</li>
-</ul>
-<p>不允许共享资源：</p>
-<ul>
-<li>禁用 Workstation 服务。</li>
-</ul>
-<h5 id="1-2-1-实例：远程桌面："><a href="#1-2-1-实例：远程桌面：" class="headerlink" title="1.2.1 实例：远程桌面："></a>1.2.1 实例：远程桌面：</h5><p><img src="https://img-blog.csdnimg.cn/20201211114532201.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211114608755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211114641857.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211114714737.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一路“确定”<br>【使用RDP，注意<code>防火墙</code>是否允许】</p>
-<h5 id="1-2-2-实例：-安装服务"><a href="#1-2-2-实例：-安装服务" class="headerlink" title="1.2.2 实例： 安装服务"></a>1.2.2 实例： 安装服务</h5><p><img src="https://img-blog.csdnimg.cn/20201211120937700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211120950740.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211121049884.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="1-3-端口安全"><a href="#1-3-端口安全" class="headerlink" title="1.3 端口安全"></a>1.3 端口安全</h4><p>测试端口 开没开【现在weindow默认关闭telnet】：<code>telnet   ip地址   端口</code></p>
-<p>端口安全：</p>
-<ul>
-<li>TCP/IP筛选：<a href="https://jingyan.baidu.com/article/90bc8fc84f568ff653640cca.html">百度经验-TCP/IP筛选</a><br>服务器【win 2003 server】：右键网卡-》找到Tcp/IP筛选、防火墙</li>
-</ul>
-<h5 id="1-3-1-实例：打开防火墙"><a href="#1-3-1-实例：打开防火墙" class="headerlink" title="1.3.1 实例：打开防火墙"></a>1.3.1 实例：打开防火墙</h5><p><strong>场景：</strong>自己的计算机 只开启80端口，其他人只能访问我这台计算机的80端口，而我可以访问别人的其他端口<br>【即：入站和出站是不同的规则，我出去用的是临时打开的随机端口，会话结束就关闭这个临时端口】<br><img src="https://img-blog.csdnimg.cn/20201211124446917.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020121112452153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Ping 不通：可能是<code>防火墙</code>的问题<br>排除木马【可疑程序】<code>msconfig</code>查看计算机中的已安装的未知程序</p>
-<h4 id="1-4-IPSec-防木马，严格控制出入流量"><a href="#1-4-IPSec-防木马，严格控制出入流量" class="headerlink" title="1.4 IPSec:防木马，严格控制出入流量"></a>1.4 IPSec:防木马，严格控制出入流量</h4><p>防火墙和TCP/IP筛选：不控制出去的流量</p>
-<p>server: 使用 IPSec + TCP/IP筛选<br>Client:  使用防火墙【windows 防火墙依赖 <code>服务</code>】</p>
-<p>场景：web服务器：只允许80端口进出</p>
-<ul>
-<li>打开本地安全策略</li>
-<li>新建 策略</li>
-<li>拒绝 所有 - 应用 - 确定</li>
-<li>添加 - 从“80端口”</li>
-<li>应用-确定</li>
-<li>启用策略<br>策略：采用<code>最佳匹配</code>原则<h4 id="1-5-网络层协议"><a href="#1-5-网络层协议" class="headerlink" title="1.5 网络层协议"></a>1.5 网络层协议</h4><img src="https://img-blog.csdnimg.cn/20201211133044459.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201211133104828.png" alt="在这里插入图片描述"><br>组播：<a href="https://blog.csdn.net/cong_xue/article/details/78639611?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522160766496919725211917529%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=160766496919725211917529&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-10-78639611.pc_search_result_cache&utm_term=%E7%BB%84%E6%92%AD&spm=1018.2118.3001.4449">组播原理-链接</a><br>组播就是计算机都配成同一个组播地址，就加入了同一个组。<br>IGMP，就是在路由器上控制有没有必要将多播数据包传到绑定多播地址的计算机的一种协议。</li>
-</ul>
-<h4 id="1-6-ARP协议"><a href="#1-6-ARP协议" class="headerlink" title="1.6 ARP协议"></a>1.6 ARP协议</h4><p>PC1  =&gt; PC2</p>
-<ul>
-<li>PC1 将PC2的IP地址封装，广播询问  该IP  相对应的  MAC地址</li>
-<li>PC2收到后，返回响应</li>
-<li>其他PC收到后，发现不是发给自己的，就丢弃<br>查看IP 与 MAC 的对应关系：<code>arp -a </code><br>临时绑定MAC和IP地址：<code>arp -s  IP地址  MAC地址(带有-)</code><br>删除MAC与IP的对应关系：<code>arp -d </code></li>
-</ul>
-<h4 id="1-7-跨网段通信："><a href="#1-7-跨网段通信：" class="headerlink" title="1.7 跨网段通信："></a>1.7 跨网段通信：</h4><p><img src="https://img-blog.csdnimg.cn/20201211140109229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>PC1 发送广播ARP广播，得到网关R1的MAC地址，不断变换MAC源地址、目标MAC，直到找到目标PC2.</p>
-<ul>
-<li>MAC地址 决定了  <strong>下一跳</strong>给哪个设备。</li>
-<li>IP地址 决定了 <strong>最终</strong>给 哪个 计算机</li>
-<li>该跨网段的过程运用了<code>代理ARP</code>的原理：<ul>
-<li> 跨网段时，PC1将ARP请求发给网关，由网关【以网关自己的名义】去请求目的设备的ARP地址。</li>
-<li>如果PC1的ARP不是配成网关，而是直接将目的MAC地址配成跨网段的设备的MAC地址，则在ARP请求时，网关收到ARP请求，发现不是发给自己的包，就丢弃，所以这时不能跨网段通信。</li>
-</ul>
-</li>
-</ul>
+</ol>
+<p>示例：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 描述信息</span></span><br><span class="line">[<span class="meta">WebMethod(Description=<span class="meta-string">&quot;这是一个 add() 方法&quot;</span>)</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 允许该WebMethod方法访问session的值</span></span><br><span class="line"><span class="comment">// 默认情况下WebMethod不能访问session中的值</span></span><br><span class="line">[<span class="meta">WebMethod(EnableSession = true)</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>[WebMethod] 的下面 紧跟  <strong>“函数” 或 “方法”</strong><br>示例：</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">WebMethod(Description=<span class="meta-string">&quot;这是一个 add() 方法&quot;</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">add_1</span>(<span class="params"><span class="built_in">float</span> a ,<span class="built_in">float</span> b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">double</span> rst = a + b ;</span><br><span class="line">    <span class="keyword">return</span>  a + <span class="string">&quot; + &quot;</span> + b + <span class="string">&quot;= &quot;</span> + rst ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20201130214448900.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="3-调试页展示"><a href="#3-调试页展示" class="headerlink" title="3. 调试页展示"></a>3. 调试页展示</h3><p><img src="https://img-blog.csdnimg.cn/20201130192021518.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201130192112243.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130192320308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130195332859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201130192558797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>由上图的<strong>地址栏</strong> 可知：<br>调用api的格式： <code>网址/方法名</code></p>
+<h3 id="4-WebService的发布"><a href="#4-WebService的发布" class="headerlink" title="4.  WebService的发布"></a>4.  WebService的发布</h3><p>要想让这个 <strong>api</strong> 能够 <strong>被</strong> 其他应用或网站 <strong>调用</strong>,必须要将api <strong>发布到服务器</strong>上。<br><img src="https://img-blog.csdnimg.cn/20201130195820565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200138942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200239892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200345118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200642890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130200912717.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>发布后 在 VS中有成功的提示：<br><img src="https://img-blog.csdnimg.cn/20201130201000528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="5-在-IIS-中-部署-我们编写的-WebService"><a href="#5-在-IIS-中-部署-我们编写的-WebService" class="headerlink" title="5.  在 IIS 中 部署 我们编写的 WebService"></a>5.  在 IIS 中 部署 我们编写的 WebService</h3><p>打开 IIS，添加站点<br><img src="https://img-blog.csdnimg.cn/20201130201354329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>配置站点详情<br><img src="https://img-blog.csdnimg.cn/20201130203043434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>设置默认文档：<br><img src="https://img-blog.csdnimg.cn/20201130202135280.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130202415333.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>浏览，以查看效果：<br><img src="https://img-blog.csdnimg.cn/20201130203500101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="6-新建项目-来-调用-API-以查看效果"><a href="#6-新建项目-来-调用-API-以查看效果" class="headerlink" title="6.  新建项目 来 调用 API 以查看效果"></a>6.  新建项目 来 调用 API 以查看效果</h3><p><img src="https://img-blog.csdnimg.cn/20201130203740919.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130204721379.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130204943734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>添加服务引用【 只有添加了“ web服务引用”才能使用api 】<br><img src="https://img-blog.csdnimg.cn/20201130210234382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130215038728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>【如果没有在上1张图的步骤中修改默认的命名空间名称，且点击“高级”后没有出现“添加web引用” 按钮，则点击“取消”，再次出现点击 “高级”，点击“添加web引用”】<br><img src="https://img-blog.csdnimg.cn/20201130210826610.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130211154633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130211417250.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130213021827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130205628494.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130213338422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="6-测试效果"><a href="#6-测试效果" class="headerlink" title="6. 测试效果"></a>6. 测试效果</h3><p><img src="https://img-blog.csdnimg.cn/20201130213627533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201130213644969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
-        <category>网络工程</category>
-        <category>CCNA</category>
+        <category>后端</category>
+        <category>C#</category>
       </categories>
       <tags>
-        <tag>CCNA</tag>
+        <tag>C#</tag>
       </tags>
   </entry>
   <entry>
@@ -1067,45 +1067,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL 8.0版本-安装篇</title>
-    <url>/2021/06/02/MySQL%208.0%E7%89%88%E6%9C%AC-%E5%AE%89%E8%A3%85%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="MySQL-8-0版本-安装篇"><a href="#MySQL-8-0版本-安装篇" class="headerlink" title="MySQL 8.0版本-安装篇"></a>MySQL 8.0版本-安装篇</h1><p>[toc]</p>
-<h3 id="1-MySQL免安装版下载-8-0-22"><a href="#1-MySQL免安装版下载-8-0-22" class="headerlink" title="1. MySQL免安装版下载(8.0.22)"></a>1. MySQL免安装版下载(8.0.22)</h3><p>进入：<a href="https://www.mysql.com/">MySQL官网</a><br><img src="https://img-blog.csdnimg.cn/2020112714302283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127143131278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127150613416.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20201127143501926.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>之后 等待下载。</p>
-<h3 id="2-MySQL的安装"><a href="#2-MySQL的安装" class="headerlink" title="2. MySQL的安装"></a>2. MySQL的安装</h3><h4 id="2-1-解压-下载好的压缩包【路径不为中文】"><a href="#2-1-解压-下载好的压缩包【路径不为中文】" class="headerlink" title="2.1 解压 下载好的压缩包【路径不为中文】"></a>2.1 解压 下载好的压缩包【路径不为中文】</h4><p><img src="https://img-blog.csdnimg.cn/20201127151330477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="2-2-创建-my-ini-配置文件-并生成初始密码"><a href="#2-2-创建-my-ini-配置文件-并生成初始密码" class="headerlink" title="2.2 创建 my.ini 配置文件,并生成初始密码"></a>2.2 创建 my.ini 配置文件,并生成初始密码</h4><p><strong>第一步：</strong><br>    在 bin 的同一级目录创建my.ini配置文件<br>配置文件中，需要更改的2部分为：</p>
-<ul>
-<li>basedir: 安装路径</li>
-<li>datadir：安装路径\data</li>
-</ul>
-<p>输入的配置：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"># 设置<span class="number">3306</span>端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64\Data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=<span class="number">200</span></span><br><span class="line"># 允许连接失败的次数。</span><br><span class="line">max_connect_errors=<span class="number">10</span></span><br><span class="line"># 服务端使用的字符集默认为utf8mb4</span><br><span class="line">character-<span class="built_in">set</span>-server=utf8mb4</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line"><span class="keyword">default</span>-storage-engine=INNODB</span><br><span class="line"># 默认使用“mysql_native_password”插件认证</span><br><span class="line">#mysql_native_password</span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br><span class="line">[client]</span><br><span class="line"># 设置mysql客户端连接服务端时默认使用的端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br></pre></td></tr></table></figure>
-<p><strong>第二步：</strong><br>以<strong>管理员</strong>身份运行 cmd，进入MySQL的 bin 目录，<br><img src="https://img-blog.csdnimg.cn/20201127152842804.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>为了生成Data目录和初始密码，输入：<br> <code>mysqld --initialize --console </code><br>若出现  如下报错：<br><img src="https://img-blog.csdnimg.cn/2020112715354489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>则 百度下载：vcruntime140_1.dll<br>并复制到以下目录<code>C:\Windows\System32</code>：<br><img src="https://img-blog.csdnimg.cn/20201127153801616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>复制完该文件后，<br>重新在 cmd 输入:  <code>mysqld --initialize --console</code><br><img src="https://img-blog.csdnimg.cn/20201127154427353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图红色部分为：随机生成的初始密码【记录下来，方便后面使用】</p>
-<h4 id="2-3-安装-启动-MySQL服务"><a href="#2-3-安装-启动-MySQL服务" class="headerlink" title="2.3 安装 + 启动 MySQL服务"></a>2.3 安装 + 启动 MySQL服务</h4><p><strong>安装：</strong><br>cmd输入：<code>mysqld --install [服务名]</code>,<br>其中，<strong>服务名可省略</strong><br>即：输入：<code>mysqld --install</code><br><strong>卸载服务：</strong> <code>mysqld --remove mysql</code><br><img src="https://img-blog.csdnimg.cn/20201127155811577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>启动：</strong> 两种方式</p>
-<ul>
-<li> cmd 中输入： <code>net start  mysql</code> 【如果服务<strong>没有设为自动</strong>，则每次开机都要输一遍】（关闭指令:<code>net stop mysql</code>）</li>
-<li><pre><code> 右键 “计算机” =》 “管理” =》 “服务” =》 找到 mysql =》启动
-</code></pre>
-【将其设为<strong>自动</strong>，这样可以不用每次开机都手动开启 mysql 服务】<h4 id="2-4-进入MySQL"><a href="#2-4-进入MySQL" class="headerlink" title="2.4 进入MySQL"></a>2.4 进入MySQL</h4>输入：<code>mysql -u root –p</code><br>输入刚才生成的初始密码【必须手动输入】<br>更改初始密码<br><code>ALTER USER &quot;root&quot;@&quot;localhost&quot; IDENTIFIED BY &quot;你的新密码&quot;;</code><h4 id="2-5-配置环境变量"><a href="#2-5-配置环境变量" class="headerlink" title="2.5 配置环境变量"></a>2.5 配置环境变量</h4>配置环境变量是为了在cmd下的任意目录中都能使用mysql</li>
-</ul>
-<p><strong>配置MySQL的主目录</strong><br><img src="https://img-blog.csdnimg.cn/20201128100208106.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>配置path</strong><br><img src="https://img-blog.csdnimg.cn/20201128100511736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3次确定</p>
-<h3 id="3-Navacat的安装"><a href="#3-Navacat的安装" class="headerlink" title="3. Navacat的安装"></a>3. Navacat的安装</h3><p>参考：<code>https://www.cnblogs.com/yanghongtao/p/10976526.html</code><br><img src="https://img-blog.csdnimg.cn/20201127163008138.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163020957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163104351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716311497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716312449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163146205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163332149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163344601.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163351105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163412973.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163421884.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163444278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163549530.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163600171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716361083.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163644942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163725455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163741557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163807439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="4-常用的MySQL命令"><a href="#4-常用的MySQL命令" class="headerlink" title="4. 常用的MySQL命令"></a>4. 常用的MySQL命令</h3><p>注意：MySQL的所有命令都以英文分号<kbd>;</kbd>结尾</p>
-<h4 id="4-1-显示所有数据库"><a href="#4-1-显示所有数据库" class="headerlink" title="4.1 显示所有数据库"></a>4.1 显示所有数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-2-创建数据库"><a href="#4-2-创建数据库" class="headerlink" title="4.2 创建数据库"></a>4.2 创建数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database School;</span><br></pre></td></tr></table></figure>
-<h4 id="4-3-删除数据库"><a href="#4-3-删除数据库" class="headerlink" title="4.3 删除数据库"></a>4.3 删除数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database School;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>SQL</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Nginx-入门</title>
     <url>/2021/06/02/Nginx-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="Nginx-基础"><a href="#Nginx-基础" class="headerlink" title="Nginx-基础"></a>Nginx-基础</h1><p>[toc]</p>
@@ -1335,6 +1296,45 @@
       </categories>
       <tags>
         <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL 8.0版本-安装篇</title>
+    <url>/2021/06/02/MySQL%208.0%E7%89%88%E6%9C%AC-%E5%AE%89%E8%A3%85%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="MySQL-8-0版本-安装篇"><a href="#MySQL-8-0版本-安装篇" class="headerlink" title="MySQL 8.0版本-安装篇"></a>MySQL 8.0版本-安装篇</h1><p>[toc]</p>
+<h3 id="1-MySQL免安装版下载-8-0-22"><a href="#1-MySQL免安装版下载-8-0-22" class="headerlink" title="1. MySQL免安装版下载(8.0.22)"></a>1. MySQL免安装版下载(8.0.22)</h3><p>进入：<a href="https://www.mysql.com/">MySQL官网</a><br><img src="https://img-blog.csdnimg.cn/2020112714302283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127143131278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127150613416.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201127143501926.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>之后 等待下载。</p>
+<h3 id="2-MySQL的安装"><a href="#2-MySQL的安装" class="headerlink" title="2. MySQL的安装"></a>2. MySQL的安装</h3><h4 id="2-1-解压-下载好的压缩包【路径不为中文】"><a href="#2-1-解压-下载好的压缩包【路径不为中文】" class="headerlink" title="2.1 解压 下载好的压缩包【路径不为中文】"></a>2.1 解压 下载好的压缩包【路径不为中文】</h4><p><img src="https://img-blog.csdnimg.cn/20201127151330477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="2-2-创建-my-ini-配置文件-并生成初始密码"><a href="#2-2-创建-my-ini-配置文件-并生成初始密码" class="headerlink" title="2.2 创建 my.ini 配置文件,并生成初始密码"></a>2.2 创建 my.ini 配置文件,并生成初始密码</h4><p><strong>第一步：</strong><br>    在 bin 的同一级目录创建my.ini配置文件<br>配置文件中，需要更改的2部分为：</p>
+<ul>
+<li>basedir: 安装路径</li>
+<li>datadir：安装路径\data</li>
+</ul>
+<p>输入的配置：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"># 设置<span class="number">3306</span>端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=E:\mysql<span class="number">-8.0</span><span class="number">.22</span>-winx64\Data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=<span class="number">200</span></span><br><span class="line"># 允许连接失败的次数。</span><br><span class="line">max_connect_errors=<span class="number">10</span></span><br><span class="line"># 服务端使用的字符集默认为utf8mb4</span><br><span class="line">character-<span class="built_in">set</span>-server=utf8mb4</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line"><span class="keyword">default</span>-storage-engine=INNODB</span><br><span class="line"># 默认使用“mysql_native_password”插件认证</span><br><span class="line">#mysql_native_password</span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br><span class="line">[client]</span><br><span class="line"># 设置mysql客户端连接服务端时默认使用的端口</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line"><span class="keyword">default</span>-character-<span class="built_in">set</span>=utf8mb4</span><br></pre></td></tr></table></figure>
+<p><strong>第二步：</strong><br>以<strong>管理员</strong>身份运行 cmd，进入MySQL的 bin 目录，<br><img src="https://img-blog.csdnimg.cn/20201127152842804.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>为了生成Data目录和初始密码，输入：<br> <code>mysqld --initialize --console </code><br>若出现  如下报错：<br><img src="https://img-blog.csdnimg.cn/2020112715354489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>则 百度下载：vcruntime140_1.dll<br>并复制到以下目录<code>C:\Windows\System32</code>：<br><img src="https://img-blog.csdnimg.cn/20201127153801616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>复制完该文件后，<br>重新在 cmd 输入:  <code>mysqld --initialize --console</code><br><img src="https://img-blog.csdnimg.cn/20201127154427353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图红色部分为：随机生成的初始密码【记录下来，方便后面使用】</p>
+<h4 id="2-3-安装-启动-MySQL服务"><a href="#2-3-安装-启动-MySQL服务" class="headerlink" title="2.3 安装 + 启动 MySQL服务"></a>2.3 安装 + 启动 MySQL服务</h4><p><strong>安装：</strong><br>cmd输入：<code>mysqld --install [服务名]</code>,<br>其中，<strong>服务名可省略</strong><br>即：输入：<code>mysqld --install</code><br><strong>卸载服务：</strong> <code>mysqld --remove mysql</code><br><img src="https://img-blog.csdnimg.cn/20201127155811577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>启动：</strong> 两种方式</p>
+<ul>
+<li> cmd 中输入： <code>net start  mysql</code> 【如果服务<strong>没有设为自动</strong>，则每次开机都要输一遍】（关闭指令:<code>net stop mysql</code>）</li>
+<li><pre><code> 右键 “计算机” =》 “管理” =》 “服务” =》 找到 mysql =》启动
+</code></pre>
+【将其设为<strong>自动</strong>，这样可以不用每次开机都手动开启 mysql 服务】<h4 id="2-4-进入MySQL"><a href="#2-4-进入MySQL" class="headerlink" title="2.4 进入MySQL"></a>2.4 进入MySQL</h4>输入：<code>mysql -u root –p</code><br>输入刚才生成的初始密码【必须手动输入】<br>更改初始密码<br><code>ALTER USER &quot;root&quot;@&quot;localhost&quot; IDENTIFIED BY &quot;你的新密码&quot;;</code><h4 id="2-5-配置环境变量"><a href="#2-5-配置环境变量" class="headerlink" title="2.5 配置环境变量"></a>2.5 配置环境变量</h4>配置环境变量是为了在cmd下的任意目录中都能使用mysql</li>
+</ul>
+<p><strong>配置MySQL的主目录</strong><br><img src="https://img-blog.csdnimg.cn/20201128100208106.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>配置path</strong><br><img src="https://img-blog.csdnimg.cn/20201128100511736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3次确定</p>
+<h3 id="3-Navacat的安装"><a href="#3-Navacat的安装" class="headerlink" title="3. Navacat的安装"></a>3. Navacat的安装</h3><p>参考：<code>https://www.cnblogs.com/yanghongtao/p/10976526.html</code><br><img src="https://img-blog.csdnimg.cn/20201127163008138.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163020957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163104351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716311497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716312449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163146205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163332149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163344601.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163351105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163412973.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163421884.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163444278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163549530.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163600171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020112716361083.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163644942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163725455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163741557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201127163807439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="4-常用的MySQL命令"><a href="#4-常用的MySQL命令" class="headerlink" title="4. 常用的MySQL命令"></a>4. 常用的MySQL命令</h3><p>注意：MySQL的所有命令都以英文分号<kbd>;</kbd>结尾</p>
+<h4 id="4-1-显示所有数据库"><a href="#4-1-显示所有数据库" class="headerlink" title="4.1 显示所有数据库"></a>4.1 显示所有数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-创建数据库"><a href="#4-2-创建数据库" class="headerlink" title="4.2 创建数据库"></a>4.2 创建数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> database School;</span><br></pre></td></tr></table></figure>
+<h4 id="4-3-删除数据库"><a href="#4-3-删除数据库" class="headerlink" title="4.3 删除数据库"></a>4.3 删除数据库</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> database School;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>SQL</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -1725,28 +1725,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue 入门-02</title>
-    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-02/</url>
-    <content><![CDATA[<h1 id="Vue入门-02"><a href="#Vue入门-02" class="headerlink" title="Vue入门-02"></a>Vue入门-02</h1><p>[toc]</p>
-<h2 id="1-1-计算属性【用于-数据处理】"><a href="#1-1-计算属性【用于-数据处理】" class="headerlink" title="1.1 计算属性【用于 数据处理】"></a>1.1 计算属性【用于 数据处理】</h2><p><strong>作用</strong>：为了不让 {{ }} 内的东西太长，使其不好维护，可先使用<code>计算属性</code>处理，处理完后的结果再在 {{ }} 中使用，【保证在 {{ }} 只写简单的逻辑】  </p>
-<p><strong>计算属性</strong> 会很 <strong>快</strong>，因为使用了 <strong>缓存</strong>，【只计算1次，之后刷新页面时，直接从缓存调用 <code>计算属性</code>。除非属性值被修改了，才会再一次进行 computed】   </p>
-<p><strong>格式：</strong>【定义在 conputed 中；定义时 格式类似函数，有小括号，有返回值；调用时 无需小括号】<br><img src="https://img-blog.csdnimg.cn/20210118161230581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="1-2-CSS-样式的绑定"><a href="#1-2-CSS-样式的绑定" class="headerlink" title="1.2 CSS 样式的绑定"></a>1.2 CSS 样式的绑定</h2><p><img src="https://img-blog.csdnimg.cn/20210118171547218.png" alt="在这里插入图片描述"></p>
-<p>实例1：<br><img src="https://img-blog.csdnimg.cn/20210118165226196.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210118165612375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>实例2【重要】<br><img src="https://img-blog.csdnimg.cn/20210118171331166.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>实例3【指定默认样式，最终样式为：default + odd/even】<br><img src="https://img-blog.csdnimg.cn/20210118171831444.png" alt="在这里插入图片描述"><br>实例4【绑定style属性】<br><img src="https://img-blog.csdnimg.cn/20210118172421806.png" alt="在这里插入图片描述"></p>
-<h2 id="1-3-数组的变更方法"><a href="#1-3-数组的变更方法" class="headerlink" title="1.3 数组的变更方法"></a>1.3 数组的变更方法</h2><p><img src="https://img-blog.csdnimg.cn/20210118173323306.png" alt="在这里插入图片描述"><br>以上这些方法可以在<strong>Vue对象内部</strong>  <code>变更数组</code>并刷新界面【对原数组进行改变】，<br>在Vue对象内部，可使用 <code>Vue.set(要被设置的对象，”属性名“，属性值)</code>，<br>在<strong>Vue对象外面</strong>，还可以使用 <code>vm.数组名.length=0</code>来变更数组，<br>除以上提及的方式外，其他方式均无法在Vue内部更改数组。【改了也不更新页面】<br><img src="https://img-blog.csdnimg.cn/20210118180023113.png" alt="在这里插入图片描述"><br>以上方法用 新数组  替换 旧数组</p>
-<p>实例：【模糊查询】<br><img src="https://img-blog.csdnimg.cn/20210118183909419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>实例：计划表<br><img src="https://img-blog.csdnimg.cn/20210118191645297.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210118191317308.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210118191444702.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210118191621270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue 入门-01</title>
     <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-01/</url>
     <content><![CDATA[<h1 id="Vue入门-01"><a href="#Vue入门-01" class="headerlink" title="Vue入门-01"></a>Vue入门-01</h1><p>[toc]</p>
@@ -1852,6 +1830,53 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue 入门-02</title>
+    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-02/</url>
+    <content><![CDATA[<h1 id="Vue入门-02"><a href="#Vue入门-02" class="headerlink" title="Vue入门-02"></a>Vue入门-02</h1><p>[toc]</p>
+<h2 id="1-1-计算属性【用于-数据处理】"><a href="#1-1-计算属性【用于-数据处理】" class="headerlink" title="1.1 计算属性【用于 数据处理】"></a>1.1 计算属性【用于 数据处理】</h2><p><strong>作用</strong>：为了不让 {{ }} 内的东西太长，使其不好维护，可先使用<code>计算属性</code>处理，处理完后的结果再在 {{ }} 中使用，【保证在 {{ }} 只写简单的逻辑】  </p>
+<p><strong>计算属性</strong> 会很 <strong>快</strong>，因为使用了 <strong>缓存</strong>，【只计算1次，之后刷新页面时，直接从缓存调用 <code>计算属性</code>。除非属性值被修改了，才会再一次进行 computed】   </p>
+<p><strong>格式：</strong>【定义在 conputed 中；定义时 格式类似函数，有小括号，有返回值；调用时 无需小括号】<br><img src="https://img-blog.csdnimg.cn/20210118161230581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="1-2-CSS-样式的绑定"><a href="#1-2-CSS-样式的绑定" class="headerlink" title="1.2 CSS 样式的绑定"></a>1.2 CSS 样式的绑定</h2><p><img src="https://img-blog.csdnimg.cn/20210118171547218.png" alt="在这里插入图片描述"></p>
+<p>实例1：<br><img src="https://img-blog.csdnimg.cn/20210118165226196.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210118165612375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>实例2【重要】<br><img src="https://img-blog.csdnimg.cn/20210118171331166.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>实例3【指定默认样式，最终样式为：default + odd/even】<br><img src="https://img-blog.csdnimg.cn/20210118171831444.png" alt="在这里插入图片描述"><br>实例4【绑定style属性】<br><img src="https://img-blog.csdnimg.cn/20210118172421806.png" alt="在这里插入图片描述"></p>
+<h2 id="1-3-数组的变更方法"><a href="#1-3-数组的变更方法" class="headerlink" title="1.3 数组的变更方法"></a>1.3 数组的变更方法</h2><p><img src="https://img-blog.csdnimg.cn/20210118173323306.png" alt="在这里插入图片描述"><br>以上这些方法可以在<strong>Vue对象内部</strong>  <code>变更数组</code>并刷新界面【对原数组进行改变】，<br>在Vue对象内部，可使用 <code>Vue.set(要被设置的对象，”属性名“，属性值)</code>，<br>在<strong>Vue对象外面</strong>，还可以使用 <code>vm.数组名.length=0</code>来变更数组，<br>除以上提及的方式外，其他方式均无法在Vue内部更改数组。【改了也不更新页面】<br><img src="https://img-blog.csdnimg.cn/20210118180023113.png" alt="在这里插入图片描述"><br>以上方法用 新数组  替换 旧数组</p>
+<p>实例：【模糊查询】<br><img src="https://img-blog.csdnimg.cn/20210118183909419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>实例：计划表<br><img src="https://img-blog.csdnimg.cn/20210118191645297.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210118191317308.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210118191444702.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210118191621270.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue 入门-04</title>
+    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-04/</url>
+    <content><![CDATA[<h1 id="Vue入门-04"><a href="#Vue入门-04" class="headerlink" title="Vue入门-04"></a>Vue入门-04</h1><p>[toc]</p>
+<h2 id="1-1-Vuex"><a href="#1-1-Vuex" class="headerlink" title="1.1 Vuex"></a>1.1 Vuex</h2><p>使用 Vuex 可以在整个Vue项目中共享数据【类似 数据库的作用】<br>=》官方叫<code>状态管理模式</code><br><img src="https://img-blog.csdnimg.cn/20210122104027301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>项目中要使用 vuex 必须要 <code>use</code> 来应用【vue 的 router 也一样】<br><img src="https://img-blog.csdnimg.cn/20210122104249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> vuex 的路径：<code>/src/store/index.js</code><br> <img src="https://img-blog.csdnimg.cn/20210122104820568.png" alt="在这里插入图片描述"><br>首先，在<code>/store/index.js</code>文件中引入vuex，并导出1个store对象，<br>在<code>main.js</code>文件中导入 <code>/store/index.js</code>文件，并在Vue对象中注册<br><img src="https://img-blog.csdnimg.cn/202101221056369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210122105030964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122110141606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例1【获取数据】："><a href="#实例1【获取数据】：" class="headerlink" title="实例1【获取数据】："></a>实例1【获取数据】：</h3><ul>
+<li>store中的state里面写数据</li>
+<li>store中的getters方法</li>
+<li>在要使用数据的组件中导入vuex的 mapGetters</li>
+<li>在计算属性computed中 使用<code>...mapGetters([&quot;getter方法名1&quot;，“getter方法名2”])</code></li>
+<li>利用  来使用数据<br><img src="https://img-blog.csdnimg.cn/20210122113209775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2021012211431555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例2【获取数据】："><a href="#实例2【获取数据】：" class="headerlink" title="实例2【获取数据】："></a>实例2【获取数据】：</h3><p><img src="https://img-blog.csdnimg.cn/20210122114921444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122115028541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="实例3-【设置数据】"><a href="#实例3-【设置数据】" class="headerlink" title="实例3 【设置数据】"></a>实例3 【设置数据】</h3><p><img src="https://img-blog.csdnimg.cn/20210122122416420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122122915950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue 入门-03</title>
     <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-03-%E7%BB%84%E4%BB%B6(%E9%83%A8%E5%88%86)+vue%E8%B7%AF%E7%94%B1/</url>
     <content><![CDATA[<h1 id="Vue入门-03"><a href="#Vue入门-03" class="headerlink" title="Vue入门-03"></a>Vue入门-03</h1><p>[toc]</p>
@@ -1937,31 +1962,6 @@
 <li><code>this.$router.push(&#123;name:&quot;路由名&quot;,params:&#123;参数名：参数值，参数名：参数值&#125;&#125;)</code></li>
 </ul>
 <h3 id="1-5-去掉使用路由时，地址栏上的-号"><a href="#1-5-去掉使用路由时，地址栏上的-号" class="headerlink" title="1.5 去掉使用路由时，地址栏上的#号"></a>1.5 去掉使用路由时，地址栏上的#号</h3><p><img src="https://img-blog.csdnimg.cn/2021012120374382.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210121204319530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vue 入门-04</title>
-    <url>/2021/06/02/Vue%E5%85%A5%E9%97%A8-04/</url>
-    <content><![CDATA[<h1 id="Vue入门-04"><a href="#Vue入门-04" class="headerlink" title="Vue入门-04"></a>Vue入门-04</h1><p>[toc]</p>
-<h2 id="1-1-Vuex"><a href="#1-1-Vuex" class="headerlink" title="1.1 Vuex"></a>1.1 Vuex</h2><p>使用 Vuex 可以在整个Vue项目中共享数据【类似 数据库的作用】<br>=》官方叫<code>状态管理模式</code><br><img src="https://img-blog.csdnimg.cn/20210122104027301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>项目中要使用 vuex 必须要 <code>use</code> 来应用【vue 的 router 也一样】<br><img src="https://img-blog.csdnimg.cn/20210122104249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> vuex 的路径：<code>/src/store/index.js</code><br> <img src="https://img-blog.csdnimg.cn/20210122104820568.png" alt="在这里插入图片描述"><br>首先，在<code>/store/index.js</code>文件中引入vuex，并导出1个store对象，<br>在<code>main.js</code>文件中导入 <code>/store/index.js</code>文件，并在Vue对象中注册<br><img src="https://img-blog.csdnimg.cn/202101221056369.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210122105030964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122110141606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例1【获取数据】："><a href="#实例1【获取数据】：" class="headerlink" title="实例1【获取数据】："></a>实例1【获取数据】：</h3><ul>
-<li>store中的state里面写数据</li>
-<li>store中的getters方法</li>
-<li>在要使用数据的组件中导入vuex的 mapGetters</li>
-<li>在计算属性computed中 使用<code>...mapGetters([&quot;getter方法名1&quot;，“getter方法名2”])</code></li>
-<li>利用  来使用数据<br><img src="https://img-blog.csdnimg.cn/20210122113209775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/2021012211431555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例2【获取数据】："><a href="#实例2【获取数据】：" class="headerlink" title="实例2【获取数据】："></a>实例2【获取数据】：</h3><p><img src="https://img-blog.csdnimg.cn/20210122114921444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122115028541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="实例3-【设置数据】"><a href="#实例3-【设置数据】" class="headerlink" title="实例3 【设置数据】"></a>实例3 【设置数据】</h3><p><img src="https://img-blog.csdnimg.cn/20210122122416420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210122122915950.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -2077,24 +2077,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/06/02/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>kali-安装笔记</title>
     <url>/2021/06/02/kali-%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="kali-安装笔记"><a href="#kali-安装笔记" class="headerlink" title="kali-安装笔记"></a>kali-安装笔记</h1><p>[toc]<br>下载地址：【国内镜像】</p>
@@ -2144,6 +2126,58 @@
       <tags>
         <tag>Linux</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>ARP协议</title>
+    <url>/2021/06/02/%E7%BD%91%E7%BB%9C-%E5%AE%9E%E4%BE%8B%E3%80%90ARP%E3%80%91/</url>
+    <content><![CDATA[<h2 id="1-ARP请求与ARP代理"><a href="#1-ARP请求与ARP代理" class="headerlink" title="1. ARP请求与ARP代理"></a>1. ARP请求与ARP代理</h2><p><img src="https://img-blog.csdnimg.cn/20201214192045886.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>R1 上配 用<code>接口</code>的静态路由到R3，【最后一定可以知道目的设备的MAC,因为只知道从接口发，而不知道发给谁，只有得到目标设备的MAC地址，才能完成封装】</li>
+<li>R3 上配 用<code>IP地址</code>的静态路由到R1 ,【最后不会知道目标的MAC，因为静态路由配的是地址，R3明确知道要发给谁，可以直接封装】</li>
+</ul>
+<p><strong>R1  = ping =&gt; R3</strong> 过程</p>
+<ol>
+<li>R1到R3需要跨网段，因此，需要涉及代理ARP</li>
+<li>R1根据R3的IP地址发送ARP广播【广播包中有源IP，源MAC，目的IP】。网关R2收到后，解封装【其他设备收到后发现不是发给自己的，就丢弃】，再以自己的名义封装ARP请求并发给R3。R3收到请求后，返回1个ARP响应给R2,R2再发给R1</li>
+</ol>
+<p>代理ARP：以自己的名义将别人的包转发出去。</p>
+<h2 id="2-双出口"><a href="#2-双出口" class="headerlink" title="2. 双出口"></a>2. 双出口</h2><p><img src="https://img-blog.csdnimg.cn/20201214195453914.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>上图是网络双出口，R1到外网从R2走<ul>
+<li>原因：<blockquote>
+<p>R1 ping 外网时，发送ARP广播，R2和R3都收到ARP广播，并发送了响应<br>但是，由于R3的响应报文先发，R2的报文后发，后发的报文会覆盖先发的报文，因此，R1到外网从R2出去</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>华为、华三设备尤其要注意接口代理ARP是否打开。</strong></p>
+]]></content>
+      <categories>
+        <category>网络工程</category>
+        <category>CCNA</category>
+      </categories>
+      <tags>
+        <tag>CCNA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/06/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>劳动法-笔记</title>
@@ -2300,40 +2334,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ARP协议</title>
-    <url>/2021/06/02/%E7%BD%91%E7%BB%9C-%E5%AE%9E%E4%BE%8B%E3%80%90ARP%E3%80%91/</url>
-    <content><![CDATA[<h2 id="1-ARP请求与ARP代理"><a href="#1-ARP请求与ARP代理" class="headerlink" title="1. ARP请求与ARP代理"></a>1. ARP请求与ARP代理</h2><p><img src="https://img-blog.csdnimg.cn/20201214192045886.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li>R1 上配 用<code>接口</code>的静态路由到R3，【最后一定可以知道目的设备的MAC,因为只知道从接口发，而不知道发给谁，只有得到目标设备的MAC地址，才能完成封装】</li>
-<li>R3 上配 用<code>IP地址</code>的静态路由到R1 ,【最后不会知道目标的MAC，因为静态路由配的是地址，R3明确知道要发给谁，可以直接封装】</li>
-</ul>
-<p><strong>R1  = ping =&gt; R3</strong> 过程</p>
-<ol>
-<li>R1到R3需要跨网段，因此，需要涉及代理ARP</li>
-<li>R1根据R3的IP地址发送ARP广播【广播包中有源IP，源MAC，目的IP】。网关R2收到后，解封装【其他设备收到后发现不是发给自己的，就丢弃】，再以自己的名义封装ARP请求并发给R3。R3收到请求后，返回1个ARP响应给R2,R2再发给R1</li>
-</ol>
-<p>代理ARP：以自己的名义将别人的包转发出去。</p>
-<h2 id="2-双出口"><a href="#2-双出口" class="headerlink" title="2. 双出口"></a>2. 双出口</h2><p><img src="https://img-blog.csdnimg.cn/20201214195453914.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li>上图是网络双出口，R1到外网从R2走<ul>
-<li>原因：<blockquote>
-<p>R1 ping 外网时，发送ARP广播，R2和R3都收到ARP广播，并发送了响应<br>但是，由于R3的响应报文先发，R2的报文后发，后发的报文会覆盖先发的报文，因此，R1到外网从R2出去</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>华为、华三设备尤其要注意接口代理ARP是否打开。</strong></p>
-]]></content>
-      <categories>
-        <category>网络工程</category>
-        <category>CCNA</category>
-      </categories>
-      <tags>
-        <tag>CCNA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ASP.NET —— 入门笔记</title>
     <url>/2021/06/02/ASP.NET%20%E2%80%94%20%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="ASP-NET-入门笔记"><a href="#ASP-NET-入门笔记" class="headerlink" title="ASP.NET-入门笔记"></a>ASP.NET-入门笔记</h1><p>[toc]</p>
@@ -2481,19 +2481,20 @@
 </ul>
   <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">system.web</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">pages</span> <span class="attr">theme</span>=<span class="string">&quot;主题1&quot;</span> /&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">compilation</span> <span class="attr">debug</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">sessionState</span> <span class="attr">mode</span>=<span class="string">&quot;StateServer&quot;</span> <span class="attr">cookieless</span>=<span class="string">&quot;false&quot;</span> 					<span class="attr">timeout</span>=<span class="string">&quot;480&quot;</span>/&gt;</span>  </span><br><span class="line">    	</span><br><span class="line"><span class="tag">&lt;/<span class="name">system.web</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>  在以上代码中 <strong>sessionState</strong> 标签是为了设置网站中的<strong>session有效时间</strong>，</p>
+<p>  <strong>sessionState</strong>的几个属性的参数：</p>
 <ul>
-<li>在以上代码中 <strong>sessionState</strong> 标签是为了设置网站中的<strong>session有效时间</strong>，<ul>
-<li><strong>sessionState</strong>的几个属性的参数：      +   mode属性：<pre><code>  +   InProc：session保存在进程(IIS)内部，性能好，但容易丢失
-  +   StateServer：保存在进程外，需要启动`asp.net State Service的服务`，session在有效期内除非重启电脑或关闭服务，否则一直保存直到失效时间自动失效
-  +   SQLServer: 保存在数据库中，在标签中设置数据库的ip地址`stateConnectionString=&#39;tcpip=127.0.0.1:42424&#39;`，部分数据类型需要序列化      +   cookieless属性：
-  +   `true`:在浏览器禁用cookie，使用url保存cookie,使用这种方法保存cookie时如果要跳转页面，不能直接覆盖地址栏的值，否则session会失效
-  +   示例：`http://localhost/ABC/(ulqsek45heu)/default.aspx`【小括号内的就是SessionID】
-  +   `false`:【默认】，在浏览器启用cookie     +   timeout属性：
-  +   属性值为 **分钟数**，**默认 20 min**
-</code></pre>
-</li>
+<li>  mode属性：</li>
 </ul>
-</li>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">	1. InProc：session保存在进程(IIS)内部，性能好，但容易丢失</span><br><span class="line"></span><br><span class="line">	2. StateServer：保存在进程外，需要启动 `asp.net State Service的服务` ，</span><br><span class="line">		session在有效期内除非重启电脑或关闭服务，否则一直保存直到失效时间自动失效</span><br><span class="line"></span><br><span class="line">	3. StateServer：保存在进程外，需要启动`asp.net State Service的服务`，</span><br><span class="line">		session在有效期内除非重启电脑或关闭服务，否则一直保存直到失效时间自动失效</span><br><span class="line"></span><br><span class="line">	4. SQLServer: 保存在数据库中，在标签中设置数据库的ip地址	</span><br><span class="line">    	`stateConnectionString=&#x27;tcpip=127.0.0.1:42424&#x27;`，部分数据类型需要序列化</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  cookieless属性：</li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">	</span><br><span class="line">	1. true: 在浏览器禁用cookie，</span><br><span class="line">		使用url保存cookie,使用这种方法保存cookie时如果要跳转页面，</span><br><span class="line">		不能直接覆盖地址栏的值，否则session会失效。</span><br><span class="line">	</span><br><span class="line">        示例：`http://localhost/ABC/(ulqsek45heu)/default.aspx`</span><br><span class="line">                【小括号内的就是SessionID】</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">    2. false:【默认】，在浏览器启用cookie</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p>  ​        </p>
+<ul>
+<li>  timeout属性： <strong>分钟数</strong>，默认 20 min</li>
 </ul>
 </li>
 </ul>
