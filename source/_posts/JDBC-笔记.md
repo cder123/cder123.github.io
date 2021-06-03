@@ -10,6 +10,16 @@ categories:
 
 [toc]
 
+## 0. 工具下载
+
+-   MySQL-下载:https://wws.lanzoui.com/izU3xpr459a 密码:96kc
+-   Navicat-下载:https://wws.lanzoui.com/ihKFypr448d 密码:amqz
+-   JDBC常用Jar包-下载:https://wws.lanzoui.com/ihKFypr448d 密码:amqz
+
+
+
+
+
 ## 1. JDBC-理解
 
 

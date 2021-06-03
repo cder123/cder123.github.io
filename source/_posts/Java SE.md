@@ -99,9 +99,14 @@ java 类名
 ### 1.1 JDK-下载：
 
 -    [JDK-官网下载](https://www.oracle.com/java/technologies/javase-downloads.html) 
+
 -    [JDK-下载url](https://www.programmer-box.com/?ref=jdk_1.6)
+
 -   [JDK的下载、安装和环境配置教程](https://blog.csdn.net/Marvin_996_ICU/article/details/106240065)
+
 -   [JDK12安装配置-Win10](https://blog.csdn.net/panjiabin321/article/details/89391210)
+
+    
 
 
 
@@ -110,6 +115,7 @@ java 类名
 -   [IntelliJ IDEA下载](https://www.jetbrains.com/zh-cn/idea/download/#section=windows)
 -   [IDEA 2019 下载+安装教程](https://mp.weixin.qq.com/s?__biz=MzU0MTg5NDkzNA==&mid=2247491865&idx=1&sn=9085c37f2b10a3495d68f5d0b66623a2&chksm=fb205160cc57d876a540fb31dcf8990b2d600855d3a195ccc565683899de64bb055401345920&scene=21#wechat_redirect)
 -   [JetBrains 2021 最新版本全家桶激活](https://pan.baidu.com/s/1Yhq_7dP0MOayyEJ-g4_27A)  提取码：ute8
+-   IDEA_30天重置工具下载:https://wws.lanzoui.com/i3bcJpr46ob  =》密码:750o
 
 
 
