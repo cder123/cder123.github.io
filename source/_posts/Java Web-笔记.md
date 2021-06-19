@@ -1435,3 +1435,343 @@ public class JsoupDemo2 {
 
 
 
+
+
+
+
+## 5. Web-Tomcat服务器
+
+
+
+
+
+### 5.1 Web基础回顾：
+
+
+
+1、软件架构：
+
+>   -   C/S
+>   -   B/S
+
+
+
+2、资源分类：
+
+>   -   静态资源：所有用户访问后的结果都一样，如：HTML、CSS、JS、图片【可`直接被浏览器解析`】
+>   -   动态资源：每个用户访问后的结果可能不同，如：Serverlet / jsp、php、asp【先`转换为静态资源`】
+
+
+
+
+
+3、网络通信三要素：
+
+>   -   IP地址：网络中的唯一标识。
+>   -   端口号：应用程序的唯一标志，0~65535
+>   -   协议：规定数据传输的规则。【TCP、UDP】
+
+
+
+
+
+
+
+### 5.2 Web服务器-概述：
+
+
+
+-   服务器：安装了服务器软件的计算机。
+
+-   服务器软件：接收、处理请求，做出响应。
+-   web服务器软件【web容器】：部署Web项目，使用户可以用浏览器访问。
+
+
+
+**注意**：动态资源必须要在Web容器中才能运行。
+
+
+
+
+
+`JavaEE`：Java在企业级开发中的`规范的总和`。共有`13项`大的规范。
+
+
+
+创建的Java相关的Web服务器：
+
+>   -   webLogic：oracle公司，大型JavaEE服务器，收费，支持JavaEE的所有规范(13种)。
+>   -   webSphere：IBM公司，大型JavaEE服务器，收费，支持JavaEE的所有规范(13种)。
+>   -   JBoss：JBoss公司，大型JavaEE服务器，收费，支持JavaEE的所有规范(13种)。
+>   -   `Tomcat`：Apache基金会，中小型JavaEE服务器，免费，仅支持`部分JavaEE的规范`。
+
+
+
+
+
+### 5.3 Tomcat的使用：
+
+部分笔记：[Nginx-入门-5.1小节中 | Cyw的笔记栈 (cder123.github.io)](https://cder123.github.io/2021/06/02/Nginx-入门笔记/#5-1-步骤一：安装Tomcat)
+
+
+
+Tomcat：web服务器软件
+
+
+
+#### 5.3.1 Tomcat需要掌握的操作：
+
+>   1.  下载:
+>
+>   2.  安装：
+>
+>   3.  启动
+>
+>   4.  关闭
+>
+>   5.  卸载
+>
+>   6.  配置+部署
+
+
+
+
+
+1.  下载：
+
+版本：`Tomcat-8.5-windows版`  =》 [Apache Tomcat下载-windows版](https://tomcat.apache.org/download-80.cgi)
+
+
+
+
+
+2.  安装：
+
+解压压缩包，解压后的路径中`不要有中文、空格`。
+
+
+
+Tomcat的目录结构：
+
+
+
+![tomcat-目录结构](https://z3.ax1x.com/2021/06/19/RCTzQI.png)
+
+
+
+Tomcat的各个目录的作用：
+
+>   -   bin：可执行的二进制文件。
+>   -   conf：配置文件。
+>   -   lib：依赖 Jar 包。
+>   -   logs：日志文件
+>   -   temp：临时文件
+>   -   webapps：存放、部署web项目
+>   -   work：存放运行的时候的数据
+
+
+
+
+
+3.  启动：
+
+>   -   windows环境下双击运行：`bin/startup.bat`
+>   -   打开浏览器，输入服务器的 IP地址+端口：`localhost:8080`  (访问自己)
+>
+>   
+>
+>   注意：可以在`conf/server.xml`中将`Connector标签`中的`8080`该为`80`，这样可以省略端口号
+
+
+
+启动时，可能遇到的问题：
+
+>   -   黑窗口一闪而过：
+>       -   原因：JAVA_HOME环境变量配置错误。
+>       -   解决：正确配置JAVA_HOME环境变量。
+>
+>   
+>
+>   -   启动报错：
+>
+>       -   原因：端口已经被占用【查看端口占用情况：netstat -ano】
+>
+>       -   解决：关闭占用8080端口的进程 或 修改自身的端口号【`conf/server.xml`，将`Connector标签`中的`8080`该为`别的端口`，保存，重新运行`bin/startup.bat`】
+>
+>           
+>
+>       
+
+
+
+
+
+4.  关闭：
+
+>   -   正常关闭：`bin/shutdown.bat`  或 ` ctrl + c`
+>   -   强制关闭：点击启动窗口的x
+
+
+
+
+
+
+
+
+
+5.  卸载：
+
+>   直接删除目录。
+
+
+
+
+
+
+
+
+
+6.  配置：
+
+
+
+部署项目的方式【3种】：
+
+-   背景：
+
+>   项目：`hello/hello.html`
+
+
+
+-   第一种：
+
+>   1.  直接将`项目文件夹`放入`webapps`目录下。
+>   2.  简化部署：将项目打成`.war`包，运行`bin/startup.bat`，将war包拖入`webapps`目录下，则自动解压缩。
+
+
+
+-   第二种：【无需复制项目到`webapps`目录下】
+
+>   -   打开`conf/server.xml`文件，拉到最后，在`Host`标签中，添加`<Context docBase="E:\hello" path="/abc" />`。【假设项目放在`E:\hello`中】
+>
+>       -   其中：`docBase`为物理路径，`path`为虚拟路径，浏览器访问时`/abc/hello.html`
+>
+>       
+>
+>   -   重新启动服务器【运行`bin/startup.bat`】
+
+
+
+-   第三种：【推荐，无需重启Tomcat，】
+
+>   -   在`conf/Catalina/localhost/`目录下，新建XML配置文件,`123.xml`，输入`<Context docBase="E:\hello" path="/abc" />`。【假设项目放在`E:\hello`中】
+>
+>       -   其中：`docBase`为物理路径，`path`为虚拟路径。浏览器访问时，直接输入XML配置文件名+html页面名：`/123/hello.html`就可访问。
+>
+>       如果不想让配置文件生效，可以将配置文件名最后面加上`_bak`
+
+
+
+
+
+
+
+
+
+#### 5.3.2 静态项目、动态项目：
+
+
+
+1.  目录结构：
+
+动态项目：
+
+>   – 项目根目录
+>
+>   ​	– WEB-INF 目录
+>
+>   ​			– web.xml：存放 项目的`核心配置文件`。
+>
+>   ​			– classes 目录：存放`字节码文件`的目录。
+>
+>   ​			– lib 目录：存放`依赖Jar包`的目录。
+>
+>   
+
+
+
+2.  在 IDEA 中集成、使用 Tomcat：
+
+-   `run -> Edit Configuration -> 左边 default【或+号】 -> Tomcat Server -> Local ` 
+-   `右边 configure -> 选中Tomcat的安装目录 -> 确定 -> 应用`
+-   创建JavaEE项目，测试 Tomcat是否集成成功。
+
+
+
+
+
+
+
+## 6. 创建第一个 Java EE项目
+
+
+
+-   [IEAD 2020.2 创建web、Spring项目](https://blog.csdn.net/qq_45738810/article/details/107842532)
+
+
+
+创建第一个 Java EE项目-步骤：
+
+>   1.  创建一个普通的 JavaSE工程。
+>   2.  右键 `工程名` -》`add FrameWork Support` -》`WebApplication ` -》OK。
+>   3.  在IDEA 中`集成 Tomcat服务器`。
+>   4.  `启动` JavaWeb，查看 Tomcat  是否 集成成功、可用。
+
+
+
+上面的第三步：集成Tomcat服务器：
+
+-   `Run -> Edit Configuration `
+
+![集成Tomcat服务器-1](https://z3.ax1x.com/2021/06/19/RPd978.png)
+
+-   添加Tomcat：
+
+![添加Tomcat](https://z3.ax1x.com/2021/06/19/RPdwND.png)
+
+
+
+<img src="https://z3.ax1x.com/2021/06/19/RPdogs.png" alt="RPdogs.png" border="0" />
+
+-   部署项目到Tomcat：
+
+<img src="https://z3.ax1x.com/2021/06/19/RPwMrt.png" alt="RPwMrt.png" border="0" />
+
+-   运行项目：
+
+<img src="https://z3.ax1x.com/2021/06/19/RPwgz9.png" alt="RPwgz9.png" border="0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 7. Serverlet
+
