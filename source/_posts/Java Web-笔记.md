@@ -1773,5 +1773,270 @@ Tomcat的各个目录的作用：
 
 
 
-## 7. Serverlet
+## 7. Servlet
+
+
+
+### 7.1 Servlet 概述：
+
+Servlet： Server Applet，运行在服务器端的小程序。
+
+
+
+`Servlet `实际上就是一组`接口`，接口中`定义了`一些 让`Java类`能够`被 浏览器访问、Tomcat 识别的规则`。将来我们需要`自定义一个类`，`实现`Servlet`接口`，`重写`接口中的`方法`。
+
+
+
+`import javax.servlet.*;`
+
+
+
+### 7.2 Servlet快速入门：
+
+步骤：
+
+1.  创建JavaEE项目。【右键项目名 -> 添加Framework -> webApplication 】，【集成 Tomcat】
+2.  自定义一个类，实现Servlet接口。【需先导入`Tomcat安装目录 -> lib -> servlet-api.jar`】
+3.  重写 Servlet接口中的方法。
+4.  配置Servlet。【在项目中的 `web -> WEB-INF -> web.xml`里配置】
+
+
+
+
+
+配置Servlet：
+
+【访问顺序：`web.xml` =》 `ServletDemo1.class`】
+
+
+
+`web.xml`：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    
+<!--    1. 配置Servlet-->
+    <servlet>
+        <servlet-name>demo_1</servlet-name>
+// 全类名【包名+类名】
+        <servlet-class>cn.demo.web.servlet.ServletDemo1</servlet-class>
+// 0或负数：Tomcat启动时，执行Servlet接口的init() 
+// 正数：浏览器访问 资源页面时，执行Servlet接口的init()         
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+<!--    2. 配置servlet的映射-->
+    <servlet-mapping>        
+        <servlet-name>demo_1</servlet-name>
+// 在浏览器地址栏中的显示        
+        <url-pattern>/demo1</url-pattern>
+    </servlet-mapping>
+    
+</web-app>
+```
+
+
+
+`cn.demo.web.servlet.ServletDemo1.class`：
+
+```java
+package cn.demo.web.servlet;
+
+import javax.servlet.*;
+import java.io.IOException;
+
+public class ServletDemo1 implements Servlet {
+    @Override
+    public void init(ServletConfig servletConfig) throws ServletException {
+
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return null;
+    }
+
+// 提供服务的方法
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+        // 浏览器一访问【localhost/demo1】,IDEA的控制台就打印 “Hello Servlet !!”
+        System.out.println("Hello Servlet !!");
+    }
+
+    @Override
+    public String getServletInfo() {
+        return null;
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+
+```
+
+
+
+
+
+
+
+### 7.3 Servlet的执行原理：
+
+以`ServletDemo1.class`为例：
+
+-   浏览器输入URL
+-   找 项目下的 `web.xml`下的`<url-pattern>`标签。
+-   `Tomcat `利用`反射`【Class.forName( )】，将`<servlet-class>` 标签中的`全类名`所对应的`字节码 加载 入内存`。
+-   创建对象 ：`ServletDemo1.newInstance( )`
+-   调用 `ServletDemo1.service( )`，执行方法中的代码。
+
+![servlet的原理](https://z3.ax1x.com/2021/06/20/RiJnZF.png)
+
+
+
+
+
+
+
+### 7.4 Servlet的生命周期-方法：
+
+
+
+1、Servlet的生命周期-方法：
+
+-   `public void init(ServletConfig )`： 创建 Servlet 时执行，只执行一次。
+
+-   `public void service(servletRequest, ServletResponse )`：提供服务，每次访问servlet时，执行，执行多次。
+
+-   `public void destroy( )`：销毁 Servlet 时【服务器 **正常关闭** 时】，执行。
+
+--------
+
+2、其他：
+
+-   `public ServletConfig getServletConfig(   )`：获取Servlet的配置对象。
+
+-   `public String getServletInfo( )`：获取配置信息。【版本、作者】
+
+
+
+---------
+
+
+
+创建-详解【Init（）】：
+
+-   `public void init(ServletConfig )`： 创建 Servlet 时执行，只执行一次。
+
+
+
+ `<load-on-startup>5</load-on-startup>`：指定创建的时间。【`web.xml`中的`<servlet>`标签下】
+
+>   -   负数：在第一次**访问**时，调用`init()`
+>   -   0或正数：服务器**启动**时，调用`init()`
+
+
+
+问题：
+
+>   init( )在多个用户同时访问时，出现`线程安全`问题。
+
+
+
+解决：
+
+>   不要在 Servlet 中定义成员变量。【即使定义了成员变量，也不要对该变量进行修改】
+
+
+
+-----
+
+
+
+### 7.5 Servlet 3.0 ：
+
+好处：支持使用`注解` 来配置 Servlet，无需`web.xml`
+
+
+
+步骤：
+
+>   1.  创建JavaEE项目，选择Servlet3.0版本以上。
+>   2.  自定义一个类，实现Servlet接口。
+>   3.  重写Servlet接口的方法。
+>   4.  在自定义的类上，使用`@WebServlet`注解来配置 Servlet 。
+
+
+
+```java
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+
+// 使用注解配置Servlet
+//【等价于 @WebServlet("/demo") 】
+    @WebServlet(urlPatterns={"/demo"}) 
+    public class Demo1 implements Servlet {
+        @Override
+        public void init(ServletConfig servletConfig) throws ServletException {
+
+        }
+
+        @Override
+        public ServletConfig getServletConfig() {
+            return null;
+        }
+
+        @Override
+        public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+
+        }
+
+        @Override
+        public String getServletInfo() {
+            return null;
+        }
+
+        @Override
+        public void destroy() {
+
+        }
+    }
+
+```
+
+
+
+
+
+### 7.6 IDEA和Tomcat的相关配置：
+
+-   IDEA会为每个Tomcat项目单独分配一份配置文件，存放位置可以查看运行的时候控制台的日志【Catalina_Base】
+
+
+
+-   **IDEA工作空间下的项目** 和 **Tomcat部署的项目**：
+    -   Tomcat 部署的项目 来自 IDEA工作空间下的项目的Web目录，但不是同一个【相当于 复制了一份】
+    -   IDEA 项目的`WEB-INF目录`下的文件无法直接被`浏览器访问`。
+
+
+
+
+
+-   断点调试：以 `debug`的形式启动。
+
+
+
+
+
+-   解决 IDEA中的 Tomcat控制台的`乱码`：[解决Tomcat日志-控制台乱码](https://www.jianshu.com/p/b438332d1069)
+
+
+
+
 
