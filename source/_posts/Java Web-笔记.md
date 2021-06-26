@@ -2040,3 +2040,571 @@ import java.io.IOException;
 
 
 
+
+
+
+
+
+
+
+
+
+
+### 7.7 Servlet的体系结构：
+
+
+
+Servlet接口的两个子抽象类：
+
+-   GenericServlet：只需重写抽象的`service()`方法，该类的其他方法都已做了空实现【方法体 内无代码】
+-   HttpServlet【常用】：简化了书写判断【Get、POST】等请求方式的的代码。【doGet( )、doPost( )】
+
+
+
+【使用`子类的原因`：为了`无需`再`重写`Servlet接口的`所有方法`（只`按需`重写）】
+
+
+
+
+
+HttpServlet的使用步骤：
+
+>   -   自定义一个类，extends 继承 HttpServlet类
+>   -   覆盖重写 `doGet( )`、`doPost( )`
+
+
+
+#### 1. Servlet：
+
+```java
+package cn.my.servletdemo;
+
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+
+@WebServlet("/demo1")
+public class Demo1 implements Servlet {
+    @Override
+    public void init(ServletConfig servletConfig) throws ServletException {
+
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return null;
+    }
+
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+        System.out.println("This is Demo1");
+    }
+
+    @Override
+    public String getServletInfo() {
+        return null;
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+
+```
+
+
+
+#### 2. GenericServlet：
+
+```java
+package cn.my.servletdemo;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+
+@WebServlet("/demo2")
+public class Demo2 extends GenericServlet {
+    
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+        System.out.println("This is Demo2");
+    }
+    
+}
+
+```
+
+
+
+#### 3. HttpServlet:
+
+```java
+package cn.my.servletdemo;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+
+@WebServlet("/demo3")
+public class Demo3 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
+}
+
+```
+
+
+
+
+
+
+
+### 7.8 Servlet的配置 ：
+
+注解`@WebServlet(参数1，参数2.......)` 中的参数：
+
+-   `urlpattens`：路径，可以有多个`@WebServlet({"/d4","/dd4","ddd4"})`
+
+>   urlpattens路径的3种规则：
+>
+>   -   `/xxx`
+>   -   `/xxx/xxx`：多层路径【目录结构】
+>   -   `*.do`：拓展名匹配【注意：此方式没有斜杠，do为自定义的拓展名】
+
+
+
+
+
+
+
+
+
+## 8. HTTP
+
+
+
+### 8.1 HTTP概述：
+
+概念：超文本传输协议。
+
+
+
+传输协议：定义了通信时传输的格式。
+
+
+
+特点：
+
+>   -   基于TCP/IP协议
+>   -   默认端口：80
+>   -   请求/响应模型：1请求，1响应
+>   -   无状态：每次请求之间相互独立，请求与请求之间不能交换数据。
+
+
+
+
+
+HTTP协议的版本：
+
+>   -   1.0版：建立连接、请求、响应、断开连接【每一次请求都需重新建立连接】
+>   -   1.1版：建立连接、请求、响应【复用连接】
+
+
+
+
+
+### 8.2 请求报文：
+
+
+
+Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
+
+>   -   请求行
+>
+>       ​	格式：
+>
+>       ​				请求方式	请求url	请求协议/版本号
+>
+>       ​	例如：	GET http://localhost/login.html	HTTP/1.1
+>
+>        	请求方式：
+>     	
+>        			+ GET：参数放在url后，不安全，url的长度有限制
+>        			+ POST：参数放在请求体里，url长度无限制，相对安全
+>
+>   
+>
+>   -   请求头：
+>
+>       ​	格式：
+>
+>       ​				请求头名：请求头值，请求头值
+>
+>       ​	常见的请求体：
+>
+>       				- HOST：主机名，IP地址
+>       				- User-Agent【常用】：浏览器版本信息（可在服务端获取该信息，并做一些处理来解决兼容性问题）
+>       				- Referer【常用】：来自哪里（作用：防盗链，统计）
+>       				- Accept：浏览器允许接收的信息。
+>       				- Connection：连接状态
+>
+>   
+>
+>   -   空行
+>   -   请求体
+
+
+
+
+
+#### 8.2.1 Request 原理：
+
+![req + res](https://z3.ax1x.com/2021/06/26/R3old0.png)
+
+注意：
+
+-   Request 和 Response对象是由Tomcat服务器创建的，
+-   Request对象：获取消息
+-   Response对象：响应消息
+
+
+
+
+
+#### 8.2.2 Request对象的继承体系结构：
+
+-   ServletRequest 接口
+    -   HttpServletRequest 接口
+        -   org.apache.catalina.connector.RequestFacade 类：由Tomcat来实现
+
+
+
+
+
+
+
+#### 8.2.3 Request对象的概念：
+
+-   获取请求数据：
+
+    -   请求行： 格式 =》`GET	/day1/demo1?username=zhangsan	HTTP/1.1`
+
+        >    获取请求方式：GET
+        >
+        >   ​			`String getMethod( )`
+        >
+        >   
+        >
+        >   获取虚拟目录：【常用】 /day1
+        >
+        >   ​			`	String getContextPath( )`
+        >
+        >    
+        >
+        >   获取Servlet的路径：/demo1
+        >
+        >   ​			`	String getServletPath( )`
+        >
+        >    
+        >
+        >   获取GET请求的参数：username=zhangsan 
+        >
+        >   ​			`String getQueryString( )`
+        >
+        >    
+        >
+        >   获取URI：【常用】
+        >
+        >   ​			`String getRequestURI( )`：`/day1/demo1`
+        >
+        >   ​			`StringBuffer getRequestURL( )`：`http://localhost/day1/demo1`
+        >
+        >    
+        >
+        >   获取协议、版本号：Http/1.1
+        >
+        >   ​			`String getProtocol( )`
+        >
+        >    
+        >
+        >   获取客户机的IP：
+        >
+        >   ​			`String getRemoteAddr( )`
+        >
+        >   
+
+    
+
+    -   请求头： 格式 =》`UserAgent:Chrome`
+
+        >   获取请求头：
+        >
+        >   ​				`String getHeader(String name)`：【常用】，其中的name不区分大小写。
+        >
+        >   ​				`Eumeration<String> getHeaderNames()`：返回1个迭代器
+        >
+        >   							+ hasMoreElements( )
+        >   							+ nextElement( )
+        >
+        >   
+
+    ```java
+    // 获取请求头
+    
+    package cn.mydemo;
+    
+    import javax.servlet.ServletException;
+    import javax.servlet.annotation.WebServlet;
+    import javax.servlet.http.HttpServlet;
+    import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletResponse;
+    import java.io.IOException;
+    import java.util.Enumeration;
+    
+    
+    @WebServlet("/demo2")
+    public class Demo2 extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    
+            // get / post
+            String method = req.getMethod();
+            System.out.println(method);
+    
+            // 虚拟目录
+            String contextPath = req.getContextPath();
+            System.out.println(contextPath);
+    
+            // 目录
+            String servletPath = req.getServletPath();
+            System.out.println(servletPath);
+    
+            // http/1.1
+            String protocol = req.getProtocol();
+            System.out.println(protocol);
+    
+            // /demo2
+            String requestURI = req.getRequestURI();
+            System.out.println(requestURI);
+    
+            // http://localhost/demo2
+            StringBuffer requestURL = req.getRequestURL();
+            System.out.println(requestURL);
+    
+            // 客户端ip
+            String remoteAddr = req.getRemoteAddr();
+            System.out.println(remoteAddr);
+    
+            // 请求头的所有键
+            Enumeration<String> headerNames = req.getHeaderNames();
+            while(headerNames.hasMoreElements()){
+                System.out.println("--------");
+                // 键
+                String s = headerNames.nextElement();
+                // 值
+                String header = req.getHeader(s);
+                System.out.println(s+" = "+header);
+            }
+    
+    
+    
+        }
+    }
+    
+    ```
+
+    
+
+    -   请求体：
+
+        >   只有POST方式才有请求体，请求体中封装了请求的参数。
+        >
+        >    
+        >
+        >   步骤：
+        >
+        >   -   Request 获取`流对象`：
+        >       -   `BufferedReader getReader()`获取字符输入流，只操作字符。
+        >       -   `ServletInputStream getInputStream()`：获取字节输入流。
+        >   -   从`流对象`中获取`数据`。
+
+    
+
+
+
+-   其他：
+
+    -   获取请求参数：【GET、POST】
+
+        ​		解决参数的中文乱码：
+
+        ​						GET：参数中的中文乱码在Tomcat8以上的版本中已被解决。
+
+        ​						POST：中文乱码可以在获取参数前通过设置Request的编码`req.setCharacterEncoding(“utf-8”)`
+
+        >   `String getParamter(String name)`根据参数名获取参数值，user = lisi&psw=123。
+        >
+        >   
+        >
+        >   `String[] getParamterValues(String name)`根据参数名获取参数值的数组，hobby=aaa&hobby=bbb
+        >
+        >    
+        >
+        >   `Eumeration<String> getParamterNames(String name)` 获取所有参数名
+        >
+        >    
+        >
+        >   `Map<String,String[]> getParamterMap()`获取所有参数的集合
+
+        ```java
+        // 通用方法获取参数【以post为例】
+        
+        // 以下省略了导包语句
+        
+        @WebServlet("/demo5")
+        public class Demo5 extends HttpServlet {
+        
+            @Override
+            protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // POST方式 , 获取请求体里的参数     
+                String usr = req.getParameter("usr");
+                System.out.println(usr);
+        
+            }
+        }
+        
+        ```
+
+        
+
+    -   资源转发：在服务器内部资源跳转。
+
+        ​				特点：
+
+        ​							1、 浏览器地址栏不变
+
+        ​							2、只能访问当前服务器内部的资源
+
+        ​							3、转发是1次请求
+
+        >   `RequestDispatcher  rd =  req.getRequestDispatcher(String path) `
+        >
+        >   
+        >
+        >   `rd.forward(req,res)`
+
+        ```java
+        // demo5页面的请求转发到demo6
+        
+        // 以下省略了导包语句
+        
+        @WebServlet("/demo5")
+        public class Demo5 extends HttpServlet {
+            
+            @Override
+            protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+                // 转发请求        
+                System.out.println("This is demo 5");
+                req.getRequestDispatcher("/demo6").forward(req,resp);
+                
+                
+            }
+        
+        
+        }
+        
+        ```
+
+        
+
+    
+    -   共享数据：【域对象：在作用范围内共享数据】
+
+        >   Request域：【用于一次请求在多次转发时共享数据】
+        >
+        >   -   setAttribute(String name，Object obj)
+        >   -   getAttribute(String name)
+        >   -   removeAttribute(String name)
+
+    -   获取ServletContext：`getServletContext(String name)`
+
+
+
+
+
+#### 8.2.4 Request案例：登录
+
+![案例需求](https://z3.ax1x.com/2021/06/26/R8Astf.png)
+
+
+
+![分析](https://z3.ax1x.com/2021/06/26/R8ZaX4.png)
+
+
+
+步骤：
+
+1、创建项目，导入Jar包，创建login.html页面，【表单的action：`虚拟目录 + servlet的资源路径`】
+
+2、创建数据库。
+
+3、创建User类
+
+4、创建UserDao类，提供login方法，测试login( )
+
+
+
+
+
+#### 8.2.5 BeanUtils
+
+Spring的一个工具类。
+
+
+
+Java Bean：用于封装数据的Java类。
+
+-   类名：public
+-   成员变量：private，使用getter、setter来访问。
+
+
+
+
+
+BeanUtils的常用方法：
+
+>   getProperty( )
+>
+>   setProperty( )
+>
+>   populate( obj )
+
+
+
+
+
+
+
+### 8.3 响应报文：
+
+
+
+
+
