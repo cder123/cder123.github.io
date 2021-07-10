@@ -190,11 +190,14 @@ post_copyright:
 
 # Sponsor/reward
 reward:
-  enable: false
+  enable: true
   QR_code:
-    # - img: /img/wechat.jpg
+    # - img: /img/wechat.jpg     
     #   link:
     #   text: wechat
+     - img: /img/qrcode_for_wx_gongzhonghao.jpg
+       link:
+       text: 微信订阅号
     # - img: /img/alipay.jpg
     #   link:
     #   text: alipay
