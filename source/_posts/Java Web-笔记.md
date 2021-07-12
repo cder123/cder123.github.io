@@ -2244,9 +2244,9 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->     	
->        			+ GET：参数放在url后，不安全，url的长度有限制
->        			+ POST：参数放在请求体里，url长度无限制，相对安全
+>     	     	     	     	
+>        		GET：参数放在url后，不安全，url的长度有限制
+>        		POST：参数放在请求体里，url长度无限制，相对安全
 >
 >   
 >
@@ -2258,11 +2258,11 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >
 >       ​	常见的请求体：
 >
->       				- HOST：主机名，IP地址
->       				- User-Agent【常用】：浏览器版本信息（可在服务端获取该信息，并做一些处理来解决兼容性问题）
->       				- Referer【常用】：来自哪里（作用：防盗链，统计）
->       				- Accept：浏览器允许接收的信息。
->       				- Connection：连接状态
+>       		- HOST：主机名，IP地址
+>       		- User-Agent【常用】：浏览器版本信息（可在服务端获取该信息，并做一些处理来解决兼容性问题）
+>       		- Referer【常用】：来自哪里（作用：防盗链，统计）
+>       		- Accept：浏览器允许接收的信息。
+>       		- Connection：连接状态
 >
 >   
 >
@@ -2571,6 +2571,73 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 
 
 
+以下为简化版示例【未连数据库、未创建User和UserDao】
+
+Servlet01部分：
+
+```java
+
+
+
+@WebServlet(name = "Servlet01", value = "/Servlet01")
+public class Servlet01 extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String username = request.getParameter("username");
+        String psw = request.getParameter("psw");
+        
+        if("123".equals(psw) && "abc".equals(username)){
+
+            System.out.println("servlet01... => 开始跳转到Servlet02");
+
+            response.setStatus(302);
+            response.setHeader("location","/JavaWeb/Servlet02");
+            //response.sendRedirect("/JavaWeb/Servlet02");
+        }else{
+            response.getWriter().write("密码错误！！");
+        }
+
+
+    }
+}
+
+```
+
+JSP部分:
+
+```java
+
+
+// action后应该为 URI（包括虚拟目录的路径）
+ <form action="/JavaWeb/Servlet01" method="post">
+    <input type="text" name="username" placeholder="用户名">
+    <input type="text" name="psw" placeholder="密码">
+    <input type="submit">
+</form>
+```
+
+Servlet02部分：
+
+```java
+@WebServlet(name = "Servlet02", value = "/Servlet02")
+public class Servlet02 extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        System.out.println("servlet02...");
+        
+    }
+}
+
+```
+
+
+
+
+
 
 
 #### 8.2.5 BeanUtils
@@ -2604,7 +2671,473 @@ BeanUtils的常用方法：
 
 ### 8.3 响应报文：
 
+Response对象-功能：设置响应消息（响应行、响应头、响应体）。
+
+​        
+
+-   设置响应行：
+
+>   1、格式：`HTTP1.1  200  OK`
+>
+>   2、设置状态码：`setStatus( int 状态码)`
+
+
+
+-   设置响应头：
+
+>   `setHeaders(String name,String value)`
+>
+>    =》` response.setHeader("content-type","text/html;charset=utf-8");`
+
+```java
+package demo1;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+// value后的路径不包括虚拟目录
+@WebServlet(name = "Servlet01", value = "/Servlet01")
+public class Servlet01 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doPost(request,response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("servlet01... => 开始跳转到Servlet02");
+
+        // 重定向【方式1】：
+        //		先设置状态码，再设置location = URI(包括虚拟目录)
+        response.setStatus(302);
+        response.setHeader("location","/JavaWeb/Servlet02");
+        response.setHeader("content-type","text/html;charset=utf-8");
+        
+        // 重定向【方式2】
+        response.sendRedirect("/JavaWeb/Servlet02");
+    }
+}
+
+```
+
+
+-   设置响应体：
+
+>   1、获取输出流
+>
+>   ​			=》字符输出流：`PrintWriter getWriter();`
+>
+>   ​			=》字节输出流：`ServletOutputStream getOutputStream()`
+>
+>   2、使用输出流，输出到客户端
 
 
 
 
+
+
+
+**重定向 redirect **与 **转发 forward** 的区别：( 转发在8.2.3小节 )
+
+>   转发的特点：
+>
+>   ​		1、地址栏不变。
+>
+>   ​		2、只能访问到当前这台服务器内部的资源。
+>
+>   ​		3、转发无论转多少次，都只是在对同1个请求在转发。（只有1次请求）
+>
+>    
+>
+>   重定向的特点：
+>
+>   ​		1、地址栏发生变化
+>
+>   ​		2、可以访问其他服务器的资源
+>
+>   ​		3、重定向是2次请求
+
+
+
+
+
+
+
+
+
+
+
+响应头的格式：
+
+>   -   响应头名：值
+>   -   ContentType：告诉客户端编码格式
+>   -   Content-disposition：告诉服务器当前的客户端是使用什么格式打开的。
+
+
+
+
+
+
+
+#### 1、路径的写法：
+
+-   绝对路径：`/abc/1.html`
+-   相对路径：`../2.html`   |   `./3.html`
+
+
+
+
+
+什么时候需要在`路径中加虚拟目录`?
+
+>   -   `客户端`和服务器之间使用时，需要有虚拟目录（客户端发出：表单）
+>
+>       虚拟目录一般使用动态获取路径：`request.getContextPath()` => `<a>`、`<form>`、重定向。
+>
+>   
+>
+>   -   `服务器`与服务器之间使用时，不需要有虚拟目录：（request对象的路径转发）
+
+
+
+
+
+#### 2、解决响应报文的中文乱码：【3种】
+
+>   1、`response.setCharacterEncoding (“GBK”)`
+>
+>   2、`response.setContentType("text/html;charset=utf-8");`
+>
+>   3、`response.setHeader("content-type","text/html;charset=utf-8");`
+
+```java
+ protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("servlet02...");
+        response.setContentType("text/html;charset=utf-8");
+        // 发送响应报文
+        response.getWriter().write("你好，world");
+    }
+```
+
+
+
+
+
+
+
+
+
+#### 3、验证码的实现：
+
+>   本质：图片
+>
+>   目的：防止恶意的注册
+
+验证码-后端代码：
+
+```java
+package demo1;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.util.Random;
+
+
+@WebServlet("/CheckCode")
+public class CheckCode extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int width =100;
+        int height =50;
+
+        // 创建缓存图片对象
+        BufferedImage bimg = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+
+
+
+        // 设置验证码图片的背景色-粉色
+        Graphics g = bimg.getGraphics();
+        g.setColor(Color.PINK);
+        g.fillRect(0,0,width,height);
+
+
+
+        // 设置验证码图片的边框
+        g.setColor(Color.black);
+        g.drawRect(0,0,width-1,height-1);
+
+
+
+        // 生成验证码字符
+        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        Random rd = new Random();
+        for (int i = 0; i < 4; i++) {
+            //生成随机角标
+            int idx = rd.nextInt(str.length());
+
+            //获取随机字符
+            char ch = str.charAt(idx);
+
+            // 写验证码
+            g.drawString(ch+"",(width+2)/5*i,height/2);
+        }
+
+
+        // 画验证码的干扰线
+        g.setColor(Color.green);
+        
+        for (int i = 0; i <10 ; i++) {
+            int x1 = rd.nextInt(width);
+            int x2 = rd.nextInt(width);
+            int y1 = rd.nextInt(height);
+            int y2 = rd.nextInt(height);
+            g.drawLine(x1,y1,x2,y2);
+        }
+
+        // 输出验证码
+        ImageIO.write(bimg,"jpg",resp.getOutputStream());
+    }
+
+}
+
+```
+
+验证码前端代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            //获取图片
+            var img = document.getElementById("checkcode");
+            
+            img.onclick = function () {
+                // 为了保证点击图片可以切换验证码，可以将src的地址 = servlet的地址
+                // 因为浏览器有缓存，所以必须在src后的地址中拼接1个时间戳，让验证码刷新
+                var time = new Date().getTime();
+                img.src = "/JavaWeb/CheckCode?" + time;
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <img id="checkcode" src="/JavaWeb/CheckCode" alt="">
+    <a id="changecode" href="">看不清，换一张</a>
+</body>
+</html>
+```
+
+
+
+
+
+
+
+
+
+
+
+### 8.4 ServletContext
+
+概念： `ServletContext接口` 代表整个Servlet应用，可以和程序的容器（Tomcat）通信。
+
+
+
+功能：
+
+>   -   获取 MIME类型
+>       -   `MIME类型`是一种文件数据类型，格式为：`大类型/小类型`，如：`text/html`，`image/jpeg`
+>       -   获取MIME类型的方法：`String getMimeType(文件名)`
+>       -   获取MIME的目的：设置 ContentType
+>   -   域对象：共享数据（req.getAttr）
+>   -   获取文件在服务器上的真实路径。
+
+
+
+
+
+获取 ServletContext（2种）
+
+-   `request.getServletContext( )`
+-   `this.getServletContext( )`
+
+
+
+
+
+
+
+获取MIME类型：
+
+```java
+        ServletContext context = this.getServletContext();
+        String type = context.getMimeType("123.jpg");
+        System.out.println(type);
+```
+
+
+
+
+
+
+
+获取域对象：
+
+-   `request.setAttribute(key,value);`
+-   `request.getAttribute(key,value);`
+-   `request.removeAttribute(key);`
+
+ServletContext可以共享所有用户的数据。
+
+
+
+
+
+
+
+获取真实的文件路径：
+
+-   `getRealPath(路径);`
+
+
+
+配置文件的存放位置：
+
+>   -   项目的src下
+>   -   web目录下
+>   -   web/WEB-INF目录下
+
+演示-获取`项目下的web/b.txt`文件：
+
+```java
+ ServletContext context = this.getServletContext();
+ String path = context.getRealPath("/b.txt");
+ File file = new File(path);
+```
+
+
+
+
+
+
+
+### 8.5 案例：文件下载
+
+需求：任何文件，只要点击，就弹出下载框
+
+
+
+思路：使用 response对象的`content-disposition:attachment;filename=xxx`，其中 filename 后的值为弹出框要显示的名称。
+
+
+
+步骤：
+
+>   1、创建html页面，将超链接的 href 指向 servlet地址：`href="/servlet01?filename=abc.jpg"`。
+>
+>   2、创建servlet，获取文件名，使用`字节输入流`将文件加载入内存。
+>
+>   3、指定response的`ContentType`和`content-disposition:attachment;filename=xxx`
+>
+>   4、利用`response输出流`，将数据写出。
+
+
+
+前端：
+
+```html
+  <a href="/JavaWeb/downloadServlet?filename=1.jpg">
+        下载图片1
+  </a>
+```
+
+
+
+后端：[文件路径、读写部分 可能有误]
+
+```java
+package demo1;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+@WebServlet("/downloadServlet")
+public class ImgDownload extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+  
+		// 获取前端传过来的参数filename
+        String filename = req.getParameter("filename");
+
+        // 利用ServletContext对象来获取：路径、文件类型
+        ServletContext context = this.getServletContext();
+
+        // 获取文件的物理路径
+        String realPath = context.getRealPath("/img/"+filename);
+
+
+		// 设置要下载的文件的类型、以附件形式下载、下载的文件名
+        String mimeType = context.getMimeType(filename);
+        resp.setContentType(mimeType);
+        resp.setHeader("content-disposition","attachment;filename="+filename);
+
+        
+        // 将图片读入内存【经验证发现，此处代码查找的是out目录下的文件，但编写代码时，是在web/img下】，可能存在错误
+        FileInputStream fis = new FileInputStream(realPath);
+
+        byte[] buff = new byte[1024*22];
+        ServletOutputStream sos = resp.getOutputStream();
+
+        // 浏览器下载
+        int len=0;
+        while((len=fis.read(buff))!=-1){
+            sos.write(buff,0,len);
+        }
+
+        fis.close();
+    }
+
+}
+
+```
+
+
+
+解决文件下载案例中，中文文件名错乱的问题。
+
+>   思路：
+>
+>   -   获取浏览器的版本信息
+>   -   根据浏览器版本，选择中文文件名的编码
+
+
+
+工具类：
+
+![解决java下载文件名的中文乱码](https://z3.ax1x.com/2021/07/12/WF8gHA.png)

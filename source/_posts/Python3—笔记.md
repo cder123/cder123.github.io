@@ -12,6 +12,7 @@ categories:
 [toc]
 
 ## 1. Python概述
+
 ### 1.1 代码编写方式：
 - 交互式
 - 全部编辑好后运行
@@ -527,9 +528,12 @@ def person(name, age, *args, city, job):
 person('Jack', 24, city='Beijing', job='Engineer')
 ```
 ## 2. Python 自动化办公
+
 ### 2.1 Excel 速查表
 ![excel速查表](https://img-blog.csdnimg.cn/20201207203552904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
+
 ## 3. Python 爬虫
+
 ### 3.1 常用的爬虫库
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201207203715257.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 
@@ -794,7 +798,9 @@ print(soup.prettify()) #输出清晰的树形结构
 #### 3.4.3 bs4 用法  思维导图
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201207211020405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
-## 4.正则表达式【用于提取信息】
+
+## 4、正则表达式【用于提取信息】
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201208100448613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 ### 4.1 正则表达式—思维导图
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020120810080011.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
@@ -811,3 +817,41 @@ print(soup.prettify()) #输出清晰的树形结构
 ### 4.7 练习题：
 ` https://zhuanlan.zhihu.com/p/91689180?utm_source=qq&utm_medium=social&utm_oi=772119850515431424 `
 [正则表达式-练习题](https://zhuanlan.zhihu.com/p/91689180?utm_source=qq&utm_medium=social&utm_oi=772119850515431424)
+
+
+
+
+
+
+
+
+
+## 5、二维码制作
+
+
+
+```python
+from MyQR import myqr
+
+def createmyqr():
+    myqr.run(words="http://cder123.gitee.io/",
+             picture='C:\\Users\\y\\Desktop\\1.gif',
+             colorized=True,
+             save_name="demo.gif")
+
+
+if __name__ == '__main__':
+    createmyqr()
+    print("完成")
+
+```
+
+
+
+
+
+
+
+
+
+## 6、
