@@ -1484,7 +1484,7 @@ public class JsoupDemo2 {
 -   服务器：安装了服务器软件的计算机。
 
 -   服务器软件：接收、处理请求，做出响应。
--   web服务器软件【web容器】：部署Web项目，使用户可以用浏览器访问。
+-   web服务器软件【web容器】：部署Web项目，使得用户可以用浏览器访问。
 
 
 
@@ -1779,7 +1779,7 @@ Tomcat的各个目录的作用：
 
 ### 7.1 Servlet 概述：
 
-Servlet： Server Applet，运行在服务器端的小程序。
+Servlet： Server Applet，运行在服务器端的小程序。【`一种 由Tomcat等服务器解析 .class文件`】
 
 
 
@@ -2244,7 +2244,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->     	     	     	     	
+>     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >
@@ -2783,6 +2783,10 @@ public class Servlet01 extends HttpServlet {
 
 #### 1、路径的写法：
 
+[java web中的各种servlet路径](https://blog.csdn.net/linghuainian/article/details/82227177)
+
+
+
 -   绝对路径：`/abc/1.html`
 -   相对路径：`../2.html`   |   `./3.html`
 
@@ -3108,7 +3112,9 @@ public class ImgDownload extends HttpServlet {
         resp.setHeader("content-disposition","attachment;filename="+filename);
 
         
-        // 将图片读入内存【经验证发现，此处代码查找的是out目录下的文件，但编写代码时，是在web/img下】，可能存在错误
+        // 将图片读入内存
+        //【经验证发现，此处代码查找的是out目录下的文件，但编写代码时，是在web/img下】，可能存在错误
+        // 要想在调试时出现效果，可将/img目录复制到out目录下
         FileInputStream fis = new FileInputStream(realPath);
 
         byte[] buff = new byte[1024*22];
@@ -3141,3 +3147,570 @@ public class ImgDownload extends HttpServlet {
 工具类：
 
 ![解决java下载文件名的中文乱码](https://z3.ax1x.com/2021/07/12/WF8gHA.png)
+
+
+
+
+
+
+
+
+
+### 8.6 会话技术（Cookie、Session）
+
+
+
+**会话**：一次会话包含了多次请求+响应。
+
+
+
+**会话的功能**：在1次会话的范围内共享数据。
+
+
+
+**分类**：
+
+-   客户端会话：cookie，将数据保存在客户端。
+-   服务端会话：session
+
+
+
+
+
+#### 1、cookie：
+
+使用步骤：
+
+>   1.  创建Cookie对象，设置数据：`new Cookie(key,value)`
+>   2.  发送Cookie：`response.addCookie(cookie对象)`
+>   3.  接收Cookie，获取数据：`Cookie[] request.getCookies()`
+
+
+
+---
+
+
+
+cookie的设置过程：
+
+![cookie的设置过程](https://z3.ax1x.com/2021/07/13/WkZEW9.png)
+
+---
+
+
+
+cookie的实现原理：
+
+>   -   在 Response的响应头中，使用 `set-Cookie：键=值`
+>   -   在 Request的请求头中，使用 `Cookie:cookie值`
+
+---
+
+
+
+Cookie的使用细节：
+
+>   1.  cookie可以一次使用`多个`
+>
+>   2.  cookie在浏览器中`保存时间`：默认关闭浏览器就销毁（可以手动设置保存时间）
+>
+>       -   cookie的持久化存储：
+>           -   `setMaxAge(int seconds)`：正数(持久化存储时间)；负数(默认值)；0(删除cookie)
+>
+>   3.  cookie支持`中文`（`Tomcat8` 以及之后的版本支持中文；8之前的版本需要URL编码）
+>
+>   4.  cookie`获取的范围`：
+>
+>       -   假设`同一台Tomcat服务器`中部署了`多个web项目`，则多个项目之间`默认无法共享Cookie`
+>       -   设置指定路径下的项目才能访问到某个cookie：`cookie对象.setPath(path);`
+>       -   设置所有的项目都能访问到某个cookie：`cookie对象.setPath(“/");`
+>       -   `不同的Tomcat服务器`之间共享Cookie可以通过`设置一级域名`：`cookie对象.setDomain(path)`
+>
+>   5.  浏览器对`单个Cookie`大小有限制（`不超过4KB`）;同一域名下的`Cookie个数`也有限制（`20`个）。
+>
+>       ​	
+>
+>       
+
+---
+
+
+
+
+
+案例：【页面显示上一次的登录时间】
+
+```java
+/**
+*	获取request中的cookies数组，遍历cookie数组，如果当前遍历到的cookie的名字为“lastLoginTime”，
+	则获取该cookie的值，并在页面上输出该cookie的值，然后重新生成时间并更新原来的时间【时间需要使用URL编码才能确保不乱码】
+*/
+
+
+package demo3;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+@WebServlet("/RemenberLoginTime")
+public class RemenberLoginTime extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+
+        Cookie[] cookies = req.getCookies();
+        resp.setContentType("text/html;charset=utf-8");
+
+        if(cookies!=null && cookies.length>1){
+            for (Cookie cookie : cookies) {
+                if("lastLoginTime".equals(cookie.getName())){
+
+                    
+                    String value = cookie.getValue();
+
+                    resp.getWriter().write("<h1>上一次的登录时间为："+URLDecoder.decode(value,"utf-8")+"</h1>");
+                    Date date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+                    String format_date = sdf.format(date);
+                    String s = URLEncoder.encode(format_date, "utf-8");
+                    cookie.setValue(s);
+                    cookie.setMaxAge(60*3);
+                    resp.addCookie(cookie);
+                    System.out.println("上一次的登录时间为："+format_date);
+
+                }
+            }
+        }else{
+
+            
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+            String format_date = sdf.format(date);
+            String s = URLEncoder.encode(format_date, "utf-8");
+            Cookie lastLoginTime = new Cookie("lastLoginTime", s);
+            lastLoginTime.setMaxAge(60*3);
+
+            resp.setCharacterEncoding("utf-8");
+            resp.addCookie(lastLoginTime);
+            System.out.println("首次的登录时间为："+format_date);
+
+            resp.getWriter().write("<h1>首次的登录时间为："+format_date+"</h1>");
+        }
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doPost(req, resp);
+    }
+
+}
+
+```
+
+
+
+
+
+#### 2、JSP：
+
+-   概念：JSP（Java Server Page）：Java服务端的页面。页面中既可以写HTML，也可以写Java代码。
+
+-   格式：
+    -   格式-1：`<% java代码 %>`：转化成`.java`文件后，出现在`service方法`中
+    -   格式-2：`<%! java代码 %>`：定义的是Java类的`成员`（变量、方法等）
+    -   格式-3：`<%= java代码 %>`：转化成`.java`文件后，出现在`service方法`中，定义的内容会`输出`到页面上。
+
+-   作用：简化书写。
+
+-   实质：JSP就是一种 Servlet，自动帮我们输出了一些HTML代码。
+
+---
+
+
+
+下图：【JSP的解析过程】
+
+![jsp的解析过程](https://z3.ax1x.com/2021/07/15/WeqTP0.png)
+
+
+
+-----
+
+
+
+JSP的内置对象：
+
+-   Request
+-   Response
+-   out：输出，类似：`response.getWriter();`【需要导入：`jsp-api.jar`】
+
+
+
+---
+
+
+
+`out.write() ` 与 `response.getWriter().write()`的区别：
+
+>   out对象：定义在哪个位置，就在哪个位置输出。
+>
+>   response对象的输出：永远在out对象前面先输出。（因为Tomcat先找Reponse对象的缓冲区，再找out对象的缓冲区）
+
+【建议】：统一使用 `out` 对象来输出到页面。
+
+
+
+
+
+---
+
+
+
+
+
+#### 3、session：
+
+
+
+-   概念：Session是将 **一次会话的多次请求** 中的`任意类型、任意大小的数据`保存在服务器的一种方式，类似Cookie的作用。
+
+---
+
+使用：
+
+1.  获取Session：`request.getSession(session的名字)；`
+2.  使用Session：
+
+>   HttpSession对象的常用方法：
+>
+>   ​	1、`getAttribute(String name)`
+>
+>   ​	2、`setAttribute(String name,Object value)`
+>
+>   ​	3、`removeAttribute(String name)`
+
+
+
+
+
+---
+
+
+
+Session是依赖Cookie的，当Client请求Session时，Server如果没有Session，就在Server中开辟内存来存放Session。将开辟出来的Session设置1个ID（JSessionID），在返回Request时，在Request对象的请求头中`Set-Cookie:具体的SessionID`。
+
+---
+
+
+
+保证2次请求的Session是同一个Session的过程：
+
+![Session的使用过程](https://z3.ax1x.com/2021/07/15/Wm3yx1.png)
+
+
+
+---
+
+
+
+Session的细节：
+
+>   1、Client关闭、Server开启：两次请求的Session默认不是同一个。( 原因：client关闭后，清除了cookie)
+>
+>   ```java
+>   // 解决不是同一个的问题：
+>   
+>   HttpSession session = request.getSession();
+>   
+>   Cookie c = new Cookie("JSessionID",session.getId());
+>   
+>   c.setMaxAge(60 * 60); // 保存1小时
+>   
+>   response.addCookie(c);
+>   ```
+>
+>    
+>
+>   
+>
+>   2、Client开启、Server关闭：两次请求的Session不是同一个。
+>
+>   ```java
+>   /*
+>   *	解决Server关闭后Session丢失的问题：
+>   
+>   		1、应用场景：购物车
+>   
+>   		2、解决方案：
+>           		- Session的钝化：服务器关闭前，将 Session序列化 到硬盘上。
+>           		- Session的活化：服务器启动后，将Session文件转化为内存中的Session对象。
+>   *
+>   */
+>   ```
+>
+>    
+>
+>   
+>
+>   3、Session的销毁  ：
+>
+>   -   服务器 关闭时销毁。
+>   -   Session对象调用`inValidate()`
+>   -   默认的失效时间：`30分钟`【可以在 `Tomcat -> conf -> web.xml->sessionConfig标签`中修改失效的时间】
+>
+>   
+
+
+
+
+
+Session 与Cookie的区别：
+
+>   1、Session存放在服务端，Cookie存放在客户端。
+>
+>   2、Session可以存放任意类型、大小的数据；Cookie的大小和数量由浏览器来限制。
+>
+>   3、Session相对安全，Cookie相对不安全。
+
+
+
+
+
+
+
+**案例：Session来实现验证码：**
+
+![验证码-案例需求](https://z3.ax1x.com/2021/07/15/WmdhIx.png)
+
+
+
+![验证码登录-案例思路](https://z3.ax1x.com/2021/07/15/WmB5iq.png)
+
+
+
+`login.jsp`页面：
+
+```jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+    // 登录表单
+    <form action="/Demo/loginServlet" method="post">
+
+        <table border="0">
+            <tr>
+                <td>用户名：</td>
+                <td><input name="username" type="text" placeholder="用户名"></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input name="psw" type="text" placeholder="密码"></td>
+            </tr>
+            <tr>
+                <td>验证码：</td>
+                <td><input name="checkCode" type="text" placeholder="验证码"></td>
+                <td><img id="chkcode" src="/Demo/checkCodeServlet" alt="验证码"></td>
+            </tr>
+            <tr>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+
+        <div style="color:red;">
+            <%= request.getAttribute("chkcode_err")==null?"":request.getAttribute("chkcode_err") %>
+            <%= request.getAttribute("username_or_psw_err")==null?"":request.getAttribute("username_or_psw_err") %>
+        </div>
+
+    </form>
+
+    
+    
+    <script>
+    	// 切换验证码
+        let img = document.getElementById("chkcode");
+
+        img.onclick = ()=>{
+            let time = new Date().getTime();
+            img.src = "/Demo/checkCodeServlet?"+time;
+        }
+    </script>
+
+</body>
+</html>
+
+```
+
+
+
+`checkCodeServlet`页面：
+
+```java
+package demo1;
+
+import javax.imageio.ImageIO;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Random;
+
+@WebServlet("/checkCodeServlet")
+public class checkCodeServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int width = 100;
+        int height = 50;
+        BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+
+        Graphics g = image.getGraphics();
+
+        // 背景色
+        g.setColor(Color.pink);
+        g.fillRect(0,0,width,height);
+
+        // 边框
+        g.setColor(Color.black);
+        g.drawRect(0,0,width,height);
+
+        // 验证码
+        g.setColor(Color.red);
+        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        Random rd = new Random();
+
+        String str_checkCode = "";
+        for (int i = 0; i < 4; i++) {
+            int ch_id = rd.nextInt(str.length());
+            char ch = str.charAt(ch_id);
+            g.drawString(ch+"",20+20*i,height/2);
+            str_checkCode+=ch;
+        }
+        request.getSession().setAttribute("session_checkCode",str_checkCode);
+
+
+        // 画干扰线
+        g.setColor(Color.GREEN);
+        for (int i = 0; i < 10; i++) {
+            int x1 = rd.nextInt(width);
+            int x2 = rd.nextInt(width);
+            int y1 = rd.nextInt(height);
+            int y2 = rd.nextInt(height);
+            g.drawLine(x1,y1,x2,y2);
+        }
+
+        ImageIO.write(image,"jpg",response.getOutputStream());
+
+    }
+}
+
+```
+
+
+
+
+
+
+
+`loginServlet`页面：
+
+```java
+package demo1;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+@WebServlet( "/loginServlet")
+public class loginServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("utf-8");
+
+
+        // 获取用户输入的信息
+        String username1 = request.getParameter("username");
+        String psw1 = request.getParameter("psw");
+        String checkCode1 = request.getParameter("checkCode");
+
+        // 用户名：zs ,密码：123
+        String username = "zs";
+        String psw = "123";        
+        HttpSession session_1 = request.getSession();
+        
+        String session_checkCode = (String)session_1.getAttribute("session_checkCode");
+        session_1.removeAttribute("session_checkCode");
+
+
+        // 如果用户输入的信息都正确，则将当前用户名存入Session,页面重定向到success.jsp
+        // 否则，页面转发回登录页，并带回了错误位置的信息
+       if(session_1!=null && checkCode1.equalsIgnoreCase(session_checkCode)){
+            if(username.equals(username1) && psw.equals(psw1)){
+                request.getSession().setAttribute("username",username1);
+                response.sendRedirect(request.getContextPath()+"/success.jsp");
+            }else{
+                    request.setAttribute("username_or_psw_err","用户名或密码错误");
+                    request.getRequestDispatcher("/login.jsp").forward(request,response);
+            }
+        }else{
+
+            request.setAttribute("chkcode_err","验证码错误");
+            request.getRequestDispatcher("/login.jsp").forward(request,response);
+
+        }
+
+    }
+}
+
+```
+
+
+
+`success.jsp`页面：
+
+```jsp
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>
+        <%=
+            request.getSession().getAttribute("username")
+        %>
+        ，欢迎你！
+    </h1>
+
+
+</body>
+</html>
+
+```
+
