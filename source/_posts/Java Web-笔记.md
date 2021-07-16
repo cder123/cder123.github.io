@@ -2244,7 +2244,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->     	     	     	     	     	     	     	     	     	
+>     	     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >
@@ -3487,71 +3487,155 @@ Session 与Cookie的区别：
 
 
 
+---
 
 
-**案例：Session来实现验证码：**
+
+
+
+
+
+#### 【 案例】：Session来实现验证码：
 
 ![验证码-案例需求](https://z3.ax1x.com/2021/07/15/WmdhIx.png)
-
-
 
 ![验证码登录-案例思路](https://z3.ax1x.com/2021/07/15/WmB5iq.png)
 
 
 
-`login.jsp`页面：
+
+
+依赖包：
+
+-   `jsp-api.jar`：从Tomcat的lib中复制
+-   `servlet-api.jar`：从Tomcat的lib中复制
+-   `mysql-connector-java-5.0.4-bin.jar`：百度下载
+
+
+
+注意：
+
+>   -   此案例的`MySQL驱动`需要放在`web/WEB-INF/lib`目录下，然后再`关联添加到项目`依赖中。
+
+
+
+`DBUtils.class`：
+
+```java
+package dbutils;
+
+import java.sql.*;
+
+public class DBUtils {
+
+    private static final String  url = "jdbc:mysql://localhost:3306/school_1?serverTimezone=Asia/Shanghai";
+    private static final String user = "javaUser";
+    private static final String psw = "javaUser";
+    private static Connection conn = null;
+
+
+    static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+// 建立连接、
+    public static Connection getConn() {
+
+        try {
+            conn = DriverManager.getConnection(url,user,psw);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return conn;
+    }
+// 释放连接
+    public static void releaseConn(Connection conn, PreparedStatement ps, ResultSet rs) throws SQLException {
+
+        if (rs != null) {
+            rs.close();
+        }
+
+        if (ps != null) {
+            ps.close();
+        }
+
+        if (conn != null) {
+            conn.close();
+        }
+    }
+
+}
+
+```
+
+
+
+
+
+`index.jsp`页面：
 
 ```jsp
+<%--
+  Created by IntelliJ IDEA.
+  User: y
+  Date: 2021/7/16
+  Time: 17:56
+  To change this template use File | Settings | File Templates.
+--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-    // 登录表单
-    <form action="/Demo/loginServlet" method="post">
-
+  <head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+  </head>
+  <body>
+    <form action="/demo/loginServlet" method="post">
         <table border="0">
-            <tr>
-                <td>用户名：</td>
-                <td><input name="username" type="text" placeholder="用户名"></td>
-            </tr>
-            <tr>
-                <td>密码：</td>
-                <td><input name="psw" type="text" placeholder="密码"></td>
-            </tr>
-            <tr>
-                <td>验证码：</td>
-                <td><input name="checkCode" type="text" placeholder="验证码"></td>
-                <td><img id="chkcode" src="/Demo/checkCodeServlet" alt="验证码"></td>
-            </tr>
-            <tr>
-                <td><input type="submit"></td>
-            </tr>
-        </table>
+          <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="username"></td>
+          </tr>
+          <tr>
+            <td>密码：</td>
+            <td><input type="text" name="psw"></td>
+          </tr>
+          <tr>
+            <td>验证码</td>
+            <td><input type="text" name="checkcode"></td>
+            <td><img id="checkcode" src="/demo/checkcodeServlet?" alt="验证码"></td>
+            <td style="color: red;">
+              <%=
+                request.getAttribute("checkcode_error")==null?"":request.getAttribute("checkcode_error")
+              %>&nbsp;&nbsp;
+              <%=
+              request.getAttribute("login_error")==null?"":request.getAttribute("login_error")
+              %>
 
-        <div style="color:red;">
-            <%= request.getAttribute("chkcode_err")==null?"":request.getAttribute("chkcode_err") %>
-            <%= request.getAttribute("username_or_psw_err")==null?"":request.getAttribute("username_or_psw_err") %>
-        </div>
+            </td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="登录"></td>
+          </tr>
+        </table>
 
     </form>
 
-    
-    
+
     <script>
-    	// 切换验证码
-        let img = document.getElementById("chkcode");
+      let img = document.getElementById("checkcode");
+        
+      img.onclick = ()=>{
+         let time = new Date().getTime();
+         img.src = "/demo/checkcodeServlet?"+time;
+      }
 
-        img.onclick = ()=>{
-            let time = new Date().getTime();
-            img.src = "/Demo/checkCodeServlet?"+time;
-        }
     </script>
-
-</body>
+  </body>
 </html>
 
 ```
@@ -3561,7 +3645,7 @@ Session 与Cookie的区别：
 `checkCodeServlet`页面：
 
 ```java
-package demo1;
+package login;
 
 import javax.imageio.ImageIO;
 import javax.servlet.*;
@@ -3572,55 +3656,59 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-@WebServlet("/checkCodeServlet")
-public class checkCodeServlet extends HttpServlet {
+@WebServlet("/checkcodeServlet")
+public class checkcodeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request, response);
+        doPost(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         int width = 100;
-        int height = 50;
+        int height = 40;
+        
         BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 
         Graphics g = image.getGraphics();
-
-        // 背景色
+        
+		// 画背景色
         g.setColor(Color.pink);
         g.fillRect(0,0,width,height);
 
-        // 边框
+		// 画边框
         g.setColor(Color.black);
         g.drawRect(0,0,width,height);
 
-        // 验证码
-        g.setColor(Color.red);
-        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        // 画验证码
+        g.setColor(Color.black);
+        String str = "ABCDEFGHIJKLMOPQRSTUVWXYZ0123456789";
         Random rd = new Random();
-
-        String str_checkCode = "";
-        for (int i = 0; i < 4; i++) {
-            int ch_id = rd.nextInt(str.length());
-            char ch = str.charAt(ch_id);
-            g.drawString(ch+"",20+20*i,height/2);
-            str_checkCode+=ch;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            int id = rd.nextInt(str.length());
+            char ch = str.charAt(id);
+            g.drawString(ch+"",15+15*i,height/2);
+            sb.append(ch);
         }
-        request.getSession().setAttribute("session_checkCode",str_checkCode);
+        HttpSession session = request.getSession();
+        session.setAttribute("checkcode",sb);
 
-
+        
         // 画干扰线
-        g.setColor(Color.GREEN);
+        g.setColor(Color.lightGray);
         for (int i = 0; i < 10; i++) {
-            int x1 = rd.nextInt(width);
-            int x2 = rd.nextInt(width);
-            int y1 = rd.nextInt(height);
-            int y2 = rd.nextInt(height);
+            int x1 = rd.nextInt(width-1);
+            int x2 = rd.nextInt(width-1);
+            int y1 = rd.nextInt(height-1);
+            int y2 = rd.nextInt(height-1);
             g.drawLine(x1,y1,x2,y2);
         }
 
         ImageIO.write(image,"jpg",response.getOutputStream());
+
+
 
     }
 }
@@ -3636,52 +3724,76 @@ public class checkCodeServlet extends HttpServlet {
 `loginServlet`页面：
 
 ```java
-package demo1;
+package login;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import dbutils.DBUtils;
 
-@WebServlet( "/loginServlet")
+
+@WebServlet("/loginServlet")
 public class loginServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("utf-8");
+        // 客户端发送的用户名、密码、验证码
+        String username = request.getParameter("username");
+        String psw = request.getParameter("psw");
+        String u_checkcode = request.getParameter("checkcode");
 
 
-        // 获取用户输入的信息
-        String username1 = request.getParameter("username");
-        String psw1 = request.getParameter("psw");
-        String checkCode1 = request.getParameter("checkCode");
+        response.setCharacterEncoding("utf-8");
 
-        // 用户名：zs ,密码：123
-        String username = "zs";
-        String psw = "123";        
-        HttpSession session_1 = request.getSession();
-        
-        String session_checkCode = (String)session_1.getAttribute("session_checkCode");
-        session_1.removeAttribute("session_checkCode");
+        // 服务端的验证码Servlet页面发送的验证码
+        HttpSession session = request.getSession();
+        StringBuilder checkcode1 = (StringBuilder)session.getAttribute("checkcode");
+        String checkcode2= new String(checkcode1);
+        session.removeAttribute("checkcode");
 
+        // 如果验证码不为空且用户输入的验证码正确，则向数据库发送用户名、密码
+        // 数据库中有符合该用户名、密码的记录，则跳转页面，否则返回登录页
+        if(u_checkcode!=null && checkcode2.equalsIgnoreCase(u_checkcode)){
+            try {
+                Connection conn = DBUtils.getConn();
+                String sql = "select * from stu where sname=? and spsw =?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1,username);
+                ps.setString(2,psw);
 
-        // 如果用户输入的信息都正确，则将当前用户名存入Session,页面重定向到success.jsp
-        // 否则，页面转发回登录页，并带回了错误位置的信息
-       if(session_1!=null && checkCode1.equalsIgnoreCase(session_checkCode)){
-            if(username.equals(username1) && psw.equals(psw1)){
-                request.getSession().setAttribute("username",username1);
-                response.sendRedirect(request.getContextPath()+"/success.jsp");
-            }else{
-                    request.setAttribute("username_or_psw_err","用户名或密码错误");
-                    request.getRequestDispatcher("/login.jsp").forward(request,response);
+                ResultSet rs = ps.executeQuery();
+
+                if(!rs.next()){
+                    request.setAttribute("login_error","用户名或密码错误！！");
+
+                    request.getRequestDispatcher("/").forward(request,response);
+
+                }else {
+
+                    response.sendRedirect(request.getContextPath()+"/home.jsp");
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
         }else{
 
-            request.setAttribute("chkcode_err","验证码错误");
-            request.getRequestDispatcher("/login.jsp").forward(request,response);
+            request.setAttribute("checkcode_error","验证码错误");
+            request.getRequestDispatcher("/").forward(request,response);
 
         }
+
+
 
     }
 }
@@ -3690,25 +3802,58 @@ public class loginServlet extends HttpServlet {
 
 
 
-`success.jsp`页面：
+`home.jsp`页面：
 
 ```jsp
-
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URLDecoder" %><%--
+  Created by IntelliJ IDEA.
+  User: y
+  Date: 2021/7/16
+  Time: 19:22
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>主页</title>
 </head>
 <body>
+  <%
+    Cookie[] cookies = request.getCookies();
 
-    <h1>
-        <%=
-            request.getSession().getAttribute("username")
-        %>
-        ，欢迎你！
-    </h1>
+    if(cookies!=null &&cookies.length>1){
+      for (Cookie cookie : cookies) {
+        if(cookie.getName().equalsIgnoreCase("lastLoginTime")){
+          String value = cookie.getValue();
+          String decode_time = URLDecoder.decode(value,"utf-8");
+          response.getWriter().write("欢迎回来，上一次的登录时间为："+decode_time);
 
+          Date date = new Date();
+          SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日，HH：mm：ss");
+          String format_time = sdf.format(date);
+          String encode_time = URLEncoder.encode(format_time,"utf-8");
 
+          cookie.setValue(encode_time);
+          cookie.setMaxAge(60*3);
+          response.addCookie(cookie);
+        }
+
+      }
+    }else{
+      Date date = new Date();
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日，HH：mm：ss");
+      String format_time = sdf.format(date);
+      String encode_time = URLEncoder.encode(format_time,"utf-8");
+      Cookie lastLoginTime = new Cookie("lastLoginTime", encode_time);
+      lastLoginTime.setMaxAge(60*3);
+      response.addCookie(lastLoginTime);
+      response.getWriter().write("首次登录的时间为："+format_time);
+
+    }
+  %>
 </body>
 </html>
 
