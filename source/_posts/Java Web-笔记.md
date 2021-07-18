@@ -2244,7 +2244,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->     	     	     	     	     	     	     	     	     	     	
+>     	     	     	     	     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >
@@ -3859,3 +3859,663 @@ public class loginServlet extends HttpServlet {
 
 ```
 
+
+
+
+
+
+
+
+
+## 9. JSP
+
+
+
+部分内容在：`8.6-1 会话技术小节`.
+
+
+
+-   格式-1：`<% java代码 %>`：转化成`.java`文件后，出现在`service方法`中
+-   格式-2：`<%! java代码 %>`：定义的是Java类的`成员`（变量、方法等）
+-   格式-3：`<%= java代码 %>`：转化成`.java`文件后，出现在`service方法`中，定义的内容会`输出`到页面上。
+
+---
+
+
+
+### 9.1 JSP-指令：
+
+
+
+-   作用：在页面中导入资源文件。
+-   格式：`<%@ 指令名  属性名1=属性值1 属性名2=属性值2 %>`
+
+
+
+JSP指令的示例：`<%@ page contentType="text/html;charset=UTF-8" language="java" %>`
+
+
+
+JSP的指令分类：
+
+-   `page`：配置页面
+-   `include`：导入页面资源
+-   `taglib`：导入资源，标签库
+
+
+
+---
+
+
+
+**Page指令：**
+
+​	1、ContentType属性：等价于`response.setContentType(MIME类型和字符集)`
+
+>   -   功能：设置response的MIME类型和字符集；设置页面的字符集（高级的iDE，低级的工具使用pageEncoding属性来设置页面的字符集）
+
+
+
+​	2、PageEncoding属性：设置页面字符集编码。
+
+​	3、buffer属性：设置页面缓冲区大小(需要带上单位)。
+
+​	4、import属性：导入Java的包。
+
+​	5、errorPage属性：页面发生异常时，自动跳转到该属性所指定的页面。
+
+​	6、isErrorPage属性：标识是否为出错时跳转到的页面，true/false。指定为true时，允许在页面中用jsp的语法显示exception对象的相关消息。
+
+---
+
+
+
+**include指令：**
+
+​	1、file属性：资源的路径。如：`<%@incluse file="top.jsp" %>`
+
+---
+
+
+
+**taglib指令：**
+
+​	1、使用任何标签库都需要：
+
+>   -   `web->WEB-INF->lib`中放入`JSTL.jar`包，
+>   -   导入`JSTL.jar`到项目中
+>   -   页面中导入标签库：`<%@taglib  prefix="自定义的标签名"  uri="http://java.sun.com/jsp/jstl/core" %>`
+>   -   使用时：`<上面自定义的标签名: if >`
+
+
+
+---
+
+
+
+
+
+###  9.2 JSP-注释：
+
+
+
+-   HTML的注释：`<!-- -->`，注释会发送到浏览器。
+-   JSP的注释【推荐】：`<%-- --%>` ，可以注释JSP代码和HTML代码，不会发送到浏览器。
+
+
+
+---
+
+
+
+
+
+### 9.3 JSP-内置对象：
+
+
+
+JSP的 9个内置对象：
+
+| 序号 | 变量名（JSP的内置对象名） | 实际类型            | 备注                                              |
+| :--: | :-----------------------: | ------------------- | ------------------------------------------------- |
+|  1   |           page            | Object              | 当前页面 this                                     |
+|  2   |        pageContext        | PageContext         | 当前页面内 共享数据，可获取其他8个内置对象        |
+|  3   |          request          | HttpServletRequest  | 一次请求获取多个资源（request转发）               |
+|  4   |         response          | HttpServletResponse | 响应对象                                          |
+|  5   |          session          | HttpSession         | 一次会话、多次请求。                              |
+|  6   |        application        | ServletContext      | 所有用户共享数据                                  |
+|  7   |            out            | JspWriter           | 输出数据到页面上                                  |
+|  8   |          config           | ServletConfig       | Servlet配置对象                                   |
+|  9   |         exception         | Throwable           | 只有`page指令`的` isErrorPage=true`时，才会生效。 |
+
+
+
+pageContext、request、session、application：都可用于共享数据。
+
+
+
+---
+
+
+
+### 9.4 MVC开发模式简介：
+
+
+
+JSP的演变历史：
+
+>   1、一开始只有Servlet，往前端输出只能借助Presonse对象，很不方便。
+>
+>   2、出现JSP，简化了操作，但出现滥用JSP现象，造成代码的可读性差、难维护。
+>
+>   3、借鉴了MVC开发模式，使得程序设计更合理。
+
+
+
+---
+
+
+
+MVC开发模式：
+
+>   -   M：mdel，模型，业务处理，如：操作数据库
+>   -   V：view，视图，展示数据。
+>   -   C：controller，控制器，获取输入、调用模型、将数据传给视图。
+
+
+
+---
+
+
+
+MVC的优点：
+
+>   -   解耦
+>   -   可重用
+
+
+
+MVC的缺点：
+
+>   -   使得项目的架构变复杂，对开发者要求更高
+
+
+
+<font style="color:red;">使用了MVC模式后，JSP里不写Java代码，java代码写在EL表达式、JSTL标签中。</font>
+
+
+
+---
+
+
+
+
+
+### 9.5 EL表达式：
+
+
+
+-   功能：替换、简化 JSP中的Java代码的书写。
+-   语法：`${ 表达式的内容 }`
+-   注意：JSP 默认支持 EL表达式。
+
+
+
+忽略EL表达式（2种方式）：
+
+>   -   `page指令`上的`isElIgnored属性的值设置为true`
+>   -   在EL表达式前加`\`，如：`\${表达式内容}`
+
+
+
+---
+
+
+
+EL表达式中的运算符：
+
+>   -   算术运算符
+>   -   关系运算符
+>   -   逻辑运算符
+>   -   空运算符empty：`${ empty list2 }`，判断`数组、字符串、集合`是否`为空 或 长度为0`。
+>   -   非运算符 not empty：`${ not empty list2 }`，判断`数组、字符串、集合`是否`为空 或 长度为0`。
+
+
+
+
+
+---
+
+**EL表达式获取值：**
+
+
+
+【注意】：EL表达式<font style="color: red;">只能获取域中的值</font>。
+
+
+
+1、EL_语法-1：`${ 域名称.键名 }`
+
+>   El表达式语法中的`域名称`:
+>
+>   -   pageScope：从 pageContext 中获取数据
+>   -   requestScope：从 request 对象中获取数据
+>   -   sessionScope：从 session 对象中获取数据
+>   -   applicationScope：从 servletContext 对象中获取数据
+
+
+
+例如：
+
+```jsp
+// 假设request域中已经有了数据 ： name="张三"
+<%
+	request.setAttribute("name","张三");
+	session.setAttribute("name","李四");
+
+
+	// 域中设置对象
+	Person user = new Person();
+	user.setName("张三");
+	user.setBirth(new Date());
+	request.setAttribute("u",user);
+	
+%>
+
+// 利用EL表达式获取数据：[第一种]
+
+	${ requestScope.name }
+
+	${ sessionScope.name }
+
+
+
+
+// EL获取域中的对象：【域名.对象名.属性名】
+//		属性：将get方法名，去掉get，再全部转换成小写字母
+//			如：user对象的getBirth()方法  =》 user.birth
+
+	${ requestScope.u.birth }
+
+
+
+
+// EL获取域中的 List集合：【 域名.集合名[下标] 】
+	${ requestScope.list2 }
+	${ requestScope.list2[3] }
+
+
+// EL获取域中的 Map集合：【 域名.集合名.键名 】
+	${ requestScope.map1 }
+	${ requestScope.map1.age }
+```
+
+
+
+
+
+2、EL_语法-2：`${ 键名 }`
+
+-   该语法：先从最小的域开始找数据，没有数据再向上一级域找数据，一直找到。
+
+```jsp
+// 假设request域中已经有了数据 ： name="张三"
+<%
+	request.setAttribute("name","张三");
+	session.setAttribute("name","李四");
+	
+%>
+
+// 利用EL表达式获取数据：[第二种]	
+
+	${ name }
+
+
+
+```
+
+
+
+
+
+---
+
+EL 表达式的隐式对象【11个】：
+
+
+
+其中的` pageContext `隐式对象同时也是 JSP的9大内置对象之一。
+
+用法：
+
+```jsp
+// 动态获取请求路径：
+/${ pageContext.request.contextPath }
+
+    <form action="${ pageContext.request.contextPath }/login.jsp">
+
+    </form>
+```
+
+
+
+
+
+---
+
+
+
+
+
+### 9.6 JSTL：
+
+
+
+**概念：** Java Server Tag Lib，Java标准标签库，是Apache免费提供的JSP标签库。
+
+**作用：** 简化和替换部分JSP页面中的Java代码。
+
+
+
+---
+
+
+
+
+
+**使用步骤：**
+
+>   1、项目中引入JSTL的JAR包：[jar包的下载地址](http://static.runoob.com/download/jakarta-taglibs-standard-1.1.2.tar.gz)
+>
+>   2、JSP页面中引入标签库：利用Taglib指令。`<%@ taglib prefix="自定义标签名" uri="标签库地址" %>`
+>
+>   3、页面中使用标签。
+
+
+
+
+
+
+
+---
+
+
+
+**常见的JSTL标签：**
+
+>   -   if：必选的属性`test`，一般与`EL表达式`配合使用。
+>   -   choose：相当于Java中的 `switch `语句
+>   -   when：相当于`case`语句
+>   -   otherwise：相当于`default`语句
+>   -   forEach：相当于Java中的`for`语句，【常用属性：begin、end、var、step，varStatus】
+
+
+
+if 标签：
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+// 页面导入标签库
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+   
+    
+	// test=true时，才显示标签中的内容(类似vue)，一般与`EL表达式`配合使用。
+    <c:if test="false"> 我是test属性为true时显示的内容(为false时不显示) </c:if>   
+    
+    
+    // EL表达式与JSTL标签联合使用。
+     <%
+    	List arr = new ArrayList();
+    	arr.add("123");
+    	request.setAttribute("list_1",arr);
+    
+    %>
+    <c:if test="${ not empty list_1 }"> 
+    	arr不为空时，我才显示
+    </c:if>
+    
+    
+    
+    <c:if test="${ num_1 % 2 ==1 }"> 
+    	num_1为奇数时，我才显示
+    </c:if>
+
+</body>
+</html>
+
+```
+
+---
+
+
+
+
+
+
+
+chhose-when-otherwise标签配合使用：
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+// 页面导入标签库
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+   
+    
+   
+     <%
+    	List arr = new ArrayList();
+    	arr.add(1);	    
+    	request.setAttribute("list_1",arr);
+    
+    %>
+    <c:choose> 
+    	<c:when test="${ list_1[0] == 1 }">星期一 </c:when> 
+        <c:when test="${ list_1[1] == 2 }">星期二 </c:when> 
+        <c:when test="${ list_1[2] == 3 }">星期三 </c:when> 
+        <c:when test="${ list_1[3] == 4 }">星期四 </c:when> 
+        <c:when test="${ list_1[4] == 5 }">星期五 </c:when> 
+        <c:when test="${ list_1[5] == 6 }">星期六 </c:when>
+        <c:when test="${ list_1[5] == 6 }">星期日 </c:when>
+        <c:otherwis> 输入有误</c:otherwise>     
+    </c:choose>
+    
+
+
+</body>
+</html>
+
+
+```
+
+
+
+---
+
+
+
+forEach标签：
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+// 页面导入标签库
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+   
+    
+   
+     <%
+    	List arr = new ArrayList();
+    	arr.add(1);	    
+    	request.setAttribute("list_1",arr);
+    
+    %>
+    
+    // 【普通for循环】
+    // 打印变量i, 范围：[0,9]，步长=1，
+    // varStatus的属性：index，索引，从0开始
+    // varStatus的属性：count，计数器，从1开始
+    <c:forEach begin="0" end="9" var="i" step="1" varStatus="s" > 
+    	  ${ i }  ===> ${ s.index }  ====> ${ s.count }
+    </c:forEach>
+    
+    // 【集合的for循环】
+    <c:forEach items="${list_1}"  var="i" varStatus="s"> 
+    	  ${ i }  ===> ${ s.index }  ====> ${ s.count }
+    </c:forEach>
+
+
+</body>
+</html>
+```
+
+
+
+
+
+---
+
+
+
+### 9.7 三层架构：
+
+
+
+-   界面层（web 层）：与用户界面交互。包的命名：`域名.项目名`
+-   业务逻辑层（service 层）：处理业务逻辑。包的命名：`域名.service`
+-   数据访问层（dao 层）：控制数据库的访问。包的命名：`域名.dao`
+
+
+
+![三层架构图](https://z3.ax1x.com/2021/07/18/W3wPte.png)
+
+
+
+
+
+项目步骤：
+
+-   **需求分析**：要完成什么功能
+-   **设计**：
+    -   技术选型：例如，`JSP + Servlet + MySQL + Druid + JdbcTemplete + BeanUtils + Tomcat`
+    -   数据库的设计
+-   **开发**：
+    -   搭建环境
+        -   搭建数据库环境
+        -   导入JAR包
+    -   编写代码
+-   **测试**：
+-   **部署 + 运维**
+
+
+
+---
+
+
+
+
+
+### 9.8 案例：【用户查询】
+
+
+
+![用户列表信息查询-整体逻辑图](https://z3.ax1x.com/2021/07/18/W320Zd.png)
+
+
+
+步骤：
+
+>   0、创建数据库
+>
+>   1、创建项目
+>
+>   2、在`web/WEB-INF`目录下新建目录`lib`，将所有的`Jar`都放入`lib`目录下。
+>
+>   3、在`src`目录下创建项目所需的所有包：`实体包、web包、service包、dao包、util包`
+>
+>   4、在包下创建各种接口、实现类、Servlet。
+>
+>   5、在 `dao实现类`中使用`Druid + JdbcTemplete`获取数据，并返回给 `service实现类`
+>
+>   6、 `service实现类` 中`new`出`dao对象`，调用`dao对象`中的获取数据的方法，返回数据给`Servlet`
+>
+>   7、`servlet`获取数据到`集合`中，将`集合`存放到 `Request对象的域中`，调用`Request对象`的`请求转发` 
+>
+>   8、`JSP页面` 引用`JSTL库`，`JSTL和 EL表达式`获取`Request域中的数据`，`JSTL的forEach`显示数据。
+
+
+
+
+
+
+
+#### 1、创建数据库：
+
+```sql
+create database exercise_2;
+-----------------------
+use exercise_2;
+-----------------------
+
+create table `user`(
+	`id` int primary key auto_increment,
+	`name` varchar(20) not null,
+	`gender` varchar(5),
+	`age` int,
+	`address` varchar(32),
+	`QQ` varchar(20),
+	`email` varchar(50)
+);
+
+---------------
+
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
+values('张三','男','23','浙江省杭州市西湖区','123445','123445@qq.com');
+
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
+values('李四','男','21','浙江省杭州市上城区','223445','223445@qq.com');
+
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
+values('王五','男','27','浙江省金华市','223445','223445@qq.com');
+
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
+values('马燕','女','22','浙江省台州市黄岩区','423445','423445@qq.com');
+```
+
+
+
+#### 2、目录结构：
+
+
+
+-   所需JAR包：
+
+![所需JAR包](https://z3.ax1x.com/2021/07/18/W8Cq10.png)
+
+
+
+-   整体的包结构：
+
+![整体包结构](https://z3.ax1x.com/2021/07/18/W8CpSP.png)
+
+
+
+-   详细包结构：
+
+![详细包结构](https://z3.ax1x.com/2021/07/18/W8Cskd.png)
