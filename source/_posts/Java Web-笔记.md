@@ -2244,7 +2244,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->     	     	     	     	     	     	     	     	     	     	     	     	     	
+>     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >
@@ -4425,6 +4425,20 @@ forEach标签：
 
 
 
+>   使用三层架构的技巧：
+>
+>   -   0、创建：`jdbc工具类`
+>
+>   -   1、创建：`实体类`（成员变量与数据表完全对应）。
+>   -   2、创建：`dao接口 + 实现类`：JDBC操作。
+>   -   3、创建：`service接口 + 实现类`：new出dao实现类，调用dao实现类的方法来完成一些功能。
+>   -   4、创建：`servlet`：执行页面访问时的操作。
+>   -   5、创建：`JSP页面`
+
+
+
+
+
 ---
 
 
@@ -4439,7 +4453,13 @@ forEach标签：
 
 
 
-步骤：
+**目标：**
+
+![案例目标](https://z3.ax1x.com/2021/07/19/WGiqHO.png)
+
+
+
+**步骤：**
 
 >   0、创建数据库
 >
@@ -4469,10 +4489,11 @@ forEach标签：
 
 ```sql
 create database exercise_2;
------------------------
-use exercise_2;
------------------------
 
+-- ---------------------
+use exercise_2;
+
+-- ---------------------
 create table `user`(
 	`id` int primary key auto_increment,
 	`name` varchar(20) not null,
@@ -4480,22 +4501,25 @@ create table `user`(
 	`age` int,
 	`address` varchar(32),
 	`QQ` varchar(20),
-	`email` varchar(50)
+	`email` varchar(50),
+	`username` varchar(20) not null,
+	`psw` varchar(20) not null
 );
 
----------------
+-- -------------
 
-insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
-values('张三','男','23','浙江省杭州市西湖区','123445','123445@qq.com');
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`)
+values('张三','男','23','浙江省杭州市西湖区','123445','123445@qq.com','zs','123');
 
-insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
-values('李四','男','21','浙江省杭州市上城区','223445','223445@qq.com');
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`)
+values('李四','男','21','浙江省杭州市上城区','223445','223445@qq.com','ls','123');
 
-insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
-values('王五','男','27','浙江省金华市','223445','223445@qq.com');
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`)
+values('王五','男','27','浙江省金华市','223445','223445@qq.com','ww','123');
 
-insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`)
-values('马燕','女','22','浙江省台州市黄岩区','423445','423445@qq.com');
+insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`)
+values('马燕','女','22','浙江省台州市黄岩区','423445','423445@qq.com','my','123');
+
 ```
 
 
@@ -4506,7 +4530,9 @@ values('马燕','女','22','浙江省台州市黄岩区','423445','423445@qq.com
 
 -   所需JAR包：
 
-![所需JAR包](https://z3.ax1x.com/2021/07/18/W8Cq10.png)
+![所需JAR包](Java Web-笔记/WG0DPO.png)
+
+---
 
 
 
@@ -4514,8 +4540,705 @@ values('马燕','女','22','浙江省台州市黄岩区','423445','423445@qq.com
 
 ![整体包结构](https://z3.ax1x.com/2021/07/18/W8CpSP.png)
 
+---
+
 
 
 -   详细包结构：
 
 ![详细包结构](https://z3.ax1x.com/2021/07/18/W8Cskd.png)
+
+
+
+---
+
+
+
+#### 3、Utils包：
+
+DBUtils.java
+
+```java
+package com.cyw.util;
+
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+import javax.sql.DataSource;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class DBUtils {
+    private static DataSource dataSource = null;
+
+    static {
+        Properties properties = new Properties();
+        InputStream is = DBUtils.class.getClassLoader().getResourceAsStream("druid.properties");
+        try {
+            properties.load(is);
+            dataSource = DruidDataSourceFactory.createDataSource(properties);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 返回 静态的数据库连接池
+    public static DataSource getDataSource() {
+        return dataSource;
+    }
+}
+
+```
+
+
+
+
+
+---
+
+
+
+#### 4、实体包：
+
+User.java：
+
+```java
+package com.cyw.domain;
+
+import java.util.Objects;
+
+public class User {
+    private int id;
+    private String name;
+    private String gender;
+    private int age;
+    private String address;
+    private String qq;
+    private String email;
+    private String username;
+    private String psw;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", qq='" + qq + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", psw='" + psw + '\'' +
+                '}';
+    }
+
+    public User() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPsw() {
+        return psw;
+    }
+
+    public void setPsw(String psw) {
+        this.psw = psw;
+    }
+
+    public User(int id, String name, String gender, int age, String address, String qq, String email, String username, String psw) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.address = address;
+        this.qq = qq;
+        this.email = email;
+        this.username = username;
+        this.psw = psw;
+    }
+}
+
+```
+
+
+
+---
+
+
+
+
+
+#### 5、Dao包：
+
+UserDaoImpl.java
+
+```java
+package com.cyw.dao.impl;
+
+import com.cyw.dao.UserDao;
+import com.cyw.domain.User;
+import com.cyw.util.DBUtils;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import javax.sql.DataSource;
+import java.util.List;
+
+public class UserDaoImpl implements UserDao {
+    DataSource dataSource= DBUtils.getDataSource();
+
+    private JdbcTemplate jt = new JdbcTemplate(dataSource);
+
+    @Override
+    public List<User> findAll() {
+       String sql = "select * from user";
+        List<User> users = jt.query(sql, new BeanPropertyRowMapper<User>(User.class));
+        return users;
+    }
+
+    @Override
+    public User findUserByUsernameAndPsw(String username,String psw) {
+
+        String sql = "select * from user where username=? and psw=?";        
+        User user = null;
+        
+        try {
+            user = jt.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, psw);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        
+        return user;
+    }
+
+
+}
+
+```
+
+
+
+---
+
+
+
+#### 6、Service包
+
+UserServiceImpl.java
+
+```java
+package com.cyw.service.impl;
+
+import com.cyw.dao.UserDao;
+import com.cyw.dao.impl.UserDaoImpl;
+import com.cyw.domain.User;
+import com.cyw.service.UserService;
+
+import java.util.List;
+
+public class UserServiceImpl implements UserService {
+    private UserDao dao = new UserDaoImpl();
+    /**
+     * 调用 dao层的方法
+     * @return
+     */
+    @Override
+    public List<User> findAll() {
+        return dao.findAll();
+    }
+
+    @Override
+    public User login(User user) {
+        try {
+            return  dao.findUserByUsernameAndPsw(user.getUsername(), user.getPsw());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  null;
+        }
+    }
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+#### 7、Web包（Servlet包）：
+
+
+
+---
+
+
+
+##### 验证码Servlet：
+
+```java
+package com.cyw.web.servlet;
+
+import javax.imageio.ImageIO;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Random;
+
+@WebServlet("/checkCodeServlet")
+public class checkCodeServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // 禁用验证码的缓存
+        response.setHeader("pragma", "no-cache");
+        response.setHeader("cache-control", "no-cache");
+        response.setHeader("expires", "0");
+
+        int width = 80;
+        int height = 30;
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        Graphics g = image.getGraphics();
+
+        // 画背景色
+        g.setColor(Color.gray);
+        g.fillRect(0, 0, width, height);
+
+        // 画边框
+        g.setColor(Color.black);
+        g.drawRect(0, 0, width, height);
+
+
+        // 画验证码
+        g.setColor(Color.yellow);
+        String checkCode = getRandomCheckCode();
+        HttpSession session = request.getSession();
+        session.setAttribute("checkCode", checkCode);
+        g.setFont(new Font("黑体", Font.BOLD, 24));
+        g.drawString(checkCode, 15, 25);
+
+        ImageIO.write(image, "jpg", response.getOutputStream());
+
+    }
+
+
+    // 随机生成验证码
+    private String getRandomCheckCode() {
+        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        Random rd = new Random();
+        String rst = "";
+        for (int i = 0; i < 4; i++) {
+            int idx = rd.nextInt(str.length());
+            char ch = str.charAt(idx);
+            rst += ch;
+        }
+        return rst;
+    }
+}
+
+```
+
+
+
+---
+
+
+
+##### 登录Servlet:
+
+```java
+package com.cyw.web.servlet;
+
+import com.cyw.domain.User;
+import com.cyw.service.impl.UserServiceImpl;
+import org.apache.commons.beanutils.BeanUtils;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+
+@WebServlet("/loginServlet")
+public class loginServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 设置编码
+        resp.setCharacterEncoding("utf-8");
+
+        // 获取表单数据
+        String verifycode = req.getParameter("verifycode");
+
+        // 验证码校验
+        HttpSession session = req.getSession();
+        String checkCode = (String)session.getAttribute("checkCode");
+        session.removeAttribute("checkCode");
+        
+        if(!checkCode.equalsIgnoreCase(verifycode)){
+            // 验证码不正确
+            req.setAttribute("login_err","验证码错误！！");
+            req.getRequestDispatcher("/login.jsp").forward(req,resp);
+            return;
+
+        }else{
+            
+            
+			// 【注意】：表单的name属性与User实体类的属性必须完全一致b
+            Map<String, String[]> map = req.getParameterMap();
+            // 封装User对象
+            User user = new User();
+            try {
+                BeanUtils.populate(user,map);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+
+            // 调用Service
+            UserServiceImpl service = new UserServiceImpl();
+            User loginUser = service.login(user);
+
+            // 判断是否登录成功
+            if (loginUser!=null){
+                // 登录成功，用户存入session,跳转页面
+                session.setAttribute("user",loginUser);
+                resp.sendRedirect(req.getContextPath()+"/index.jsp");
+
+            }else{
+                // 登录失败，提示失败，返回登录页
+                req.setAttribute("login_err","用户名或密码错误！！");
+                req.getRequestDispatcher("/login.jsp").forward(req,resp);
+
+            }
+
+        }
+    }
+}
+
+```
+
+
+
+---
+
+
+
+
+
+##### 用户列表查询Servlet:
+
+```java
+package com.cyw.web.servlet;
+
+import com.cyw.domain.User;
+import com.cyw.service.UserService;
+import com.cyw.service.impl.UserServiceImpl;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet( "/userListServlet")
+public class userListServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        UserService service = new UserServiceImpl();
+        List<User> users = service.findAll();
+        request.setAttribute("users",users);
+        request.getRequestDispatcher("/list.jsp").forward(request,response);
+    }
+}
+
+```
+
+
+
+---
+
+
+
+
+
+#### 8、登录页
+
+login.jsp
+
+```java
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>管理员登录</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        let img = document.getElementById("vcode");
+        img.onclick = () => {
+            let time = new Date().getTime();
+            img.src = "${pageContext.request.contextPath}/checkCodeServlet?time=" + time;
+        }
+
+    </script>
+</head>
+<body>
+<div class="container" style="width: 400px;">
+    <h3 style="text-align: center;">管理员登录</h3>
+    <form action="${ pageContext.request.contextPath}/loginServlet" method="post">
+        <div class="form-group">
+            <label for="user">用户名：</label>
+            <input type="text" name="username" class="form-control" id="user" placeholder="请输入用户名"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">密码：</label>
+            <input type="password" name="psw" class="form-control" id="password" placeholder="请输入密码"/>
+        </div>
+
+        <div class="form-inline">
+            <label for="vcode">验证码：</label>
+            <input type="text" name="verifycode" class="form-control" id="verifycode" placeholder="请输入验证码"
+                   style="width: 120px;"/>
+            <a href="javascript:refreshCode()"><img src="${pageContext.request.contextPath}/checkCodeServlet"
+                                                    title="看不清点击刷新" id="vcode"/></a>
+        </div>
+
+
+        <hr/>
+        <div class="form-group" style="text-align: center;">
+            <input class="btn btn btn-primary" type="submit" value="登录">
+        </div>
+    </form>
+
+    <!-- 出错显示的信息框 -->
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span></button>
+        <strong>${ login_err }</strong>
+    </div>
+</div>
+</body>
+</html>
+```
+
+
+
+
+
+#### 9、首页
+
+index.jsp
+
+```java
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>首页</title>
+
+  <!-- 1. 导入CSS的全局样式 -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+  <script src="js/jquery-2.1.0.min.js"></script>
+  <!-- 3. 导入bootstrap的js文件 -->
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  </script>
+</head>
+<body>
+<div align="center">
+
+  <div>${ user.name}，欢迎你！</div>
+
+  <a
+          href="${ pageContext.request.contextPath}/userListServlet" style="text-decoration:none;font-size:33px">查询所有用户信息
+  </a>
+</div>
+</body>
+</html>
+```
+
+
+
+#### 10、用户查询页
+
+list.jsp
+
+```java
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <!-- 使用Edge最新的浏览器的渲染方式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- viewport视口：网页可以根据设置的宽度自动进行适配，在浏览器的内部虚拟一个容器，容器的宽度与设备的宽度相同。
+    width: 默认宽度与设备的宽度相同
+    initial-scale: 初始的缩放比，为1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>用户信息管理系统</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <script src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3 style="text-align: center">用户信息列表</h3>
+    <table border="1" class="table table-bordered table-hover">
+        <tr class="success">
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>籍贯</th>
+            <th>QQ</th>
+            <th>邮箱</th>
+            <th>操作</th>
+        </tr>
+
+        <c:forEach items="${ users }" var="user" varStatus="s">
+            <tr>
+                <td>${ s.count }</td>
+                <td>${ user.name }</td>
+                <td>${ user.gender}</td>
+                <td>${ user.age}</td>
+                <td>${ user.address}</td>
+                <td>${ user.qq}</td>
+                <td>${ user.email}</td>
+                <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a class="btn btn-default btn-sm" href="">删除</a></td>
+            </tr>
+        </c:forEach>
+
+        <tr>
+            <td colspan="8" align="center"><a class="btn btn-primary" href="add.html">添加联系人</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+
+
+```
+
+
+
+
+
