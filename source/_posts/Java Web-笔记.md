@@ -2244,7 +2244,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
+>     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >
@@ -4459,6 +4459,10 @@ forEach标签：
 
 
 
+`分页的格式：页数= 总记录数%每页显示数==0？总记录数%每页显示数：总记录数%每页显示数+1`
+
+
+
 **步骤：**
 
 >   0、创建数据库
@@ -4507,7 +4511,6 @@ create table `user`(
 );
 
 -- -------------
-
 insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`)
 values('张三','男','23','浙江省杭州市西湖区','123445','123445@qq.com','zs','123');
 
@@ -4515,11 +4518,10 @@ insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`
 values('李四','男','21','浙江省杭州市上城区','223445','223445@qq.com','ls','123');
 
 insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`)
-values('王五','男','27','浙江省金华市','223445','223445@qq.com','ww','123');
+values('王五','男','27','浙江省金华市','223445','323445@qq.com','ww','123');
 
 insert into `user`(`name`,`gender`,`age`,`address`,`QQ`,`email`,`username`,`psw`)
 values('马燕','女','22','浙江省台州市黄岩区','423445','423445@qq.com','my','123');
-
 ```
 
 
@@ -5241,4 +5243,305 @@ list.jsp
 
 
 
+
+---
+
+
+
+## 10 Filter 过滤器
+
+>   [Filter+Listener视频](https://www.bilibili.com/video/BV1vt411R72s?from=search&seid=12014235413821499147)
+
+
+
+JavaWeb的三大组件：`Servlet + Filter + Listener`
+
+
+
+-   **概念**：Request请求访问服务器时，可以被过滤器拦截，并实现一些特殊的功能。
+
+-   **作用**：完成通过的操作。如：登录验证、统一编码校验、敏感词过滤。
+
+步骤：
+
+>   1、定义类，实现 Filter接口。
+>
+>   2、覆盖 重写方法。
+>
+>   3、配置 <font style="color:red;">拦截路径</font> 。
+
+
+
+
+
+---
+
+
+
+### 1、过滤器的实现方式（2种）：
+
+-   `注解`
+-   `web.xml`
+
+
+
+
+
+
+
+
+
+#### 1.1 注解-实现过滤器：
+
+```java
+package com.cyw.filterdemo;
+
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import java.io.IOException;
+
+// 配置过滤路径
+@WebFilter("/*")
+public class FilterDemo implements Filter {		// 实现Filter接口，重写3个生命周期方法
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
+        System.out.println("过滤器实现类-doFilter方法执行");
+
+        // 过滤器放行
+        filterChain.doFilter(servletRequest,servletResponse);
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+
+```
+
+
+
+#### 1.2 过滤器中 web.xml配置：
+
+
+
+web.xml 实现过滤器：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    
+    
+<!--
+	1、定义过滤器名、设置过滤器的全类名
+ 	2、
+-- >
+    <filter>
+        <filter-name>demo1</filter-name>
+        <filter-class>com.cyw.filterdemo.FilterDemo</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>demo1</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+</web-app>
+```
+
+
+
+---
+
+### 2、Filter的生命周期：
+
+-   `init()`：服务器启动后，创建Filter对象，执行一次 init 方法。
+-   `doFilter()`：request请求被拦截的资源时，执行。
+-   `destroy()`：服务器正常关闭时，执行 destroy 方法。
+
+
+
+---
+
+
+
+### 3、Filter的执行流程：
+
+-   执行过滤器
+-   执行过滤后的放行资源
+-   再次执行过滤器方向代码下的代码。
+
+
+
+
+
+---
+
+
+
+
+
+### 4、过滤器的配置：
+
+
+
+ 【位置：`@webFilter("拦截路径")` 或者 `we.xml`】
+
+
+
+1、拦截路径：
+
+>   -   拦截具体的资源：
+>       -   例如：拦截路径配为：`/index.jsp`，则访问`index.jsp`页面时，执行过滤器。
+>
+>    
+>
+>   -   拦截某个目录：
+>
+>       -   例如：拦截路径配为：`/user/*`，访问 user 目录下的所有资源时，执行过滤器。
+>
+>        
+>
+>   -   拦截文件的后缀名：
+>
+>       -   例如：拦截拦截配为：`*.jsp`，访问所有以`.jsp`结尾的文件时，执行过滤器。
+
+
+
+
+
+2、拦截方式（资源被访问的方式）：
+
+>   -   资源被访问的方式：
+>       -   重定向
+>       -   请求转发
+>
+>       
+>
+>   -   拦截方式的配置：
+>
+>       -   注解：设置@WebFilter注解的dispatcherType属性
+>           -   `REQUEST`：默认值，拦截请求的资源
+>           -   `FORWARD`：
+>           -   `INCLUDE`：
+>           -   `ERROE`：
+>           -   `ASYNC`：拦截异步访问资源。
+>       -   `web.xml`：`<dispatcher>  </dispatcher>`
+>
+>   
+
+
+
+
+
+### 5、 过滤器的执行顺序：
+
+
+
+假设有2个过滤器，执行顺序：
+
+>   -   过滤器1
+>   -   过滤器2
+>   -   资源
+>   -   过滤器2
+>   -   过滤器1
+
+
+
+具体顺序：
+
+>   -   注解形式-配置过滤器的过滤路径：比较过滤器的类名，名字字母小的先执行。
+>   -   web.xml 形式-配置过滤器：在上面的先执行。
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+## 11、Listener 监听器：
+
+监听 Session、Request、ServletContext的创建、销毁。
+
+使用：类似Servlet和Filter。
+
+
+
+
+
+
+
+
+
+
+
+## 12、代理模式:
+
+
+
+设计模式（23种）：解决某种问题的固定格式。
+
+---
+
+
+
+-   代理模式：【真实对象（手机厂家） + 代理对象（手机店）】
+
+>   代理模式的分类：
+>
+>   -   静态代理：有一个专门的类文件
+>   -   动态代理：在内存中生成一个类文件
+
+
+
+---
+
+
+
+
+
+实现步骤：
+
+>   1、真实对象和代理对象`实现相同的接口`。
+>
+>   2、获取代理对象的实例，【该方法来自`java.lang.reflect.Proxy`】
+>
+>   ```java
+>   
+>   代理对象 = Proxy.newProxyInstance(类加载器，真实对象的接口，new InvocationHandler(){
+>       
+>       // 传入代理对象，代理对象调用的方法，调用方法时真实传入的参数    
+>       public object invoke( Object proxy ，Method method ，Object[] args){
+>           
+>   		Object obj = method.invoke(真实对象,args);
+>           
+>           return obj;
+>       }
+>       
+>   })
+>   ```
+>
+>   
+>
+>   3、代理对象`调用方法`。
+>
+>   4、增强方法。
 

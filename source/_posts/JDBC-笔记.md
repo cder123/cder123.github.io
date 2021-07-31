@@ -994,7 +994,7 @@ public class Demo {
                 System.out.println(res.getString("sid")+" "+res.getString("sname"));
             }
 
-            DBCPUtil.relaeseConn(conn,ps,res);
+            DBCPUtil.releaseConn(conn,ps,res);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -1008,9 +1008,7 @@ public class Demo {
 
 
 
-### 6.2 c3p0：【存疑】
-
-【注意：此小节的配置还未调试成功】
+### 6.2 c3p0：
 
 
 
@@ -1020,8 +1018,8 @@ public class Demo {
 
 需要导入的Jar包：
 
--   `mchange-commons-java-0.2.12.jar`
--   `c3p0-0.9.5.2.jar`
+-   `mchange-commons-java.jar`
+-   `c3p0.jar`
 
 
 
@@ -1042,7 +1040,7 @@ public class Demo {
 
 C3P0的使用步骤：
 
->   -   导入 JAR包：`mchange-commons-java-0.2.12.jar`+`c3p0-0.9.5.2.jar`
+>   -   导入 JAR包：`mchange-commons-java.jar`+`c3p0.jar`
 >   -   定义配置文件：`src目录`下`c3p0-config.xml`
 >   -   创建数据库连接池：`CombopooledDadtaSource`对象
 >   -   获取连接：`comboPooledDadtaSource.getConnection();`
@@ -1067,8 +1065,6 @@ C3P0的使用步骤：
     <property name="checkoutTimeout">3000</property>
   </default-config>
 
-  <named-config name="otherc3p0"> 
-  </named-config>
 </c3p0-config>
 ```
 
@@ -1112,7 +1108,7 @@ public class C3P0Util {
         return dataSource.getConnection();
     }
 
-    public static void relaeseConn(Connection conn, PreparedStatement ps, ResultSet rs) {
+    public static void releaseConn(Connection conn, PreparedStatement ps, ResultSet rs) {
 
         try {
             if (rs != null) rs.close();
