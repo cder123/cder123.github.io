@@ -1,3 +1,14 @@
+---
+title: Redis-入门笔记
+tag: Redis
+categories:
+  - [SQL,Redis]
+  - [后端,Java,Redis]  
+ 
+---
+
+
+
 
 
 # Redis-入门笔记
@@ -20,15 +31,13 @@ Redis是一种高性能的非关系型数据库。
 
 
 
-![关系型db与非关系型db](https://z3.ax1x.com/2021/07/31/WjPQHA.png)
+![](https://z3.ax1x.com/2021/07/31/WjPQHA.png)
 
 
 
 
 
 ---
-
-
 
 
 

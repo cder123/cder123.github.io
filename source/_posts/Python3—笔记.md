@@ -7,6 +7,7 @@ categories:
 ---
 
 # Python3—笔记
+
 部分内容来自知乎和中国大学mooc
 
 [toc]
@@ -815,7 +816,7 @@ print(soup.prettify()) #输出清晰的树形结构
 ### 4.6 正则表达式函数
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201208103901541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 ### 4.7 练习题：
-` https://zhuanlan.zhihu.com/p/91689180?utm_source=qq&utm_medium=social&utm_oi=772119850515431424 `
+
 [正则表达式-练习题](https://zhuanlan.zhihu.com/p/91689180?utm_source=qq&utm_medium=social&utm_oi=772119850515431424)
 
 
@@ -852,6 +853,3 @@ if __name__ == '__main__':
 
 
 
-
-
-## 6、
