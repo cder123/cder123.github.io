@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cyw的笔记栈 - 笔记-让生活更便捷</title><meta name="author" content="CYW"><meta name="copyright" content="CYW"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Cyw的笔记栈">
+<meta property="og:url" content="http://cder123.github.io/page/3/index.html">
+<meta property="og:site_name" content="Cyw的笔记栈">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/01/2KZgDs.png">
+<meta property="article:author" content="CYW">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/06/01/2KZgDs.png"><link rel="shortcut icon" href="https://z3.ax1x.com/2021/06/01/2KeKMQ.png"><link rel="canonical" href="http://cder123.github.io/page/3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"简","msgToSimplifiedChinese":"繁"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Cyw的笔记栈',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-08-04 19:08:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KZgDs.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://z3.ax1x.com/2021/06/01/2uBDbR.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Cyw的笔记栈</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Cyw的笔记栈</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/08/04/ASP.NET_WebForm_%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0/" title="2020-ASP.NET_WebForm_毕设笔记">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2020-ASP.NET_WebForm_毕设笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/ASP.NET_WebForm_%E6%AF%95%E8%AE%BE%E7%AC%94%E8%AE%B0/" title="2020-ASP.NET_WebForm_毕设笔记">2020-ASP.NET_WebForm_毕设笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/C/">C#</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/ASP-NET/">ASP.NET</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/C/">C#</a></span></div><div class="content">2020-ASP.NET_WebForm_毕设笔记[toc]
+1. 整体概述1.1 该电子商城的页面
+  首页
+  分类页【包含：一级分类/二级分类】
+  搜索页
+  商品详情页
+  注册页
+  登录页
+  忘记密码【即：修改密码页】
+用户中心
+  基本信息页
+  地址管理
+  收款码管理
+  用户管理
+  商品管理
+
+
+  订单中心
+  订单详情
+  订单录入
+  购物车
+
+1.2 功能模块图
+1.3 样式
+  该项目主要使用 【Bootstrap4 +外联css + 内联css + Jquery 样式】
+
+  由于需要使用 Bootstrap4 ，因此 在页面需要先导入Jquery ，再导入Bootstrap4 【因为Bootstrap4 有部分功能是基于Jquery开发的】  (本项目是在母版页导入)：
+123&lt;script src=&quot;/App_Themes/主题1/jquery.min.js&quot;&gt;&lt;/script&gt;&lt;script src=&quot;/App_Themes/主题1/bootstrap/js/bootstrap.bu ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/08/04/C#%20%E7%BC%96%E5%86%99%20WebService%E3%80%90WebAPI%E3%80%91%E7%9A%84%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/" title="C# 编写 WebService的示例">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C# 编写 WebService的示例"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/C#%20%E7%BC%96%E5%86%99%20WebService%E3%80%90WebAPI%E3%80%91%E7%9A%84%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/" title="C# 编写 WebService的示例">C# 编写 WebService的示例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/C/">C#</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/C/">C#</a></span></div><div class="content">C# 编写 WebService的示例@[toc]
+1. 示例环境
+windows server 2012
+Visual Studio 2012
+IIS 82. 新建web服务
+
+默认生成以下代码：观察下图：由图可知：webservice其实就是 “方法” 的集合【即：一堆的方法】
+
+[WebMethod]是必须的，不能删除，语法示例如下：1[WebMethod(属性名=属性值)]
+在一个WebService类中，一个 Public的方法 只有拥有 WebMethod   才能被访问 。WebMethod有6个属性：
+
+Description
+EnableSession
+MessageName
+TransactionOption
+CacheDuration
+BufferResponse
+
+
+
+
+示例：
+12345678// 描述信息[WebMethod(Description=&quot;这是一个 add() 方法&quot;)]// 允许该WebMethod方法访问session的值// 默认情况下WebMethod不能访问session中的值[WebMethod(EnableSes ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/08/04/CCNA-%E7%AC%94%E8%AE%B0-02%E3%80%90%E9%9D%9E%E7%90%86%E8%AE%BA%E3%80%91/" title="CCNA-笔记-02【非理论】">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CCNA-笔记-02【非理论】"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/CCNA-%E7%AC%94%E8%AE%B0-02%E3%80%90%E9%9D%9E%E7%90%86%E8%AE%BA%E3%80%91/" title="CCNA-笔记-02【非理论】">CCNA-笔记-02【非理论】</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/">网络工程</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/CCNA/">CCNA</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CCNA/">CCNA</a></span></div><div class="content">CCNA-笔记-02【非理论】[toc]
+第二章 TCP / IP协议1. 协议分层
+1.1 传输层
+TCP：可靠，建立会话【消耗资源】，差错校验，分段传输，适用于：1个数据包传不完，需要分段传输，需要重传的场合，如：浏览网页、发邮件netstat -n查看会话
+UDP：不可靠，适用于：1个数据包就能传完。如：屏幕广播，QQ聊天，域名解析1.2 应用层
+HTTP    = tcp + 80
+HTTPS = tcp +443
+FTP      = tcp + 20 / 21  【20传数据(主动模式时20，被动模式由软件协商)，21做控制】
+SMTP = tcp + 25
+POP3 = tcp +110
+RDP = tcp + 3389
+DNS = TCP【同步数据】/ UDP【查dns，常用】 + 53
+CIFS【使用IP地址访问】 = tcp + 445
+CIFS【使用计算机名访问】 = tcp + 139 
+SQL Server【远程访问时】 = tcp + 1433
+Telnet  = tcp + 23
+SSH = tcp + 22
+服务与端口的关系：用 端口 来区分使用的 服务 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/08/04/Flask-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Flask-入门笔记">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Flask-入门笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/Flask-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Flask-入门笔记">Flask-入门笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Python3/">Python3</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Python3/">Python3</a></span></div><div class="content">Flask-入门笔记[toc]
+1. 案例1：创建1个flask应用程序目录结构：
+
+  main.py
+
+templates 目录
+
+index.html
+
+
+
+注意： flask中的模板就是html页面
+
+  return  字符串
+
+123456789101112131415161718192021222324from flask import Flaskapp = Flask(__name__)# 当浏览器的地址栏后为“ / ”时，调用相应处理的函数index()，# 页面内容为return关键字后的内容# 【这启示我们，只要将1个html页面放在return关键字后，就能实现页面的动态切换】@app.route(&#x27;/&#x27;)def index():    return &#x27;你好，我是首页&#x27;# 当浏览器的地址栏后为“ /pic ”时，调用相应处理的函数pic()# 【即：页面显示return关键字后的内容】@app.route(&#x27;/pic&#x27;)def pic():    return &#x27;你好，我是pic&#x27;i ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/08/04/HTML-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="HTML-笔记">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HTML-笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/HTML-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="HTML-笔记">HTML-笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%9F%BA%E7%A1%80/">基础</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/HTML/">HTML</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/HTML/">HTML</a></span></div><div class="content">HTML—入门笔记[toc]
+1. html 的基本结构1.1 整体结构【骨架】1234567891011&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;        &lt;meta charset=&quot;UTF-8&quot;&gt;        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;        &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;        &lt;!--正文--&gt;&lt;/body&gt;&lt;/html&gt;
+1.2 head 标签通常只在 head标签中放 以下 几种 标签
+
+ title
+ meta
+ link
+ style
+ script
+ base
+
+1.3 页面中文编码的设置1&lt;meta charset=&quot;U ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/08/04/Git%E5%85%A5%E9%97%A8-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Git-学习笔记">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git-学习笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/Git%E5%85%A5%E9%97%A8-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Git-学习笔记">Git-学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/">编程工具</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/Git/">Git</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Git/">Git</a></span></div><div class="content">Git-学习笔记[toc]
+1. Git 安装及全局配置
+以Windows为例：
+
+从 Git官网 直接下载安装程序，然后按 默认 选项安装
+若 在点击左下角的windows图标后 能够找到 “Git”-“Git Bash”，并且打开后出现类似 cmd 的窗口，则安装成功。
+打开 Git Bash【git bash中可以输入  Linux命令，相当于 linux中的终端】
+输入git config --global user.name &quot;用户名&quot;
+输入 git config --global user.email &quot;邮箱地址&quot;    
+
+
+2. Git 的工作原理2.1 git 与 svn 的差别
+
+  git 是 分布式的版本控制系统，在本地和远程 各有1个版本库,工作时可以不用联网
+  svn 是集中式的版本控制系统，是多个人共用1个版本库，工作时需要联网
+
+
+2.2 几个重要的概念
+工作区【workspace】：文件夹
+暂存区【stage】：git add 时，从 workspace  添加到  stage
+本地仓库【Repository】 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/08/04/JDBC-%E7%AC%94%E8%AE%B0/" title="JDBC-笔记">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JDBC-笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/JDBC-%E7%AC%94%E8%AE%B0/" title="JDBC-笔记">JDBC-笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Java/">Java</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Java/JDBC/">JDBC</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/SQL/MySQL/">MySQL</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JDBC/">JDBC</a></span></div><div class="content">JDBC-笔记[toc]
+0. 工具下载
+  MySQL-下载:https://wws.lanzoui.com/izU3xpr459a 密码:96kc
+  Navicat-下载:https://wws.lanzoui.com/ihKFypr448d 密码:amqz
+  JDBC常用Jar包-下载:https://wws.lanzoui.com/ihKFypr448d 密码:amqz
+
+1. JDBC-理解
+  JDBC-bilibili
+
+
+ 什么是JDBC？
+
+
+  JDBC：【Java DataBase Connectivity】
+  位置：java.sql.*;
+
+
+ JDBC的本质：
+
+
+  JDBC是Sun公司提供的一套接口，
+  接口都有 调用者 和 实现者，
+  我们面向接口，去调用、写实现类,这些都是面向接口的编程。
+
+
+ 为什么要面向接口编程？
+
+
+
+  解耦合
+  多态机制
+
+
+
+ 为什么要制定JDBC接口？
+
+
+  因为每种数据库软件在底层的实现原理是不一样的。
+  为了适配不同的数据库，Sun公司提供了JDBC接口，每种数据库的厂家根据自家的数据库，写JDBC的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/08/04/Hexo+Github%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%AB%99/" title="Hexo_Github_搭建博客站">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo_Github_搭建博客站"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/Hexo+Github%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%AB%99/" title="Hexo_Github_搭建博客站">Hexo_Github_搭建博客站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/">编程工具</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/Git/">Git</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Git/">Git</a></span></div><div class="content">Hexo_Github 搭建博客站[toc]
+0. 环境说明
+  Windows 10
+  Github网站：GitHub
+  Node.js：Node.js
+  gitBash：Git for Windows
+  hexo：Hexo-zh
+
+1. 安装相关的环境
+  Node.js 安装配置
+
+gitBash 安装配置 : 安装完后，配置git的ssh，并关联到 github
+
+
+1.1 在Github上建立站点的仓库
+ 在Github网站上建立1个名为：cder123.github.io 的仓库，在建立仓库时，勾选初始化按钮。
+
+
+  其中：
+
+  cder123为 github的用户名。
+
+
+
+ 打开GitBash，配置
+
+123456789101112131415161718192021git config --global user.name &quot;你的GitHub用户名&quot;git config --global user.email &quot;你的GitHub注册邮箱&quot;ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱& ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/08/04/Java%20SE/" title="Java SE-入门笔记">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java SE-入门笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/Java%20SE/" title="Java SE-入门笔记">Java SE-入门笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Java/">Java</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%90%8E%E7%AB%AF/Java/Java-SE/">Java SE</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Java/">Java</a></span></div><div class="content">Java SE -入门笔记[toc]
+0. 前置知识文档：
+
+  Java 教程 | 菜鸟教程 (runoob.com)
+  在线文档-jdk-zh
+  JavaSE-博客-笔记-网传
+
+0.1 Java 的文件结构 :
+  项目 -&gt;  模块（包）-&gt;  .java文件 -&gt; 类 
+  包的命名规范：
+
+ 由字母、数字下划线组成，不能以数字开头，字母全部小写。
+ 不同路径通过点(.)来分割，如：java.lang
+ 为了保证包名唯一性，一般使用域名反写来命名包，如：com.baidu.music
+
+  新建包：project -&gt; 右键 src -&gt; new -&gt; package
+   按包名展开：左侧导航栏 -&gt; 齿轮 -&gt;  去掉 compact middle packages的勾
+
+0.2 运行环境介绍
+  JVM：运行，java虚拟机
+  JRE：运行，（JVM+lib类库 =》真正可以执行.class文件）
+  JDK：开发，4个主要的文件夹：bin、include、lib、 jre
+
+范围：
+
+   JDK &gt; JRE ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2021/08/04/JavaScript-%E7%AC%94%E8%AE%B0/" title="JavaScript-笔记">     <img class="post_bg" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JavaScript-笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/04/JavaScript-%E7%AC%94%E8%AE%B0/" title="JavaScript-笔记">JavaScript-笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-04T08:46:45.951Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/%E5%9F%BA%E7%A1%80/">基础</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/JavaScript/">JavaScript</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/JavaScript/">JavaScript</a></span></div><div class="content">JavaScript-笔记[toc]
+1. 数据类型 + 类型转化
+  string
+  boolean
+  number
+  object
+  null
+  undefined
+
+1.1 String  =&gt; Number【直接查看字符串的首字符 是否 为数字=》不是 =》NaN】
+
+  parseInt( )
+
+12345parseInt(&quot;123abc&quot;)   // 123parseInt(&quot;22.5&quot;) 	 // 22parseInt(&quot;abc&quot;)		 // NaN
+
+
+
+
+  parseFloat( )
+
+12345parseFloat(&quot;123abc&quot;)	// 123.0parseFloat(&quot;123.23.4&quot;)	// 123.23parseFloat(&quot;abc&quot;)		// NaN
+
+1.2  Number =&gt; String
+  toString( )：转化为字符串
+  toFix( 保留的小数位数 )：四舍五入后，转化为字符串
+
+2. 数 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KZgDs.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">CYW</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">36</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://cder123.gitee.io"><i class="fab fa-github"></i><span>点我吧</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">本站点基于Hexo和GitPages技术搭建，站点内容为本人搜集或原创的笔记。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/08/04/NodeJS-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Node.js-入门笔记"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Node.js-入门笔记"/></a><div class="content"><a class="title" href="/2021/08/04/NodeJS-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Node.js-入门笔记">Node.js-入门笔记</a><time datetime="2021-08-04T08:46:45.966Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/04/Python%E7%88%AC%E8%99%AB-%E6%A1%88%E4%BE%8B%E7%AF%87/" title="Python爬虫-案例篇"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python爬虫-案例篇"/></a><div class="content"><a class="title" href="/2021/08/04/Python%E7%88%AC%E8%99%AB-%E6%A1%88%E4%BE%8B%E7%AF%87/" title="Python爬虫-案例篇">Python爬虫-案例篇</a><time datetime="2021-08-04T08:46:45.966Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/04/Python3%E2%80%94%E7%AC%94%E8%AE%B0/" title="Python3—笔记"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python3—笔记"/></a><div class="content"><a class="title" href="/2021/08/04/Python3%E2%80%94%E7%AC%94%E8%AE%B0/" title="Python3—笔记">Python3—笔记</a><time datetime="2021-08-04T08:46:45.966Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/04/Redis-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Redis-入门笔记"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis-入门笔记"/></a><div class="content"><a class="title" href="/2021/08/04/Redis-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="Redis-入门笔记">Redis-入门笔记</a><time datetime="2021-08-04T08:46:45.966Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/04/SQL%20Server-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="SQL Server-入门笔记"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL Server-入门笔记"/></a><div class="content"><a class="title" href="/2021/08/04/SQL%20Server-%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="SQL Server-入门笔记">SQL Server-入门笔记</a><time datetime="2021-08-04T08:46:45.966Z" title="发表于 2021-08-04 16:46:45">2021-08-04</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/"><span class="card-category-list-name">SQL</span><span class="card-category-list-count">5</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/MySQL/"><span class="card-category-list-name">MySQL</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/Redis/"><span class="card-category-list-name">Redis</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/SQL-Server/"><span class="card-category-list-name">SQL-Server</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="card-category-list-name">信息安全</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/"><span class="card-category-list-name">系统安全</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/"><span class="card-category-list-name">前端</span><span class="card-category-list-count">8</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/HTML/"><span class="card-category-list-name">HTML</span><span class="card-category-list-count">1</span></a></li></ul></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/C/" style="font-size: 1.37em; color: #99a4b2">C#</a> <a href="/tags/CCNA/" style="font-size: 1.37em; color: #99a4b2">CCNA</a> <a href="/tags/Git/" style="font-size: 1.23em; color: #999ea6">Git</a> <a href="/tags/HTML/" style="font-size: 1.1em; color: #999">HTML</a> <a href="/tags/JDBC/" style="font-size: 1.1em; color: #999">JDBC</a> <a href="/tags/JQuery/" style="font-size: 1.1em; color: #999">JQuery</a> <a href="/tags/Java/" style="font-size: 1.23em; color: #999ea6">Java</a> <a href="/tags/JavaScript/" style="font-size: 1.23em; color: #999ea6">JavaScript</a> <a href="/tags/Linux/" style="font-size: 1.37em; color: #99a4b2">Linux</a> <a href="/tags/MarkDown/" style="font-size: 1.1em; color: #999">MarkDown</a> <a href="/tags/Maven/" style="font-size: 1.1em; color: #999">Maven</a> <a href="/tags/MySQL/" style="font-size: 1.23em; color: #999ea6">MySQL</a> <a href="/tags/Nginx/" style="font-size: 1.1em; color: #999">Nginx</a> <a href="/tags/Python3/" style="font-size: 1.37em; color: #99a4b2">Python3</a> <a href="/tags/Redis/" style="font-size: 1.1em; color: #999">Redis</a> <a href="/tags/SQL-Server/" style="font-size: 1.1em; color: #999">SQL Server</a> <a href="/tags/Vue/" style="font-size: 1.5em; color: #99a9bf">Vue</a> <a href="/tags/Windows/" style="font-size: 1.23em; color: #999ea6">Windows</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E6%8A%80%E5%B7%A7/" style="font-size: 1.1em; color: #999">日常技巧</a> <a href="/tags/%E6%B3%95%E5%BE%8B/" style="font-size: 1.1em; color: #999">法律</a> <a href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.23em; color: #999ea6">算法与数据结构</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">八月 2021</span><span class="card-archive-list-count">39</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">39</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">104.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-08-04T11:08:33.441Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 By CYW</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
