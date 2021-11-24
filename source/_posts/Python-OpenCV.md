@@ -1,5 +1,5 @@
 ---
-title: Pythonn-OpenCV
+title: Python-OpenCV
 tag: Python3
 categories:
   - 后端
