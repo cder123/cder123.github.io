@@ -1,8 +1,10 @@
 ﻿---
+
 title: Windows批处理命令—入门
 tag: Windows
 categories:
   - [后端,操作系统,Windows使用]
+
 ---
 
 
@@ -261,3 +263,54 @@ else(goto label_1)
 ```
 命令解析：
 - 设1个变量`a`，`a`的值为`0`时，打印`hello`，否则跳转到 `label_1`位置重新执行语句
+
+
+
+
+
+### 12. 案例-按需关机
+
+```bat
+@echo off
+color 0a
+
+:"menu"
+echo =========================
+echo 	1. 关机
+echo 	2. 取消
+echo 	3. 关闭此程序
+echo =========================
+
+
+
+// /p 表示cmd输入参数，case为变量名
+set /p case="请输入选项: " 
+
+
+// 按照输入的参数跳转到相应的标签
+
+if "%case%"=="menu" goto "menu"
+
+if "%case%"=="1" goto "1"
+
+if "%case%"=="2" goto "2"
+
+if "%case%"=="3" goto "3"
+
+
+:"1"
+set /p time="请输入关机时间(单位/s): "
+shutdown -s -f -t %time%
+goto "menu"
+
+:"2"
+shutdown -a
+goto "menu"
+
+
+:"3"
+exit
+```
+
+
+
