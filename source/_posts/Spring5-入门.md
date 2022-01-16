@@ -38,6 +38,12 @@ categories:
 
 
 
+---
+
+
+
+
+
 ## 1、下载 Spring5
 
 [下载教程](https://blog.csdn.net/sgliuxiu/article/details/104629795)
@@ -57,6 +63,12 @@ categories:
         </dependency>
     </dependencies>
 ```
+
+
+
+
+
+---
 
 
 
@@ -202,6 +214,12 @@ beans.xml：
 
 
 
+---
+
+
+
+
+
 ## 3、IOC 容器
 
 
@@ -239,9 +257,8 @@ IOC也叫控制反转，是面向对象编程中的一种设计原则。在Sprin
 	// 相对路径获取配置文件中的context
 	ApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
 
-
 	// 绝对路径获取配置文件中的context
-	ApplicationContext context1 = new FileSystemXmlApplicationContext("C:\\Desktop\\JavaWorkSpace\\hello_Spring_1\\src\\main\\resources\\beans.xml");
+	ApplicationContext context1 = new FileSystemXmlApplicationContext("resources/beans.xml");
 
 ```
 
@@ -268,7 +285,7 @@ IOC也叫控制反转，是面向对象编程中的一种设计原则。在Sprin
 
 
 
->   setter方法-设置 实体类 的成员变量【重点】
+>   setter方法（property标签）-设置 实体类 的成员变量【重点】
 
 ```xml
     <bean id="user" class="com.cyw.entity.User">
@@ -359,7 +376,7 @@ IOC也叫控制反转，是面向对象编程中的一种设计原则。在Sprin
 
 ```xml
     <bean id="user" class="com.cyw.entity.User">
-      <constructor-arg name="myName" value="王五"/>
+      	<constructor-arg name="myName" value="王五"/>
         <constructor-arg name="age" value="22"/>
     </bean>
 ```
@@ -394,6 +411,8 @@ IOC也叫控制反转，是面向对象编程中的一种设计原则。在Sprin
 
 
 
+
+---
 
 
 
@@ -476,4 +495,205 @@ IOC也叫控制反转，是面向对象编程中的一种设计原则。在Sprin
     <import resource="bean3.xml"/>
 </beans>
 ```
+
+
+
+
+
+---
+
+
+
+## 5、p命名空间、c命名空间的依赖注入
+
+
+
+
+
+p命名空间、c命名空间是为了简化 3.2 小节的依赖注入。
+
+
+
+### 5.1 p命名空间
+
+
+
+p命名空间的作用：（简化 set 方式的依赖注入）将bean标签的子标签property 以 bean标签属性的形式出现。
+
+
+
+使用 p命名空间 **前**：
+
+```xml
+<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <!-- results in a setDriverClassName(String) call -->
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+    <property name="username" value="root"/>
+    <property name="password" value="root"/>
+</bean>
+```
+
+
+
+
+
+>p命名空间的使用步骤：
+>
+>-   导入命名空间（`   xmlns:p="http://www.springframework.org/schema/p"`）
+>-   在 bean 标签中使用（如：` p:password="root"`）
+
+
+
+使用 p命名空间 **后**：
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close"
+        p:driverClassName="com.mysql.jdbc.Driver"
+        p:url="jdbc:mysql://localhost:3306/mydb"
+        p:username="root"
+        p:password="root"/>
+
+</beans>
+```
+
+
+
+
+
+
+
+### 5.2 c命名空间
+
+c命名空间的作用：（简化 构造器 方式的依赖注入）
+
+
+
+c命名空间的使用步骤：
+
+-   前提：在实体类中已经定义好了 有参构造函数。
+
+-   导入命名空间（`     xmlns:c="http://www.springframework.org/schema/c"`）
+-   在 bean 标签中使用（如：` c:email="123"`，其中的email为构造函数的参数名）
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    
+    <bean id="thingOne" class="x.y.ThingTwo"/>
+
+    <!-- 传统方式-->
+    <bean id="thingOne" class="x.y.ThingOne">
+        <constructor-arg ref="thingTwo"/>        
+        <constructor-arg value="[emailprotected]"/>
+    </bean>
+
+    <!-- c命名空间方式 -->
+    <bean id="thingOne" class="x.y.ThingOne" c:thingTwo-ref="thingTwo"  c:email="[emailprotected]"/>
+
+</beans>
+```
+
+
+
+
+
+
+
+
+
+## 6、Bean的作用域
+
+
+
+| Scope                                                        | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [singleton](https://www.docs4dev.com/docs/zh/spring-framework/5.1.3.RELEASE/reference/core.html#beans-factory-scopes-singleton) | **(默认)**将每个 Spring IoC 容器的单个 bean 定义范围限定为单个对象实例。 |
+| [prototype](https://www.docs4dev.com/docs/zh/spring-framework/5.1.3.RELEASE/reference/core.html#beans-factory-scopes-prototype) | 将单个 bean 定义的作用域限定为任意数量的对象实例。           |
+| [request](https://www.docs4dev.com/docs/zh/spring-framework/5.1.3.RELEASE/reference/core.html#beans-factory-scopes-request) | 将单个 bean 定义的范围限定为单个 HTTP 请求的生命周期。也就是说，每个 HTTP 请求都有一个在单个 bean 定义后面创建的 bean 实例。仅在可感知网络的 Spring `ApplicationContext`中有效。 |
+| [session](https://www.docs4dev.com/docs/zh/spring-framework/5.1.3.RELEASE/reference/core.html#beans-factory-scopes-session) | 将单个 bean 定义的范围限定为 HTTP `Session`的生命周期。仅在可感知网络的 Spring `ApplicationContext`上下文中有效。 |
+| [application](https://www.docs4dev.com/docs/zh/spring-framework/5.1.3.RELEASE/reference/core.html#beans-factory-scopes-application) | 将单个 bean 定义的范围限定为`ServletContext`的生命周期。仅在可感知网络的 Spring `ApplicationContext`上下文中有效。 |
+| [websocket](https://www.docs4dev.com/docs/zh/spring-framework/5.1.3.RELEASE/reference/web.html#websocket-stomp-websocket-scope) | 将单个 bean 定义的范围限定为`WebSocket`的生命周期。仅在可感知网络的 Spring `ApplicationContext`上下文中有效。 |
+
+
+
+使用示例（` bean标签的 scope属性`）：`resources/beans.xml`
+
+```xml
+<bean id="user" class="com.cyw.User" scope="singleton"/>
+
+<bean id="user" class="com.cyw.User" scope="prototype"/>
+
+<bean id="user" class="com.cyw.User" scope="request"/>
+
+<bean id="user" class="com.cyw.User" scope="session"/>
+
+<bean id="user" class="com.cyw.User" scope="application"/>
+
+<bean id="user" class="com.cyw.User" scope="websocket"/>
+```
+
+
+
+
+
+## 7、自动装配
+
+
+
+自动装配：spring 在context 中自动查找属性，并给 bean 的属性 赋值。
+
+
+
+>   Spring 的 三种装配方式：
+
+1.   XML 中手动配置
+2.   java注解手动配置
+3.   自动装配（**重要**）
+
+
+
+>   自动装配的模式（`bean标签的 autowire 属性的取值`）：
+
+| Mode          | Explanation                                                  |
+| ------------- | ------------------------------------------------------------ |
+| `no`          | (默认)无自动装配。 Bean 引用必须由`ref`元素定义。对于大型部署，建议不要更改默认设置，因为明确指定协作者可以提供更好的控制和清晰度。在某种程度上，它记录了系统的结构。 |
+| `byName`      | 按属性名称自动布线。 Spring 寻找与需要自动装配的属性同名的 bean。例如，如果一个 bean 定义被设置为` byName`自动装配，并且包含一个`master`属性(即，它具有`setMaster(..)`方法)，那么 Spring 将查找一个名为`master`的 bean 定义并使用它来设置属性。 |
+| `byType`      | 如果容器中恰好存在一个该属性类型的 bean，则使该属性自动装配。如果存在多个错误，则会引发致命异常，这表明您可能不对该 bean 使用`byType`自动装配。如果没有匹配的 bean，则什么也不会发生(未设置该属性)。 |
+| `constructor` | 类似于`byType`，但适用于构造函数参数。如果容器中不存在构造函数参数类型的一个 bean，则将引发致命错误。 |
+
+
+
+
+
+
+
+### 7.1 XML自动装配
+
+（`bean 标签的 autowire属性`）
+
+```xml
+<bean id="dog" class="com.cyw.Dog"/>
+
+<bean id="user" class="com.cyw.User"  autowire="byName">
+	<property name="name" value="大白">
+</bean>
+```
+
+
+
+### 7.1 注解自动装配
+
+
 
