@@ -1,0 +1,490 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Spring4-入门 | Cyw的笔记栈</title><meta name="keywords" content="Java"><meta name="author" content="CYW"><meta name="copyright" content="CYW"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Spring4-入门[toc] 0、参考资料书：    SSM从零开始学   Offer来了  1、Spring基础1.1、Spring 概述1.1.1、什么是 SpringSpring 是一种JavaEE 开发一站式的解决方案。以 IOC 和AOP为核心，该框架提供的功能贯穿表示层、业务层、持久层。 Spring框架的特点：     轻量：核心Jar包只有1.4 MB，占用的系统资源（CPU和内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring4-入门">
+<meta property="og:url" content="http://cder123.github.io/2022/01/15/Spring4-%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Cyw的笔记栈">
+<meta property="og:description" content="Spring4-入门[toc] 0、参考资料书：    SSM从零开始学   Offer来了  1、Spring基础1.1、Spring 概述1.1.1、什么是 SpringSpring 是一种JavaEE 开发一站式的解决方案。以 IOC 和AOP为核心，该框架提供的功能贯穿表示层、业务层、持久层。 Spring框架的特点：     轻量：核心Jar包只有1.4 MB，占用的系统资源（CPU和内">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/01/2KV1yj.png">
+<meta property="article:published_time" content="2022-01-15T07:56:27.343Z">
+<meta property="article:modified_time" content="2022-01-16T10:07:29.221Z">
+<meta property="article:author" content="CYW">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/06/01/2KV1yj.png"><link rel="shortcut icon" href="https://z3.ax1x.com/2021/06/01/2KeKMQ.png"><link rel="canonical" href="http://cder123.github.io/2022/01/15/Spring4-%E5%85%A5%E9%97%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"简","msgToSimplifiedChinese":"繁"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring4-入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-16 18:07:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KZgDs.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">52</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">45</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://z3.ax1x.com/2021/06/01/2KV1yj.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Cyw的笔记栈</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Spring4-入门<a class="post-edit-link" href="null_posts/Spring4-入门.md" title="编辑" target="_blank"><i class="fas fa-pencil-alt"></i></a></h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-15T07:56:27.343Z" title="发表于 2022-01-15 15:56:27">2022-01-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-16T10:07:29.221Z" title="更新于 2022-01-16 18:07:29">2022-01-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/Java/">Java</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/Java/SSM/">SSM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Spring4-入门"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Spring4-入门"><a href="#Spring4-入门" class="headerlink" title="Spring4-入门"></a>Spring4-入门</h1><p>[toc]</p>
+<h2 id="0、参考资料"><a href="#0、参考资料" class="headerlink" title="0、参考资料"></a>0、参考资料</h2><p>书：</p>
+<ul>
+<li>  SSM从零开始学</li>
+<li>  Offer来了</li>
+</ul>
+<h2 id="1、Spring基础"><a href="#1、Spring基础" class="headerlink" title="1、Spring基础"></a>1、Spring基础</h2><h3 id="1-1、Spring-概述"><a href="#1-1、Spring-概述" class="headerlink" title="1.1、Spring 概述"></a>1.1、Spring 概述</h3><h4 id="1-1-1、什么是-Spring"><a href="#1-1-1、什么是-Spring" class="headerlink" title="1.1.1、什么是 Spring"></a>1.1.1、什么是 Spring</h4><p>Spring 是一种JavaEE 开发一站式的解决方案。以 <code>IOC</code> 和<code>AOP</code>为核心，该框架提供的功能贯穿<em>表示层、业务层、持久层</em>。</p>
+<p><font style="color:red;">Spring框架的特点：</font></p>
+<blockquote>
+<ul>
+<li>  <strong>轻量</strong>：核心Jar包只有<code>1.4 MB</code>，占用的系统资源（CPU和内存）少。</li>
+<li>  <strong>框架灵活</strong>：可以按需引入模块来实现不同的功能。</li>
+<li>  <strong>面向容器</strong>：（以XML或注解的形式）配置化实现对象，管理对象的生命周期。</li>
+<li>  <strong>控制反转（IOC）</strong>：创建对象时，若需要依赖其他对象，则自动传入其依赖的对象。（目的：解耦）</li>
+<li>  <strong>面向切面（AOP）</strong>：将 <em>业务逻辑</em> 和 <em>系统逻辑</em> 分离，提高系统的内聚。</li>
+</ul>
+</blockquote>
+<p><font style="color:red;">Spring的组成架构：</font></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://www.runoob.com/wp-content/uploads/2015/07/673670c9a34075831373b711cb8f21b7.png" alt="Spring-组成架构图"></p>
+<p>spring 框架的核心模块包括：</p>
+<blockquote>
+<ul>
+<li>  核心容器层：beans、core、context、spEl（核心容器的运行还需要commons-logging包）</li>
+<li>  数据访问层</li>
+<li>  Web应用层</li>
+</ul>
+</blockquote>
+<p>Jar包介绍：</p>
+<blockquote>
+<p>  主要为三类：</p>
+<ul>
+<li>  class字节码文件的压缩包</li>
+<li>  API文档的压缩包</li>
+<li>  源码压缩包</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="1-1-2、-IoC-与-DI"><a href="#1-1-2、-IoC-与-DI" class="headerlink" title="1.1.2、 IoC 与 DI"></a>1.1.2、 IoC 与 DI</h4><p>IoC（Intervision of Control）也叫 <em>控制反转</em>。</p>
+<p>DI（dependency Inject）也叫 <em>依赖注入</em>。</p>
+<p><code>IoC</code>是由Spring的 IoC容器来管理Java对象的生命周期，把控制权交给IoC容器，直接从IoC容器中获取对象，而不需要像传统的面向对象编程那样由用户手动new出对象。IoC理论实际上是在借助第三方的 IoC容器实现多个对象之间的解耦。【相当于：先整体，再局部】</p>
+<p><code>DI</code>是在IoC容器创建对象的过程中，若A对象依赖B对象，则由 IoC容器主动创建B对象并传给（注入）A对象。</p>
+<p><code>IoC</code> 和<code>DI</code>是从不同的角度对同一件事情的描述。IoC是从容器的角度，DI 是从APP的角度。</p>
+<p><font style="color:red">使用 <code>IoC/DI</code> 的好处:</font></p>
+<blockquote>
+<ul>
+<li>  可维护性好</li>
+<li>  专注业务</li>
+<li>  可复用性好</li>
+<li>  创建对象具有热拔插性</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="1-2、Spring-的核心容器"><a href="#1-2、Spring-的核心容器" class="headerlink" title="1.2、Spring 的核心容器"></a>1.2、Spring 的核心容器</h3><p>由上面<code>1.1.1小节</code>的<code>Spring组成架构图</code>可以看出，Spring的核心容器的模块分为：</p>
+<blockquote>
+<ul>
+<li>  beans：工厂模式，管理对象</li>
+<li>  core：IoC、AOP</li>
+<li>  context：在beans和core的基础上构建，继承了beans模块，添加了国际化、事件传播等功能</li>
+<li>  spEL：Spring表达式（类似El表达式的写法）</li>
+</ul>
+</blockquote>
+<p>Spring框架的核心容器中，主要的两个包为：<code>org.springframework.beans.factory</code>和<code>org.springframework.context</code>。其中，beans 包 中主要的接口为<code>BeanFactory</code>，负责管理Java类；context 包 中主要的接口为<code>ApplicationFactory</code>。</p>
+<p>本质上IoC容器就是一个工厂。使用了<code>XML解析、工厂模式、反射</code>。</p>
+<p><font style="color:red">Spring 中 的 <code>IoC</code>容器的组成部分主要有：</font></p>
+<blockquote>
+<ul>
+<li><p>  <code>对象</code></p>
+</li>
+<li><p>  配置文件<code>applicationContext.xml</code>：bean的id、类、属性、属性值。xml配置文件名可以随意。</p>
+</li>
+<li><p>  <code>BeanFactory 接口</code>及相关组件：工厂模式（Bean容器模式），负责读取配置文件、管理对象的生成和加载。维护Bean对象之间的依赖关系，负责Bean的生命周期。加载配置文件时，不会创建对象，使用对象时，才创建对象【Spring使用】</p>
+</li>
+<li><p>  <code>ApplicationContext 接口</code>及其相关类：相比BeanFactory接口来说，该方式可以更方便的访问资源、支持国际化消息、提供文字消息解释方法等。加载配置文件时，创建对象【程序员使用】</p>
+</li>
+</ul>
+</blockquote>
+<p><font style="color:red"><code>BeanFactory 接口</code>的实现类：</font></p>
+<blockquote>
+<p>  <code>org.springframework.beans.factory.xml.XmlBeanFactory</code>：需要传入一个Bean配置文件文件（applicationContext.xml）的输入流，然后调用<code>getBean(String id) </code>或<code>getBean(String id，Class requiredType)</code>来创建相应的对象。</p>
+</blockquote>
+<p><font style="color:red"><code>ApplicationContext 接口</code>的实现类</font></p>
+<blockquote>
+<ul>
+<li>  <code>FileSystemXmlApplicationContext</code>：从<strong>文件系统</strong>中的XML配置文件加载（以盘符为根目录），只能在指定路径中查询配置文件</li>
+<li>  <code>ClassPathXmlApplicationContext</code>：从<strong>类路径</strong>中的XML配置文件加载（以src为根目录），可以在整个类路径中查询配置文件</li>
+<li>  <code>XmlWebApplicationContext</code>：从<strong>Web系统</strong>中的XML配置文件加载</li>
+</ul>
+</blockquote>
+<h2 id="2、Bean"><a href="#2、Bean" class="headerlink" title="2、Bean"></a>2、Bean</h2><h3 id="2-1、-Bean的装配-概述"><a href="#2-1、-Bean的装配-概述" class="headerlink" title="2.1、 Bean的装配-概述"></a>2.1、 Bean的装配-概述</h3><p><font style="color:red"><code>IoC/DI</code>的实现方式（Bean的装配）：</font></p>
+<blockquote>
+<p>  两种方式【XML和注解】</p>
+<ul>
+<li>  类的<code>setter方法</code>（常用）：xml中bean节点的<code>property</code>子标签，必须要有无参构造和setter方法</li>
+<li>  类的<code>构造方法</code>：xml中bean节点的<code>constructor-arg</code>子标签</li>
+<li>  注解装配（必须导入AOP的jar包））：<code>@Repository</code>（dao层）、<code>@Service</code>、<code>@Controller</code>、<code>@Autowired</code></li>
+<li>  xml中bean标签的自动装配属性</li>
+</ul>
+</blockquote>
+<p><font style="color:red"><code>IoC/DI</code>的实现方式（Bean的装配）-简写-命名空间：</font></p>
+<blockquote>
+<ul>
+<li>  p：相当于property标签</li>
+<li>  c：相当于constructor-arg标签</li>
+</ul>
+<p>  命名空间的方式与子标签的方式的区别：</p>
+<ul>
+<li>  命名空间的方式需要引入xml的命名空间</li>
+<li>  命名空间的方式是作为bean标签的属性来写的，子标签是作为bean标签的内部节点写的</li>
+</ul>
+</blockquote>
+<p><font style="color:red">Bean标签的常用属性和子标签：</font></p>
+<blockquote>
+<p>  <font style="color:red">bean标签常用的属性：</font></p>
+<ul>
+<li>  id:    唯一标识【javaBean的属性名，setter方法名去掉set，第一个字母改小写】</li>
+<li>  name:  别名，可以有多个，多个别名之间用逗号或分号分割</li>
+<li>  class: javabean 的全类名（包名.类名）</li>
+<li>scope: 作用域，scope属性的7个取值：<pre><code> -   singleton :    单例模式，每次访问的都是同一个bean对象
+ -   prototype :    原型，每次用getBean方法来访问该JavaBean都创建一个新的bean对象
+ -   request    :    请求域
+ -   session
+ -   globalSession：portlet环境中
+</code></pre>
+<ul>
+<li>  application</li>
+<li>  websocket</li>
+</ul>
+</li>
+<li>  init-method：指定JavaBean的初始化方法的方法名</li>
+<li>  destroy-method：指定JavaBean的销毁方法的方法名</li>
+<li>  factory-method：利用工厂类的方法获取对象【class属性配为工厂类的全类名，factory-method指定工厂类的静态方法】（代替bean标签的无参装配的方式）</li>
+<li>  factory-bean：动态工厂的id属性，配合factory-method属性使用</li>
+</ul>
+<p>  <font style="color:red">bean标签常用的子标签：</font></p>
+<ul>
+<li>  property标签</li>
+<li>  constructor-arg标签 </li>
+</ul>
+<p>  <font style="color:red">property标签 和 constructor-arg标签 的常用属性：</font></p>
+<ul>
+<li>  name：标识，必须与Java类中的<strong>成员变量的名字一致</strong></li>
+<li>  value：注入java自带的数据类型的数据</li>
+<li>  ref：注入用户定义的JavaBean的<strong>全类名</strong>或bean标签的id</li>
+</ul>
+<p>  <font style="color:red">bean的子标签property的常用子标签【集合数据类型】：</font></p>
+<ul>
+<li>  list : 配合value标签使用</li>
+<li>  set   </li>
+<li>  map：配合entry子标签使用（entry标签的属性：key 和 value-ref）</li>
+<li>  props：配合prop子标签使用（key属性；值放标签内）</li>
+<li>  null</li>
+<li>  value</li>
+</ul>
+<p>  <font style="color:red">property标签的value为特殊值时：</font></p>
+<ul>
+<li>  转义字符</li>
+<li><code>&lt;![CDATA[ 特殊字符 ]]&gt;</code></li>
+</ul>
+</blockquote>
+<h3 id="2-2、-Bean的XML装配"><a href="#2-2、-Bean的XML装配" class="headerlink" title="2.2、 Bean的XML装配"></a>2.2、 Bean的XML装配</h3><p><font style="color:red">Bean的装配-XML的方式（调用setter方法装配）：</font></p>
+<ul>
+<li>  引入Spring 的 beans约束</li>
+<li>  在配置文件中写bean标签</li>
+<li>  利用ApplicationContext对象的getBean方法获取对象</li>
+<li>  调用bean对象的方法</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag"> http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag"> &quot;</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"> </span><br><span class="line">	<span class="comment">&lt;!-- 该bean的属性都是java自带的属性，不需要依赖注入 --&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao&quot;</span> <span class="attr">name</span>=<span class="string">&quot;userdao;UserDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.dao.impl.UserDaoImpl&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;singleton&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 该bean的属性中有javaBean,需要依赖注入，注入方式：property子标签 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- property子标签的name属性表示按照bean的对象名来装配，需要换成value属性 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- property子标签的ref属性表示javabean的id,若是java自带的数据类型，需要换成value属性 --&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;service&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.service.impl.UserServiceImpl&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;id&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line"> 		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dao&quot;</span> /&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span> 	</span><br><span class="line"> </span><br><span class="line"> 	</span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><font style="color:red">Bean的装配-XML的方式（调用构造方法装配）：</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag"> http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag"> &quot;</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment"> 		构造方法的方式装配Bean对象有2种写法：【任选其一】</span></span><br><span class="line"><span class="comment">			- 利用参数的索引传参</span></span><br><span class="line"><span class="comment">			- 利用参数的形参名传参</span></span><br><span class="line"><span class="comment">	--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.dao.impl.UserDaoImpl&quot;</span> /&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;service&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.service.impl.UserServiceImpl&quot;</span>&gt;</span></span><br><span class="line"> 		<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">&quot;0&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line"> 		<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;dao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dao&quot;</span> /&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line"> 	</span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="2-3、-Bean的注解装配"><a href="#2-3、-Bean的注解装配" class="headerlink" title="2.3、 Bean的注解装配"></a>2.3、 Bean的注解装配</h3><p><font style="color:red">Bean的自动装配-注解的方式：</font></p>
+<ul>
+<li>  使用注解的形式装配，必须结合<code>AOP的 jar包</code>来完成</li>
+<li>  XML配置文件中导入<code>名称空间</code>和<code>约束</code></li>
+<li>  配置文件的beans标签中：<code>&lt;context:annotation-config/&gt;</code></li>
+<li>  配置bean标签（省略property和constructor-arg子标签）<strong>或者</strong>开启组件扫描</li>
+<li>  在Java类上使用注解</li>
+<li>  创建ApplicationContext对象并获取Bean对象</li>
+<li>  调用Bean对象的方法</li>
+</ul>
+<blockquote>
+<p>  <font style="color:red">Bean的装配-注解方式注意事项：</font></p>
+<ul>
+<li><p>自动装配-需要引入的约束：</p>
+<ul>
+<li>  <code>xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</code></li>
+<li>  <code>http://www.springframework.org/schema/context</code></li>
+<li>  <code>http://www.springframework.org/schema/context/spring-context.xsd</code></li>
+</ul>
+</li>
+<li><p>导入某个包的所有Bean</p>
+<ul>
+<li>  <code>&lt;context: component-scan base-package=&quot;包名&quot;/&gt;</code></li>
+</ul>
+</li>
+<li><p>自动装配-开启自动装配设置：</p>
+<ul>
+<li>  <code>&lt;context:annotation-config/&gt;</code></li>
+</ul>
+</li>
+<li><p>自动装配-Java类上设置注解：</p>
+<ul>
+<li>  标识分层：<code>@Repository(beanId)</code>、<code>@Service(beanId)</code>、<code>@Controller(beanId)</code>、<code>@Component</code>【注解的参数可省略，省略后默认为<em>首字母小写的类名</em>】</li>
+<li>  标识自动装配：<code>@Autowired 与 @Qualifier</code>、<code>@Resource(name=&quot;beanId&quot;)</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag"> http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag"> http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">  http://www.springframework.org/schema/context/spring-context.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag"> &quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">	<span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment"> 		自动装配-需要引入的约束：</span></span><br><span class="line"><span class="comment">			 - xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="line"><span class="comment"> 			 - http://www.springframework.org/schema/context</span></span><br><span class="line"><span class="comment">  			 - http://www.springframework.org/schema/context/spring-context.xsd</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		自动装配-开启自动装配设置：</span></span><br><span class="line"><span class="comment">			- &lt;context:annotation-config/&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		自动装配-Java类上设置注解：</span></span><br><span class="line"><span class="comment">			- 标识分层：【创建对象的注解】</span></span><br><span class="line"><span class="comment">				-- @Repository(beanId)</span></span><br><span class="line"><span class="comment">				-- @Service(beanId)</span></span><br><span class="line"><span class="comment">				-- @Controller(beanId)</span></span><br><span class="line"><span class="comment">			- 标识自动装配：【自动装配的注解】</span></span><br><span class="line"><span class="comment">				-- @Autowired	// 根据 类型 来注入</span></span><br><span class="line"><span class="comment">				-- @Qualifier	// 根据 name属性 来注入【配合 @Autowired 使用】</span></span><br><span class="line"><span class="comment">				-- @Resource(name=&quot;beanId&quot;) / 根据 name属性类型或 来注入</span></span><br><span class="line"><span class="comment">	--&gt;</span> </span><br><span class="line">    </span><br><span class="line"> 	<span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.dao.impl.UserDaoImpl&quot;</span> /&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;service&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.service.impl.UserServiceImpl&quot;</span> /&gt;</span> 		</span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Service层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ssm.ioc.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.ssm.ioc.dao.UserDao;</span><br><span class="line"><span class="keyword">import</span> com.ssm.ioc.service.UserService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service(&quot;service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> UserDao dao;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		dao.login();</span><br><span class="line">		System.out.println(<span class="string">&quot;userService: ...login&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">UserServiceImpl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">UserServiceImpl</span><span class="params">(<span class="keyword">int</span> id,UserDao dao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">		<span class="keyword">this</span>.dao = dao;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> UserDao <span class="title">getDao</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> dao;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDao</span><span class="params">(UserDao dao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.dao = dao;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;UserServiceImpl [id=&quot;</span> + id + <span class="string">&quot;, dao=&quot;</span> + dao + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><font style="color:red">Bean的自动装配-XML的方式：</font></p>
+<ul>
+<li>  （利用bean标签的autowire属性，必须导入aop的jar包）</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag"> http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag"> http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">  http://www.springframework.org/schema/context/spring-context.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag"> &quot;</span>&gt;</span></span><br><span class="line"> 		</span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">		autowire属性的取值：</span></span><br><span class="line"><span class="comment">			- default ：由beans标签的default-autowire属性确定</span></span><br><span class="line"><span class="comment">			- byName  ：按bean标签的name属性值装配</span></span><br><span class="line"><span class="comment">			- byType  : 按数据类型装配</span></span><br><span class="line"><span class="comment">			- constructor ：按构造函数的参数类型，进行byName的自动装配</span></span><br><span class="line"><span class="comment">			- no : 不自动装配</span></span><br><span class="line"><span class="comment">	 --&gt;</span></span><br><span class="line"> 		 </span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.dao.impl.UserDaoImpl&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;service&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.service.impl.UserServiceImpl&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;byName&quot;</span> /&gt;</span></span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"> 	</span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="2-4、-Bean-命名空间装配"><a href="#2-4、-Bean-命名空间装配" class="headerlink" title="2.4、 Bean-命名空间装配"></a>2.4、 Bean-命名空间装配</h3><p><font style="color:red">Bean的装配-p命名空间（调用setter方法装配）：</font></p>
+<ul>
+<li>  引入命名空间：<code> xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</code></li>
+<li>  编写bean配置文件</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:p</span>=<span class="string">&quot;http://www.springframework.org/schema/p&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/context/spring-context.xsd&quot;</span> &gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 第一种：setter【property子标签】+无参构造 --&gt;</span></span><br><span class="line">	   <span class="comment">&lt;!--  </span></span><br><span class="line"><span class="comment">		&lt;bean id=&quot;userDao&quot; class=&quot;com.ssm.ioc.dao.UserDaoImpl&quot; /&gt;	    </span></span><br><span class="line"><span class="comment">	    &lt;bean id=&quot;userService&quot; class=&quot;com.ssm.ioc.service.UserServiceImpl&quot; &gt;</span></span><br><span class="line"><span class="comment">	   		&lt;property name=&quot;idx&quot; value=&quot;1&quot;/&gt;</span></span><br><span class="line"><span class="comment">	   		&lt;property name=&quot;dao&quot; ref=&quot;userDao&quot;/&gt;</span></span><br><span class="line"><span class="comment">	    &lt;/bean&gt; --&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">&lt;!-- 第2种：setter【p命名空间】+无参构造 --&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.dao.UserDaoImpl&quot;</span> /&gt;</span> </span><br><span class="line">	    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> </span></span><br><span class="line"><span class="tag">	    	<span class="attr">class</span>=<span class="string">&quot;com.ssm.ioc.service.UserServiceImpl&quot;</span> </span></span><br><span class="line"><span class="tag">	    	<span class="attr">p:idx</span>=<span class="string">&quot;1&quot;</span> </span></span><br><span class="line"><span class="tag">	    	<span class="attr">p:dao-ref</span>=<span class="string">&quot;userDao&quot;</span> </span></span><br><span class="line"><span class="tag">       /&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><font style="color:red">Bean的装配-c命名空间（调用构造方法装配）：</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:c</span>=<span class="string">&quot;http://www.springframework.org/schema/c&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;thingOne&quot;</span> <span class="attr">class</span>=<span class="string">&quot;x.y.ThingTwo&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 传统方式--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;thingOne&quot;</span> <span class="attr">class</span>=<span class="string">&quot;x.y.ThingOne&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">&quot;thingTwo&quot;</span>/&gt;</span>        </span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;[emailprotected]&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- c命名空间方式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;thingOne&quot;</span> <span class="attr">class</span>=<span class="string">&quot;x.y.ThingOne&quot;</span> <span class="attr">c:thingTwo-ref</span>=<span class="string">&quot;thingTwo&quot;</span>  <span class="attr">c:email</span>=<span class="string">&quot;[emailprotected]&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h3 id="2-5、纯注解装配"><a href="#2-5、纯注解装配" class="headerlink" title="2.5、纯注解装配"></a>2.5、纯注解装配</h3><p>不使用XML配置文件【SpringBoot 常使用纯注解方式】</p>
+<p>步骤：</p>
+<blockquote>
+<ul>
+<li>  编写一个配置类，使用<code>@Configuration</code>修饰</li>
+<li>  配置类上使用<code>@Component-Scan(base-Packages=&quot;包路径&quot;)</code>修饰</li>
+<li>  创建<code>AnnotationConfigApplicationContext(配置类的字节码)</code>对象来代替<code>ClassPathXmlApplicationContext</code></li>
+<li></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="2-6、-引入其他配置文件"><a href="#2-6、-引入其他配置文件" class="headerlink" title="2.6、 引入其他配置文件"></a>2.6、 引入其他配置文件</h3><p>在beans标签内：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">&quot;applicationContext-123.xml&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h3 id="2-7、-Bean的生命周期"><a href="#2-7、-Bean的生命周期" class="headerlink" title="2.7、 Bean的生命周期"></a>2.7、 Bean的生命周期</h3><ul>
+<li>  调用无参构造</li>
+<li>  setter方法</li>
+<li>  初始化方法</li>
+<li>  使用</li>
+<li>  销毁方法</li>
+</ul>
+<hr>
+<h2 id="3、AOP"><a href="#3、AOP" class="headerlink" title="3、AOP"></a>3、AOP</h2><h3 id="3-1、-什么是AOP"><a href="#3-1、-什么是AOP" class="headerlink" title="3.1、  什么是AOP"></a>3.1、  什么是AOP</h3><p>AOP也叫 <code>面向切面编程</code>，是对<code>OOP</code>（面向对象编程）的补充。AOP是为了解决实现某个功能时，相同的代码分散到各个方法中【隔离业务逻辑，解耦，提高内聚性】，采用<code>横向抽取机制</code>，利用<code>动态代理技术</code>。</p>
+<p>简而言之，AOP就是用不修改源码的方式在主干功能中增加新功能。</p>
+<h3 id="3-2、AOP的底层原理"><a href="#3-2、AOP的底层原理" class="headerlink" title="3.2、AOP的底层原理"></a>3.2、AOP的底层原理</h3><p><font style="color:red;">AOP的底层原理【使用的动态代理技术】有以下两种使用情况：</font></p>
+<blockquote>
+<p>创建代理对象，由代理对象实现功能：</p>
+<ul>
+<li>有接口：JDK的动态代理，创建接口实现类的代理对象，由代理对象来增强方法。【调用<code>java.lang.reflect.Proxy</code>类的<code>newProxyInstance(接口类加载器，接口的字节码数组，实现InvocationHandler接口来编写增强方法)</code>】</li>
+<li>无接口：CGlib的动态代理，创建当前类的子类的代理对象，由子类代理对象来完成代理。</li>
+</ul>
+</blockquote>
+<h4 id="3-2-1、-JDK动态代理"><a href="#3-2-1、-JDK动态代理" class="headerlink" title="3.2.1、 JDK动态代理"></a>3.2.1、 JDK动态代理</h4><p>JDK动态代理，适用于有接口的情况。</p>
+<p>步骤：</p>
+<blockquote>
+<ul>
+<li>  创建接口</li>
+<li>  创建接口的实现类，实现接口的方法</li>
+<li>  创建<code>InvocationHandler</code>接口的实现类</li>
+<li>  <code>Proxy.newProxyInstance(接口的类加载器，接口的字节码数组，InvocationHandler实现类的对象);</code>得到对象</li>
+<li>  对象调用方法</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="3-3、-AOP术语"><a href="#3-3、-AOP术语" class="headerlink" title="3.3、 AOP术语"></a>3.3、 AOP术语</h3><ul>
+<li>  <code>Aspect</code>：切面【把<strong>通知</strong>应用到<strong>切点</strong>的<strong>过程</strong>（代码应用到方法）】，切面类需要在beans标签内注册。</li>
+<li>  <code>Joinpoint</code>：连接点，【一个<strong>可以</strong>被动态代理技术增加功能的方法】。</li>
+<li>  <code>Pointcut</code>：切点，类名、方法名、满足条件的规则【<strong>实际</strong>被增加功能的方法】。</li>
+<li><code>Advice</code>：通知（增强），切面类的方法【功能中被增加的<strong>代码</strong>】。<ul>
+<li>  前置通知：在被增强的方法运行之前的时候执行</li>
+<li>  后置通知：在被增强的方法运行之后的时候执行</li>
+<li>  环绕通知：在被增强的方法运行前后都执行</li>
+<li>  异常通知：在被增强的方法运行出现异常时执行</li>
+<li>  最终通知：最终一定会执行的代码</li>
+</ul>
+</li>
+<li>  <code>TargetObject</code>：目标对象（增强对象），所有被通知的对象。</li>
+<li>  <code>Proxy</code>：代理，通知应用到对象后，被动态创建出的对象。</li>
+<li>  <code>Weaving</code>：织入，切面代码插入到目标对象后，生成的代理对象的过程。</li>
+</ul>
+<p><font style="color:red;">AOP常用的两个框架：</font></p>
+<ul>
+<li>  <code>Spring AOP</code>：纯Java实现，不需要额外的编译器</li>
+<li>  <code>AspcetJ</code>：一个单独的AOP框架，需要有专门的编译器【推荐】</li>
+</ul>
+<h3 id="3-4、AspectJ-框架实现AOP"><a href="#3-4、AspectJ-框架实现AOP" class="headerlink" title="3.4、AspectJ 框架实现AOP"></a>3.4、AspectJ 框架实现AOP</h3><p><font style="color:red;">AspectJ 框架实现AOP的两种方式：</font></p>
+<ul>
+<li>  XML声明</li>
+<li>  注解声明</li>
+</ul>
+<h4 id="3-4-1、-XML声明AOP"><a href="#3-4-1、-XML声明AOP" class="headerlink" title="3.4.1、 XML声明AOP"></a>3.4.1、 XML声明AOP</h4><p>XML声明：切面（类）、切入点（方法调用）、通知（规则）</p>
+<p>XML声明AOP时，所有的 切面（类）、切入点（方法调用）、通知（规则）都必须定义在<code>&lt;aop:config&gt;</code>标签内，<code>beans</code>标签可以有多个<code>&lt;aop:config&gt;</code>标签，每个<code>&lt;aop:config&gt;</code>标签内可以有多个切面（<code>&lt;aop:aspect&gt;</code>）、切点（<code>&lt;aop:cutpoint&gt;</code>）、通知（<code>&lt;aop:advisor&gt;</code>）</p>
+<hr>
+<h4 id="3-4-2、-注解声明AOP"><a href="#3-4-2、-注解声明AOP" class="headerlink" title="3.4.2、 注解声明AOP"></a>3.4.2、 注解声明AOP</h4><hr>
+<h2 id="4、数据库开发"><a href="#4、数据库开发" class="headerlink" title="4、数据库开发"></a>4、数据库开发</h2><hr>
+<h2 id="5、事务管理"><a href="#5、事务管理" class="headerlink" title="5、事务管理"></a>5、事务管理</h2><hr>
+<h2 id="6、Spring5-新特性"><a href="#6、Spring5-新特性" class="headerlink" title="6、Spring5 新特性"></a>6、Spring5 新特性</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">CYW</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://cder123.github.io/2022/01/15/Spring4-%E5%85%A5%E9%97%A8/">http://cder123.github.io/2022/01/15/Spring4-入门/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cder123.github.io" target="_blank">Cyw的笔记栈</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://z3.ax1x.com/2021/06/01/2KV1yj.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/qrcode_for_wx_gongzhonghao.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/qrcode_for_wx_gongzhonghao.jpg" alt="微信订阅号"/></a><div class="post-qr-code-desc">微信订阅号</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/11/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机网络-实验笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/08/13/Java-多线程/" title="Java-多线程"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-13</div><div class="title">Java-多线程</div></div></a></div><div><a href="/2021/08/13/Mybatis-入门/" title="Mybatis-入门"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-13</div><div class="title">Mybatis-入门</div></div></a></div><div><a href="/2021/08/04/Java Web-笔记/" title="Java Web-入门笔记"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-04</div><div class="title">Java Web-入门笔记</div></div></a></div><div><a href="/2021/08/04/Java SE/" title="Java SE-入门笔记"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-04</div><div class="title">Java SE-入门笔记</div></div></a></div><div><a href="/2021/09/01/Spring5-入门/" title="Spring-入门"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://z3.ax1x.com/2021/06/01/2KV1yj.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-01</div><div class="title">Spring-入门</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring4-%E5%85%A5%E9%97%A8"><span class="toc-text">Spring4-入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">0、参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81Spring%E5%9F%BA%E7%A1%80"><span class="toc-text">1、Spring基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E3%80%81Spring-%E6%A6%82%E8%BF%B0"><span class="toc-text">1.1、Spring 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Spring"><span class="toc-text">1.1.1、什么是 Spring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2%E3%80%81-IoC-%E4%B8%8E-DI"><span class="toc-text">1.1.2、 IoC 与 DI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2%E3%80%81Spring-%E7%9A%84%E6%A0%B8%E5%BF%83%E5%AE%B9%E5%99%A8"><span class="toc-text">1.2、Spring 的核心容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81Bean"><span class="toc-text">2、Bean</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81-Bean%E7%9A%84%E8%A3%85%E9%85%8D-%E6%A6%82%E8%BF%B0"><span class="toc-text">2.1、 Bean的装配-概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E3%80%81-Bean%E7%9A%84XML%E8%A3%85%E9%85%8D"><span class="toc-text">2.2、 Bean的XML装配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E3%80%81-Bean%E7%9A%84%E6%B3%A8%E8%A7%A3%E8%A3%85%E9%85%8D"><span class="toc-text">2.3、 Bean的注解装配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E3%80%81-Bean-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E8%A3%85%E9%85%8D"><span class="toc-text">2.4、 Bean-命名空间装配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5%E3%80%81%E7%BA%AF%E6%B3%A8%E8%A7%A3%E8%A3%85%E9%85%8D"><span class="toc-text">2.5、纯注解装配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6%E3%80%81-%E5%BC%95%E5%85%A5%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2.6、 引入其他配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7%E3%80%81-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">2.7、 Bean的生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81AOP"><span class="toc-text">3、AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E3%80%81-%E4%BB%80%E4%B9%88%E6%98%AFAOP"><span class="toc-text">3.1、  什么是AOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E3%80%81AOP%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-text">3.2、AOP的底层原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1%E3%80%81-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-text">3.2.1、 JDK动态代理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E3%80%81-AOP%E6%9C%AF%E8%AF%AD"><span class="toc-text">3.3、 AOP术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E3%80%81AspectJ-%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0AOP"><span class="toc-text">3.4、AspectJ 框架实现AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1%E3%80%81-XML%E5%A3%B0%E6%98%8EAOP"><span class="toc-text">3.4.1、 XML声明AOP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2%E3%80%81-%E6%B3%A8%E8%A7%A3%E5%A3%B0%E6%98%8EAOP"><span class="toc-text">3.4.2、 注解声明AOP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91"><span class="toc-text">4、数据库开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="toc-text">5、事务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81Spring5-%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-text">6、Spring5 新特性</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By CYW</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
