@@ -21,6 +21,12 @@ categories:
 
 
 
+博客：
+
+-   [JavaSSM笔记（一）Spring基础_Ketuer的博客-CSDN博客](https://blog.csdn.net/qq_25928447/article/details/122221020)
+
+
+
 ## 1、Spring基础
 
 
@@ -169,7 +175,7 @@ Spring框架的核心容器中，主要的两个包为：`org.springframework.be
 
 
 
-## 2、Bean
+## 2、IoC 控制反转
 
 
 
@@ -187,6 +193,11 @@ Spring框架的核心容器中，主要的两个包为：`org.springframework.be
 >   -   类的`构造方法`：xml中bean节点的`constructor-arg`子标签
 >   -   注解装配（必须导入AOP的jar包））：`@Repository`（dao层）、`@Service`、`@Controller`、`@Autowired`
 >   -   xml中bean标签的自动装配属性
+
+**注意**：
+
+-   `@Component`注解可以泛指`@Repository`、`@Service`、`@Controller`
+-   以下四个注解用于创建对象：`@Component`、`@Repository`、`@Service`、`@Controller` 。
 
 
 
@@ -594,10 +605,11 @@ public class UserServiceImpl implements UserService{
 
 步骤：
 
->   -   编写一个配置类，使用`@Configuration`修饰
->   -   配置类上使用`@Component-Scan(base-Packages="包路径")`修饰
+>   -   编写一个“配置类”，使用`@Configuration`修饰
+>   -   “配置类”上使用`@Component-Scan(base-Packages="包路径")`修饰
 >   -   创建`AnnotationConfigApplicationContext(配置类的字节码)`对象来代替`ClassPathXmlApplicationContext`
->   -   
+>
+>       
 
 
 
@@ -649,7 +661,7 @@ public class UserServiceImpl implements UserService{
 
 
 
-## 3、AOP
+## 3、AOP 面向切面编程
 
 
 
@@ -671,8 +683,8 @@ AOP也叫 `面向切面编程`，是对`OOP`（面向对象编程）的补充。
 
 > 创建代理对象，由代理对象实现功能：
 >
-> - 有接口：JDK的动态代理，创建接口实现类的代理对象，由代理对象来增强方法。【调用`java.lang.reflect.Proxy`类的`newProxyInstance(接口类加载器，接口的字节码数组，实现InvocationHandler接口来编写增强方法)`】
-> - 无接口：CGlib的动态代理，创建当前类的子类的代理对象，由子类代理对象来完成代理。
+> - 有接口：**JDK的动态代理**，创建接口实现类的代理对象，由代理对象来增强方法。【调用`java.lang.reflect.Proxy`类的`newProxyInstance(接口类加载器，接口的字节码数组，实现InvocationHandler接口来编写增强方法)`】
+> - 无接口：**CGlib的动态代理**，创建当前类的子类的代理对象，由子类代理对象来完成代理。
 
 
 
@@ -717,16 +729,50 @@ JDK动态代理，适用于有接口的情况。
     -   环绕通知：在被增强的方法运行前后都执行
     -   异常通知：在被增强的方法运行出现异常时执行
     -   最终通知：最终一定会执行的代码
--   `TargetObject`：目标对象（增强对象），所有被通知的对象。
+-   `TargetObject`：目标对象（增强对象），所有被通知的对象。【被插入代码的对象】
 -   `Proxy`：代理，通知应用到对象后，被动态创建出的对象。
--   `Weaving`：织入，切面代码插入到目标对象后，生成的代理对象的过程。
+-   `Weaving`：织入，切面代码插入到目标对象后，生成的代理对象的**过程**。
+
+
+
+**术语小结：**
+
+>   -   切面：一个用于增强*其他的类中的方法*的类。
+>   -   连接点：可以被增强的方法（虚拟的概念）
+>   -   切点：被增强的方法（实际）
+>   -   通知：切面类中，用于增强切点的方法的一部分代码
+>   -   织入：插入通知的过程
+
+
 
 
 
 <font style="color:red;">AOP常用的两个框架：</font>
 
 -   `Spring AOP`：纯Java实现，不需要额外的编译器
--   `AspcetJ`：一个单独的AOP框架，需要有专门的编译器【推荐】
+-   `AspcetJ`：一个单独的AOP框架，需要有专门的编译器**【推荐】**
+
+
+
+
+
+<font style="color:red;">AspectJ的切点表达式：</font>
+
+-   切点表达式的 **作用**：表明是对哪个类中的哪个方法进行增强（添加功能）。
+-   **语法：**` execution( [访问修饰符] [返回类型:修饰符为*时省略] [包名.类名] [方法(参数列表)] )`
+-   语法示例：
+    -   对 `com.dao.UserDao`的`add()`进行增强：`execution(* com.dao.UserDao.add(..))`
+    -   对 `com.dao.UserDao`的所有进行增强：`execution(* com.dao.UserDao.*(..))`
+    -   对 `com.dao`包内的全部类和方法进行增强：`execution(* com.dao.*.*(..))`
+
+**注意：**
+
+>   -   上面的**表达式**的语法示例中`*`代表全部，`..`代表全部
+>   -   表达式中使用`*`，则可以省略返回值类型，否则必须写返回值类型
+
+ 
+
+
 
 
 
@@ -739,7 +785,7 @@ JDK动态代理，适用于有接口的情况。
 <font style="color:red;">AspectJ 框架实现AOP的两种方式：</font>
 
 -   XML声明
--   注解声明
+-   注解声明【**推荐使用**】
 
 
 
@@ -747,13 +793,79 @@ JDK动态代理，适用于有接口的情况。
 
 #### 3.4.1、 XML声明AOP
 
-XML声明：切面（类）、切入点（方法调用）、通知（规则）
+XML声明的有：切面（代理类）、切入点（被增强的方法）、通知（“增强方法”）
 
 
 
-XML声明AOP时，所有的 切面（类）、切入点（方法调用）、通知（规则）都必须定义在`<aop:config>`标签内，`beans`标签可以有多个`<aop:config>`标签，每个`<aop:config>`标签内可以有多个切面（`<aop:aspect>`）、切点（`<aop:cutpoint>`）、通知（`<aop:advisor>`）
+XML声明AOP时，所有的 切面（类）、切点（方法）、通知（增加的代码）都必须定义在`<aop:config>`标签内，`beans`标签可以有多个`<aop:config>`标签，每个`<aop:config>`标签内可以有多个切面（`<aop:aspect>`）、切点（`<aop:pointcut>`）、通知（`<aop:advisor>`）
 
 
+
+<font style="color:red"> 注解声明AOP-步骤：</font>
+
+>   -   定义一个被增强的类，类里定义被增强的方法。
+>   -   定义一个增强类（切面类，代理类），类中定义不同的方法来代表不同的增强类型。
+>   -   配置文件中，配置切点
+>       -   IoC注册bean
+>       -   AOP配置：`<aop-config></aop-config>`
+>       -   配置-切入点：在`aop-config`标签内，输入`<aop:pointcut id="" expression="" />`
+>       -   配置-切面：`<aop:aspect ref=""></aop:aspect>`
+>       -   配置-通知：`<aop:aspect ref=""></aop:aspect>`内，`<aop:before method="" pointcut-ref="">`
+
+```xml
+// spring的配置文件
+    <bean id="userDao" class="com.dao.UserDaoImpl" />
+    <bean id="userProxy" class="com.demo.UserProxy" />
+
+// AOP配置
+    <aop-config>
+        // 切点【要被增强的方法】
+        <aop:pointcut id="p1" expression="execution(* com.dao.UserDao.buy(..))" />
+
+        // 切面类【代理类】
+        <aop:aspect ref="userProxy">
+            // beforeTest1为切面类UserProxy的【前置通知】增强方法，
+            // 相当于被@Before注解修饰的方法
+			<aop:before method="beforeTest1" pointcut-ref="p1">
+        </aop:aspect>
+    </aop-config>
+
+```
+
+
+
+示例：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+ ">
+
+    // 注册bean，用于创建对象
+        <bean id="userDao" class="com.dao.UserDaoImpl"></bean>
+        <bean id="myAspect" class="com.aspect.AspectClass"></bean>
+ 	
+    // 配置AOP
+ 	<aop:config>
+        
+        // 注册：切面类
+	 	<aop:aspect id="aspcet" ref="myAspect">
+            
+	 		// 注册：切点
+	 		<aop:pointcut expression="execution(* com.dao.UserDaoImpl.login())"
+                          id="myPointcut"/>            
+            // 注册：通知
+	 		<aop:before method="before" pointcut-ref="myPointcut"></aop:before>
+	 	</aop:aspect>	 	
+ 	</aop:config>
+</beans>
+```
 
 
 
@@ -767,15 +879,185 @@ XML声明AOP时，所有的 切面（类）、切入点（方法调用）、通�
 
 
 
+<font style="color:red"> 注解声明AOP-步骤：</font>
+
+>   -   定义一个被增强的类，类里定义被增强的方法。
+>   -   定义一个增强类（切面类），类中定义不同的方法来代表不同的增强类型。
+>   -   通过配置文件来进行通知的配置，步骤：
+>       -   开启注解扫描【批量注册类】：`<context: component-scan base-package="包名"/>`
+>       -   注解修饰以上两个类【`IoC`的`@Repository`、`@Service`、`@Controller`】
+>       -   `@Aspect`注解修饰（增强类）切面类
+>       -   配置文件中，开启**生成代理对象**的配置：`<spo:aspectj-autoproxy/>`
+>       -   配置不同类型的通知【前置、后置、环绕、异常、最终】，步骤：
+>           -   在**增强类**中，在作为通知的**方法**上使用**不同通知类型的注解**修饰，结合切入点表达式。
 
 
 
+<font style="color:red">注解修饰不同类型的通知-注解类型：</font>
+
+>   -   前置通知：`@Before(“切点表达式”)`
+>   -   后置通知：`@AfterReturning(“切点表达式”)`
+>   -   环绕通知：`@Around(“切点表达式”)`：在通知方法内传入参数，通过在`proceedingJoinPoint.proceed()`前、后编写代码来实现。
+>   -   异常通知：`@AfterThrowing(“切点表达式”)`
+>   -   最终通知：`@After(“切点表达式”)` 
 
 
 
+<font style="color:red">通知复用【切面类中】：</font>
+
+```java
+// 切点表达式：“execution(权限修饰符 全类名.方法名(参数列表) )”
+
+@Pointcut("execution(public void com.dao.UserDao.add(..))")
+public void pointDemo(){
+    System.out.print("通知。。。");
+}
+
+// 复用切入点通知
+@Before("pointDemo()")
+public void before(){
+    System.out.print("前置通知。。。");
+}
+```
 
 
 
+<font style="color:red">多个切面类对同一个类增强时，定义优先级：</font>
+
+>   -   使用：`@Order(数字)`注解修饰**被增强的类**，数字越小，优先级越大
+
+
+
+---
+
+
+
+**以下示例省略的实体类与dao类和接口的代码：**
+
+<font style="color:red">示例（1）-切面类（增强）：</font>
+
+```java
+package com.aspect;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class AspectClass { 
+    // 定义一个可复用的切点
+	@Pointcut("execution(* com.dao.UserDaoImpl.login(..))")
+	public void mypointcut() {}
+	
+	@Before("mypointcut()")
+	public void before(JoinPoint joinPoint) {
+		System.out.println("切面类（before）：...login...前置通知");
+	}
+	
+	@AfterReturning("mypointcut()")
+	public void afterReturning(JoinPoint joinPoint) {
+		System.out.println("切面类（afterReturning）：...login...后置通知");
+	}
+	
+	@Around("mypointcut()")
+	public Object around(ProceedingJoinPoint joinPoint)throws Throwable {
+		System.out.println("切面类（around）：...login...环绕通知-之前");
+		Object obj = joinPoint.proceed();	
+		System.out.println("切面类（around）：...login...环绕通知-之后");
+		return obj;
+	}
+	
+	@AfterThrowing(value = "mypointcut()",throwing ="e")
+	public void afterThrowing(JoinPoint joinPoint,Throwable e){
+		System.out.println("切面类（afterThrowing）：...login...异常通知");
+		System.out.println(e.getMessage());
+	}
+	
+	@After("mypointcut()")
+	public void after(JoinPoint joinPoint){
+		System.out.println("切面类（after）：...login...最终通知");		
+	}
+
+}
+
+```
+
+<font style="color:red">示例（1）-xml配置：</font>
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd ">
+
+ 
+ 	<context:component-scan base-package="com.*" /> 	
+ 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>  	
+
+</beans>
+```
+
+
+
+<font style="color:red">示例（1）-测试：</font>
+
+```java
+package com.test;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
+import com.dao.UserDao;
+
+
+public class AopTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ApplicationContext context	=new ClassPathXmlApplicationContext("applicationContext.xml");
+		UserDao dao = (UserDao)context.getBean("userDaoImpl");
+		dao.login(1);
+	
+	}
+}
+
+```
+
+
+
+<font style="color:red">示例（1）-无异常时的效果：</font>
+
+```java
+切面类（around）：...login...环绕通知-之前
+切面类（before）：...login...前置通知
+dao: ... login...1
+切面类（around）：...login...环绕通知-之后
+切面类（after）：...login...最终通知
+切面类（afterReturning）：...login...后置通知
+```
+
+
+
+<font style="color:red">示例（1）-异常时的效果：</font>
+
+```java
+切面类（around）：...login...环绕通知-之前
+Exception in thread "main" 切面类（before）：...login...前置通知
+切面类（after）：...login...最终通知
+切面类（afterThrowing）：...login...异常通知
+/ by zero
+java.lang.ArithmeticException: / by zero
+```
 
 
 
@@ -791,6 +1073,211 @@ XML声明AOP时，所有的 切面（类）、切入点（方法调用）、通�
 
 
 
+### 4.1、准备工作
+
+
+
+-   引入 jar 包：
+    -   `commons-logging,jar`
+    -   `mysql-connector-java.jar`
+    -   `spring-beans.jar`
+    -   `spring-context,jar`
+    -   `spring-core.jar`
+    -   `spring-expression.jar`
+    -   `spring-jdbc.jar`
+    -   `spring-tx.jar`：事务相关
+    -   `spring-orm.jar`：整合其他ORM框架
+    -   `druid.jar`：Druid连接池【可选】
+-   XML 中配置数据源
+-   XML 开启组件扫描
+-   XML 配置JdbcTemplate
+-   给每个类配置注解（`@Component`、`@Repository`、`@Service`、`@Controller`）
+
+
+
+
+
+**常见操作-见链接：**[JDBC-笔记 | Cyw的笔记栈](https://cder123.github.io/2021/08/04/JDBC-笔记/#6-4-JDBC-Templete)
+
+
+
+>   -   执行：`jdbcTemplate.execute(String sql)`
+>
+>   -   修改（增删改）：`jdbcTemplate.update(String sql,Object[] sql_args)`
+>
+>   -   查询【返回单个Integer】：`jdbcTemplate.queryForObject(String sql,Integer.class)`
+>
+>   -   查询【返回对象】：`jdbcTemplate.queryForObject(String sql,BeanPropertyRowMapper mapper,Object[] sql_args)`
+>
+>   -   查询【返回集合】：`jdbcTemplate.queryForList(String sql,BeanPropertyRowMapper mapper,Object[] sql_args)`
+>
+>   -   查询【返回集合】：`jdbcTemplate.query(String sql,BeanPropertyRowMapper mapper)`
+>
+>       
+>
+>    
+>
+>   小结：
+>
+>   -   **JdbcTemplate**的查询功能**只能返回对象和列表**，因此，当需要返回基本类型时，可以传入**包装类**的字节码
+>   -   **JdbcTemplate**的批量操作：以`batch`开头的方法
+
+
+
+
+
+<font style="color:red;">数据源（无连接池版）：</font>
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd
+ ">
+    
+    // 数据源
+ 	<bean id="dataSource" 
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+ 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/springstudy" />
+ 		<property name="username" value="root" />
+ 		<property name="password" value="root" />
+ 	</bean>
+    
+    // jdbc模板类
+ 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+ 		<property name="dataSource" ref="dataSource" />
+ 	</bean>
+ 
+    
+    // 开启组件扫描（注解形式在实体类上修饰后，可以创建实体类）
+ 	<context:component-scan base-package="com.*" /> 	
+ 	
+ 	
+ 	
+</beans>
+```
+
+
+
+<font style="color:red;">数据源（连接池版）：</font>
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd
+ ">
+
+ 	
+ 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" 
+          destroy-method="close">
+ 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+ 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/springstudy" />
+ 		<property name="username" value="root" />
+ 		<property name="password" value="root" />
+ 	</bean>
+ 	
+ 	
+ 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+ 		<property name="dataSource" ref="dataSource" />
+ 	</bean>
+ 
+ 	<context:component-scan base-package="com.*" /> 	
+ 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy> 
+ 	
+ 	
+</beans>
+```
+
+
+
+
+
+
+
+<font style="color:red;">执行语句（没有结果）：</font>
+
+```java
+package com.test;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+import com.dao.UserDao;
+import com.entity.User;
+
+public class AopTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ApplicationContext context	= new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+        JdbcTemplate jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate");
+		
+        jdbcTemplate.execute("create table role(
+                             rid int primary key,
+                             rname nvarchar(5));
+        ");
+
+		
+	}
+
+}
+
+```
+
+<font style="color:red;">数据查询-封装为对象：</font>
+
+```java
+package com.test;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+import com.dao.UserDao;
+import com.entity.User;
+
+public class AopTest {
+
+	public static void main(String[] args) {
+		
+		ApplicationContext context	= new ClassPathXmlApplicationContext("applicationContext.xml");
+		JdbcTemplate jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate");
+
+		String sql = "select * from `user` where uid=1";
+		BeanPropertyRowMapper<User> rowmap = new BeanPropertyRowMapper<>(User.class);
+		User user = jdbcTemplate.queryForObject(sql,rowmap);
+        
+        // User [uid=1, username=张三, pwd=123]
+		System.out.println(user);
+		
+	}
+
+}
+
+```
+
 
 
 
@@ -804,6 +1291,8 @@ XML声明AOP时，所有的 切面（类）、切入点（方法调用）、通�
 
 
 ## 5、事务管理
+
+
 
 
 
