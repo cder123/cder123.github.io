@@ -1073,25 +1073,25 @@ java.lang.ArithmeticException: / by zero
 
 
 
-### 4.1、准备工作
+<font style="color:red;">准备工作:</font>
 
-
-
--   引入 jar 包：
-    -   `commons-logging,jar`
-    -   `mysql-connector-java.jar`
-    -   `spring-beans.jar`
-    -   `spring-context,jar`
-    -   `spring-core.jar`
-    -   `spring-expression.jar`
-    -   `spring-jdbc.jar`
-    -   `spring-tx.jar`：事务相关
-    -   `spring-orm.jar`：整合其他ORM框架
-    -   `druid.jar`：Druid连接池【可选】
--   XML 中配置数据源
--   XML 开启组件扫描
--   XML 配置JdbcTemplate
--   给每个类配置注解（`@Component`、`@Repository`、`@Service`、`@Controller`）
+>   -   引入 jar 包：
+>       -   `commons-logging,jar`
+>       -   `mysql-connector-java.jar`
+>       -   `spring-beans.jar`
+>       -   `spring-context,jar`
+>       -   `spring-core.jar`
+>       -   `spring-expression.jar`
+>       -   `spring-jdbc.jar`
+>       -   `spring-tx.jar`：事务相关
+>       -   `spring-orm.jar`：整合其他ORM框架
+>       -   `druid.jar`：Druid连接池【可选】
+>   -   XML 中配置数据源
+>   -   XML 开启组件扫描
+>   -   XML 配置JdbcTemplate
+>   -   给每个类配置注解（`@Component`、`@Repository`、`@Service`、`@Controller`）
+>
+>   
 
 
 
@@ -1294,13 +1294,275 @@ public class AopTest {
 
 
 
+### 5.1、事务的概念
+
+
+
+事务，是数据库操作的基本单元，要么不做，要么全做。
+
+
+
+事务的**四大特性**：
+
+>   -   原子性：一组要么不做，要么全做的操作。
+>   -   一致性：从一个一致的状态 到 另一个一致的状态。
+>   -   隔离性：多个事务同时执行时，各自独立，互不影响。
+>   -   持久性：一旦提交，永久存储。
+
+
+
+经典的事务应用场景：银行转账
+
+>   -   A 转账 100 元 给 B
+>   -   A少100，B多100
+
+
+
+### 5.2、事务操作环境的搭建
+
+
+
+>   -   创建数据库和数据表
+>   -   定义dao层、service层的方法
+>   -   `JdbcTemplate`注入`DataSource`，`dao层`注入JdbcTemplate，`service层`注入dao
+
+
+
+<font style="color:red;">事务操作的流程：</font>
+
+>   -   开启事务
+>   -   执行操作
+>   -   没有异常，提交事务
+>   -   有异常，回滚事务
 
 
 
 
 
+### 5.3、Spring的事务管理
 
 
+
+**事务管理**可以在任何一次添加，但一般添加到**Service层**。
+
+
+
+<font style="color:red;">Spring的两种事务管理操作：</font>
+
+>   -   编程式：直接在代码里写
+>   -   声明式：在配置文件里写，底层使用AOP
+>       -   基于注解的声明式事务管理【常用】：注解+xml 或 完全注解
+>       -   基于XML配置文件的声明式事务管理
+
+
+
+<font style="color:red;">Spring的事务管理的接口【事务管理器API】：</font>
+
+>   PlatformTransactionManager
+>
+>   -   DataSourceTransactionManager【供Mybatis框架使用】
+
+
+
+
+
+### 5.4、注解的声明式事务管理
+
+步骤：
+
+>   -   在XML配置文件中，配置`DataSouce` 和 `DataSourceTransactionManager`
+>   -   XML中引入`·`命名空间和与约束（` xmlns:tx="http://www.springframework.org/schema/tx"`和`http://www.springframework.org/schema/tx
+>        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd`）
+>   -   开启**注解声明式事务**，`<tx:annotation-driven transaction-manager="transactionManager" />`
+>   -   在**Service层的类或方法**上添加**事务注解**：`@Transactional`
+
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd
+ http://www.springframework.org/schema/tx
+ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+ ">
+    
+    // 数据源
+        <bean id="dataSource" 
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+            <property name="url" value="jdbc:mysql://127.0.0.1:3306/springstudy" />
+            <property name="username" value="root" />
+            <property name="password" value="root" />
+        </bean>
+    
+    // jdbc模板类
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+            <property name="dataSource" ref="dataSource" />
+        </bean>
+
+    // 事务管理
+        <bean id="transactionManager" 
+              class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <prpperty name="dataSource" ref="dataSource" />
+        </bean>
+    
+    // 开启注解声明式事务管理
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    
+</beans>
+```
+
+
+
+
+
+`@Transactional` 注解事务管理的参数的配置：
+
+>   -   `propagation`：事务的传播行为【见下表】。管理多个事务方法的调用过程。
+>   -   `isolation`：事务的隔离级别。为解决【污读、不可重读、幻读】
+>   -   `timeout`：超时时间。规定时间内提交，不提交就回滚（默认值 = **-1秒**）
+>   -   `reayOnly`：是否只读。**默认值为false**
+>   -   `rollbackFor`：回滚。设置发生哪些异常的时候，回滚数据。
+>   -   `noRollbackFor`：不回滚。设置发生哪些异常的时候，不回滚数据。
+
+
+
+<font style="color:red;">事务的传播行为：</font>
+
+|             传播属性             | 描述                                                         |
+| :------------------------------: | ------------------------------------------------------------ |
+|     REQUIRED (即：Required)      | 若已有事务在运行，则当前方法就在该方法内运行；否则新建一个事务再运行该方法。 |
+| REQUIRED_NEW (即：Required_new)  | 若已有事务在运行，则挂起该事务，并创建一个新事务来运行该方法 |
+|     SUPPORTS（即：Supports）     | 有事务，则运行在该事务；无事务，则可以直接运行               |
+| NO_SUPPORTED（即：No_Supported） | 不可运行在事务；有事务，则先挂起事务                         |
+|    MANDATORY（即：Mandatory）    | 必须运行在事务中；无事务，则报异常                           |
+|        NEVER（即：Never）        | 不可运行在事务中；有事务，则报异常                           |
+|       NESTED（即：Nested）       | 有事务，在该事务的内部事务中运行；无事务，则新建事务，在新事务内运行 |
+
+<font style="color:red;">事务的传播行为的使用：</font>
+
+```java
+@Transactional(propagation=Propagation.REQUIRED)
+@Service
+class UserService{
+    
+}
+```
+
+
+
+<font style="color:red;">事务的读的问题：</font>
+
+>   涉及事务的隔离性。有三个读的问题
+>
+>   -   污读：一个未提交的事务 读到 另一个**未提交的事务的数据**
+>   -   不可重读：一个未提交的事务 读到 一个已提交的事务 **修改的数据**
+>   -   幻读：一个未提交的事务 读到 一个已提交的事务 **添加的数据**
+
+
+
+<font style="color:red;">解决事务的读的问题：</font>
+
+>   设置事务的隔离级别：
+>
+>   -   读未提交（read uncommited）：没解决
+>   -   读已提交（read commited）：解决 脏读
+>   -   可重复读（repeated_read）：解决 脏读、不可重读【**MySQL默认**的隔离级别】
+>   -   序列化（serializable）：解决 脏读、不可重读、幻读
+
+
+
+```java
+@Transactional(propagation=Propagation.REQUIRED,
+               isolation=Isolation.REPITEDABLE_READ)	// repeated_read
+@Service
+class UserService{
+    
+}
+```
+
+
+
+
+
+### 5.5、XML的声明式事务管理
+
+
+
+<font style="color:red;">步骤：</font>
+
+>   -   XML中配置事务管理器
+>   -   配置 切面类的“通知”方法
+>   -   配置 切面类、切点
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd
+ http://www.springframework.org/schema/tx
+ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+ ">
+    
+    // 数据源
+        <bean id="dataSource" 
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+            <property name="url" value="jdbc:mysql://127.0.0.1:3306/springstudy" />
+            <property name="username" value="root" />
+            <property name="password" value="root" />
+        </bean>
+    
+    // jdbc模板类
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+            <property name="dataSource" ref="dataSource" />
+        </bean>
+
+    // 事务管理
+        <bean id="transactionManager" 
+              class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <prpperty name="dataSource" ref="dataSource" />
+        </bean>
+    
+   // ---------------------------------------------------
+   // 配置通知
+    <tx:advice id="txAdvice">
+        // 配置事务参数
+        <tx:attributes>
+            // 在哪个方法上添加事务【2种方式】
+        	<tx:method name="addMoney" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    
+    // 配置切点和切面
+    <aop:config>
+    	<aop:pointcut id="pt1" 
+                      expression="execution(* com.service.UserService.addMoney(..))" />
+        
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1" />
+    </aop:config>
+    
+</beans>
+
+```
 
 
 
@@ -1311,3 +1573,16 @@ public class AopTest {
 
 
 ## 6、Spring5 新特性
+
+
+
+
+
+
+
+
+
+
+
+
+
