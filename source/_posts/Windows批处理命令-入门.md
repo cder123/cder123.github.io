@@ -4,16 +4,24 @@ title: Windows批处理命令—入门
 tag: Windows
 categories:
   - [后端,操作系统,Windows使用]
-
 ---
 
 
 
 # Windows批处理命令—入门
 
-@[toc]
+[toc]
 
-### 1. 解决 cmd  中文乱码
+
+
+## 0、资料
+
+-   [Windows 批处理(bat)语法大全 - 赵青青 - 博客园 (cnblogs.com)](https://www.cnblogs.com/zhaoqingqing/p/4620402.html)
+
+
+
+## 1. 解决 cmd  中文乱码
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201203130339914.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201203130429604.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201203130651236.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
@@ -28,14 +36,14 @@ cmd中输入：`chcp 65001` 将 编码改为 UTF-8
 
 
 
-###  2. 批处理文件
+##  2. 批处理文件
 
 批处理文件 就是 将多条DOS命令放在一个`.bat` 文件中，运行时，依次执行文件中编写的 DOS命令
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201203133633685.png)
 
 
 
-### 3. 切换目录
+## 3. 切换目录
 
 cd【即：change directory 更改当前目录】
 - 进入驱动器，如：`d:`
@@ -46,7 +54,7 @@ cd【即：change directory 更改当前目录】
 
 
 
-### 4. 获取当前 批处理文件 所在的目录
+## 4. 获取当前 批处理文件 所在的目录
 
 “d” ： Drive的缩写，即为驱动器
 “p”：  Path缩写，即为路径，目录
@@ -110,7 +118,7 @@ pause
 
 
 
-### 5. 杀进程：
+## 5. 杀进程：
 
 ```bash
 taskkill -f /im notepad.exe
@@ -125,7 +133,7 @@ pause
 
 
 
-### 6. 获取帮助
+## 6. 获取帮助
 
 例如：`taskkill  /?`
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201203142030518.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
@@ -136,7 +144,7 @@ pause
 
 
 
-### 7. 常用命令
+## 7. 常用命令
 
 ```bash
 //查看系统版本的命令的语法【/？】
@@ -186,8 +194,7 @@ copy /?
 
 
 
-
-### 8. 运行的时候 传参
+## 8. 运行的时候 传参
 
 例如：
 
@@ -208,7 +215,7 @@ call b.bat "hello" "haha"
 
 
 
-### 9. echo
+## 9. echo
 
 语法：
 1. `echo   on/off  `: 打开或关闭提示【不显示输入的过程，只显示执行结果】
@@ -222,7 +229,7 @@ call b.bat "hello" "haha"
 
 
 
-### 10. @符号
+## 10. @符号
 
 @与echo off 相似，用于隐藏 带@的命令的输入 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201203145545385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
@@ -249,8 +256,7 @@ echo hello  >> d:\Test.txt
 
 
 
-
-### 11. goto
+## 11. goto
 
 实例：
 ```bash
@@ -268,7 +274,7 @@ else(goto label_1)
 
 
 
-### 12. 案例-按需关机
+## 12. 案例-定时关机
 
 ```bat
 @echo off

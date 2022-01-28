@@ -27,6 +27,21 @@ categories:
 
 
 
+视频：
+
+-   [尚硅谷 spring5](https://www.bilibili.com/video/BV1Vf4y127N5?p=2)
+
+>   【根据视频总结笔记】：
+>   1、IOC-XML-1：https://blog.csdn.net/weixin_45496190/article/details/107059038
+>   2、IOC-XML-2：https://blog.csdn.net/weixin_45496190/article/details/107067200
+>   3、IOC-注解：https://blog.csdn.net/weixin_45496190/article/details/107071204
+>   4、AOP：https://blog.csdn.net/weixin_45496190/article/details/107082732
+>   5、JdbcTemplate：https://blog.csdn.net/weixin_45496190/article/details/107092107
+
+
+
+
+
 ## 1、Spring基础
 
 
@@ -1204,6 +1219,108 @@ java.lang.ArithmeticException: / by zero
 </beans>
 ```
 
+```properties
+<!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--高版本的Driver可以自动识别数据库  而不再需要指定具体是哪一个Driver了-->
+        <property name="driverClassName" value="${druid.driverClassName}"/>
+        <property name="url" value="${druid.url}"/>
+        <property name="username" value="${druid.username}"/>
+        <property name="password" value="${druid.password}"/>
+
+        <!-- 初始化连接数量 -->
+        <property name="initialSize" value="${druid.initialSize}" />
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${druid.minIdle}" />
+        <!-- 最大并发连接数 -->
+        <property name="maxActive" value="${druid.maxActive}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${druid.maxWait}" />
+
+        <!--以下暂时可以不需要配置-->
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="${druid.validationQuery}" />
+        <property name="testWhileIdle" value="${druid.testWhileIdle}" />
+        <property name="testOnBorrow" value="${druid.testOnBorrow}" />
+        <property name="testOnReturn" value="${druid.testOnReturn}" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。 -->
+        <property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize"
+                  value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="${druid.filters}" />
+    </bean>
+```
+
+druid在Spring全局配置中的设置：
+
+```xml
+<!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--高版本的Driver可以自动识别数据库  而不再需要指定具体是哪一个Driver了-->
+        <property name="driverClassName" value="${druid.driverClassName}"/>
+        <property name="url" value="${druid.url}"/>
+        <property name="username" value="${druid.username}"/>
+        <property name="password" value="${druid.password}"/>
+
+        <!-- 初始化连接数量 -->
+        <property name="initialSize" value="${druid.initialSize}" />
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${druid.minIdle}" />
+        <!-- 最大并发连接数 -->
+        <property name="maxActive" value="${druid.maxActive}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${druid.maxWait}" />
+
+        <!--以下暂时可以不需要配置-->
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="${druid.validationQuery}" />
+        <property name="testWhileIdle" value="${druid.testWhileIdle}" />
+        <property name="testOnBorrow" value="${druid.testOnBorrow}" />
+        <property name="testOnReturn" value="${druid.testOnReturn}" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。 -->
+        <property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize"
+                  value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="${druid.filters}" />
+    </bean>
+```
+
+druid-conf,.properties:
+
+```properties
+druid.driverClassName=com.mysql.cj.jdbc.Driver
+druid.url=jdbc:mysql://217.0.0.1/springstudy?useSSL=false&characterEnding=utf8&serverTimezone=Asia/Shanghai
+druid.username=root
+druid.password=123
+druid.initialSize=10
+druid.minIdle=6
+druid.maxActive=50
+druid.maxWait=60000
+druid.timeBetweenEvictionRunsMillis=60000
+druid.minEvictableIdleTimeMillis=300000
+druid.validationQuery=SELECT 'x'
+druid.testWhileIdle=true
+druid.testOnBorrow=false
+druid.testOnReturn=false
+druid.poolPreparedStatements=false
+druid.maxPoolPreparedStatementPerConnectionSize=20
+druid.filters=wall,stat
+```
+
 
 
 
@@ -1376,7 +1493,7 @@ public class AopTest {
 >   -   开启**注解声明式事务**，`<tx:annotation-driven transaction-manager="transactionManager" />`
 >   -   在**Service层的类或方法**上添加**事务注解**：`@Transactional`
 
-
+【使用时，删除以下配置的注释】
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1395,7 +1512,12 @@ public class AopTest {
  http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
  ">
     
+     <context:component-scan base-package="com.*"></context:component-scan>
+ 	 <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+    
     // 数据源
+    // <context:property-placeholder location="classpath:d.properties" />
         <bean id="dataSource" 
               class="org.springframework.jdbc.datasource.DriverManagerDataSource">
             <property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -1412,7 +1534,7 @@ public class AopTest {
     // 事务管理
         <bean id="transactionManager" 
               class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-            <prpperty name="dataSource" ref="dataSource" />
+            <property name="dataSource" ref="dataSource" />
         </bean>
     
     // 开启注解声明式事务管理
@@ -1572,7 +1694,19 @@ class UserService{
 
 
 
-## 6、Spring5 新特性
+## 6、Spring5 新功能介绍
+
+
+
+
+
+<font style="color:red;">介绍：</font>
+
+>   -   Spring 5 是基于JDK 8兼容JDK 9的，剔除了以往不建议使用的类和方法。
+>   -   Spring 5 自带通用的日志框架封装【官方建议使用：Log4j2】
+>   -   Spring 5 `@Nullable`注解，可以作用在方法（返回值为空）、属性、参数（值可以为空）
+>   -   Spring 5 支持函数式编程【lambda表达式】：用户手动new的对象交给Spring来管理
+>   -   Spring 5 整合 Junit5【指定Junit版本：`@RunWith(SpringJunit4ClassRunner.class)`; 指定配置文件的路径：`@ContextConfiguration(lasspath:bean1.xml)`】
 
 
 
@@ -1582,7 +1716,29 @@ class UserService{
 
 
 
+## 7、WebFlux
 
 
 
+### 7.1、WebFlux简介
+
+【建议此模块学习前，先学SpringMVC】
+
+
+
+
+
+### 7.2、WebFlux的执行流程与核心API
+
+
+
+
+
+### 7.3、WebFlux-基于注解的编程模型
+
+
+
+
+
+### 7.4、WebFlux-基于函数式的编程模型
 

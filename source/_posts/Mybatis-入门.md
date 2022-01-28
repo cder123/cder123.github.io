@@ -1051,18 +1051,6 @@ public void updateUser(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 
@@ -1231,7 +1219,7 @@ public void updateUser(){
 
 
 
-## 11、Mybaiis的加载机制
+## 11、Mybatis的加载机制
 
 
 
@@ -1269,7 +1257,7 @@ public void updateUser(){
 
 
 
-## 12、Mybaiis的缓存
+## 12、Mybatis的缓存
 
 
 
@@ -1307,5 +1295,5 @@ public void updateUser(){
 
 
 
-## 13、Mybaiis的注解开发
+## 13、Mybatis的注解开发
 
