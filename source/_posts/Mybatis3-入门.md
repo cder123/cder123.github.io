@@ -967,11 +967,22 @@ public interface UserDao {
 
 
 
+`discriminator`子标签：鉴别器，属性`column`的值为数据表的列，属性`javaType`的值为列所对应的 java类型
+
+
+
 <font style="color:red;font-size:1.2em;">关系映射：</font>
 
 -   一对一（`association 子标签`）：【类A有一个类B的属性】类A的映射配置文件中，association子标签的select属性绑定类B的Dao接口的查询方法，该查询方法的返回值为一个对象。（两个类的关联属性是一个**2**类型）
 -   一对多（`collection 子标签`）：【类A有一个类B的属性，且是集合类型】类A的映射配置文件中，association子标签的select属性绑定类B的Dao接口的查询方法，该查询方法的返回值为一个集合。（两个类的关联属性是一个**集合**类型）
 -   多对多：【类A有一个类B的属性，且是集合类型，类B有一个类A的属性，且是集合类型】类A的映射配置文件中，association子标签的select属性绑定类B的Dao接口的查询方法，该查询方法的返回值为一个集合。类B的映射配置文件中，association子标签的select属性绑定类A的Dao接口的查询方法，该查询方法的返回值为一个集合。（两个类各自有一个关联属性，且各自是一个**集合**类型）
+
+
+
+<font style="color:red;font-size:1.2em;">关系映射在编写 association 标签的时候主要有 **嵌套结果** 和 **嵌套查询** 两种：</font>
+
+>   -   嵌套结果【多表关联的语句在SQL里写】：property + javaType
+>   -   嵌套查询【多表关联的语句在各自的接口里写】：property + javaType + column + select
 
 
 
@@ -985,9 +996,10 @@ public interface UserDao {
 <mapper namespace="com.dao.UserDao">
 	
     // 自定义JavaBean类型【嵌套查询】
-    // id子标签：用于定义主键的映射关系
-    // result子标签：用于定义其他属性的映射关系
-	<resultMap type="com.entity.User" id="myUser">
+        // id子标签：用于定义主键的映射关系
+        // result子标签：用于定义其他属性的映射关系
+        // discriminator子标签：使用结果值来决定使用哪个resultMap
+	<resultMap id="myUser" javaType="com.entity.User">
         // column : 数据表的列名
         // property：javabean的属性名
         // javaType: javabean的全类名（javaBean属性的类型）
@@ -1000,10 +1012,18 @@ public interface UserDao {
                 <id column="deptId" property="deptId" />
                 <result column="deptName" property="deptName" />
             </association>
+            <discriminator javaType="string" column="sex">
+                <case value="0" resultType="myUser">
+                	// ...
+                </case>
+                <case value="1" resultType="myUser">
+                	// ...
+                </case>
+            </discriminator>
 	</resultMap>
     
-     // 自定义JavaBean类型【分步查询】
-	<resultMap type="com.entity.User" id="myUser">
+     // 自定义JavaBean类型【嵌套结果】
+	<resultMap id="myUser" javaType="com.entity.User">
 		<id column="uid" property="uid" />
 		<result column="username" property="username" />
 		<result column="pwd" property="pwd" />
@@ -1138,7 +1158,11 @@ public interface UserDao {
 
 -   [Mybatis-中文文档-insert、update、delete](https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#insert_update_and_delete)
 
+insert、update标签中，主键相关的属性：
 
+-   属性`useGeneratedKeys="true | false"`
+-   属性`keyProperty="主键的属性名"`
+-   属性`keyColumn="主键是第几列"`
 
 
 
@@ -1534,18 +1558,18 @@ Mybatis的缓存在底层使用 `Map`封装。
 
 
 
-## 6、Mybatis 整合
+## 6、Mybatis 整合 Spring
 
 
 
-<font style="color:red;font-size:1.3em;">步骤：</font>
+### 6.1、<font style="color:red;font-size:1.3em;">整合的步骤：</font>
 
 >   1、编写：数据库（数据源）的配置：`druid.properties`
 
 ```properties
 driverClassName=com.mysql.jdbc.Driver
-url=jdbc:mysql://localhost:3306/ssm_01
-username=root
+url=jdbc:mysql://localhost:3306/ssm01?useUnicode=true&characterEncoding=utf-8
+user=root	# 由于spring中${username}默认取的是系统的用户名，会覆盖掉配置文件的内容，所以改配置的属性名
 pwd=root
 initialSize=5
 maxActive=100
@@ -1579,10 +1603,12 @@ maxWait=5000
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/tx/spring-tx.xsd       
 ">
     
     
@@ -1591,49 +1617,273 @@ maxWait=5000
 
 
 
-<font style="color:red;">2-2、在读取`applicationContext.xml`中的 数据库配置文件：</font>
+<font style="color:red;">2-2、在`applicationContext.xml`中的beans标签内读取 数据库配置文件：</font>
 
 ```xml
 	
-	<context:property-placeholder location="classpath:/conf/druid-conf.properties" />
+	<context:property-placeholder location="classpath:conf/druid-conf.properties" />
 
 ```
 
 
 
-
-
-<font style="color:red;">2-3、在读取`applicationContext.xml`中的 开启组件扫件、AOP代理、注解配置：</font>
+<font style="color:red;">2-3、在`applicationContext.xml`中的 开启组件扫件、AOP代理：</font>
 
 ```xml
    
 	<context:component-scan base-package="com.cyw.*"/>
     <aop:aspectj-autoproxy/>
-    <context:annotation-config />
 
 ```
 
 
 
-<font style="color:red;">2-4、在读取`applicationContext.xml`中的 开启组件扫件、AOP代理、注解配置：</font>
+<font style="color:red;">2-4、在`applicationContext.xml`中的 配置数据源：</font>
+
+```xml
+<!--    配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--高版本的Driver可以自动识别数据库  而不再需要指定具体是哪一个Driver了-->
+        <property name="driverClassName" value="${driverClassName}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${user}" />
+        <property name="password" value="${password}" />
+        <property name="initialSize" value="1" />
+        <property name="maxActive" value="50" />
+        <property name="maxWait" value="30000" />
+    </bean>
+```
+
+
+
+<font style="color:red;">2-5、在`applicationContext.xml`中的 配置事务管理器：</font>
+
+```xml
+<!--    事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+<!--    基于注解的事务配置-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+```
+
+
+
+<font style="color:red;">2-6、在`applicationContext.xml`中的 配置Mybatis的sqlSessionFactory：</font>
+
+```xml
+<!--    注册sqlSessionFactory：
+            - 数据源
+            - 配置Mybatis的全局配置文件的路径
+-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:conf/mybatis-conf.xml"/>
+    </bean>
+```
+
+
+
+<font style="color:red;">2-7、在`applicationContext.xml`中的 配置Dao接口：</font>
+
+```xml
+<!--自动批量注册Dao接口（不写dao实现类的方式）-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.cyw.dao"/>
+    </bean>
+
+<!--手动注册Dao接口（不写dao实现类的方式）-->
+<!--    <bean id="stuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.cyw.dao.StuDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="stuIdCardDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.cyw.dao.StuIdCardDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+-->
+
+```
 
 
 
 
 
 >   3、编写：Mybatis 的全局配置文件：`mybatis-conf.xml`
->
->   
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   
+	// 批量注册Dao接口
+    <mappers>
+        <package name="com.cyw.dao"/>
+    </mappers>
+
+</configuration>
+```
+
+
+
+>   4、编写：Mybatis 的映射配置文件：`StuMapper.xml`
+
+注意：
+
+-   mapper 标签的 `namespace `属性的值为 Dao接口的`全类名`
+-   增删改查标签的 `id` 属性：为Dao接口的`方法名`
+-   增删改查标签的 `parameterType `属性：为Dao接口的`参数类型的别名或全类名`
+-   增删改查标签的 `resultMap `属性：为 resultMap标签的` id`
+
+
+
+`StuMapper.xml`：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyw.dao.StuDao">
+
+    
+    // 结果集的（封装）映射规则
+    <resultMap id="UserRst" type="com.cyw.po.Stu">
+        <id property="id" column="id"/>
+        <result property="name" column="name" javaType="string"/>
+        <result property="sex" column="sex"/>
+<!--  嵌套结果（多表关联的语句在SQL里写）      
+		<association property="card"  javaType="com.cyw.po.StuIdCard">
+            <id property="id" column="id"/>
+            <result property="code" column="code" />
+        </association>
+-->
+        // 嵌套查询,调用另一个接口的查询方法
+        <association property="card"
+                     column="id"
+                     javaType="com.cyw.po.StuIdCard"
+        			 select="com.cyw.dao.StuIdCardDao.getStuIdCardById"
+         />
+        
+    </resultMap>
+
+    <select id="getStuById"
+            parameterType="integer"
+            resultMap="UserRst">
+        <!-- 嵌套结果方式的SQL
+			select stu.*,stuIdCard.code
+        	from stu,stuIdCard
+        	where stu.id = #{id}
+                and stu.id = stuIdCard.id; -->
+        
+        //  嵌套查询方式的SQL
+        select * from stu where id = #{id};
+    </select>
+
+</mapper>
+```
+
+`StuIdCardMapper.xml`：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyw.dao.StuIdCardDao">
+
+    <select id="getStuIdCardById"
+            parameterType="integer"
+            resultType="com.cyw.po.StuIdCard">
+        select * from stuIdCard where id = #{id};
+    </select>
+
+</mapper>
+```
 
 
 
 
 
+### 6.2、<font style="color:red;font-size:1.3em;">目录结构及配置文件：</font>
+
+![image-20220130110933244](https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220130110933244.png)
 
 
 
 
 
+`Spring的配置文件`（mybatis的配置文件见上面的“整合步骤”小节）：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+    <context:component-scan base-package="com.cyw"/>
+    <aop:aspectj-autoproxy/>
+
+    <context:property-placeholder location="classpath:conf/druid-conf.properties" />
+
+<!--    配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--高版本的Driver可以自动识别数据库  而不再需要指定具体是哪一个Driver了-->
+        <property name="driverClassName" value="${driverClassName}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${user}" />
+        <property name="password" value="${password}" />
+        <property name="initialSize" value="1" />
+        <property name="maxActive" value="50" />
+        <property name="maxWait" value="30000" />
+    </bean>
+
+<!--    事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+<!--    基于注解的事务配置-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+<!--    注册sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:conf/mybatis-conf.xml"/>
+    </bean>
+
+
+<!--手动注册Dao接口（不写dao实现类的方式）-->
+<!--    <bean id="stuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.cyw.dao.StuDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="stuIdCardDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.cyw.dao.StuIdCardDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+-->
+<!--自动注册Dao接口（不写dao实现类的方式）-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.cyw.dao"/>
+    </bean>
+
+
+</beans>
+```
 
 
 

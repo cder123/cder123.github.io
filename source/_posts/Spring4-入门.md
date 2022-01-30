@@ -1088,6 +1088,8 @@ java.lang.ArithmeticException: / by zero
 
 
 
+### 4.1、使用步骤及案例
+
 <font style="color:red;">准备工作:</font>
 
 >   -   引入 jar 包：
@@ -1299,7 +1301,7 @@ druid在Spring全局配置中的设置：
     </bean>
 ```
 
-druid-conf,.properties:
+druid-conf.properties:
 
 ```properties
 druid.driverClassName=com.mysql.cj.jdbc.Driver
@@ -1394,6 +1396,20 @@ public class AopTest {
 }
 
 ```
+
+
+
+### 4.2、报错及解决方法
+
+在Spring 使用外部的properties配置文件时，可能出现的问题如下：
+
+<font style="color:red;">1.   MySQL拒绝本机访问-原因如下：</font>
+
+因为Spring在引入properties配置文件后，在使用 properties 配置文件的 username属性来配置数据源时，用了`${username}`，但Spring本身可以使用`${username}`来取当前操作系统的用户名。因此，操作系统的 username与 properties 配置文件中的 username 产生冲突，并且Spring默认优先使用了操作系统的 username 去连接MySQL，而 MySQL 内此时并没有配置该username的用户，所以，拒绝本机访问
+
+
+
+
 
 
 
@@ -1513,7 +1529,7 @@ public class AopTest {
  ">
     
      <context:component-scan base-package="com.*"></context:component-scan>
- 	 <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+ 	 <aop:aspectj-autoproxy />
 
     
     // 数据源
