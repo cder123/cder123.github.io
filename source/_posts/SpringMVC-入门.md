@@ -19,6 +19,7 @@ categories:
 视频：
 
 >   -   [尚硅谷-SpringMVC](https://www.bilibili.com/video/BV1Ry4y1574R?p=2)
+>   -   [Thymeleaf-服务器模板引擎_动力结点](https://www.bilibili.com/video/BV1cq4y1E79S)
 
 
 
@@ -42,7 +43,7 @@ categories:
 
 
 
-### 1.1、什么是MVC
+### 1.1、什么是 MVC
 
 
 
@@ -72,7 +73,7 @@ C：Controller 控制器，也就是Sevlet
 
 
 
-### 1.2、什么是Spring MVC
+### 1.2、什么是 Spring MVC
 
 Spring MVC 是Spring 的一个子项目，是Spring 为表示层提供的一整套完备的解决方案。
 
@@ -80,7 +81,7 @@ Spring MVC 是Spring 的一个子项目，是Spring 为表示层提供的一整�
 
 
 
-### 1.3、Spring MVC的特点
+### 1.3、Spring MVC 的特点
 
 
 
@@ -93,9 +94,153 @@ Spring MVC 是Spring 的一个子项目，是Spring 为表示层提供的一整�
 
 
 
+### 1.4、Thymeleaf 基本用法
+
+Thymeleaf 是一个服务端的Java 模板引擎，通过在 HTML 标签中嵌入特殊的语法糖，将后端的数据渲染到前端的模板页（替换模板页的占位符部分），生成结果文件，实现页面的展示效果。
+
+Thymeleaf 的功能类似 JSTL 标签库，但与JSTL不同的是，浏览器可以直接预览模板文件，无需服务端支持。
 
 
-### 1.4、Spring MVC版-Hello World
+
+官网：[Thymeleaf](https://www.thymeleaf.org/)
+
+
+
+<font style="color:red;">业界常用的模板：</font>
+
+>   -   FreeMarker
+>   -   Thymeleaf
+>   -   Velocity
+
+
+
+<font style="color:red;">Thymeleaf 的 Maven 坐标：</font>
+
+```xml
+<dependency>
+  <groupId>org.thymeleaf</groupId>
+  <artifactId>thymeleaf</artifactId>
+  <version>3.0.14.RELEASE</version>
+</dependency>
+```
+
+
+
+<font style="color:red;">语法：</font>
+
+```html
+// 使用语法：th:属性名=“${后端属性名}”
+// 在以下示例中，不连接服务器时，input标签的值是张三，连接服务器时，被替换
+<input type="text" 
+       name="userName" 
+       value="张三" 
+       th:value="${user.name}" />
+```
+
+
+
+<font style="color:red;">简单表达式：</font>
+
+-   变量表达式：`${...}`
+-   选择变量表达式：`*{...}`
+-   消息表达式：`#{...}`
+-   链接网址表达式：`@{...}`
+-   片段表达式：`~{...}`
+
+
+
+
+
+<font style="color:red;">url 传参：</font>
+
+```html
+<a th:href="@{ /test/hello(username=‘zs’,pwd='root') }">
+	跳转到 /test/hello 页面，并传参username 和 pwd
+</a>
+```
+
+
+
+
+
+<font style="color:red;">案例：</font>
+
+1.   创建普通的Maven项目，pom.xml 中导入坐标
+2.   创建` HelloThymeleaf`测试类
+
+```java
+
+public class HelloThymeleaf{
+    
+    @Test
+    public void test01(){        
+        // 创建模板引擎
+        TemplateEngine engine = new TemplateEngine();
+        
+        // 准备模板
+        String inputStr = "<input type='text' th:value='${txt}'/>";
+        
+        // 准备数据，使用Context
+        Context context =  new Context();
+        context.setVariable("txt","hello_boys");
+        
+        // 处理模板,生成最终的html
+        String out = engine.process(inputStr,context);        
+    }
+    
+    
+    @Test
+    public void test02(){        
+        // 创建模板引擎
+        TemplateEngine engine = new TemplateEngine();
+        
+        // 创建一个类加载器模板解析器
+        ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
+        
+        // 设置模板解析器
+        engine.setTemplateResolver(resolver);
+        
+        // 准备数据，使用Context
+        Context context =  new Context();
+        context.setVariable("txt","hello_boys");        
+        
+        // 处理模板,生成最终的html,传给前端（此案例前端页面以定义好模板）
+        String outHtml = engine.process("main.html",context);      
+    }
+    
+    @Test
+    public void test03(){        
+        // 创建模板引擎
+        TemplateEngine engine = new TemplateEngine();
+        
+        // 创建一个类加载器模板解析器
+        ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
+        
+        // 设置前缀、后缀
+        // 完整路径：templates/index.html
+        resolver.setPrefix("templates/");
+        resolver.setSuffix(".html");
+        
+        // 设置模板解析器
+        engine.setTemplateResolver(resolver);
+        
+        // 准备数据，使用Context
+        Context context =  new Context();
+        context.setVariable("txt","hello_boys");        
+        
+        // 处理模板,生成最终的html,传给前端（此案例前端页面以定义好模板）
+        String outHtml = engine.process("index",context);      
+    }
+}
+```
+
+
+
+
+
+
+
+### 1.5、Spring MVC 版-Hello World
 
 
 
@@ -359,7 +504,7 @@ public class HelloWorldController {
 
 
 
-创建index.html：（需要引入命名空间）
+<font style="color:red;">创建index.html：（需要引入命名空间）</font>
 
 ```html
 <!DOCTYPE html>
@@ -378,7 +523,7 @@ public class HelloWorldController {
 
 
 
-配置视图解析器（以 thymeleaf 的视图解析器为例）：
+<font style="color:red;">在Spring的配置文件中，配置视图解析器（以 thymeleaf 的视图解析器为例）：</font>
 
 ```xml
 <!-- 配置Thymeleaf视图解析器 -->
@@ -403,6 +548,24 @@ public class HelloWorldController {
         </property>
     </bean>
 ```
+
+
+
+<font style="color:red;">spring自带的视图解析器：</font>
+
+```xml
+<!--    扫描：控制器-->
+    <context:component-scan base-package="com.cyw.controller"/>
+<!--    注册：处理器映射器，将处理器（控制器）的name作为url来查找-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+<!--    注册：处理器适配器，配置对handlerRequest()方法的调用-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+<!--    注册：视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+    
+```
+
+
 
 
 
@@ -505,7 +668,7 @@ public class HelloWorldController {
 
 
 
-### 1.5、Hello World 案例总结
+### 1.6、Hello World 案例总结
 
 
 
@@ -525,7 +688,566 @@ public class HelloWorldController {
 
 
 
+SpringMVC 的注解 可以放在类上，也可以放在方法上。
 
+
+
+### 2.1、@RequestMapping 注解
+
+#### 2.1.1、@RequestMapping 的功能：
+
+`@RequestMapping` 注解的功能就是建立 **请求路径** 与 **控制器方法** 的映射关系，类似Servlet 中的`@WebServlet`注解的作用。
+
+---
+
+
+
+#### 2.1.2、@RequestMapping 的作用位置：
+
+`@RequestMapping` 注解 修饰一个类时：设置请求路径的初始信息
+
+`@RequestMapping` 注解 修饰一个方法时：设置请求路径的具体信息
+
+既修饰一个类，又修饰该类的方法，则先匹配类上的 url ，再匹配方法上的 url
+
+控制器：
+
+```java
+@Controller
+@RequestMapping("/test")
+public class RequestMappingController {
+
+    //此时请求映射所映射的请求的请求路径为：/test/testRequestMapping
+    @RequestMapping("/testRequestMapping")
+    public String testRequestMapping(){
+        return "success";
+    }
+
+}
+```
+
+
+
+---
+
+
+
+#### 2.1.3、@RequestMapping 的 value 属性：
+
+`@RequestMapping` 的 `value `属性，也就是 默认传入的属性（**按 url 匹配处理方法**），任何 htttp 的请求方式都行，如：
+
+```java
+@RequestMapping("/hello")
+public String test01(){...}
+
+------------------------------------------
+    
+// "/hello" 和“/test” 都匹配 test02 这个 处理器方法
+@RequestMapping({"/hello",""/test""})
+public String test02(){...}
+```
+
+
+
+---
+
+
+
+
+
+#### 2.1.4、@RequestMapping 的 method 属性：
+
+`@RequestMapping` 的 `method `属性，按照 HTTP 的请求方式（get、post、put、delete等）匹配控制器方法。当请求**不满足要求**时，报`405：Request method ‘POST’ not supported`错误。
+
+
+
+<font style="color:red;">注意：</font>
+
+目前浏览器只支持get和post，若在form表单提交时，为method设置了其他请求方式的字符串（put或delete），则按照默认的请求方式get处理。
+
+
+
+<font style="color:red;">http 请求方式不同的案例：</font>
+
+```java
+    <form th:action="@{/test}" method="post">
+        <input type="submit">
+    </form>
+        
+// ===========================
+    @RequestMapping(
+            value = "/test",
+            method = {RequestMethod.GET, RequestMethod.POST}
+    )
+    public String test01(){
+        return "success";
+    }
+```
+
+
+
+<font style="color:red;">派生注解：</font>
+
+>   -   处理 get    请求的映射 –> `@GetMapping`
+>   -   处理 post 请求的映射  –> `@PostMapping`
+
+
+
+---
+
+
+
+#### 2.1.4、@RequestMapping 的 params 属性：
+
+@RequestMapping注解的 params 属性通过请求的**请求参数**匹配请求映射。
+
+@RequestMapping注解的 params 属性是一个**字符串类型的数组**，可以通过**四种表达式**设置请求参数和请求映射的匹配关系。
+
+<font style="color:red;">params 属性的值的写法：</font>
+
+>   -   “ 参数 ”：要求请求映射所匹配的请求**必须携带**param 请求参数
+>
+>   -   “ ! 参数”：要求请求映射所匹配的请求必须**不能携带**param 请求参数
+>
+>   -   “ 参数 = value ”：要求请求映射所匹配的请求**必须携带**param请求参数且 param = value
+>
+>   -   “ 参数 != value ”：要求请求映射所匹配的请求**必须携带**param请求参数但是 param != value
+
+
+
+```java
+    <a th:href="@{/test(username='admin',password=123456)">
+        测试@RequestMapping的params属性-->/test
+    </a>  
+    
+// ======================
+    
+    @RequestMapping(
+        value = "/test"
+        ,method = {RequestMethod.GET, RequestMethod.POST}
+        ,params = {"username","password != 123456"}
+    )
+    public String testRequestMapping(){
+        return "success";
+    }
+```
+
+
+
+
+
+---
+
+
+
+#### 2.1.4、@RequestMapping 的 headers 属性：
+
+`@RequestMapping`注解的`headers`属性通过请求的请求头信息匹配请求映射
+
+@RequestMapping注解的headers属性是一个**字符串类型的数组**，可以通过四种表达式设置请求头信息和请求映射的匹配关系
+
+“header信息”：要求请求映射所匹配的请求必须携带header请求头信息
+
+“ ! header信息”：要求请求映射所匹配的请求必须不能携带header请求头信息
+
+“header信息= value”：要求请求映射所匹配的请求必须携带header请求头信息且header=value
+
+“header信息 != value”：要求请求映射所匹配的请求必须携带header请求头信息且header!=value
+
+若当前请求满足`@RequestMapping`注解的`value 和 method`属性，但是`不满足headers`属性，此时页面显示`404错误，即资源未找到`
+
+
+
+---
+
+
+
+#### 2.1.5、SpringMVC支持ant风格的路径
+
+ant风格的路径：路径的通配符匹配。
+
+>   -   `？`：表示任意的**单个**字符 =>  @RequestMapping("/a?b/test")   => {“/a1b/test”，”/a2b/test”}
+>
+>   -   `*`：表示任意的**0~n个**字符 =>  @RequestMapping("/a*b/test") => {“/ab/test”，”/a1b/test”，”/a123b/test”}
+>
+>   -   `**`：表示任意的**一层或多层目录**  =>  @RequestMapping("/a**b/test") => {“/a/b/test”，”/a/c/b/test”，”/a/c/d/b/test”}
+>
+>   注意：在使用 `**` 时，只能使用 `/**/xxx` 的方式
+
+
+
+```java
+	// 匹配 a开头,b结尾的路径下的test【“/a1b/test”,“/a2b/test”】
+	@RequestMapping("/a?b/test")
+    public String testRequestMapping(){
+        return "success";
+    }
+```
+
+
+
+---
+
+
+
+#### 2.1.6、SpringMVC支持 RestFul 风格的路径占位符
+
+
+
+原始方式：`/deleteUser?id=1`
+
+RestFul方式：`/deleteUser/1`
+
+SpringMVC路径中的占位符常用于**RESTful**风格中，当请求路径中将某些数据通过`路径的方式`传输到服务器中，就可以在相应的@RequestMapping注解的value属性中通过`占位符{xxx}`表示传输的数据，在通过`@PathVariable`注解，将占位符所表示的数据`赋值`给控制器方法的形参。
+
+
+
+```java
+    
+    <a th:href="@{/testRest/1/admin}">测试路径中的占位符-->/testRest </a>
+    	<br>
+
+// ====================
+    
+    @RequestMapping("/testRest/{id}/{username}")
+    public String testRest(@PathVariable("id") String id, 
+                           @PathVariable("username") String username){
+        
+        System.out.println("id:"+id+",username:"+username);
+        return "success";
+    }
+	//最终输出的内容为-->id:1,username:admin
+
+```
+
+
+
+---
+
+
+
+### 2.2、获取请求参数
+
+
+
+#### 2.2.1、传统 Servlet 获取请求参数：
+
+传统 Servlet 获取请求参数 是通过控制器参数中的 `HttpServletRequest `对象的`String getParamter("参数的键")`方法。
+
+注意：前、后端的参数名要一致。
+
+```java
+
+	@ReuquestMapping("/hello/success")
+	public String test01(HttpServletRequest  req){
+        
+        String username = req.getParamter("username");
+        String pwd = req.getParamter("pwd");
+        System.out.println(username+"--- " + pwd);   
+        
+        return "success";
+    }
+
+```
+
+
+
+#### 2.2.2、控制器方法的形参 获取请求参数：
+
+注意：前、后端的参数名要一致。
+
+```java
+	@ReuquestMapping("/hello/success")
+	public String test01(String username,String pwd){   
+        
+        System.out.println(username+"--- " + pwd);      
+        
+        return "success";
+    }
+
+
+	@ReuquestMapping("/hello/test02")
+	public String test02(String username,String[] hobby){   
+        
+        System.out.println(username+"--- " + Arrays.toString(hobby));      
+        
+        return "success";
+    }
+```
+
+
+
+#### 2.2.3、@RequestParam 获取请求参数：
+
+注意：前、后端的参数名可以不一致。
+
+`@RequestParam()` 注解的作用：建立 **前端的请求参数** 与 **后端控制器方法形参** 的映射。
+
+`@RequestParam()`注解的 `required `属性默认为 `true`，不能装配则报错400，该属性表示是否为必须。
+
+`@RequestParam()`注解的 `defaultValue `属性设置默认值，只要前端传过来的参数不存在或为null 时，就使用注解的 `defaultValue `属性设置的默认值。
+
+```java
+	
+	@ReuquestMapping("/hello/success")
+	public String test01(@RequestParam("user_name") String username)        
+    {   
+        // 前端表单控件的name属性值为user_name,后端控制器方法的形参为 username
+        // 前后端的参数名，不一致时，可以通过@RequestParam注解来建立映射关系
+        System.out.println(username);      
+        
+        return "success";
+    }
+```
+
+
+
+---
+
+
+
+#### 2.2.5、@RequestHeader 获取请求参数：
+
+`@RequestHeader `注解的作用：建立 **请求报文头的信息** 与 **控制器方法的形参** 的映射关系。
+
+该注解的三个参数，value、required、defaultValue。这三个注解的参数的用法同` 2.2.3`小节` @RequestParam ` 。
+
+
+
+
+
+---
+
+
+
+#### 2.2.6、@CookieValue 获取请求参数：
+
+
+
+`@CookieValue `注解的作用：建立 **Cookie的信息** 与 **控制器方法的形参** 的映射关系。
+
+该注解的三个参数，value、required、defaultValue。这三个注解的参数的用法同` 2.2.3`小节` @RequestParam ` 。
+
+
+
+---
+
+
+
+#### 2.2.7、POJO 获取请求参数：
+
+将控制器方法的形参设为一个POJO，POJO的属性名与前端请求的参数名一致，那么SpringMVC会将请求参数自动封装为POJO。
+
+
+
+前端代码：
+
+```html
+    
+	<form th:action="@{/test/testParamPOJO}" method="post">
+        <input type="text" name="username" />
+        <input type="text" name="pwd" />
+        <input type="submit" />
+    </form>
+
+```
+
+后端代码：
+
+```java
+// POJO 中
+	@Data
+	public class User{
+        private String username;
+        private String pwd;
+    }
+
+// testController 中
+	
+	public String  testParamPOJO(User user){
+        System.out.println(user);
+        return "success";
+    }
+
+
+```
+
+
+
+---
+
+
+
+#### 2.2.8、解决请求参数的乱码问题：
+
+url 传参乱码：Tomcat 的`server.xml`中的编码配置问题。
+
+post 传参乱码：编码不一致。
+
+
+
+<font style="color:red;">解决方案：</font>配置 编码过滤器，并在`web.xml`中注册。
+
+
+
+`web.xml`添加如下配置：
+
+```xml
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceResponseEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+```
+
+
+
+---
+
+
+
+### 2.3、域对象共享数据
+
+
+
+<font style="color:red;">域对象：</font>
+
+-   在`传统的Servlet`中，域对象主要有 PageContext（JSP页面）、 `Request`、`Session`、`Cookie`、`Application`。
+-   在`SpringMVC`中，域对象主要有 `Request`、`Session`、`Application`。
+
+
+
+<font style="color:red;">域对象共享数据的几种方式：</font>( 5+1+1)
+
+>   -   ServletAPI 向 Request 域对象 共享数据
+>   -   ModelAndView 向 Request 域对象 共享数据
+>   -   Model 向 Request 域对象 共享数据
+>   -   Map 向 Request 域对象 共享数据
+>   -   ModelMap 向 Request 域对象 共享数据
+>   -   Session 域对象 共享数据
+>   -   Application 域对象 共享数据
+
+
+
+---
+
+
+
+#### 2.3.1、Request 域对象（ServletAPI）
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+#### 2.3.2、Request 域对象（ModelAndView）
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+#### 2.3.3、Request 域对象（Model）
+
+
+
+
+
+
+
+
+
+---
+
+
+
+#### 2.3.4、Request 域对象（Map）
+
+
+
+
+
+
+
+---
+
+
+
+#### 2.3.5、Request 域对象（ModelMap）
+
+
+
+
+
+
+
+
+
+---
+
+
+
+#### 2.3.6、Model、ModelMap、Map 之间的关系
+
+
+
+
+
+
+
+
+
+---
+
+
+
+#### 2.3.7、Session 域对象
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+#### 2.3.8、Application 域对象
 
 
 
@@ -542,6 +1264,8 @@ public class HelloWorldController {
 
 
 ## 3、SpringMVC 的数据绑定
+
+部分内容见【`2.2`】小节
 
 
 
