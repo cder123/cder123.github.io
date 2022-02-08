@@ -1718,7 +1718,7 @@ Tomcat的各个目录的作用：
 
 -   【推荐】
 
->   `打开IDEA`   ->  `help`  -> `edit coustem VM options ` -> `添加 -Dfile.encoding=UTF-8`
+>    [tomcat问题 - 呵呵可笑 - 博客园 (cnblogs.com)](https://www.cnblogs.com/zsh-blog/p/15824989.html#:~:text=tomcat问题 1、控制台中文乱码 这种情况是tomcat的日志配置文件的编码需要修改，找到tomcat安装目录，找到conf下的logging.properties文件，将其中的encoding,%3D UTF-8的部分全部修改为encoding %3D GBK，如图：) 
 
 
 
@@ -2268,7 +2268,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
+>    	 	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >

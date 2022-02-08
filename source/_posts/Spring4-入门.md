@@ -1409,9 +1409,30 @@ public class AopTest {
 
 
 
+<font style="color:red;">2、Maven使用Junit 测试时，报错：target\surefire-reports for the individual test results：</font>
+
+解决：在 pom.xml 的project内：
+
+```xml
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+                <testFailureIgnore>true</testFailureIgnore>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
 
 
 
+<font style="color:red;">3、AOP错误error creating bean with name 'org.springframework.aop.config.internalAutoProxyCreator'：</font>
+
+原因：忘记导入aspectj的jar包
 
 
 

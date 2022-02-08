@@ -77,7 +77,13 @@ C：Controller 控制器，也就是Sevlet
 
 Spring MVC 是Spring 的一个子项目，是Spring 为表示层提供的一整套完备的解决方案。
 
-注：三层架构分为表示层、业务逻辑层、数据访问层。表示层主要是 **前端页面 + 后端的Servlet** 。
+**注**：三层架构分为表示层、业务逻辑层、数据访问层。表示层主要是 **前端页面 + 后端的Servlet** 。
+
+
+
+<font style="color:red;font-size:1.3em;">！！注意：！！！！！！</font>
+
+>   Spring 的配置文件 和  SpringMVC的配置文件可以是同一个文件，但为了方便管理，一般分开写。【格式完全一样】
 
 
 
@@ -135,6 +141,11 @@ Thymeleaf 的功能类似 JSTL 标签库，但与JSTL不同的是，浏览器可
        name="userName" 
        value="张三" 
        th:value="${user.name}" />
+
+
+<p th:text="${username}"></p>
+    
+
 ```
 
 
@@ -247,6 +258,13 @@ public class HelloThymeleaf{
 <font style="color:red;">案例提示：</font>
 
 -   本案例中使用到了 thymeleaf 模板引擎，这是一个在服务端获取后端的ModelAndView 对象后，解析，生成结果，输出给浏览器呈现结果的工具。
+
+-   控制器中实现页面跳转：
+
+    -   请求转发：`return "forward: success"`
+    -   重定向：`return "redirect: success"`
+
+    
 
 
 
@@ -571,6 +589,8 @@ public class HelloWorldController {
 
 >   7.   在 请求控制器 上添加一个被`RequestMapping("url路径")`注解修饰的**控制方法**
 
+
+
 ```java
 package com.cyw.controller;
 
@@ -669,6 +689,12 @@ public class HelloWorldController {
 
 
 ### 1.6、Hello World 案例总结
+
+
+
+环境搭建【视频】：https://www.bilibili.com/video/BV1Ry4y1574R?p=35
+
+
 
 
 
@@ -825,7 +851,7 @@ public String test02(){...}
     @RequestMapping(
         value = "/test"
         ,method = {RequestMethod.GET, RequestMethod.POST}
-        ,params = {"username","password != 123456"}
+        ,params = {"username","password != 123456"}	// 此处，参数username是为必选
     )
     public String testRequestMapping(){
         return "success";
@@ -1078,7 +1104,7 @@ SpringMVC路径中的占位符常用于**RESTful**风格中，当请求路径中
 
 
 
-#### 2.2.8、解决请求参数的乱码问题：
+#### 2.2.8、解决请求参数的乱码问题（编码过滤器）：
 
 url 传参乱码：Tomcat 的`server.xml`中的编码配置问题。
 
@@ -1093,13 +1119,17 @@ post 传参乱码：编码不一致。
 `web.xml`添加如下配置：
 
 ```xml
-  <filter>
+<!-- 此处省略了xml的声明标签、注册DispacherServlet的配置 -->  
+
+<filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <!-- request 编码 -->
     <init-param>
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
     </init-param>
+     <!-- response 编码 -->
     <init-param>
       <param-name>forceResponseEncoding</param-name>
       <param-value>true</param-value>
@@ -1131,13 +1161,13 @@ post 传参乱码：编码不一致。
 
 <font style="color:red;">域对象共享数据的几种方式：</font>( 5+1+1)
 
->   -   ServletAPI 向 Request 域对象 共享数据
->   -   ModelAndView 向 Request 域对象 共享数据
->   -   Model 向 Request 域对象 共享数据
->   -   Map 向 Request 域对象 共享数据
->   -   ModelMap 向 Request 域对象 共享数据
->   -   Session 域对象 共享数据
->   -   Application 域对象 共享数据
+>   -   `ServletAPI `向 **Request** 域对象 共享数据
+>   -   `ModelAndView `向 **Request** 域对象 共享数据【**推荐使用**】
+>   -   `Model `向 **Request** 域对象 共享数据
+>   -   `Map `向 **Request** 域对象 共享数据
+>   -   `ModelMap `向 **Request** 域对象 共享数据
+>   -   `Session `域对象 共享数据
+>   -   `Application `域对象（**ServletContext** 对象） 共享数据
 
 
 
@@ -1147,13 +1177,45 @@ post 传参乱码：编码不一致。
 
 #### 2.3.1、Request 域对象（ServletAPI）
 
+ServletAPI 的方式：控制器方法传入HttpServletRequest、HttpServletResponse、HttpServletSession。
 
 
 
+<font style="color:red">控制器：</font>
 
+```java
+@Controller
+public class HelloController {
+	
+	@ReuquestMapping("/success")
+	public String test01(HttpServletRequest  req){
+        
+        req.setAttribute("testRequestScope","hello,servletAPI");
+        
+        return "success";
+    }
+}
+```
 
+<font style="color:red">前端：</font>
 
-
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title> 
+</head>
+<body>
+    
+    <h1>首页</h1>
+    
+    // thmeleaf 获取 request 域中键为testReqScope的数据
+    <p th:text="${testRequestScope}"></p>
+    
+</body>
+</html>
+```
 
 
 
@@ -1161,13 +1223,56 @@ post 传参乱码：编码不一致。
 
 
 
-#### 2.3.2、Request 域对象（ModelAndView）
+#### 2.3.2、Request 域对象（ModelAndView）【推荐使用】
+
+【推荐使用】
+
+`ModelAndView`对象：其中的 `Model ` 指的是往域对象中共享数据的功能，`View `指的是指定视图名称并解析最终跳转到页面的过程。
 
 
 
+<font style="color:red">注意：</font>
+
+-   返回值必须是`ModelAndView`类型
+-   `ModelAndView`对象需要调用`addObject(key,value);`方法来共享数据，类似 Servlet编程时的 `request `对象的 `setAttribute(key,value);`方法。
+-   `ModelAndView`对象需要调用`setViewName(视图名);`方法，来设置视图名（转发给哪个页面）
 
 
 
+<font style="color:red">控制器的方法：</font>
+
+```java
+ 	@RequestMapping("/mav")
+    public ModelAndView testMav(){
+        ModelAndView mav = new ModelAndView();
+        // 共享数据
+        mav.addObject("testRequestScope","hello,mav");
+        // 转发页面
+        mav.setViewName("rst");
+        return mav;
+    }
+```
+
+
+
+<font style="color:red">前端 res.html：</font>
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>结果页：</h1>  
+    
+    ModelAndView域:【地址栏访问：http://ip:端口/项目名/mav 时跳转到该页面】
+    <p  th:text="${testRequestScope}"></p>
+
+</body>
+</html>
+```
 
 
 
@@ -1181,7 +1286,45 @@ post 传参乱码：编码不一致。
 
 
 
+<font style="color:red">注意：</font>
 
+-   控制器方法的**形参**必须要有`Model`对象
+-   控制器方法的**返回值**必须要是**视图名**
+-   `Model`对象需要调用`addAttribute(key,value);`方法来共享数据，类似 Servlet编程时的 `request `对象的 `setAttribute(key,value);`方法。
+
+
+
+<font style="color:red">控制器：</font>
+
+```java
+ 	@RequestMapping("/modelTest")
+    public String testMav(Model model){
+        
+        model.addAttribute("testRequestScope","hello,model");      
+        return rst;
+    }
+```
+
+
+
+<font style="color:red">前端：</font>
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>结果页：</h1>  
+    
+    Model域:【地址栏访问：http://ip:端口/项目名/modelTest 时跳转到该页面】
+    <p  th:text="${testRequestScope}"></p>
+
+</body>
+</html>
+```
 
 
 
@@ -1192,6 +1335,44 @@ post 传参乱码：编码不一致。
 
 
 #### 2.3.4、Request 域对象（Map）
+
+控制器方法的形参若为`Map`类型的集合，则该Map集合就是`Request`域中**共享的数据**。
+
+<font style="color:red">控制器的方法：</font>
+
+```java
+ 	@RequestMapping("/mapTest")
+    public String testMav(Map<String,Object> map){
+        
+        map.put("testRequestScope","hello,map");      
+        return rst;
+    }
+```
+
+
+
+<font style="color:red">前端：</font>
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>结果页：</h1>  
+    
+    Map域:【地址栏访问：http://ip:端口/项目名/mapTest 时跳转到该页面】
+    <p  th:text="${testRequestScope}"></p>
+
+</body>
+</html>
+```
+
+
+
+
 
 
 
@@ -1207,6 +1388,44 @@ post 传参乱码：编码不一致。
 
 
 
+<font style="color:red">控制器的方法：</font>
+
+```java
+ 	@RequestMapping("/modelMapTest")
+    public String testMav(ModelMap modelmap){
+        
+        modelmap.put("testRequestScope","hello,ModelMap");      
+        return rst;
+    }
+```
+
+
+
+<font style="color:red">前端：</font>
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>结果页：</h1>  
+    
+    ModelMap域:【地址栏访问：http://ip:端口/项目名/modelMapTest 时跳转到该页面】
+    <p  th:text="${testRequestScope}"></p>
+
+</body>
+</html>
+```
+
+
+
+
+
+
+
 
 
 
@@ -1219,9 +1438,19 @@ post 传参乱码：编码不一致。
 
 #### 2.3.6、Model、ModelMap、Map 之间的关系
 
+Model、ModelMap、Map类型的参数其实本质上都是 `BindingAwareModelMap `类型的
 
+```java
+public interface Model{}
 
+public class ModelMap extends LinkedHashMap<String, Object> {}
 
+public class ExtendedModelMap extends ModelMap implements Model {}
+
+public class BindingAwareModelMap extends ExtendedModelMap {}
+```
+
+这几种方式最终都会返回 `ModelAndView `对象
 
 
 
@@ -1235,6 +1464,36 @@ post 传参乱码：编码不一致。
 
 
 
+<font style="color:red">控制器的方法：</font>
+
+```java
+
+@RequestMapping("/sessionTest")
+public String testSession(HttpSession session){
+    session.setAttribute("testSessionScope", "hello,session");
+    return "rst";
+}
+```
+
+<font style="color:red">前端：</font>
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>结果页：</h1>  
+    
+    Session域:【地址栏访问：http://ip:端口/项目名/sessionTest 时跳转到该页面】
+    <p  th:text="${sesssion.testSessionScope}"></p>
+
+</body>
+</html>
+```
+
 
 
 
@@ -1247,9 +1506,20 @@ post 传参乱码：编码不一致。
 
 
 
-#### 2.3.8、Application 域对象
+#### 2.3.8、Application 域对象（ServletContext 对象）
 
 
+
+<font style="color:red">控制器的方法：</font>
+
+```java
+    @RequestMapping("/testApplication")
+    public String testApplication(HttpSession session){
+        ServletContext application = session.getServletContext();
+        application.setAttribute("testApplicationScope", "hello,application");
+        return "rst";
+    }
+```
 
 
 
@@ -1265,7 +1535,534 @@ post 传参乱码：编码不一致。
 
 ## 3、SpringMVC 的数据绑定
 
-部分内容见【`2.2`】小节
+部分内容见【`2.2`】小节。
+
+
+
+SpringMVC 在程序执行过程中，将**前端的请求参数**通过一定的方式*绑定*到**控制器参数**中。
+
+即：在**数据绑定**的过程中，SpringMVC 将 `ServletRequet `对象 传递给 `DataBinder` 组件，然后 `DataBinder` 组件 调用 `ConversionService `组件将**请求参数的内容**进行类型与格式的转化，并填充到**参数对象**中，之后调用`Validator`组件对**参数对象**进行数据的合法性校验。最后将校验后的`BindingResult`对象赋值给控制器方法相应的参数。
+
+
+
+
+
+### 3.1、SpringMVC 的绑定 默认数据类型
+
+
+
+<font style="color:red;">常用的默认数据类型：</font>
+
+>   -   `HttpServletRequest`
+>   -   `HttpServletResponse`
+>   -   `HttpSession`
+>   -   `Model 或者 ModelMap`：Model 是一个接口，ModelMap 是Model  接口的一个实现类（作用：将Model 数据填充到 Request 域）
+
+
+
+<font style="color:red;">步骤：</font>
+
+-   导入Jar 包
+-   在 `web.xml`文件中，配置前端控制器
+-   在 `applicationContext.xml`（Spring 的配置文件）中，配置 视图解析器、组件扫描。
+-   创建一个控制器类，使用`@Controller`注解修饰整个类，使用`@RequestMapping`注解修饰控制器方法
+-   编写控制器方法、要返回的页面。
+
+
+
+控制器：
+
+```java
+
+@Controller
+public class HelloController{
+    
+    @ReuqestMapping("/testParam01")
+    public String test01(HttpServletRequest req){
+        
+        String username = req.getParamter("username");
+        System.out.println(username);
+        
+        return "success";
+    }
+    
+}
+```
+
+
+
+
+
+### 3.2、SpringMVC 的绑定 简单数据类型
+
+
+
+<font style="color:red;">步骤：</font>
+
+-   导入Jar 包
+-   在 `web.xml`文件中，配置前端控制器
+-   在 `applicationContext.xml`（Spring 的配置文件）中，配置 视图解析器、组件扫描。
+-   创建一个控制器类，使用`@Controller`注解修饰整个类，使用`@RequestMapping`注解修饰控制器方法
+-   编写控制器方法、要返回的页面。
+
+
+
+控制器：
+
+```java
+
+@Controller
+public class HelloController{
+    
+    @ReuqestMapping("/testParam02")
+    public String test02(Integer uid){        
+       
+        System.out.println(uid);
+        
+        return "success";
+    }
+    
+}
+```
+
+
+
+
+
+### 3.3、SpringMVC 的绑定 POJO
+
+
+
+<font style="color:red;">步骤：</font>
+
+-   导入Jar 包
+-   在 `web.xml`文件中，配置前端控制器
+-   在 `applicationContext.xml`（Spring 的配置文件）中，配置 视图解析器、组件扫描。
+-   创建一个控制器类，使用`@Controller`注解修饰整个类，使用`@RequestMapping`注解修饰控制器方法
+-   编写控制器方法、要返回的页面。
+
+
+
+POJO：
+
+```java
+import lombok.*;
+
+@Data
+public class User{
+    private int uid;
+    private String username;
+    private String pwd;
+}
+```
+
+
+
+控制器：
+
+```java
+
+@Controller
+public class HelloController{
+    
+    @ReuqestMapping("/testParam03")
+    public String test03(User user){        
+       	// 当前端的参数名 与 POJO对象的属性名 可以一一对应时，可以自动封装为POJO
+        System.out.println(user);
+        
+        return "success";
+    }
+    
+}
+```
+
+
+
+
+
+### 3.4、SpringMVC 的绑定 包装POJO
+
+包装POJO 的前端部分必须符合以下规则：
+
+>   -   前端请求的参数名：为直接基本属性时，前端请求的参数名 与 POJO 的属性名一致。
+>   -   前端请求的参数名：为POJO属性的子属性时，前端请求的参数名要带上POJO的属性名（如：`dept.deptName`）
+
+
+
+<font style="color:red;">步骤：</font>
+
+-   导入Jar 包
+-   在 `web.xml`文件中，配置前端控制器
+-   在 `applicationContext.xml`（Spring 的配置文件）中，配置 视图解析器、组件扫描。
+-   创建一个控制器类，使用`@Controller`注解修饰整个类，使用`@RequestMapping`注解修饰控制器方法
+-   编写控制器方法、要返回的页面。
+
+
+
+包装POJO：【有属性为 class 类型】
+
+```java
+import lombok.*;
+
+@Data
+public class User{
+    private int uid;
+    private String username;
+    private String pwd;
+    private Dept dept;	// 部门
+}
+```
+
+
+
+包装POJO内部的POJO：
+
+```java
+import lombok.*;
+
+@Data
+public class Dept{
+    private int id;
+    private String deptName;
+}
+```
+
+
+
+控制器：
+
+```java
+
+@Controller
+public class HelloController{
+    
+    @ReuqestMapping("/testParam04")
+    public String test04(User user){  
+        
+       	Dept dept = user.getDept();
+        System.out.println(dept);
+        
+        return "success";
+    }
+    
+}
+```
+
+
+
+
+
+
+
+### 3.5、SpringMVC 的绑定 数组
+
+
+
+绑定 数组 ，也就是前端传过来的是 checkbox 的数据。
+
+
+
+<font style="color:red;">步骤：</font>
+
+-   导入Jar 包
+-   在 `web.xml`文件中，配置前端控制器
+-   在 `applicationContext.xml`（Spring 的配置文件）中，配置 视图解析器、组件扫描。
+-   创建一个控制器类，使用`@Controller`注解修饰整个类，使用`@RequestMapping`注解修饰控制器方法
+-   编写控制器方法、要返回的页面。
+
+
+
+控制器：
+
+```java
+@Controller
+public class HelloController{
+    
+    @ReuqestMapping("/testParam02")
+    public String test02(Integer[] uids){        
+       
+        if(uids != null){
+            for(Integer id : uids){
+                System.out.println(uid);
+            }            
+        }        
+        
+        return "success";
+    }
+    
+}
+```
+
+
+
+
+
+### 3.6、SpringMVC 的绑定 集合
+
+
+
+<font style="color:red;">绑定 集合时，无法直接使用，必须先创建一个POJO类，然后将集合作为POJO的成员变量，最后在控制器方法的参数中，将该POJO 作为参数类型。</font>
+
+
+
+POJO：
+
+```java
+import lombok.*;
+
+@Data
+public class CollectionPOJO{
+    private List<User> list;
+}
+```
+
+
+
+控制器：
+
+```java
+@Controller
+public class HelloController{
+    
+    @ReuqestMapping("/testParam02")
+    public String test02(CollectionPOJO pojo){        
+       List<User> list = pojo.getList();
+       
+       for(User user : list){
+            System.out.println(user);
+       } 
+        
+        return "success";
+    }    
+}
+```
+
+
+
+---
+
+
+
+## 4、SpringMVC 的视图
+
+
+
+SpringMVC中的视图是`View接口`，视图的作用**渲染数据**，将模型Model中的数据展示给用户。
+
+SpringMVC视图的种类很多，默认有：**转发视图**、**重定向视图**。
+
+当工程引入`jstl`的依赖，*转发视图*会自动转换为`JstlView`。
+
+若使用的视图技术为`Thymeleaf`，在SpringMVC的配置文件中配置了 Thymeleaf 的视图解析器，由此视图解析器解析之后所得到的是 `ThymeleafView `。
+
+
+
+### 4.1、ThymeleafView
+
+
+
+当控制器方法中所设置的**视图名称没有任何前缀**时，此时的视图名称会被SpringMVC配置文件中所配置的视图解析器解析，视图名称拼接视**图前缀**和**视图后缀**所得到的**最终路径**，会通过**转发**的方式**实现跳转**。
+
+
+
+
+
+### 4.2、转发视图
+
+
+
+SpringMVC中默认的**转发视图**是`InternalResourceView`。
+
+
+
+”转发“，有资格获取`/WEB-INF`目录下的资源，“重定向”没资格。
+
+”转发“，无资格跨域，“重定向”有资格跨域。
+
+
+
+SpringMVC 中创建**转发视图**的情况：
+
+>   当控制器方法中所设置的视图名称以`"forward:"`为前缀时，创建`InternalResourceView`视图，此时的视图名称**不会**被SpringMVC配置文件中所配置的视图解析器解析，而是会将前缀`"forward:"`去掉，**剩余部分**作为**最终路径**通过**转发的方式**实现跳转。  
+>
+>   
+>
+>   例如：`"forward:/"`，`“forward:/employee”`
+
+
+
+控制器的方法：
+
+```java
+    
+	@RequestMapping("/testForward")
+    public String testForward(){
+        return "forward:/testHello";
+    }
+
+```
+
+
+
+
+
+### 4.3、重定向视图
+
+
+
+SpringMVC中默认的重定向视图是`RedirectView`。
+
+
+
+”转发“，有资格获取`/WEB-INF`目录下的资源，“重定向”没资格。
+
+”转发“，无资格跨域，“重定向”有资格跨域。
+
+
+
+>   当控制器方法中所设置的视图名称以`"redirect:"`为前缀时，创建`RedirectView`视图，此时的视图名称不会被SpringMVC配置文件中所配置的视图解析器解析，而是会将前缀`"redirect:"`去掉，剩余部分作为最终路径通过重定向的方式实现跳转。
+>
+>    
+>
+>   例如：`"redirect:/"`，`“redirect:/employee”`。 
+>
+>    
+>
+>   **注意：**重定向视图在解析时，会先将`redirect:`前缀去掉，然后会判断剩余部分是否以`/`开头，若是则会自动拼接上下文路径。
+>
+>   
+
+
+
+控制器的方法：
+
+```java
+    
+	@RequestMapping("/testRedirect")
+    public String testRedirect(){
+        return "redirect:/testHello";
+    }
+```
+
+
+
+
+
+### 4.4、视图控制器 view-controller
+
+
+
+当控制器方法中，仅仅用来实现页面跳转，即：只需要设置视图名称时，可以将处理器方法使用`view-controller`标签进行表示。
+
+注意：
+
+>   当SpringMVC中设置任何一个`view-controller`时，其他控制器中的请求映射将**全部失效**，
+>
+>   此时需要在`SpringMVC的配置文件`中设置开启mvc注解驱动的标签：`<mvc:annotation-driven />`。
+
+
+
+
+
+Spring的配置文件中：
+
+```xml
+<!--
+    path：设置处理的请求地址（相当于：@RequestMapping的地址）
+    view-name：设置请求地址所对应的视图名称（相当于：页面的名称）
+-->
+
+	<mvc:view-controller path="/testView" view-name="success" />
+	
+// 开启 MVC 的注解启动
+	<mvc:annotation-driven />
+```
+
+
+
+
+
+---
+
+
+
+## 5、SpringMVC 与 RestFul 交互
+
+
+
+### 5.1、RestFul 简介
+
+
+
+REST：**Re**presentational **S**tate **T**ransfer，表现层资源状态转移。
+
+
+
+REST-解释：
+
+>   1、**资源的表述**：例如，HTML/XML/JSON/纯文本/图片/视频/音频等等。资源的表述格式可以通过协商机制来确定。请求-响应方向的表述通常使用不同的格式。
+>
+>   2、**状态转移**：在客户端和服务器端之间转移（transfer）代表资源状态的表述。通过转移和操作资源的表述，来间接实现操作资源的目的。
+
+
+
+### 5.2、RestFul 的实现
+
+具体说，就是 HTTP 协议里面，四个表示操作方式的动词：`GET`、`POST`、`PUT`、`DELETE`。
+
+
+
+它们分别对应四种基本操作：
+
+>   -   GET ：用来获取资源
+>   -   POST  ：用来新建资源
+>   -   PUT ： 用来更新资源
+>   -   DELETE  ：用来删除资源
+
+
+
+REST 风格提倡 URL 地址使用统一的风格设计，从前到后各个单词使用**斜杠**分开，**不使用问号键值对**方式携带请求参数，而是将要发送给服务器的**数据作为 URL 地址的一部分**，以保证整体风格的一致性。
+
+| 操作     | 传统方式         | REST风格                   |
+| -------- | ---------------- | -------------------------- |
+| 查询操作 | getUserById?id=1 | user/1   –> get请求方式    |
+| 保存操作 | saveUser         | user       –> post请求方式 |
+| 删除操作 | deleteUser?id=1  | user/1   –> delete请求方式 |
+| 更新操作 | updateUser       | user       –> put请求方式  |
+
+
+
+`HiddenHttpMethodFilter`可以将`POST`请求转化为浏览器目前不支持的put 和 delete 请求。
+
+`HiddenHttpMethodFilter` 处理`put`和`delete`请求的两个条件：
+
+>   -   当前请求的请求方式必须为post
+>
+>   -   当前请求必须传输请求参数_method
+>
+>   满足以上条件，**HiddenHttpMethodFilter** 过滤器就会将当前请求的请求方式转换为请求参数\_method的值，因此请求参数\_method的值才是最终的请求方式。
+
+
+
+
+
+`web.xml`：
+
+```xml
+// 以下只展示了该章节的核心配置
+// 先注册 SpringMVC 的字符过滤器，再注册以下过滤器
+
+<filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
+
 
 
 
@@ -1287,7 +2084,373 @@ post 传参乱码：编码不一致。
 
 
 
-## 4、SpringMVC 的JSON与RESTful交互
+## 6、SpringMVC 与 JSON 交互
+
+
+
+`HttpMessageConverter`，报文信息转换器，将**请求报文**转换为**Java对象**，或将**Java对象**转换为**响应报文**。
+
+`HttpMessageConverter`提供了两个**注解**和两个**类型**：
+
+>   （在控制器的方法上使用）
+>
+>   两个**注解**：
+>
+>   -   `@RequestBody`：用来修饰一个代表**请求体**的形参
+>   -   `@ResponseBody`：用来修饰一个**控制器的方法**（将方法的最终返回结果作为响应体）
+>
+>   两个**类型**：
+>
+>   -   `RequestEntity`：整个完整的请求报文
+>   -   `ResponseEntity`：整个完整的响应报文
+
+
+
+### 6.1、@RequestBody 注解
+
+`@RequestBody`可以获取请求体，需要在控制器方法设置一个**形参**，使用`@RequestBody`进行标识，当前请求的请求体就会为当前注解所标识的形参赋值。【post 请求报文才有请求体】
+
+```java
+ // 前端   
+	<form th:action="@{/testRequestBody}" method="post">
+        用户名：<input type="text" name="username"><br>
+        密码：<input type="password" name="password"><br>
+        <input type="submit">
+    </form>
+        
+//=====================================
+        
+// 控制器的方法        
+    @RequestMapping("/testRequestBody")
+    public String testRequestBody(@RequestBody String requestBody){
+        System.out.println("requestBody:"+requestBody);
+        return "success";
+    }
+
+// 输出结果【控制台】
+// requestBody:username=admin&password=123456
+```
+
+
+
+### 6.2、RequestEntity 类型
+
+RequestEntity封装请求报文的一种类型，需要在控制器方法的形参中设置该类型的形参，当前请求的请求报文就会赋值给该形参，可以通过getHeaders()获取请求头信息，通过getBody()获取请求体信息。
+
+
+
+```java
+    
+	@RequestMapping("/testRequestEntity")
+    public String testRequestEntity(RequestEntity<String> requestEntity){
+        
+        System.out.println("requestHeader:"+requestEntity.getHeaders());
+        System.out.println("requestBody:"+requestEntity.getBody());
+        return "success";
+    }
+
+// =====================================================
+/*
+	输出结果： 
+		requestHeader:[ host:“localhost:8080”,
+						connection:“keep-alive”, 
+						content-length:“27”, 
+						cache-control:“max-age=0”, 
+						sec-ch-ua:"" Not A;Brand";v=“99”,
+                        “Chromium”;v=“90”,
+                        “Google Chrome”;v=“90"”,
+                        sec-ch-ua-mobile:"?0",
+                        upgrade-insecure-requests:“1”,
+                        origin:“http://localhost:8080”, 
+                        user-agent:“Mozilla/5.0 (Windows NT 10.0; Win64; x64)”
+                      ] 	
+        requestBody：username=admin & password=123
+
+*/
+```
+
+
+
+
+
+### 6.3、@ResponseBody注解
+
+
+
+`@ResponseBody`用于标识一个**控制器方法**，可将该方法的返回值直接作为响应报文的响应体响应到浏览器。
+
+
+
+```java
+// 页面显示：“success”字符串  
+
+	@RequestMapping("/testResponseBody")
+    @ResponseBody
+    public String testResponseBody(){
+        return "success";
+    }
+
+```
+
+
+
+### 6.4、ResponseEntity类型
+
+ResponseEntity用于控制器方法的返回值类型，该控制器方法的返回值就是响应到浏览器的响应报文。
+
+
+
+### 6.5、@ResponseBody 处理JSON：
+
+#### 6.5.1、步骤：
+
+`@ResponseBody`处理 `JSON `的步骤：
+
+>   -   导入`jackson`的依赖。
+>   -   在SpringMVC的核心配置文件中，**开启mvc的注解驱动**。
+>   -   使用`@ResponseBody`注解标识一个控制器方法。
+>   -   控制器方法返回一个POJO（自动转化为JSON）
+
+
+
+<font style="color:red;">（1）导入Jackson 依赖：</font>
+
+```xml
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.12.1</version>
+</dependency>
+```
+
+
+
+<font style="color:red;">（2）SpringMVC配置文件中，开启mvc注解驱动：</font>
+
+```xml
+	<mvc:annotation-driven />
+```
+
+
+
+<font style="color:red;">（3）使用`@ResponseBody`注解标识一个控制器方法</font>
+
+<font style="color:red;">（4）将Java对象直接作为控制器方法的返回值返回，就会自动转换为Json格式的字符串</font>
+
+```java
+    
+			
+// (3)    	
+        @ResponseBody
+        @RequestMapping("/testResponseUser")
+        public User testResponseUser(){
+            // (4)
+            return new User(1001,"admin","123456",23,"男");
+        }
+
+// 浏览器的页面中展示的结果：
+/*
+	{	
+		“id”:1001,
+		“username”:“admin”,
+		“password”:“123456”,
+		“age”:23,“sex”:“男”
+    }
+*/
+```
+
+
+
+#### 6.5.2、整体演示：
+
+<font style="color:red;">（1）前端：</font>
+
+```html
+    <div id="app">
+        <a th:href="@{/testAjax}" @click="testAjax">testAjax</a><br>
+    </div>
+
+// ============================================
+
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+<script type="text/javascript">
+    
+    var vue = new Vue({
+        el:"#app",
+        methods:{
+            testAjax:function (event) {
+                axios({
+                    method:"post",
+                    url:event.target.href,
+                    params:{
+                        username:"admin",
+                        password:"123456"
+                    }
+                }).then(function (response) {
+                    alert(response.data);
+                });
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+```
+
+<font style="color:red;">（2）控制器方法：</font>
+
+```java
+    
+	@RequestMapping("/testAjax")
+    @ResponseBody
+    public String testAjax(String username, String password){
+        System.out.println("username:"+username+",password:"+password);
+        return "hello,ajax";
+    }
+```
+
+
+
+
+
+### 6.6、@RestController注解
+
+`@RestController`注解是SpringMVC提供的一个**复合注解**，标识在**控制器的类**上，
+
+就相当于为类添加了`@Controller`注解，并且为其中的每个方法添加了`@ResponseBody`注解。
+
+【`@Controller` + `@ResponseBody`】
+
+
+
+---
+
+
+
+## 7、SpringMVC 的拦截器
+
+
+
+拦截器（Interceptor），类似 Servet 编程时的 Filter 过滤器的作用，可以使用拦截器进行权限验证。
+
+
+
+自定义拦截器类的两种方式：
+
+>   -   实现`HandlerInterceptor`接口 或者 继承`HandlerInterceptor`接口 的实现类。
+>   -   实现`WebRequestInterceptor`接口 或者 继承`WebRequestInterceptor`接口 的实现类。
+
+
+
+以实现`HandlerInterceptor`接口为例：
+
+```java
+
+public classMyInterceptor implements HandlerInterceptor{
+    
+    // 在控制器方法之前执行，返回值为true时，才继续执行；返回false时，中断之后的操作
+    @Override
+    public boolean preHandle(HttpServletRequest req
+                            ,HttpServletResponse resp
+                            ,Object obj )
+    {
+        ...
+    }
+    
+    // 在控制器方法调用之后，视图解析之前执行【可修改ModelAndView对象】
+    @Override
+    public void postHandle(HttpServletRequest req
+                            ,HttpServletResponse resp
+                            ,Object obj.
+                          	,ModelAndView mav)
+    {
+        ...
+    }
+    
+    // 视图渲染完成，请求完毕之后执行【清理资源】
+    @Override
+    public void afterCompletion(HttpServletRequest req
+                            ,HttpServletResponse resp
+                            ,Object obj.
+                          	,ModelAndView mav)
+    {
+        ...
+    }
+}
+
+```
+
+
+
+<font style="color:red;">步骤：</font>
+
+>   -   定义一个拦截器类，实现拦截器接口（见上面的示例）
+>   -   在`SpringMVC.xml` （SpringMVC的配置文件）中配置拦截器
+
+
+
+`SpringMVC.xml` ：
+
+```xml
+// 以下只展示核心配置
+
+    <mvc:interceptors>
+         // 注册拦截器类
+            <bean class="com.cyw.interceptor.MyInterceptor" />
+
+         // 配置拦截器【第一个拦截器】
+            <mvc:interceptor>
+                // 拦截的路径
+                <mvc:mapping path="/**"/>
+
+                // 不拦截的路径
+                <mvc:exclude-mapping path=""/>
+
+                // 匹配的请求才进行拦截
+                <bean class="com.cyw.interceptor.TestInterceptor01" />
+            </mvc:interceptor>
+
+
+         // 配置拦截器【第二个拦截器】
+            <mvc:interceptor>
+                // 拦截的路径
+                <mvc:mapping path="/**"/>
+
+                // 匹配的请求才进行拦截
+                <bean class="com.cyw.interceptor.TestInterceptor02" />
+            </mvc:interceptor>
+    </mvc:interceptors>
+```
+
+
+
+---
+
+
+
+## 8、异常处理器
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1309,7 +2472,41 @@ post 传参乱码：编码不一致。
 
 
 
-## 5、SpringMVC 的拦截器
+## 9、注解配置 SpringMVC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 10、SpringMVC 的执行流程
+
+
 
 
 
@@ -1341,5 +2538,5 @@ post 传参乱码：编码不一致。
 
 
 
-## 6、SSM 整合
+## 11、SSM 整合
 

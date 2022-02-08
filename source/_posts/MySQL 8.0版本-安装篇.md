@@ -1,14 +1,24 @@
-﻿---
+---
 title: MySQL 8.0版本-安装篇
 tag: MySQL
 categories:
   - SQL
   - MySQL
+
 ---
+
+
 
 # MySQL 8.0版本-安装篇
 
 [toc]
+
+### 0. 资料
+
+-  [mysql8下载安装及配置 - 雪顶儿 - 博客园 (cnblogs.com)](https://www.cnblogs.com/hejh/p/11282380.html#:~:text=mysql8下载和安装. 一、下载. 官网地址： https%3A%2F%2Fdev.mysql.com%2Fdownloads%2Fmysql%2F8.0.html. 选择"downloads"-->"mysql community server"%2C如下图所示：. 向下滑动页面，找到你电脑适配的版本，点击"download"，如下图：.,thanks%2C just start my download. "，直接下载：. 下载完成，解压，mysql的目录如下，下载和安装（解压版不存在安装这一步骤，解压就可以）. 二、mysql的环境变量配置.) 
+-   [MySQL8免安装版下载安装与配置(windows) - ping_code - 博客园 (cnblogs.com)](https://www.cnblogs.com/pingcode/p/15839428.html) 
+
+
 
 ### 1. MySQL免安装版下载(8.0.22)
 

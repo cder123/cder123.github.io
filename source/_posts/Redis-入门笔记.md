@@ -80,7 +80,7 @@ Redis是一种高性能的非关系型数据库。
 
 ### 3.1 Redis的数据结构（数据类型）：
 
->   1、键值对（key-value）：其中键为字符串，值有以下<font style="color:red;">5种类型</font>：
+>   键值对（key-value）：其中键为字符串，值有以下<font style="color:red;">5种类型</font>：
 >
 >   -   string：字符串类型的数据
 >   -   hash：map格式的数据

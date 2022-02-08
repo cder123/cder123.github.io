@@ -975,7 +975,7 @@ public interface UserDao {
 
 -   一对一（`association 子标签`）：【类A有一个类B的属性】类A的映射配置文件中，association子标签的select属性绑定类B的Dao接口的查询方法，该查询方法的返回值为一个对象。（两个类的关联属性是一个**2**类型）
 -   一对多（`collection 子标签`）：【类A有一个类B的属性，且是集合类型】类A的映射配置文件中，association子标签的select属性绑定类B的Dao接口的查询方法，该查询方法的返回值为一个集合。（两个类的关联属性是一个**集合**类型）
--   多对多：【类A有一个类B的属性，且是集合类型，类B有一个类A的属性，且是集合类型】类A的映射配置文件中，association子标签的select属性绑定类B的Dao接口的查询方法，该查询方法的返回值为一个集合。类B的映射配置文件中，association子标签的select属性绑定类A的Dao接口的查询方法，该查询方法的返回值为一个集合。（两个类各自有一个关联属性，且各自是一个**集合**类型）
+-   多对多（两个实体类都使用`collection 子标签`）：【类A有一个类B的属性，且是集合类型，类B有一个类A的属性，且是集合类型】类A的映射配置文件中，association子标签的select属性绑定类B的Dao接口的查询方法，该查询方法的返回值为一个集合。类B的映射配置文件中，association子标签的select属性绑定类A的Dao接口的查询方法，该查询方法的返回值为一个集合。（两个类各自有一个关联属性，且各自是一个**集合**类型）
 
 
 
@@ -983,6 +983,107 @@ public interface UserDao {
 
 >   -   嵌套结果【多表关联的语句在SQL里写】：property + javaType
 >   -   嵌套查询【多表关联的语句在各自的接口里写】：property + javaType + column + select
+
+
+
+小结：
+
+>   **通用：**
+>
+>   -   column : 数据表的列名
+>   -   property：javabean的属性名
+>   -   javaType: javabean的全类名（javaBean属性的类型）
+>   -   fetch-Type: 懒加载【lazy（默认） | eager】
+>
+>   ---
+>
+>   【嵌套查询】：
+>
+>   -   id子标签：用于定义主键的映射关系
+>   -   result子标签：用于定义其他属性的映射关系
+>   -   discriminator子标签：使用结果值来决定使用哪个resultMap
+>
+>   ---
+>
+>   【嵌套结果】：
+>
+>   -   select: “查询”方法的全类名
+>   -   column: 数据表的列名
+>   -   property : select 属性的查询结果传给property属性绑定的 javaBean属性
+>
+>    
+>
+>   ---
+>
+>   【一对一】：`association`标签 
+>
+>   ```xml
+>   // 【嵌套结果的方式】
+>   // com.cyw.dao.StuMapper接口
+>   
+>   <resultMap id="StuRst" type="com.cyw.po.Stu">
+>           <id property="sid" column="id"/>
+>           <result property="name" column="name"/>
+>           <result property="sex" column="sex"/>
+>           <association property="card" column="cardId" javaType="com.cyw.po.StuCard">
+>               <id property="id" column="id"/>
+>               <result property="code" column="code"/>
+>           </association>
+>    </resultMap>
+>    
+>    <select id="getStuBySid" resultMap="StuRst">
+>           select stu.* ,stuIdCard.code
+>           from stu,stuIdCard
+>               where stu.id = #{sid}
+>               and stu.id = stuIdCard.id;
+>   </select>
+>   ```
+>
+>    
+>
+>   ---
+>
+>   
+>
+>   【一对多】：`collection`标签（在**一**的那方的映射配置文件中使用） 
+>
+>    ```xml
+>    // 【嵌套结果的方式】
+>    // com.cyw.dao.ClassesMapper
+>    
+>    <resultMap id="classesRst" type="com.cyw.po.Classes">
+>            <id property="cid" column="cid"/>
+>            <result property="cname" column="cname"/>
+>            <collection property="stuList" javaType="list" ofType="com.cyw.po.Stu">
+>                <id property="sid" column="id"/>
+>                <result property="name" column="name"/>
+>                <result property="sex" column="sex"/>
+>                <association property="card" column="cardId" javaType="com.cyw.po.StuCard">
+>                    <id property="id" column="id"/>
+>                    <result property="code" column="code"/>
+>                </association>
+>            </collection>
+>    </resultMap>
+>    
+>    <select id="getClassesByCid" resultMap="classesRst">
+>            select classes.*,stu.*,stuIdCard.`code`
+>            from classes,stu,stuIdCard
+>            where classes.id = #{cid}
+>              and stu.cid = classes.id
+>              and stu.cardId = stuIdCard.id;
+>    </select>
+>    
+>    ```
+>
+>    
+>
+>   ---
+>
+>   
+>
+>   【多对多】：`collection`标签（在**双方**的映射配置文件中都要使用，用法类似一对多） 
+>
+>   
 
 
 
@@ -996,9 +1097,6 @@ public interface UserDao {
 <mapper namespace="com.dao.UserDao">
 	
     // 自定义JavaBean类型【嵌套查询】
-        // id子标签：用于定义主键的映射关系
-        // result子标签：用于定义其他属性的映射关系
-        // discriminator子标签：使用结果值来决定使用哪个resultMap
 	<resultMap id="myUser" javaType="com.entity.User">
         // column : 数据表的列名
         // property：javabean的属性名
@@ -1068,7 +1166,7 @@ public interface UserDao {
 
 
 
-
+---
 
 
 
@@ -1351,7 +1449,9 @@ if 标签的示例（2）-【改进】：
 
 ### 4.3、<font style="color:red;">where 标签：</font>
 
->   注意：该标签解决了可能因条件全部不成立而导致的 SQL语句问题
+>   注意：该标签解决了可能因条件全部不成立而导致的 SQL语句问题，where标签只会去掉前面的and 或者 or，因此 SQL语句的and 要放开头。
+
+and | or 写在前面
 
 ```xml
 <select id="findActiveBlogLike"
@@ -1375,10 +1475,16 @@ if 标签的示例（2）-【改进】：
 
 ### 4.4、<font style="color:red;">trim标签：</font>
 
->   trim 标签可以定制SQL语句，类似于where标签
+>   trim 标签可以定制SQL语句，类似于where标签的功能【可解决：where标签只能去除前面的and | or的问题】
+
+and | or 写在后面
 
 ```xml
-// 从where字符开始，如果标签内部的条件不成立，则去掉最终的SQL语句中无效的 and 或 or 字符    
+// 从where字符开始，如果标签内部的条件不成立，则去掉最终的SQL语句中多余的 and 或 or 字符    
+// prefix: 给整条SQL语句拼接后的条件部分加一个前缀【相当于不写where关键字，而让前缀自动写where关键字】
+// prefixOverrides: 可以去除哪种多余的连接符
+// suffix: 加一个后缀
+// suffixOverrides: 去掉拼接后的SQL语句后面多余的后缀
 	<trim prefix="where" prefixOverrides="and | or">
       <if test="state != null">
               <if test="state != null">
@@ -1474,6 +1580,13 @@ bind 标签：用于在 `select 标签内部 `设置**模糊查询**的条件。
 
 
 
+### 4.8、两个内置的参数
+
+-   `_paramater`：单个参数时，就是该参数；多个参数时，会封装为 map。
+-   `_databaseId`：若在全局配置文件中设置了`databaseProvider`，则该内置参数代表当前数据库的别名。
+
+
+
 
 
 ----
@@ -1489,14 +1602,18 @@ bind 标签：用于在 `select 标签内部 `设置**模糊查询**的条件。
 
 
 
+### 5.1、一级缓存
+
+
+
 Mybatis 中的SQL语句执行后会有缓存，再次执行相同的语句时，无需编译SQL语句，直接执行缓存中的SQL。
 
 
 
-Mybatis 缓存包括了**一级缓存**和**二级缓存**，*默认开启了**一级缓存***。
+Mybatis 缓存包括了**一级缓存**和**二级缓存**，*默认开启了**一级缓存***【一级缓存关不了】。
 
->   -   **一级缓存**：是` SqlSession`级别【查询缓存】的，每次进行**增删改**操作时，一级缓存失效。
->   -   **二级缓存**：是` Mapper(dao)`级别【表级缓存】的，多个**一级缓存**可以共享同一个**二级缓存** ，二级缓存是事务性的。
+>   -   **一级缓存**：是` SqlSession`级别【查询缓存、本地缓存】的，每次进行**增删改**操作时，一级缓存失效。
+>   -   **二级缓存**：是` Mapper(dao)【namespace】`级别【表级缓存、全局缓存】的，多个**一级缓存**可以共享同一个**二级缓存** ，二级缓存是事务性的。
 
 ![缓存-1](https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220128125844044.png)
 
@@ -1508,9 +1625,32 @@ Mybatis的缓存在底层使用 `Map`封装。
 
 
 
+<font style="color:red;">一级缓存失效（不起作用）的四种情况：</font>
 
+>   -   SqlSession 不同。
+>   -   SqlSession 相同，但**查询条件不同**。
+>   -   SqlSession 相同，查询条件相同，但执行了**增删改**操作。
+>   -   SqlSession 相同，**手动清除**了一级缓存。
+
+
+
+
+
+
+
+### 5.2、二级缓存
 
 **二级缓存**默认是不开启的，需要手动开启二级缓存。
+
+
+
+<font style="color:red;">二级缓存的运行机制：</font>
+
+>   -   一个SqlSession，查询数据后，数据保存到了一级缓存
+>   -   关闭SqlSession，一级缓存保存到了二级缓存，新的SqlSession就可以共享之前的数据。
+>   -   不同 namespace（dao）的数据会放在自己的的map里。
+
+映射配置文件的每个增删改标签若使用了`flushCache=“true”`,则增删改操作执行后会清理缓存（一、二级全清理）
 
 
 
@@ -1519,7 +1659,7 @@ Mybatis的缓存在底层使用 `Map`封装。
 >   -   JavaBean 可序列化
 >   -   MyBatis 的**全局配置文件**中设置`setting`标签
 
-实现二级缓存的时候，MyBatis 要求返回的**POJO必须是可序列化**的。开启二级缓存的条件也是比较简单，通过直接在 MyBatis 的**全局配置文件**中通过：
+（1）实现二级缓存的时候，MyBatis 要求返回的**POJO必须是可序列化**的。开启二级缓存的条件也是比较简单，通过直接在 MyBatis 的**全局配置文件**中（全局生效）通过：
 
 ```xml
 <settings>
@@ -1527,7 +1667,9 @@ Mybatis的缓存在底层使用 `Map`封装。
 </settings>
 ```
 
-然后，dao接口的**映射配置文件**中通过`<cache />`标签：
+或在Mapper映射配置文件的select标签中使用`useCache`属性配置（单个语句生效）
+
+（2）然后，dao接口的**映射配置文件**中通过`<cache />`标签：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -1541,8 +1683,11 @@ Mybatis的缓存在底层使用 `Map`封装。
     	//		- FIFO ：按缓存产生时的顺序来删除
     	//		- SOFT ：按 GC的状态 和 软引用规则 来删除
     	//		- WEAK ：按 GC的状态 和 弱引用规则 来删除
-    	// flushInterval： 缓存的刷新时间的间隔
+    	// flushInterval： 缓存的刷新时间的间隔（毫秒），默认不清空
     	// size：缓存区的大小【“引用”的个数】，默认1024
+    	// readOnly: 
+    	//		- true：只读，不安全，速度快
+    	//		- false：缓存数据可能被修改，利用序列化和反序列化技术clone一份新的缓存
         <cache
                eviction="FIFO"
                flushInterval="60000"
@@ -1552,7 +1697,7 @@ Mybatis的缓存在底层使用 `Map`封装。
 </mapper>
 ```
 
-
+（3）最后，POJO实现序列化接口。
 
 
 
@@ -1560,9 +1705,161 @@ Mybatis的缓存在底层使用 `Map`封装。
 
 ## 6、Mybatis 整合 Spring
 
+所需的 JAR包：
+
+>   -   spring-webmvc
+>   -   spring-tx
+>   -   spring-jdbc
+>   -   aspectjweaver
+>   -   junit
+>   -   mysql-connector-java
+>   -   druid
+>   -   mybatis
+>   -   mybatis-spring
+>   -   lombok（使用注解`@Data`来代替Getter、setter等方法）
+
+maven导入jar包：
+
+`pom.xml：`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.cyw</groupId>
+  <artifactId>SSM-02</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>SSM-02 Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+<!--
+ =============================================================
+-->
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>4.1.2.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>4.1.2.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>4.1.2.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.8.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.5.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.14</version>
+    </dependency>
+    <dependency>
+      <groupId>org.singledog</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>1.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.0.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.0.9</version>
+    </dependency>
+
+  </dependencies>
+<!--
+ =============================================================
+-->
+  <build>
+    <finalName>SSM-02</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <testFailureIgnore>true</testFailureIgnore>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+
+```
 
 
-### 6.1、<font style="color:red;font-size:1.3em;">整合的步骤：</font>
+
+
+
+
+
+### 6.1、<font style="color:red;">整合的步骤：</font>
+
+
 
 >   1、编写：数据库（数据源）的配置：`druid.properties`
 
@@ -1630,8 +1927,8 @@ maxWait=5000
 <font style="color:red;">2-3、在`applicationContext.xml`中的 开启组件扫件、AOP代理：</font>
 
 ```xml
-   
-	<context:component-scan base-package="com.cyw.*"/>
+   // 扫描com.cyw包（包括子包）下的所有组件
+	<context:component-scan base-package="com.cyw"/>
     <aop:aspectj-autoproxy/>
 
 ```
@@ -1718,7 +2015,7 @@ maxWait=5000
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    
-	// 批量注册Dao接口
+	// 批量注册com.cyw.dao中的接口【可省略】
     <mappers>
         <package name="com.cyw.dao"/>
     </mappers>
@@ -1728,7 +2025,7 @@ maxWait=5000
 
 
 
->   4、编写：Mybatis 的映射配置文件：`StuMapper.xml`
+>   4、编写：Mybatis 的映射配置文件：`StuMapper.xml`、`StuIdCardMapper.xml`、`ClassesMapper.xml`
 
 注意：
 
@@ -1807,7 +2104,7 @@ maxWait=5000
 
 
 
-### 6.2、<font style="color:red;font-size:1.3em;">目录结构及配置文件：</font>
+### 6.2、<font style="color:red;">目录结构及配置文件：</font>
 
 ![image-20220130110933244](https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220130110933244.png)
 
