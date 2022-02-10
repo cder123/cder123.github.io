@@ -1116,6 +1116,10 @@ post 传参乱码：编码不一致。
 
 
 
+<font style="color:red;">注意：【编码过滤器要配在最前面，一旦之前获取过请求参数，则该过滤器失效】。</font>
+
+
+
 `web.xml`添加如下配置：
 
 ```xml
@@ -1964,17 +1968,18 @@ SpringMVC中默认的重定向视图是`RedirectView`。
 
 
 
-Spring的配置文件中：
+SpringMVC的配置文件中：
 
 ```xml
 <!--
     path：设置处理的请求地址（相当于：@RequestMapping的地址）
     view-name：设置请求地址所对应的视图名称（相当于：页面的名称）
 -->
-
 	<mvc:view-controller path="/testView" view-name="success" />
 	
-// 开启 MVC 的注解启动
+<!--
+	开启 MVC 的注解启动
+-->
 	<mvc:annotation-driven />
 ```
 
@@ -1986,7 +1991,7 @@ Spring的配置文件中：
 
 
 
-## 5、SpringMVC 与 RestFul 交互
+## 5、SpringMVC 与 RestFul 交互（HiddenHttpMethodFilter）
 
 
 
@@ -2032,45 +2037,74 @@ REST 风格提倡 URL 地址使用统一的风格设计，从前到后各个单�
 
 
 
-`HiddenHttpMethodFilter`可以将`POST`请求转化为浏览器目前不支持的put 和 delete 请求。
+`HiddenHttpMethodFilter`过滤器可以将`POST`请求转化为浏览器目前不支持的`put `和 `delete `请求。
 
 `HiddenHttpMethodFilter` 处理`put`和`delete`请求的两个条件：
 
->   -   当前请求的请求方式必须为post
+>   -   当前请求的请求方式必须为`post`
 >
->   -   当前请求必须传输请求参数_method
+>   -   当前请求必须传输请求参数`_method`(input隐藏域标签的name为`_method`，value属性的值为`put`或`delete`)
 >
->   满足以上条件，**HiddenHttpMethodFilter** 过滤器就会将当前请求的请求方式转换为请求参数\_method的值，因此请求参数\_method的值才是最终的请求方式。
+>   满足以上条件，**`HiddenHttpMethodFilter`** 过滤器就会将当前请求的请求方式转换为`请求参数\_method`的值，因此请求参数`_method`的值才是最终的请求方式。（在`web.xml`中配置）
 
 
 
-
-
-`web.xml`：
+<font style="color:red;">web.xml：</font>
 
 ```xml
 // 以下只展示了该章节的核心配置
 // 先注册 SpringMVC 的字符过滤器，再注册以下过滤器
 
-<filter>
-    <filter-name>HiddenHttpMethodFilter</filter-name>
-    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-</filter>
-<filter-mapping>
-    <filter-name>HiddenHttpMethodFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+```
+
+
+
+<font style="color:red;">前端：</font>
+
+```html
+
+<form method="post" th:action="@{/user}">
+    		<input type="hidden" name="_method" value="PUT">
+    用户名： <input type="text" name="username"/>
+    		<input type="submit" />
+</form>
+
 ```
 
 
 
 
 
+<font style="color:red;font-size:1.3em;">小结：</font>
+
+> - `web.xml`中，配置`HiddenHttpMethodFilter`过滤器。
+> - **控制器**的某个方法上的 `@RequestMapping`注解的method参数中 ，将 HTTP 请求方式设为 `put` 或 `delete`。
+> - **前端页面**，form 表单的 method 属性设为`post`，表单内必须要有一个隐藏域标签`<input type="hidden" name="_method" value="put">`或`<input type="hidden" name="_method" value="delete">`
 
 
 
 
 
+### 5.3、放行静态资源
+
+
+
+- [放行静态资源-b站](https://www.bilibili.com/video/BV1Ry4y1574R?p=65)
+
+<font style="color:red;">SpringMVC.xml：</font>
+
+```xml
+	<mvc:delault-servlet-handler />
+```
 
 
 
@@ -2084,7 +2118,7 @@ REST 风格提倡 URL 地址使用统一的风格设计，从前到后各个单�
 
 
 
-## 6、SpringMVC 与 JSON 交互
+## 6、SpringMVC 与 JSON 交互（HttpMessageConverter）
 
 
 
@@ -2108,7 +2142,11 @@ REST 风格提倡 URL 地址使用统一的风格设计，从前到后各个单�
 
 ### 6.1、@RequestBody 注解
 
+【在形参上】
+
 `@RequestBody`可以获取请求体，需要在控制器方法设置一个**形参**，使用`@RequestBody`进行标识，当前请求的请求体就会为当前注解所标识的形参赋值。【post 请求报文才有请求体】
+
+
 
 ```java
  // 前端   
@@ -2123,24 +2161,26 @@ REST 风格提倡 URL 地址使用统一的风格设计，从前到后各个单�
 // 控制器的方法        
     @RequestMapping("/testRequestBody")
     public String testRequestBody(@RequestBody String requestBody){
-        System.out.println("requestBody:"+requestBody);
+        System.out.println("requestBody:=>"+requestBody);
         return "success";
     }
 
 // 输出结果【控制台】
-// requestBody:username=admin&password=123456
+// requestBody:=> username=admin&password=123456
 ```
 
 
 
 ### 6.2、RequestEntity 类型
 
-RequestEntity封装请求报文的一种类型，需要在控制器方法的形参中设置该类型的形参，当前请求的请求报文就会赋值给该形参，可以通过getHeaders()获取请求头信息，通过getBody()获取请求体信息。
+【在形参上】
+
+`RequestEntity`封装请求报文的一种类型，需要在控制器方法的形参中设置该类型的形参，当前请求的请求报文就会赋值给该形参，可以通过getHeaders()获取请求头信息，通过getBody()获取请求体信息。
 
 
 
 ```java
-    
+// ... 控制器方法    
 	@RequestMapping("/testRequestEntity")
     public String testRequestEntity(RequestEntity<String> requestEntity){
         
@@ -2175,7 +2215,7 @@ RequestEntity封装请求报文的一种类型，需要在控制器方法的形�
 
 ### 6.3、@ResponseBody注解
 
-
+【在控制器方法上】
 
 `@ResponseBody`用于标识一个**控制器方法**，可将该方法的返回值直接作为响应报文的响应体响应到浏览器。
 
@@ -2194,9 +2234,31 @@ RequestEntity封装请求报文的一种类型，需要在控制器方法的形�
 
 
 
-### 6.4、ResponseEntity类型
+### 6.4、ResponseEntity 类型
 
-ResponseEntity用于控制器方法的返回值类型，该控制器方法的返回值就是响应到浏览器的响应报文。
+【控制器方法的返回值】
+
+`ResponseEntity `用于作为控制器方法的**返回值类型**，该控制器方法的返回值就是响应到浏览器的响应报文。
+
+
+
+<font style="color:red;">使用场景：</font>文件下载
+
+
+
+控制器：
+
+```java
+// ... 省略了控制器的其他方法
+
+    @RequestMapping("/testResponseEntity")
+    public ResponseEntity testResponseEntity(){
+        
+        return ResponseEntity;
+    }
+```
+
+
 
 
 
@@ -2235,7 +2297,7 @@ ResponseEntity用于控制器方法的返回值类型，该控制器方法的返
 
 <font style="color:red;">（3）使用`@ResponseBody`注解标识一个控制器方法</font>
 
-<font style="color:red;">（4）将Java对象直接作为控制器方法的返回值返回，就会自动转换为Json格式的字符串</font>
+<font style="color:red;">（4）将Java对象直接作为控制器方法的**返回值**返回，就会自动转换为 JSON 格式的字符串</font>
 
 ```java
     
@@ -2313,13 +2375,162 @@ ResponseEntity用于控制器方法的返回值类型，该控制器方法的返
 
 
 
-### 6.6、@RestController注解
+### 6.6、@RestController注解【重点】
 
 `@RestController`注解是SpringMVC提供的一个**复合注解**，标识在**控制器的类**上，
 
 就相当于为类添加了`@Controller`注解，并且为其中的每个方法添加了`@ResponseBody`注解。
 
-【`@Controller` + `@ResponseBody`】
+即：【`@Controller` + `@ResponseBody`】
+
+
+
+
+
+
+
+
+
+### 6.7、文件下载与上传-案例
+
+
+
+- [文件上传、下载-案例—B站](https://www.bilibili.com/video/BV1Ry4y1574R?p=75)
+
+
+
+#### 6.7.1、文件下载
+
+文件下载案例：使用了`ResponseEntity`类型
+
+
+
+<font style="color:red;">控制器方法：</font>
+
+```java
+    @RequestMapping("/testDown")
+    public ResponseEntity<byte[]> testResponseEntity(HttpSession session) throws IOException {
+        
+        //获取ServletContext对象
+        ServletContext servletContext = session.getServletContext();
+        
+        //获取服务器中文件的真实路径
+        String realPath = servletContext.getRealPath("/static/img/1.jpg");
+        
+        //创建输入流
+        InputStream is = new FileInputStream(realPath);
+        
+        //创建字节数组
+        byte[] bytes = new byte[is.available()];
+        
+        //将流读到字节数组中
+        is.read(bytes);
+        
+        //创建HttpHeaders对象设置响应头信息
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        
+        //设置要下载方式以及下载文件的名字
+        headers.add("Content-Disposition", "attachment;filename=1.jpg");
+        
+        //设置响应状态码
+        HttpStatus statusCode = HttpStatus.OK;
+        
+        //创建ResponseEntity对象
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, headers, statusCode);
+        
+        //关闭输入流
+        is.close();
+        return responseEntity;
+    }
+
+```
+
+
+
+#### 6.7.2、文件上传
+
+
+
+文件上传：要求`form`表单的**请求方式**必须为`post`，并且添加属性`enctype="multipart/form-data"`
+
+
+
+SpringMVC 中将上传的文件封装到`MultipartFile`对象中，通过此对象可以获取文件相关信息。
+
+
+
+<font style="color:red;font-size:1.3em;">步骤：</font>
+
+> - 导入 `commons-fileupload.jar`包**依赖**
+> - 在 SpringMVC 的配置文件中，添加**文件解析器**的配置
+> - 编写**控制器方法**
+
+
+
+<font style="color:red;">（1）导入maven 依赖：</font>
+
+```xml
+   
+	<dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.3.1</version>
+    </dependency>
+
+```
+
+
+
+<font style="color:red;">（2）在SpringMVC配置文件中，配置文件解析器：</font>
+
+```xml
+<!-- id必须有，且为 multipartResolver -->
+<bean id="multipartResolver" 
+      class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+```
+
+
+
+<font style="color:red;">（3）控制器方法：</font>
+
+```java
+    
+	@RequestMapping("/testUp")
+    public String testUp(MultipartFile photo, HttpSession session) throws IOException {
+        
+        //获取上传的文件的文件名
+        String fileName = photo.getOriginalFilename();
+        
+        //处理文件重名问题
+        String houzuiName = fileName.substring(fileName.lastIndexOf("."));        
+        fileName = UUID.randomUUID().toString() + houzuiName;
+        
+        //获取服务器中photo目录的路径
+        ServletContext servletContext = session.getServletContext();
+        
+        String photoPath = servletContext.getRealPath("photo");
+        
+        File file = new File(photoPath);
+        
+        if(!file.exists()){
+            file.mkdir();
+        }
+        
+        String finalPath = photoPath + File.separator + fileName;
+        
+        //实现上传功能
+        photo.transferTo(new File(finalPath));
+        
+        return "success";
+    }
+
+
+```
+
+
+
+
 
 
 
@@ -2332,6 +2543,12 @@ ResponseEntity用于控制器方法的返回值类型，该控制器方法的返
 
 
 拦截器（Interceptor），类似 Servet 编程时的 Filter 过滤器的作用，可以使用拦截器进行权限验证。
+
+
+
+过程：
+
+> 前端页面 =》Filter  =》DispacherServlet  =》拦截器 =》HandlerMapping =》HandlerMapping  =》HandlerAdaptor =》 Handler （Controller）
 
 
 
@@ -2432,6 +2649,43 @@ public classMyInterceptor implements HandlerInterceptor{
 
 
 
+SpringMVC 提供了一个处理控制器方法执行过程中所出现的异常的接口：`HandlerExceptionResolver`
+
+`HandlerExceptionResolver `接口的实现类有：
+
+> - `DefaultHandlerExceptionResolver`
+> - `SimpleMappingExceptionResolver`
+
+
+
+### 8.1、基于 XML 的异常处理器
+
+
+
+SpringMVC 提供了自定义的异常处理器`SimpleMappingExceptionResolver`。
+
+
+
+`SpringMVC`配置文件：
+
+```xml
+<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+        <props>
+            <!--
+                properties的键表示处理器方法执行过程中出现的异常
+                properties的值表示若出现指定异常时，设置一个新的视图名称，跳转到指定页面
+            -->
+            <prop key="java.lang.ArithmeticException">error</prop>
+        </props>
+    </property>
+    <!--
+        exceptionAttribute属性设置一个属性名，将出现的异常信息在请求域中进行共享
+    -->
+    <property name="exceptionAttribute" value="ex"></property>
+</bean>
+
+```
 
 
 
@@ -2439,6 +2693,28 @@ public classMyInterceptor implements HandlerInterceptor{
 
 
 
+### 8.2、基于 注解 的异常处理器
+
+
+
+```java
+    
+// @ControllerAdvice 将当前类标识为异常处理的组件
+
+    @ControllerAdvice
+    public class ExceptionController {
+
+        // @ExceptionHandler用于设置所标识方法处理的异常
+        // ex表示当前请求处理中出现的异常对象
+        @ExceptionHandler(ArithmeticException.class)        
+        public String handleArithmeticException(Exception ex, Model model){
+            model.addAttribute("ex", ex);
+            return "error";
+        }
+
+    }
+
+```
 
 
 
