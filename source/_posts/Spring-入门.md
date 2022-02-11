@@ -1,12 +1,12 @@
 ---
-title: Spring4-入门
+title: Spring-入门
 tag: Java
 categories:
   - [后端,Java,SSM]
 
 ---
 
-# Spring4-入门
+# Spring-入门
 
 [toc]
 

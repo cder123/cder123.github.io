@@ -1,5 +1,5 @@
 ---
-title: Spring-入门
+title: Spring-入门（IoC-简化版）
 tag: Java
 categories:
   - [后端,Java,SSM]
@@ -8,7 +8,7 @@ categories:
 
 
 
-# Spring5-入门
+# Spring-入门（IoC-简化版）
 
 [toc]
 

@@ -3503,3 +3503,26 @@ private void processDispatchResult(HttpServletRequest request, HttpServletRespon
 
 ## 11、SSM 整合
 
+
+
+### 11.1、常见报错：
+
+
+
+<font style="color:red;font-size:1.3em;">（1）SpringMVC使用`@Autowired`自动装配Service对象时，报错的问题：</font>
+
+> 原因：
+>
+> - 是否开启`Spring配置文件`的组件扫描（IoC配置）。
+> - 是否给 `Controller、Service`层添加注解。
+> - 是否给`Controller、Service`创建`Getter、Setter、构造函数`。
+> - 是否在`web.xml`中配置了：`context-param `标签（绑定Spring配置文件）、`HiddenHttpMethodFilter`（使用HTTP的put、delete请求）、`ContextLoaderListener`、`DispacherServlet`。
+> - 是否给 `SpringMVC配置文件` 的组件扫描。
+> - 是否给 `SpringMVC配置文件` 的配置视图解析器。
+> - 是否给 `SpringMVC配置文件` 开启注解驱动。
+> - 是否给 `SpringMVC配置文件` 配置拦截器。
+
+
+
+
+
