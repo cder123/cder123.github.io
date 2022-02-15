@@ -19,7 +19,7 @@ categories:
 **计算属性** 会很 **快**，因为使用了 **缓存**，【只计算1次，之后刷新页面时，直接从缓存调用 `计算属性`。除非属性值被修改了，才会再一次进行 computed】   
 
 
-**格式：**【定义在 conputed 中；定义时 格式类似函数，有小括号，有返回值；调用时 无需小括号】
+**格式：**【定义在 computed 中；定义时 格式类似函数，有小括号，有返回值；调用时 无需小括号】
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210118161230581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 ## 1.2 CSS 样式的绑定
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210118171547218.png)

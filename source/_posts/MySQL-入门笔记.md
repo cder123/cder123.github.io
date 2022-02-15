@@ -17,14 +17,12 @@ categories:
 ### 1.1 MySQL的 安装 + 配置
 
 -   [mysql-笔记-网传](https://blog.csdn.net/dzg_chat/article/details/88619120)
-
 -   [MySQL-学习视频-b站](https://www.bilibili.com/video/BV1BX4y1G7cn)
-
 -   [MySQL下载地址](https://downloads.mysql.com/archives/community/)
-
 -   [MySQL（5.5）安装+配置](https://blog.csdn.net/CharmJay/article/details/94330268)
 -   [Navicat 15.x for MySQL激活教程](https://www.jianshu.com/p/70143ef3d4a3)
 -   [50道SQL练习题 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32137597)
+-   面试题：https://www.bilibili.com/video/BV14Y411V7eL
 
 
 

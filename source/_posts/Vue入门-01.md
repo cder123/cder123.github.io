@@ -4,6 +4,7 @@ tag: Vue
 categories:
   - 前端
   - Vue
+
 ---
 
 
@@ -34,6 +35,10 @@ categories:
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 ```
 #### 1.1.2 使用npm包管理器安装【不推荐新手】
+
+。。。
+
+
 
 
 ### 1.2 Vue必备步骤
@@ -243,3 +248,4 @@ beforeDestroy 事件:销毁之前触发
 
 #### 4.3.8 Destroyed 事件
 beforeDestroy 事件:销毁之后触发
+

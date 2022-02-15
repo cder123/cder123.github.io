@@ -2268,7 +2268,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->    	 	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
+>    	 	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >
@@ -5419,7 +5419,7 @@ web.xml 实现过滤器：
 
 
 
- 【位置：`@webFilter("拦截路径")` 或者 `we.xml`】
+ 【位置：`@webFilter("拦截路径")` 或者 `web.xml`】
 
 
 
