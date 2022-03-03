@@ -273,12 +273,38 @@ public class Test {
 
 
 
+
+
+### 1.3、Mybatis 的几个对象
+
+
+
+- SqlSessionFactoryBuilder对象：创建完SqlSessionFactory对象后就没用了。
+- SqlSessionFactory对象：一般设为单例模式
+- SqlSession对象：线程不安全，每次用完要手动关闭。
+
+
+
+
+
+
+
 ## 2、Mybatis 全局配置文件
 
 Mybatis 全局XML配置文件是为了注册信息【也可以通过new配置对象的方法】，包括：
 
 -   环境信息【数据库、事务管理器】
 -   dao接口的映射配置文件的信息
+
+
+
+
+
+Mybatis 全局XML配置文件中的标签顺序是有规定的，具体顺序见官网。
+
+
+
+mybatis-config.xml：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -321,7 +347,7 @@ Mybatis 全局XML配置文件是为了注册信息【也可以通过new配置对
 
 Mybatis可以使用`properties标签`来引入**外部的properties文件**中的配置【一般是数据库配置信息】。
 
-一般配置文件由Spring来导入，所以Mybatis的数据库配置不常用
+一般配置文件由Spring来导入，所以Mybatis的数据库配置不常用。
 
 `properties标签`的两个属性：
 
@@ -581,7 +607,7 @@ jdbc.password=root
 
 ### 2.4、插件简介
 
-插件可以拦截以下四大对象的一些方法。
+插件可以拦截以下Mybatis的四大对象的一些方法。
 
 四个对象：
 
@@ -2222,7 +2248,8 @@ Mybatis 逆向工程（MyBatis Generator）也叫 MBG，可以通过**逆向工�
         </commentGenerator>
         <!-- Mysql数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-            connectionURL="jdbc:mysql://localhost:3306/test" userId="root"
+            connectionURL="jdbc:mysql://localhost:3306/test" 
+               userId="root"
             password="root" />
 
         <!-- 默认为false，把JDBC DECIMAL 和NUMERIC类型解析为Integer，为true时 把JDBC DECIMAL 和NUMERIC类型解析为java.math.BigDecimal -->

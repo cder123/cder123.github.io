@@ -1759,7 +1759,7 @@ class UserService{
 
 ### 7.1、WebFlux简介
 
-【建议此模块学习前，先学SpringMVC】
+【建议此模块学习前，先学SpringBoot】
 
 
 
