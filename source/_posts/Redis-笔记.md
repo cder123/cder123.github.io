@@ -17,6 +17,15 @@ categories:
 
 
 
+# 零、参考资料
+
+- [Redis 6-尚硅谷版](https://www.bilibili.com/video/BV1Rv41177Af?p=2)
+- [Redis 6 -尚硅谷版-博客](https://zhangc233.github.io/2021/05/02/Redis/)
+
+
+
+
+
 # 一、Redis 的安装
 
 
@@ -277,7 +286,7 @@ flushall
 
 
 
-## 1、常用的操作
+## 1、通用的操作
 
 
 
@@ -436,6 +445,263 @@ string 类型就是一个简单动态字符串（SDS），类型Java中ArrayList
 string 内部的数据小于`1 MB`时，翻倍扩容；数据大于`1 MB`时，每次最多扩容`1 MB`。最大长度`512 MB`。
 
 
+
+
+
+## 3、list 类型
+
+
+
+list 类型是`单键多值`，一个键多个值。在底层使用的是双向链表，因此可以在任意位置进行插入和删除。
+
+list 列表元素较少时，使用空间连续的**压缩列表**`ziplist`，
+
+list 列表元素较少时，使用空间连续的**压缩列表**`ziplist`，
+
+
+
+
+
+常用命令：
+
+```shell
+
+# 查看连续的多个数据，结束下标=-1时，表示开始下标到最后一个元素
+lrange 键名 开始下标 结束下标
+
+# (从左边开始)按下标查看列表的元素
+lindex 键名 下标
+
+
+# 获取列表长度
+llen 键名
+
+
+# 从左边插入
+lpush 键名1 值1 键名2 值2
+
+
+# 从右边插入
+rpush 键名1 值1 键名2 值2
+
+
+# 从左边删除（list左边的1个值），可以在命令最后指定要删除的元素个数
+lpop 键名
+
+
+# 从右边删除（list右边的1个值）
+rpop 键名
+
+
+# list1右边的数据移到list1左边
+rpoplpush list1的键名 list2的键名
+
+
+
+# 在第一个指定值的（前面brfore|后边after）插入新值
+linsert 键名 before 指定值 新值
+linsert 键名 after 指定值 新值
+
+
+# 从左边删除n个指定值
+lrem 键名 n 指定值
+
+
+# 替换指定下标的值
+lset 键名 下标 新值
+```
+
+
+
+
+
+
+
+
+
+## 4、set 类型
+
+
+
+set 类型是一个可去重的 `string`类型的**无序集合**。
+
+set 类型的底层是` value为 null 的 hash 表`，所以其增删改查的复杂度都是`O(1)`
+
+
+
+
+
+常用操作：
+
+```shell
+
+# 添加多个值到set集合中
+sadd 键 值1 值2
+
+
+# 删除set集合中指定的元素
+srem 键 值1 值2
+
+
+# 随机删除set集合中的一个值
+spop 键
+
+
+# 取出set集合中的所有值
+smembers 键
+
+
+# 随机查询set集合中的n个值（不会删除）
+srandmember 键 n
+
+
+# 判断指定的set集合中是否存在该值,存在：1 ；不存在：0
+sismember 键 值
+
+
+# 返回set集合中的元素个数
+scard 键
+
+
+
+# 将值从源set集合移动到目标集合
+smove src的key dst的key 值
+
+
+# 返回两个集合的交集
+sinter 键1 键2
+
+
+# 返回两个集合的并集
+sunion 键1 键2
+
+
+# 返回两个集合的差集
+sdiff 键1 键2
+```
+
+
+
+
+
+
+
+## 5、hash 类型
+
+
+
+hash 类型对应的数据结构：压缩列表`ziplist`、哈希表`hashtable`。
+
+`field-value`长度较短、且数量较少时，使用 `ziplist`。否则，使用 `hashtable`。
+
+
+
+![image-20220304191813669](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220304191813669.png)
+
+<center>hash 结构</center>
+
+
+
+常用操作：
+
+```shell
+
+# 添加数据（hash的数据部分是哈希表，field相当于数据部分的哈希表的键）
+hset 键 字段 值
+
+
+# 获取数据
+hget 键 字段
+
+
+# 设置hash表数据部分的多个值
+hmset  键 字段1 值1 字段2 值2
+
+
+# 设置hash表数据部分的多个值
+hexists  键 字段
+
+
+# 获取指定的hash表所有的字段
+hkeys  键
+
+
+# 获取指定的hash表中所有的值
+hvals  键
+
+
+# 给指定的hash表中指定的字段所对应的值增加指定的增量
+hincrby 键 字段 增量
+
+
+# 当指定的字段不存在时，添加值
+hsetnx 键 字段 值
+```
+
+
+
+
+
+
+
+## 6、zset 类型
+
+
+
+zset 类型的**没有重复元素有序集合**，是元素均为字符串。
+
+zset 集合的每个成员都关联的一个<font color=red>评分（score）</font>，按 “评分” **升序**将集合的的元素排列。
+
+zset 集合的成员不能重复，<font color=red>但“评分”可以重复</font>。
+
+ 
+
+因为元素是有序的，所以可以很快根据 “评分” 、“次序”来获取一个范围的元素。
+
+
+
+在底层使用`跳跃表`实现，既有红黑树的效率，又比红黑树实现起来简单。
+
+
+
+常用操作：
+
+```shell
+# 添加元素
+zadd 键 评分 值1 值2 值3
+
+
+# 返回范围在[起始下标 , 终止下标]之间的元素,若结尾有withscores，表示返回：评分+值
+zrange 键 起始下标 终止下标 withscores
+
+
+# 返回zset集合中，所有score值在[min,max]之间的集合值，按score升序排列(最大值后的参数可省略)
+zrangebyscore 键 评分的最小值 评分的最大值 withscore limit 偏移量 个数
+
+
+#返回zset集合中，所有score值在[min,max]之间的集合值，按score降序排列(最大值后的参数可省略)
+zrevrangebyscore 键 评分的最小值 评分的最大值 withscore limit 偏移量 个数
+
+
+# 给元素的score评分加上增量
+zincrby 键 增量 值
+
+
+# 删除指定的元素
+zrem 键 值
+
+
+# 统计zset集合内，score在 [min,max]内的元素个数
+zcount 键 最小值 最大值
+
+
+# 返回该值在集合中的排名，从0开始
+zrank 键 值
+```
+
+
+
+<iframe style="height:600px;"  src="//player.bilibili.com/player.html?aid=247670776&bvid=BV1Rv41177Af&cid=326379063&page=12" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 
 
