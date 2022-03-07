@@ -1,5 +1,5 @@
 ---
-title: Redis-笔记
+title: Redis-笔记（完整）
 tag: Redis
 categories:
   - [SQL,Redis]
@@ -702,6 +702,611 @@ zrank 键 值
 
 
 <iframe style="height:600px;"  src="//player.bilibili.com/player.html?aid=247670776&bvid=BV1Rv41177Af&cid=326379063&page=12" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+## 7、bitmaps 类型
+
+
+
+常用于统计用户的访问量。
+
+活跃的用户越多，（相比 set 类型）使用 bitmaps 来统计活跃用户就越省空间。
+
+
+
+- bitmaps 类型 本质上还是字符串类型，但可以对字符串中的`位`进行操作。
+
+- bitmaps 类型 单独提供了一套命令，所以在 Redis 中使用bitmaps和使用字符串的命令有所不同。
+
+- 可以把 bitmaps 类型 看作是以`bit 位`为单位的数组，数组的每个单元都只能存储 0 和 1，数组的下标在 bitmaps 类型中叫<font style="color:purple;">偏移量</font>。
+
+
+
+![image-20220307182133578](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307182133578.png)
+
+
+
+
+
+
+
+常用命令：
+
+```shell
+
+# 设置bitmap，偏移量是数组下标（一般用来表示用户的id），值是0或1
+setbit 键 偏移量 值
+
+
+# 获取
+getbit 键 偏移量
+
+
+# 统计 bitmaps 字符串中的有多少个bit位是1。开始、结束字节若为负数，表示从最后一个字节开始往前数
+bitcount 键 开始字节 结束字节
+
+
+# 位运算，可以做多个bitmaps的 and、or、not、xor等操作，并将结果保存到destkey所表示的bitmaps中
+bitop 位运算符  运算结果的键 操作bitmaps1的键 操作bitmaps2的键
+```
+
+
+
+
+
+setbit：
+
+![image-20220307182719390](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307182719390.png)
+
+
+
+![image-20220307182908997](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307182908997.png)
+
+
+
+bitop：
+
+![image-20220307183940869](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307183940869.png)
+
+
+
+<iframe style="height:500px;"  src="//player.bilibili.com/player.html?aid=247670776&bvid=BV1Rv41177Af&cid=326379607&page=15" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+## 8、hyperloglog 类型
+
+
+
+统计相关的功能需求，例如：网站的 PageView（PV）可以使用Redis 的 incr、incrby 实现。
+
+但是，例如：网站的 UniqueView（UV）、独立IP数、搜索记录数等需要去重的问题应该如何解决？
+
+
+
+求集合中不重复元素的个数的问题——<font style="color:red;">基数问题</font>
+
+> 基数问题的解决方案：
+>
+> - 存储在MySQL中，使用`distinct count(*)`计算不重复的个数。
+> - 使用 Redis 提供的 hash、set、bitmaps 等数据结构。
+>
+>  
+>
+> 以上两种方法虽然结果精确，但随着数据量的增加，将导致占用的空间越来越多。
+
+
+
+hyperloglog 类型 就是专门用于做`基数统计`的数据类型。
+
+
+
+<font style="color:red;font-size:1.2em">优点：</font>
+
+> 在输入的数据数量或体积非常大的时候，计算基数所需的空间<font style="color:red;">很小且固定</font>。
+>
+> 在 hyperloglog 类型中，每个键只需花费`12 KB`的内存就可以计算接近 <font style="color:red;">2^64^</font> 个不同的基数
+
+
+
+<font style="color:red;font-size:1.2em">缺点：</font>
+
+> 只会根据输入元素来计算基数，不会存储输入元素，因此不能返回输入的元素。
+
+
+
+
+
+常用命令：
+
+```shell
+
+# 添加指定元素到 hyperloglog 中，添加成功返回1，失败返回0
+pfadd 键 元素1 元素2 元素3 .......
+
+
+# 统计基数
+pfcount 键
+
+
+# 将多个hyperloglog 类型的数据合并后保存到另一个 hyperloglog 中
+pfmerge 合并后的结果键 待合并的htyperloglog1 待合并的htyperloglog2
+
+```
+
+
+
+
+
+<iframe style="height:500px;" src="//player.bilibili.com/player.html?aid=247670776&bvid=BV1Rv41177Af&cid=326379758&page=16" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+## 9、geospatial 类型
+
+
+
+geospatial 类型 存储的就是元素的二维坐标（经纬度）。
+
+Redis 基于该数据类型，提供了 经纬度的设置、查询、范围查询、距离查询、经纬度hash等常见操作。
+
+
+
+常用命令：
+
+```shell
+
+# 添加
+# 两极无法直接添加，一般使用时会下载城市数据然后通过Java一次性导入。不能重复添加，超出范围会报错。
+# 有效的经度：-180~+180
+# 有效的纬度：-85.05112878 ~ 85.05112878
+geoadd 键 经度1 纬度1 地点的名称1 [经度2 纬度2 地点的名称2........]
+
+
+# 获取
+geopos 键 地点的名称
+
+
+# 获取两点之间的直线距离，长度单位：m米（默认）、km千米、ft英尺、mi英里
+geodist 键 地点的名称1 地点的名称2 长度单位
+
+
+# 找出方圆多少距离的元素
+geo 键 经度 纬度 b距离 长度单位
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 三、Redis 配置文件
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在安装时，我们将Redis的配置文件（`redis.conf`）复制到了`/etc/`目录下，并在启动`redis-server`时，指定了`/etc/redis.conf`配置文件。下面讲解Redis的配置文件。
+
+
+
+## 0、常用设置
+
+
+
+（1）注释掉 bind，使得 Redis 可以被外网PC访问：
+
+```
+# bind 127.0.0.1 -::1
+```
+
+
+
+（2）将 `protected-mode` 的值改为`no`，使得 Redis 可以被外网PC访问：
+
+```shell
+protected-mode no
+```
+
+
+
+（3）将 `daemonize` 的值改为`yes`，使得 Redis 可以后台运行：
+
+```shell
+daemonize yes
+```
+
+
+
+（4）设置`maxmemory`，防止内存不足时，服务器宕机：
+
+```shell
+maxmemory <bytes>
+```
+
+
+
+
+
+
+
+## 1、units 单位
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Redis 的配置文件的开头定义了一些基本的度量单位，只支持 `byte`字节，不支持`bit`位。
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:purple;">大小写不敏感</font>。
+
+![image-20220307120806024](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307120806024.png)
+
+
+
+
+
+## 2、include 引入其他配置文件
+
+
+
+```shell
+include /path/to/local.conf
+
+include /path/to/other.conf
+```
+
+
+
+
+
+## 3、network 网络设置
+
+
+
+### 3.1、bind 绑定 IP 地址
+
+建议注释掉，否则只能本地访问。
+
+```shell
+# bind 192.168.1.100 10.0.0.1     # listens on two specific IPv4 addresses
+# bind 127.0.0.1 ::1              # listens on loopback IPv4 and IPv6
+# bind * -::*                     # like the default, all available interfaces
+
+bind 127.0.0.1 -::1
+```
+
+
+
+
+
+### 3.2、protected-mode 是否允许远程访问
+
+
+
+```shell
+# yes: 不能远程访问
+# no: 可以远程访问
+protected-mode yes
+```
+
+
+
+
+
+### 3.3、port 服务监听的端口
+
+
+
+```shell
+port 6379
+```
+
+
+
+
+
+### 3.4、 tcp-backlog 连接队列
+
+tcp-backlog 是一个连接队列。
+
+<font style="color:red;">tcp-backlog 连接队列总和 = 未完成三次握手的队列 + 已完成三次握手的队列</font>
+
+在<font style="color:red;">高并发环境</font>下，需要将<font style="color:red;"> tcp-backlog </font>调高来避免<font style="color:red;">慢客户端连接</font>的问题。
+
+
+
+
+
+<font style="color:red;">注意：</font>
+
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linux 会将`tcp-backlog`的值减小到`/proc/sys/net/core/somaxconn`的值（128）。所以，需要确认增大`/proc/sys/net/core/somaxconn` 和 `/proc/sys/net/ipv4/tcp_max_syn_backlog`（128）来达到想要的效果。
+
+
+
+```shell
+# TCP listen() backlog.
+#
+# In high requests-per-second environments you need a high backlog in order
+# to avoid slow clients connection issues. Note that the Linux kernel
+# will silently truncate it to the value of /proc/sys/net/core/somaxconn so
+# make sure to raise both the value of somaxconn and tcp_max_syn_backlogprotected-mode yes
+# in order to get the desired effect.
+
+tcp-backlog 511
+```
+
+
+
+
+
+
+
+### 3.5、 time-out 超时
+
+
+
+```shell
+# Close the connection after a client is idle for N seconds (0 to disable)
+timeout 0
+```
+
+
+
+
+
+### 3.6、tcp-keepalive 
+
+
+
+300 秒没有操作就断开
+
+```shell
+# A reasonable value for this option is 300 seconds, 
+tcp-keepalive 300
+```
+
+
+
+
+
+## 4、general 通用配置
+
+
+
+
+
+### 4.1、daemon 后台启动
+
+
+
+```shell
+# By default Redis does not run as a daemon. Use 'yes' if you need it.
+# Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
+# When Redis is supervised by upstart or systemd, this parameter has no impact.
+daemonize yes
+```
+
+
+
+
+
+### 4.2、pidfile 文件
+
+
+
+```shell
+# Creating a pid file is best effort: if Redis is not able to create it
+# nothing bad happens, the server will start and run normally.
+#
+# Note that on modern Linux systems "/run/redis.pid" is more conforming
+# and should be used instead.
+pidfile /var/run/redis_6379.pid
+```
+
+
+
+
+
+### 4.3、loglevel 日志等级
+
+
+
+```shell
+# Specify the server verbosity level.
+# This can be one of:
+# 	debug (a lot of information, useful for development/testing)
+# 	verbose (many rarely useful info, but not a mess like the debug level)
+# 	notice (moderately verbose, what you want in production probably)
+# 	warning (only very important / critical messages are logged)
+# 生产环境
+loglevel notice
+```
+
+
+
+
+
+### 4.4、database 默认的数据库数
+
+
+
+```shell
+# Set the number of databases. The default database is DB 0, you can select
+# a different one on a per-connection basis using SELECT <dbid> where
+# dbid is a number between 0 and 'databases'-1
+# 范围：[0,databases-1]
+databases 16
+```
+
+
+
+
+
+
+
+## 5、security 安全
+
+
+
+### 5.1、设置密码
+
+
+
+在`redis-cli`客户端中，输入：
+
+```shell
+config get requirepass
+
+config set requirepass "123456"
+
+auth 123456
+```
+
+
+
+
+
+## 6、limit 限制
+
+
+
+### 6.1、maxclients 最大客户端连接数
+
+
+
+- 该配置用于设置Redis最多同时可以连接多少个客户端。
+
+- 默认为`10000`个客户端。
+
+- 若达到此限制，则拒绝新的连接请求，并向连接的请求方发送`max number of clients reached`来做回应。
+
+
+
+```shell
+# maxclients 10000
+```
+
+
+
+
+
+### 6.2、maxmemory 最大内存
+
+
+
+- <font style="color:red;font-size:1.3em;">建议必须设置</font>，否则当内存满时，会造成服务器宕机。
+
+- 设置 redis 可以使用的内存大小。一旦达到内存的使用上限，则会移除内部的数据。
+
+- 移除数据的规则可以通过`maxmemory-policy`来指定。
+
+
+
+```shell
+maxmemory <bytes>
+```
+
+
+
+
+
+
+
+# 四、订阅与发布
+
+
+
+## 1、什么是订阅和发布
+
+
+
+Redis 发布和订阅是一种消息通信模式：
+
+- 发布者（pub）发送消息
+- 订阅者（sub）接受消息
+
+
+
+`Redis 客户端`可以订阅任意数量的`频道`。
+
+
+
+
+
+发布：
+
+![image-20220307175345830](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307175345830.png)
+
+
+
+订阅：
+
+![image-20220307175431929](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307175431929.png)
+
+
+
+
+
+## 2、订阅与发布的实现案例
+
+
+
+### 2.1、Redis 客户端1 订阅频道
+
+
+
+```shell
+# 订阅频道(channel_1)
+subscribe channel_1
+```
+
+
+
+![image-20220307180709571](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307180709571.png)
+
+
+
+### 2.2、Redis 客户端2 发布消息
+
+
+
+```shell
+# 向redis客户端1所订阅的频道channel_1 发布消息
+publish channel_1 hello—world
+```
+
+
+
+![image-20220307181136474](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307181136474.png)
+
+
+
+
+
+### 2.2、Redis 客户端1 接收消息
+
+
+
+![image-20220307181245499](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307181245499.png)
+
+
+
+
+
+
+
+# 五、Jedis 操作
 
 
 

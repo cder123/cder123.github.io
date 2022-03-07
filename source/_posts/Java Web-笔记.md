@@ -2268,7 +2268,7 @@ Request报文的格式：【请求行 + 请求头 + 空格 + 请求体】
 >       ​	例如：	GET http://localhost/login.html	HTTP/1.1
 >
 >        	请求方式：
->    	 	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
+>    	 	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	     	
 >        		GET：参数放在url后，不安全，url的长度有限制
 >        		POST：参数放在请求体里，url长度无限制，相对安全
 >
@@ -5676,3 +5676,92 @@ public final class MailUtils {
 
 ```
 
+
+
+
+
+## 14、Maven-war 打包部署
+
+
+
+（1）在Maven的`POM.xml`文件中：
+
+```xml
+ <build>
+    <!-- 打包后war文件的名字 -->
+    <finalName>test02</finalName>
+     
+   <plugins>
+     <!-- 打war包的插件 -->
+     <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-war-plugin</artifactId>
+       <version>3.2.0</version>
+     </plugin>
+   </plugins>
+ </build>
+```
+
+
+
+（2）执行Maven的打包命令：
+
+![image-20220305141445747](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220305141445747.png)
+
+
+
+（3）打包生成的war包在项目的`target`目录下。
+
+
+
+（4）配置 tomcat：
+
+> - 修改`server.xml`文件中的字符编码为`UTF-8`，（在`Connector 8080的标签`）
+
+```xml
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" URIEncoding="UTF-8" />
+```
+
+
+
+> - 配置war包的路径（在`Host 标签内`）
+
+```xml
+
+<!-- test02是项目名  -->
+    <context path="/test02" 
+             docBase="test02.war"
+             debug="0" 
+             privileged="true" 
+             reloadable="true"/>
+```
+
+
+
+> - 启动 Tomcat
+
+进入Tomcat的`bin`目录，双击`startup.bat`
+
+
+
+
+
+
+
+## 15、将 Tomcat 安装为服务
+
+
+
+（1）进入Tomcat安装目录下的`bin`目录
+
+（2）在 Tomcat 的`bin`目录下，以管理员身份运行`cmd`
+
+（3）执行以下命令：
+
+```bat
+service.bat tomcat
+```
+
+（4）右键`计算机` -> `管理`->`服务` ，找到`Apache Tomcat9.0tomcat`服务，进行管理。
