@@ -1,5 +1,5 @@
 ---
-title: Redis-笔记（完整）
+title: Redis-笔记
 tag: Redis
 categories:
   - [SQL,Redis]
@@ -21,6 +21,7 @@ categories:
 
 - [Redis 6-尚硅谷版](https://www.bilibili.com/video/BV1Rv41177Af?p=2)
 - [Redis 6 -尚硅谷版-博客](https://zhangc233.github.io/2021/05/02/Redis/)
+- [Redis 6-笔记](https://blog.csdn.net/weixin_47872288/article/details/118410080)
 
 
 
@@ -1307,6 +1308,528 @@ publish channel_1 hello—world
 
 
 # 五、Jedis 操作
+
+
+
+## 1、Maven 依赖
+
+
+
+```xml
+		<dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+```
+
+
+
+
+
+## 2、Jedis 的连通
+
+
+
+（1）修改Redis的设置：
+
+（注释掉`/etc/redis.conf`配置文件中的bind语句，protected-mode设为no，重启 Redis 服务）
+
+```bash
+# 关闭Redis服务
+kill -9 6379
+
+
+# 打开Redis服务
+/usr/local/bin/redis-server /etc/redis.conf
+```
+
+
+
+
+
+（2）关闭CentOS 的防火墙
+
+```bash
+# 查看防火墙
+systemctl status firewalld
+
+
+# 关闭防火墙
+ systemctl stop firewalld
+```
+
+
+
+（3）测试Jedis能否连通Redis服务器：
+
+```java
+package com.cyw;
+
+import redis.clients.jedis.Jedis;
+
+public class TestJedis {
+    public static void main(String[] args) {
+
+        // 根据ip地址、端口，创建Jedis对象
+        Jedis jedis = new Jedis("192.168.220.137",6379);
+
+        // 测试能否连通Redis服务器
+        String ping = jedis.ping();
+        
+        // 打印 pong 表示已经连通
+        System.out.println(ping);
+        
+        jedis.close();
+
+    }
+}
+
+```
+
+
+
+
+
+## 3、Jedis 的 API-keys
+
+
+
+```java
+ 	@Test
+    public void demo1(){
+        Jedis jedis = new Jedis("192.168.220.137", 6379);
+
+        // 查询Redis的当前数据库中的所有键
+        // 相当于Redis原生的命令：keys *
+        Set<String> keys = jedis.keys("*");
+        System.out.println(keys);
+    }
+```
+
+
+
+
+
+## 4、Jedis 的 API-String
+
+
+
+其他类型与String类型的用法类型，都是将原生的命令改为方法。
+
+
+
+```java
+    @Test
+    public void demo1(){
+        Jedis jedis = new Jedis("192.168.220.137", 6379);
+		
+        // 添加str类型的数据
+        String ok = jedis.set("k1", "abc");
+        System.out.println(ok);
+        
+        
+        // 获取str类型的数据
+        String k1 = jedis.get("k1");
+        System.out.println(k1);
+        
+        
+        // 判断某个键是否存在
+        boolean isExist = jedis.exists("k1");
+        System.out.println(isExist);
+        
+                
+        // 设置有效期（秒）
+        jedis.expire("k1", 30);
+        
+        
+        // 获取剩余有效期（秒）：-1永不过期，-2已过期
+        long ttl = jedis.ttl("k1");
+        System.out.println(ttl);
+        
+        
+        // 批量设置
+        jedis.mset("k1","a1","k2","a2");
+        System.out.println(jedis.get("k1"));
+        System.out.println(jedis.get("k2"));
+        
+        
+        // 释放资源
+        jedis.close();
+        
+    }
+```
+
+
+
+
+
+
+
+# 六、案例-模拟手机验证码
+
+
+
+
+
+## 1、要求
+
+
+
+- 输入手机号，点击发送，随机生成6位数字的验证码，2分钟有效
+- 输入验证码，点击验证，返回成功或失败
+- 每个手机号每天只能输入3次
+
+
+
+
+
+## 2、实现思路
+
+
+
+- 随机生成6位数字的验证码：Java中的`Random`类的`nextInt()`方法。
+- 2分钟有效：使用 Jedis操作Redis设置验证码的有效期（`jedis.expire("键",有效秒数)`）
+- 返回成功或失败：使用Jedis的`jedis.get("键")`获取Redis中的验证码，并将取出的值与用户的输入值比较
+- 每天只能输入3次：使用Redis的`incrby`命令
+
+
+
+
+
+## 3、实现
+
+
+
+### 3.1、生成验证码
+
+
+
+```java
+ 	// 生成6位数的验证码的方法
+    public static String getCode(){
+        Random rd = new Random();
+        String str = "";
+        for (int i = 0; i < 6; i++) {
+            str += rd.nextInt(10);
+        }
+        return str;
+    }
+```
+
+
+
+
+
+### 3.2、限制每个手机每天只能发送三次
+
+
+
+```java
+ 	// 限制每个手机每天只能发送3次，
+    // 存储验证码到Redis，设置过期时间
+    public static void sendCode(String phone){
+
+        Jedis jedis = new Jedis("192.168.220.137", 6379);
+
+        // 拼接用户验证码生成次数的key
+        String countKey = "verifyCode"+phone+":count";
+
+        // 尝试去Redis中获取验证码的生成次数
+        String count = jedis.get(countKey);
+        
+        if (count == null){
+            // 为null表示没有验证码（第一次生成验证码）
+            // 有效期：一天
+            jedis.setex(countKey,24*60*60,"1");
+        }else if (Integer.parseInt(count)<3){
+            jedis.incr(countKey);
+        }else if (Integer.parseInt(count)>=3){
+            System.out.println("今天的发送次数已达3次，不能再发送了");
+            jedis.close();
+			return;
+        }
+
+        // 拼接用户验证码的key
+        String codeKey = "verifyCode"+phone+":code";
+
+        // 后端生成验证码
+        String code = PhoneCode.getCode();
+
+        // 设置验证码的有效期为2分钟
+        jedis.setex(codeKey,120,code);
+
+        jedis.close();        
+    }
+```
+
+
+
+### 3.3、校验验证码
+
+
+
+```java
+ 	// 校验验证码
+    public static void verifyCode(String phone,String code){
+
+        Jedis jedis = new Jedis("192.168.220.137", 6379);
+
+        // 拼接用户验证码的key
+        String codeKey = "verifyCode"+phone+":code";
+
+        String redisCode = jedis.get(codeKey);
+
+        if (redisCode.equalsIgnoreCase(code)){
+            System.out.println("验证通过！");
+        }else{
+            System.out.println("验证失败！");
+        }
+        jedis.close();
+    }
+```
+
+
+
+
+
+### 3.4、测试
+
+
+
+```java
+    public static void main(String[] args) {
+
+//        sendCode("123456");
+        verifyCode("123456","844525");
+    }
+```
+
+
+
+
+
+### 3.5、完整版代码
+
+
+
+```java
+package com.cyw;
+
+import redis.clients.jedis.Jedis;
+
+import java.util.Random;
+
+public class PhoneCode {
+    public static void main(String[] args) {
+
+//        sendCode("123456");
+        verifyCode("123456","844525");
+    }
+
+    // 生成6位数的验证码
+    public static String getCode(){
+        Random rd = new Random();
+        String str = "";
+        for (int i = 0; i < 6; i++) {
+            str += rd.nextInt(10);
+        }
+        return str;
+    }
+
+
+    // 限制每个手机每天只能发送3次，
+    // 存储验证码到Redis，设置过期时间
+    public static void sendCode(String phone){
+
+        Jedis jedis = new Jedis("192.168.220.137", 6379);
+
+        // 拼接用户验证码生成次数的key
+        String countKey = "verifyCode"+phone+":count";
+
+        // 尝试去Redis中获取验证码的生成次数
+        String count = jedis.get(countKey);
+
+        if (count == null){
+            // 为null表示没有验证码（第一次生成验证码）
+            // 有效期：一天
+            jedis.setex(countKey,24*60*60,"1");
+        }else if (Integer.parseInt(count)<3){
+            jedis.incr(countKey);
+        }else if (Integer.parseInt(count)>=3){
+            System.out.println("今天的发送次数已达3次，不能再发送了");
+            jedis.close();
+            return;
+        }
+
+        // 拼接用户验证码的key
+        String codeKey = "verifyCode"+phone+":code";
+
+        // 后端生成验证码
+        String code = PhoneCode.getCode();
+
+        // 设置验证码的有效期为2分钟
+        jedis.setex(codeKey,120,code);
+
+        jedis.close();
+    }
+
+
+    // 校验验证码
+    public static void verifyCode(String phone,String code){
+
+        Jedis jedis = new Jedis("192.168.220.137", 6379);
+
+        // 拼接用户验证码的key
+        String codeKey = "verifyCode"+phone+":code";
+
+        String redisCode = jedis.get(codeKey);
+
+        if (redisCode.equalsIgnoreCase(code)){
+            System.out.println("验证通过！");
+        }else{
+            System.out.println("验证失败！");
+        }
+        jedis.close();
+    }
+}
+
+```
+
+
+
+
+
+
+
+# 七、Redis 整合 SpringBoot
+
+
+
+
+
+## 1、Maven依赖
+
+
+
+```xml
+		 <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+```
+
+
+
+
+
+
+
+## 2、SpringBoot 的配置文件中的 Redis 部分
+
+
+
+`application.properties`
+
+```properties
+spring.redis.host=192.168.220.137			# redis 服务器的地址
+spring.redis.port=6379						# redis 服务器的端口
+spring.redis.database=0						# redis服务器的数据库索引
+spring.redis.timeout=1800000				# 连接超时时间（毫秒）
+spring.redis.lettuce.pool.max-active=20		# 最大连接数，负值表示无限制
+spring.redis.lettuce.pool.max-wait=-1		# 最大阻塞等待时间，负值表示无限制
+spring.redis.lettuce.pool.max-idle=5		# 最大连接
+spring.redis.lettuce.pool.min-idle=0		# 最小连接
+```
+
+
+
+
+
+## 3、SpringBoot 的 Redis 配置类
+
+
+
+```java
+@EnableCaching
+@Configuration
+public class RedisConfig extends CachingConfigurerSupport {
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        template.setConnectionFactory(factory);
+//key序列化方式
+        template.setKeySerializer(redisSerializer);
+//value序列化
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+//value hashmap序列化
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
+        return template;
+    }
+
+    @Bean
+    public CacheManager cacheManager(RedisConnectionFactory factory) {
+        RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+//解决查询缓存转换异常的问题
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+// 配置序列化（解决乱码的问题）,过期时间600秒
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(600))
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
+                .disableCachingNullValues();
+        RedisCacheManager cacheManager = RedisCacheManager.builder(factory)
+                .cacheDefaults(config)
+                .build();
+        return cacheManager;
+    }
+}
+```
+
+
+
+
+
+## 4、测试类
+
+
+
+```java
+@RestController
+@RequestMapping("/redisTest")
+public class RedisTestController {
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @GetMapping
+    public String testRedis() {
+        //设置值到redis
+        redisTemplate.opsForValue().set("name","学习java可看码农研究僧的博客地址，https://blog.csdn.net/weixin_47872288");
+        //从redis获取值
+        String name = (String)redisTemplate.opsForValue().get("name");
+        return name;
+    }
+}
+```
+
+
 
 
 
