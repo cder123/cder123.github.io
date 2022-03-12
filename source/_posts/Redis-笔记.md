@@ -939,6 +939,48 @@ maxmemory <bytes>
 
 
 
+（5）修改密码`requirepass`：
+
+```shell
+requirepass 你的密码
+
+# 在Java代码中：
+jedis.auth("密码"）
+```
+
+
+
+（6）重启Redis
+
+```shell
+# 1.关闭redis,在 redis-cli 所在的目录下输入： 
+redis-cli -a 密码
+
+
+#  进入到 redis 指令模式，输入：
+shutdown
+ 
+ 
+# 然后再输入：  
+exit
+
+
+# 2.启动redis
+# 在 redis-server 所在的目录下输入： 
+redis-server redis.conf所在目录/redis.conf
+
+# 可以通过指令 ps aux | grep redis 查看redis状态
+
+# 开放端口：
+firewall-cmd --add-port=6379/tcp --permanent
+
+# 重启防火墙生效
+firewall-cmd --reload
+firewall-cmd --query-port=6379/tcp
+```
+
+
+
 
 
 
@@ -1828,6 +1870,448 @@ public class RedisTestController {
     }
 }
 ```
+
+
+
+
+
+
+
+
+
+# 八、事务 与 锁机制
+
+
+
+Redis 事务是一个单独的隔离操作：
+
+- 事务中的所有命令都会序列化、按顺序执行。
+- 事务在执行过程中，不会被其他客户端发送的命令请求打断。
+
+
+
+Redis 事务的主要作用：<font style="color:red;">串联多个命令，防止别的命令插队。</font>
+
+不支持ACID
+
+
+
+## 1、基本操作
+
+
+
+- `multi`：排队（开启事务）
+
+- `exec` ：执行
+
+- `discard`：放弃排队（回滚）
+
+
+
+
+
+![image-20220311132347204](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132347204.png)
+
+
+
+
+
+
+
+开启事务、执行事务：
+
+![image-20220311132716797](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132716797.png)
+
+
+
+
+
+回滚事务：
+
+![image-20220311132814188](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132814188.png)
+
+
+
+
+
+
+
+
+
+## 2、事务的错误处理
+
+
+
+### 2.1、组队出错
+
+
+
+![image-20220311132919586](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132919586.png)
+
+
+
+
+
+组队阶段的出现错误，则队列内的命令都不会执行成功：
+
+![image-20220311133107022](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311133107022.png)
+
+
+
+
+
+### 2.2、执行出错
+
+
+
+执行阶段的出现错误，则队列内正确的命令可以执行成功：
+
+![image-20220311133408335](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311133408335.png)
+
+
+
+
+
+
+
+## 3、悲观锁
+
+
+
+<font style="color:red;font-size:1.3em;">悲观锁：</font>每次取数据，都认为别人会修改，所以每次拿数据时都会上锁，其他人取数据时会进入阻塞状态。传统的关系型数据库里的`行锁`、`表锁`、`读锁`、`写锁`等就利用了悲观锁机制。
+
+
+
+
+
+缺点：效率低。
+
+
+
+<iframe 
+style="height:500px;"  src="//player.bilibili.com/player.html?aid=247670776&bvid=BV1Rv41177Af&cid=326381446&page=22" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+## 4、乐观锁
+
+
+
+<font style="color:red;font-size:1.3em;">乐观锁：</font>给数据加上一个版本号，更新数据的时候，检查版本号是否与数据库中的一致。适用于`多读`的情况（如：抢票），可以提高吞吐量。Redis 就是利用这种 `check-and-set`机制实现事务的。
+
+
+
+<font style="color:red;font-size:1.3em;">乐观锁的使用：（watch 命令）</font>
+
+> 假设现在有2个Redis客户端，同时操作键名为“balance”的数据：
+>
+> - （双方）先执行`watch`命令，监视某些键（如：`watch balance`）。
+> - （双方）再执行`multi`命令，开启事务。
+> - （双方）数据更新操作加入到队列（如：`incrby balance 10`）
+> - 执行队列中的操作`exec`
+> - 当第二个客户端执行操作时，返回`nil`表示Redis客户端2的更新操作执行执行失败。（乐观锁生效）
+> - 取消监视`unwatch`。
+
+
+
+
+
+
+
+<iframe style="height:500px;"  src="//player.bilibili.com/player.html?aid=247670776&bvid=BV1Rv41177Af&cid=326381509&page=23" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+
+
+## 5、Redis 事务的三个特性
+
+
+
+> - 单独的隔离操作（所有命令顺序执行，不会被其它客户端的命令打断）
+> - 没有隔离级别的概念（队列中的所有命令，没提交前都不会被实际执行）
+> - 不保证原子性（队列中的一条命令执行失败，其他正确的命令不会回滚，仍然执行）
+
+
+
+
+
+
+
+
+
+
+
+## 6、案例-秒杀
+
+
+
+```java
+package com.cyw.kill;
+
+import redis.clients.jedis.Jedis;
+
+public class KillTest {
+    public static void main(String[] args) {
+        Jedis jedis = new Jedis("192.168.220.138", 6379);
+        System.out.println(jedis.ping());
+    }
+
+    
+    public boolean doKill(String uid,String productId){
+        // 1、判断uid和productId是否为null
+        if (uid == null || productId == null){
+            return false;
+        }
+
+        // 2、连接Redis服务器
+        Jedis jedis = new Jedis("192.168.220.138", 6379);
+
+
+        // 3、拼接库存key
+        String remainNumKey= "kill_DB:"+productId+":qt";
+
+        // 4、拼接秒杀成功的用户key
+        String userKey = "kill_DB:"+uid+":user";
+
+
+        // 5、获取库存，若为null，表示还没开始
+        String remainNum = jedis.get(remainNumKey);
+
+        if (remainNum == null){
+            System.out.println("秒杀还没开始！");
+            jedis.close();
+            return false;
+        }
+
+        // 6、判断用户是否重复秒杀
+        if(jedis.sismember(userKey, uid)){
+            System.out.println("已经秒杀成功，不能重复秒杀");
+            jedis.close();
+            return false;
+        }
+
+        // 7、判断如果商品数量、库存小于1，秒杀结束
+        if (Integer.parseInt(remainNum) < 1){
+            System.out.println("秒杀已经结束！");
+            jedis.close();
+            return false;
+        }
+
+        // 秒杀过程，库存减一，把用户添加到名单里
+        jedis.decr(remainNumKey);
+        jedis.sadd(userKey,uid);
+        System.out.println("秒杀成功！");
+
+        return true;
+    }
+}
+
+```
+
+
+
+
+
+## 7、ab工具模拟并发
+
+
+
+（1）安装：`yum install httpd-tools`
+
+（2）检查是否安装成功：`ab --help`
+
+（3）请求1000次，并发量100：`ab -n 1000 -c 100 http://192.168.220.138:8080/secondKill`
+
+（4）POST请求时，把请求体放到文件里，并指定请求参数的类型(请求路径不能写localhost)：`ab -n 1000 -c 100 -p postfile -T 'application/x-www-form-urlencoded'  需要测试的网站的url`
+
+
+
+
+
+<iframe style="height:500px;"
+  src="//player.bilibili.com/player.html?aid=247670776&bvid=BV1Rv41177Af&cid=326381628&page=25" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+连接超时问题：【使用连接池】
+
+```java
+public class JedisPoolUtil {
+	private static volatile JedisPool jedisPool = null;
+
+	private JedisPoolUtil() {
+	}
+
+	public static JedisPool getJedisPoolInstance() {
+		if (null == jedisPool) {
+			synchronized (JedisPoolUtil.class) {
+				if (null == jedisPool) {
+					JedisPoolConfig poolConfig = new JedisPoolConfig();
+					poolConfig.setMaxTotal(200);
+					poolConfig.setMaxIdle(32);
+					poolConfig.setMaxWaitMillis(100*1000);
+					poolConfig.setBlockWhenExhausted(true);
+					poolConfig.setTestOnBorrow(true);  // ping  PONG，判断是否还存在
+				 
+                    // 配置、ip、端口、超时时间
+					jedisPool = new JedisPool(poolConfig, "172.22.109.205", 6379, 60000 );
+				}
+			}
+		}
+		return jedisPool;
+	}
+
+	public static void release(JedisPool jedisPool, Jedis jedis) {
+		if (null != jedis) {
+			jedisPool.returnResource(jedis);
+		}
+	}
+
+}
+```
+
+在【秒杀案例的代码中】通过创建连接池再来获取数据：
+
+```java
+//2 连接redis
+//Jedis jedis = new Jedis("192.168.44.168",6379);
+//通过连接池得到jedis对象
+JedisPool jedisPoolInstance = JedisPoolUtil.getJedisPoolInstance();
+Jedis jedis = jedisPoolInstance.getResource();
+```
+
+
+
+
+
+最终的【秒杀案例代码】：
+
+```java
+package com.cyw.kill;
+
+import redis.clients.jedis.Jedis;
+
+public class KillTest {
+    public static void main(String[] args) {
+        Jedis jedis = new Jedis("192.168.220.138", 6379);
+        System.out.println(jedis.ping());
+    }
+
+    
+    public boolean doKill(String uid,String productId){
+        // 1、判断uid和productId是否为null
+        if (uid == null || productId == null){
+            return false;
+        }
+
+        // 2、连接Redis服务器
+        JedisPool jedisPoolInstance = JedisPoolUtil.getJedisPoolInstance();
+		Jedis jedis = jedisPoolInstance.getResource();
+        
+        // 3、拼接库存key
+        String remainNumKey= "kill_DB:"+productId+":qt";
+
+        // 4、拼接秒杀成功的用户key
+        String userKey = "kill_DB:"+uid+":user";
+
+        // 监视库存（乐观锁）
+        jedis.watch(remainNumKey);
+
+        // 5、获取库存，若为null，表示还没开始
+        String remainNum = jedis.get(remainNumKey);
+
+        if (remainNum == null){
+            System.out.println("秒杀还没开始！");
+            jedis.close();
+            return false;
+        }
+
+        // 6、判断用户是否重复秒杀
+        if(jedis.sismember(userKey, uid)){
+            System.out.println("已经秒杀成功，不能重复秒杀");
+            jedis.close();
+            return false;
+        }
+
+        // 7、判断如果商品数量、库存小于1，秒杀结束
+        if (Integer.parseInt(remainNum) < 1){
+            System.out.println("秒杀已经结束！");
+            jedis.close();
+            return false;
+        }
+
+        
+        // 开启事务
+        Transcation multi = jedis.multi();
+       
+        // 秒杀过程，库存减一，把用户添加到名单里
+        multi.decr(remainNumKey);
+        multi.sadd(userKey,uid);
+        List<Object> rst = multi.exec();
+        if(rst==null || rst.size()==0){
+            System.out.println("秒杀失败！");
+            jedis.close();
+            return false;
+        }
+        System.out.println("秒杀成功！");
+
+        return true;
+    }
+}
+
+```
+
+
+
+
+
+
+
+
+
+# 九、Redis 的持久化
+
+
+
+Redis 中的持久化操作分为：
+
+- RDB
+- AOF
+
+
+
+
+
+## 1、RDB
+
+
+
+RDB 就是在指定的<font style="color:red;">时间间隔</font>内，将内存中的<font style="color:red;">数据集快照</font>写入磁盘，也就是`Snapshot 快照`，它回复时是将快照文件直接读到内存中。（每隔一段时间，就将内存数据写入磁盘）
+
+
+
+如何备份：
+
+> - Redis 会单独创建（fork）一个子进程来进行持久化
+> - 先将数据写入**临时文件**，等到出啊结束后，再用**临时文件替换上一次的持久化文件**。
+> - 主进程不会有`I/O 操作`，确保了性能
+> - RDB 比 AOF 更高效。
+> - 缺点：**最后一次持久化的数据可能丢失**。
+
+ 
+
+。。。。。。
+
+
+
+## 2、AOP
+
+
 
 
 
