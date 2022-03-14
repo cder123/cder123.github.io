@@ -1093,11 +1093,21 @@ public class User {
 
 
 
+条件优先级：
+
+<iframe style="height:500px;"  src="//player.bilibili.com/player.html?aid=339472748&bvid=BV12R4y157Be&cid=700363284&page=34" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+
+
 - lt：小于，gt:大于，eq：等于，ne：不等于
 
 - or():直接链式调用条件方法 
 
-- and(消费者模式)：调用and(后再链式调用条件方法
+- and(消费者接口)：调用and(后再链式调用条件方法
 
 
 
@@ -1138,10 +1148,11 @@ public class User {
 @Test
     void testUpdate2(){
         // 修改用户：用户名包含S,并且（年龄大于20或邮箱为null）
-        // 此处的and(...)用来lambda表达式，且lambda表达式的中的条件先执行
+        	// 此处的and(...)用来lambda表达式，且lambda表达式的中的条件先执行
+        	// lmabda表达式中的i就是warpper对象
         UpdateWrapper<User> wrapper = new UpdateWrapper<>();
         wrapper.like("name","S")
-                .and( i ->i.gt("age",20).or().isNull("email"));
+                .and( i -> i.gt("age",20).or().isNull("email"));
 
         User user = new User();
         user.setUsername("小明");
@@ -1151,4 +1162,750 @@ public class User {
 ```
 
 
+
+实例：
+
+```java
+    @Test
+    public void test07() {
+        //将（年龄大于20或邮箱为null）并且用户名中包含有a的用户信息修改
+        //组装set子句以及修改条件
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        //lambda表达式内的逻辑优先运算
+        updateWrapper
+            .set("age", 18)
+            .set("email", "user@atguigu.com")
+            .like("username", "a")
+            .and(i -> i.gt("age", 20).or().isNull("email"));
+            int result = userMapper.update(null, updateWrapper);
+            System.out.println(result);
+    }
+```
+
+
+
+
+
+
+
+## 5、查询数据表中的部分列
+
+
+
+查询数据表中的部分列，也就是组装Select语句。
+
+
+
+```java
+    @Test
+    void testUpdate3(){
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.select("name","age","email");
+        List<Map<String, Object>> maps = userMapper.selectMaps(wrapper);
+        maps.forEach(System.out::println);
+    }
+```
+
+
+
+
+
+## 6、子查询
+
+
+
+```java
+    @Test
+    void testUpdate4(){
+        // 查询 uid<=100 的用户
+        // select * from t_user where uid in (select uid rom t_user where uid<=100)
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.inSql("uid","select uid from t_user where uid <=100")
+    }
+```
+
+
+
+
+
+## 7、LambdaQueryWrapper
+
+
+
+```java
+    @Test
+    public void test09() {
+        //定义查询条件，有可能为null（用户未输入）
+        String username = "a";
+        Integer ageBegin = 10;
+        Integer ageEnd = 24;
+        
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        
+        //避免使用字符串表示字段，防止运行时错误
+        queryWrapper
+        	.like(StringUtils.isNotBlank(username), User::getName, username)
+       		.ge(ageBegin != null, User::getAge, ageBegin)
+        	.le(ageEnd != null, User::getAge, ageEnd);
+        
+        List<User> users = userMapper.selectList(queryWrapper);
+        users.forEach(System.out::println);
+    }
+```
+
+
+
+
+
+## 8、LambdaUpdateWrapper
+
+
+
+```java
+    @Test
+    public void test10() {
+        //组装set子句
+        LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<>();
+        
+        //lambda表达式内的逻辑优先运算        
+        updateWrapper
+        	.set(User::getAge, 18)
+        	.set(User::getEmail, "user@atguigu.com")
+        	.like(User::getName, "a")
+        	.and(i -> i.lt(User::getAge, 24).or().isNull(User::getEmail)); 
+       
+        User user = new User();
+        int result = userMapper.update(user, updateWrapper);
+        System.out.println("受影响的行数：" + result);
+    }
+```
+
+
+
+
+
+
+
+
+
+# 八、分页插件
+
+
+
+
+
+<iframe 
+style="height:500px;"    src="//player.bilibili.com/player.html?aid=339472748&bvid=BV12R4y157Be&cid=700364145&page=42" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+## 1、分页插件的配置
+
+
+
+（1）创建配置类：
+
+```java
+package com.cyw.demo02.config;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+// (1)
+@Configuration
+// (2)
+@MapperScan("com.cyw.demo02.mapper")
+public class MybatisPlusConfig {
+
+    // (3)
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor(){
+
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+
+        return interceptor;
+    }
+}
+
+```
+
+
+
+## 2、测试分页
+
+
+
+```java
+    @Test
+    void testPage(){
+        
+        String email = "";
+        
+        Page<User> userPage = new Page<User>(1,3);
+        
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        
+        wrapper.like(StringUtils.isBlank(email), User::getEmail, "@qq.com");
+        
+        userMapper.selectPage(userPage, wrapper);     
+        
+        
+        System.out.println(userPage.getRecords());	// 记录（数据）
+        System.out.println(userPage.getCurrent());	// 当前页码
+        System.out.println(userPage.getSize());		// 每页大小
+        System.out.println(userPage.getTotal());	// 总记录数
+        System.out.println(userPage.getPages());	// 总页数
+    }
+```
+
+
+
+## 3、自定义分页
+
+
+
+
+
+<iframe 
+style="height:500px;"  src="//player.bilibili.com/player.html?aid=339472748&bvid=BV12R4y157Be&cid=700364243&page=44" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+### 3.1、UserMapper中定义接口方法
+
+```java
+/**
+* 根据年龄查询用户列表，分页显示
+* @param page 分页对象,xml中可以从里面进行取值,传递参数 Page 即自动分页,必须放在第一位
+* @param age 年龄
+* @return
+*/
+	IPage<User> selectPageVo(@Param("page") Page<User> page, 
+                             @Param("age") Integer age);
+
+```
+
+
+
+### 3.3、给POJO的包取别名
+
+
+
+`application.yml`：
+
+```yml
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      table-prefix: t_
+  type-aliases-package: com.cyw.demo02.po	# 给pojo包取别名
+```
+
+
+
+
+
+### 3.3、UserMapper.xml中编写SQL
+
+
+
+```xml
+	<!--SQL片段，记录基础字段-->
+	<sql id="BaseColumns">id,username,age,email</sql>
+
+    <!--IPage<User> selectPageVo(Page<User> page, Integer age);-->
+    <select id="selectPageVo" resultType="User">
+        SELECT 
+            <include refid="BaseColumns"></include> 
+        FROM t_user 
+        WHERE age > #{age}
+    </select>
+```
+
+
+
+
+
+
+
+### 3.4、测试自定义分页
+
+
+
+```java
+    @Test
+    public void testSelectPageVo(){
+        
+        //设置分页参数
+        Page<User> page = new Page<>(1, 5);
+        userMapper.selectPageVo(page, 20);
+        
+        //获取分页数据
+        List<User> list = page.getRecords();
+        
+        list.forEach(System.out::println);
+        
+        System.out.println("当前页："+page.getCurrent());
+        System.out.println("每页显示的条数："+page.getSize());
+        System.out.println("总记录数："+page.getTotal());
+        System.out.println("总页数："+page.getPages());
+        System.out.println("是否有上一页："+page.hasPrevious());
+        System.out.println("是否有下一页："+page.hasNext());
+	}
+
+```
+
+
+
+
+
+
+
+# 九、乐观锁插件
+
+
+
+## 1、乐观锁
+
+
+
+假设：
+
+> 产品100元，小明+50，小李-20（同时操作）
+
+
+
+悲观锁：
+
+> 在操作前加锁
+
+
+
+乐观锁：
+
+> 给数据库加一个版本号的字段，每次更新前，检查版本号（版本号作为SQL语句的where条件之一）
+>
+> 版本号一致，则更新数据，并将版本号字段+1
+>
+> 注意：POJO的版本号属性要加`@ersion`注解
+
+
+
+## 2、乐观锁案例（模拟冲突）
+
+
+
+
+
+<iframe style="height:500px;" src="//player.bilibili.com/player.html?aid=339472748&bvid=BV12R4y157Be&cid=700364331&page=46" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+### 2.1、数据表
+
+
+
+```sql
+
+CREATE TABLE t_product
+(
+    id BIGINT(20) NOT NULL COMMENT '主键ID',
+    NAME VARCHAR(30) NULL DEFAULT NULL COMMENT '商品名称',
+    price INT(11) DEFAULT 0 COMMENT '价格',
+    VERSION INT(11) DEFAULT 0 COMMENT '乐观锁版本号',
+    PRIMARY KEY (id)
+);
+
+
+INSERT INTO t_product (id, NAME, price) VALUES (1, '外星人笔记本', 100);
+```
+
+
+
+### 2.2、POJO
+
+
+
+```java
+import lombok.Data;
+
+@Data
+public class Product {
+    private Long id;
+    private String name;
+    private Integer price;
+    private Integer version;
+}
+```
+
+
+
+
+
+### 2.3、mapper 接口
+
+
+
+```java
+public interface ProductMapper extends BaseMapper<Product> {
+    
+}
+```
+
+
+
+
+
+### 2.4、测试
+
+
+
+```java
+    @Test
+    public void testConcurrentUpdate() {
+        //1、小李
+        Product p1 = productMapper.selectById(1L);
+
+        System.out.println("小李取出的价格：" + p1.getPrice());
+
+        //2、小王
+        Product p2 = productMapper.selectById(1L);
+        System.out.println("小王取出的价格：" + p2.getPrice());
+
+        //3、小李将价格加了50元，存入了数据库
+        p1.setPrice(p1.getPrice() + 50);
+        int result1 = productMapper.updateById(p1);
+        System.out.println("小李修改结果：" + result1);
+
+        //4、小王将商品减了30元，存入了数据库
+        p2.setPrice(p2.getPrice() - 30);
+        int result2 = productMapper.updateById(p2);
+        System.out.println("小王修改结果：" + result2);
+
+        //最后的结果
+        Product p3 = productMapper.selectById(1L);
+
+        //价格覆盖，最后的结果：70
+        System.out.println("最后的结果：" + p3.getPrice());
+    }
+```
+
+
+
+
+
+## 2、乐观锁案例（解决冲突）
+
+
+
+查询时，需要连带版本一起查：
+
+```sql
+SELECT id,`name`,price,`version` 
+FROM product 
+WHERE id=1
+```
+
+
+
+更新时，需要连带版本一起更新：
+
+```sql
+UPDATE product 
+SET 
+	price=price+50, 
+	`version`=`version` + 1 
+WHERE 
+	id=1 
+	AND	`version`=1
+```
+
+
+
+给POJO加版本号属性、`@Version`注解：
+
+```java
+import com.baomidou.mybatisplus.annotation.Version;
+import lombok.Data;
+
+@Data
+public class Product {
+    private Long id;
+    private String name;
+    private Integer price;
+    @Version
+    private Integer version;
+}
+```
+
+
+
+在配置类中，添加插件：
+
+```java
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor(){
+        
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        
+        //添加分页插件
+        interceptor.addInnerInterceptor(new
+        	PaginationInnerInterceptor(DbType.MYSQL));
+        
+        //添加乐观锁插件
+        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        
+        return interceptor;
+    }
+
+```
+
+
+
+
+
+优化：
+
+```java
+    @Test
+    public void testConcurrentVersionUpdate() {
+        //小李取数据
+        Product p1 = productMapper.selectById(1L);
+        
+        //小王取数据
+        Product p2 = productMapper.selectById(1L);
+        
+        //小李修改 + 50
+        p1.setPrice(p1.getPrice() + 50);
+        
+        int result1 = productMapper.updateById(p1);
+        
+        System.out.println("小李修改的结果：" + result1);
+        
+        //小王修改 - 30
+        p2.setPrice(p2.getPrice() - 30);
+        
+        int result2 = productMapper.updateById(p2);
+        
+        System.out.println("小王修改的结果：" + result2);
+        
+        if(result2 == 0){
+            //失败重试，重新获取version并更新
+            p2 = productMapper.selectById(1L);
+            p2.setPrice(p2.getPrice() - 30);
+            result2 = productMapper.updateById(p2);
+        }
+        
+        System.out.println("小王修改重试的结果：" + result2);
+        
+        //老板看价格
+        Product p3 = productMapper.selectById(1L);        
+        System.out.println("老板看价格：" + p3.getPrice());
+    }
+```
+
+
+
+小结：
+
+> - 数据表加一个`version`字段
+> - POJO加一个`verison`属性，并用`@Veriosn`注解修饰该属性
+> - 在配置类中，添加乐观锁的插件（拦截器）
+
+
+
+
+
+# 十、通用枚举
+
+
+
+数据库中的值是 int ，枚举类却有多个值时，需要使用 MybatisPlus 的通用枚举。
+
+
+
+## 1、创建枚举类，添加`@EnumValue`注解
+
+创建枚举类，生成构造函数，生成Geter，添加`@EnumValue`注解
+
+```java
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
+
+@Getter
+public enum SexNum {
+    MALE(1,"男"),
+    FEMALE(0,"女");
+
+    // 添加通用枚举的注解，指定
+    @EnumValue
+    private Integer sex;
+    private String sexName;
+
+    SexNum(Integer sex, String sexName) {
+        this.sex = sex;
+        this.sexName = sexName;
+    }
+}
+
+```
+
+
+
+
+
+## 2、配置文件中扫描通用枚举的包
+
+
+
+```yml
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      table-prefix: t_
+  type-aliases-package: com.cyw.demo02.po
+  type-enums-package: com.cyw.demo02.enums
+```
+
+
+
+## 3、测试
+
+
+
+```java
+    @Test
+    public void testSexEnum(){
+        User user = new User();
+        user.setName("Enum");
+        user.setAge(20);
+        //设置性别信息为枚举项，会将@EnumValue注解所标识的属性值存储到数据库
+        user.setSex(SexEnum.MALE);
+        //INSERT INTO t_user ( username, age, sex ) VALUES ( ?, ?, ? )
+        //Parameters: Enum(String), 20(Integer), 1(Integer)
+        userMapper.insert(user);
+    }
+```
+
+
+
+
+
+
+
+# 十一、逆向工程（代码生成器）
+
+
+
+## 1、导入依赖
+
+
+
+```xml
+    <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-generator</artifactId>
+        <version>3.5.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>2.3.31</version>
+    </dependency>
+```
+
+
+
+## 2、编写配置
+
+
+
+模板：
+
+```java
+package com.cyw.demo02;
+
+import com.baomidou.mybatisplus.generator.FastAutoGenerator;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+
+import java.util.Collections;
+
+public class FastAutoGeneratorTest {
+    public static void main(String[] args) {
+        FastAutoGenerator.create("url", "username", "password")
+                .globalConfig(builder -> {
+                    builder.author("baomidou") // 设置作者
+                            .enableSwagger() // 开启 swagger 模式
+                            .fileOverride() // 覆盖已生成文件
+                            .outputDir("D://"); // 指定输出目录
+                })
+                .packageConfig(builder -> {
+                    builder.parent("com.cyw") // 设置父包名
+                            .moduleName("demo02") // 设置模块名
+                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "D://")); // 设置mapperXml生成路径
+                })
+                .strategyConfig(builder -> {
+                    builder.addInclude("t_simple") // 设置需要生成的表名
+                            .addTablePrefix("t_", "c_"); // 设置过滤表前缀
+                })
+                .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
+                .execute();
+    }
+}
+
+```
+
+
+
+
+
+模板实例：（注意：要把生成的mapper配置文件移动到mapper接口的同一级目录）
+
+```java
+package com.cyw.demo02;
+
+import com.baomidou.mybatisplus.generator.FastAutoGenerator;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+
+import java.util.Collections;
+
+public class FastAutoGeneratorTest {
+    public static void main(String[] args) {
+        FastAutoGenerator.create("jdbc:mysql://localhost:3306/mybatis_plus?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true", "root", "root")
+                .globalConfig(builder -> {
+                    builder.author("cyw") // 设置作者
+//                            .enableSwagger() // 开启 swagger 模式
+                            .fileOverride() // 覆盖已生成文件
+                            .outputDir("C:\\Users\\cyw\\Desktop\\JavaWorkSpace\\01"); // 指定输出目录
+                })
+                .packageConfig(builder -> {
+                    builder.parent("com.cyw") // 设置父包名
+                            .moduleName("demo02") // 设置父包模块名
+                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "C:\\Users\\cyw\\Desktop\\JavaWorkSpace\\01")); // 设置mapperXml生成路径
+                })
+                .strategyConfig(builder -> {
+                    builder.addInclude("t_user") // 设置需要生成的表名
+                            .addTablePrefix("t_"); // 设置过滤表前缀
+                })
+                .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
+                .execute();
+    }
+}
+
+```
 
