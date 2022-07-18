@@ -1,4 +1,10 @@
+---
 
+title: SSM整合Vue
+tag: Java
+categories:
+  - [后端,Java,SSM]
+---
 
 <h1>SSM整合Vue</h1>
 
