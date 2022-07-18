@@ -2146,6 +2146,8 @@ REST 风格提倡 URL 地址使用统一的风格设计，从前到后各个单�
 
 `@RequestBody`可以获取请求体，需要在控制器方法设置一个**形参**，使用`@RequestBody`进行标识，当前请求的请求体就会为当前注解所标识的形参赋值。【post 请求报文才有请求体】
 
+后端接收到的是form表单转为 url 的Query字符串形式
+
 
 
 ```java
@@ -3006,7 +3008,7 @@ DispatcherServlet 本质上是一个 Servlet，所以天然的遵循 Servlet 的
 
 
 
-![image-20220210211746097](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220210211746097.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220210211746097.png"/>
 
 
 

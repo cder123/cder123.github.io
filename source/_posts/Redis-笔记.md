@@ -167,9 +167,9 @@ redis-server /etc/redis.conf
 ps -ef | grep redis
 ```
 
-![image-20220302174936819](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220302174936819.png)
 
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220302174936819.png"/>
 
 
 
@@ -597,7 +597,7 @@ hash 类型对应的数据结构：压缩列表`ziplist`、哈希表`hashtable`�
 
 
 
-![image-20220304191813669](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220304191813669.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220304191813669.png"/>
 
 <center>hash 结构</center>
 
@@ -726,11 +726,17 @@ zrank 键 值
 
 
 
-![image-20220307182133578](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307182133578.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307182133578.png"/>
+
+
+
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307182719390.png"/>
 
 
 
 
+
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307183940869.png"/>
 
 
 
@@ -760,17 +766,19 @@ bitop 位运算符  运算结果的键 操作bitmaps1的键 操作bitmaps2的键
 
 setbit：
 
-![image-20220307182719390](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307182719390.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307182908997.png"/>
 
 
 
-![image-20220307182908997](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307182908997.png)
+
 
 
 
 bitop：
 
-![image-20220307183940869](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307183940869.png)
+
+
+
 
 
 
@@ -993,7 +1001,7 @@ firewall-cmd --query-port=6379/tcp
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:purple;">大小写不敏感</font>。
 
-![image-20220307120806024](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307120806024.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307120806024.png"/>
 
 
 
@@ -1289,15 +1297,21 @@ Redis 发布和订阅是一种消息通信模式：
 
 发布：
 
-![image-20220307175345830](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307175345830.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307175345830.png"/>
 
 
 
 订阅：
 
-![image-20220307175431929](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307175431929.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307175431929.png"/>
 
 
+
+
+
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307180709571.png"/>
+
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307181136474.png"/>
 
 
 
@@ -1316,7 +1330,7 @@ subscribe channel_1
 
 
 
-![image-20220307180709571](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307180709571.png)
+
 
 
 
@@ -1331,7 +1345,7 @@ publish channel_1 hello—world
 
 
 
-![image-20220307181136474](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307181136474.png)
+
 
 
 
@@ -1341,9 +1355,7 @@ publish channel_1 hello—world
 
 
 
-![image-20220307181245499](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220307181245499.png)
-
-
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220307181245499.png"/>
 
 
 
@@ -1908,9 +1920,9 @@ Redis 事务的主要作用：<font style="color:red;">串联多个命令，防�
 
 
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220311132347204.png"/>
 
 
-![image-20220311132347204](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132347204.png)
 
 
 
@@ -1920,7 +1932,7 @@ Redis 事务的主要作用：<font style="color:red;">串联多个命令，防�
 
 开启事务、执行事务：
 
-![image-20220311132716797](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132716797.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220311132716797.png"/>
 
 
 
@@ -1928,9 +1940,7 @@ Redis 事务的主要作用：<font style="color:red;">串联多个命令，防�
 
 回滚事务：
 
-![image-20220311132814188](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132814188.png)
-
-
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220311132814188.png"/>
 
 
 
@@ -1946,7 +1956,7 @@ Redis 事务的主要作用：<font style="color:red;">串联多个命令，防�
 
 
 
-![image-20220311132919586](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311132919586.png)
+
 
 
 
@@ -1954,9 +1964,9 @@ Redis 事务的主要作用：<font style="color:red;">串联多个命令，防�
 
 组队阶段的出现错误，则队列内的命令都不会执行成功：
 
-![image-20220311133107022](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311133107022.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220311132919586.png"/>
 
-
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220311133107022.png"/>
 
 
 
@@ -1966,9 +1976,9 @@ Redis 事务的主要作用：<font style="color:red;">串联多个命令，防�
 
 执行阶段的出现错误，则队列内正确的命令可以执行成功：
 
-![image-20220311133408335](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220311133408335.png)
 
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220311133408335.png"/>
 
 
 

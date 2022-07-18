@@ -1,4 +1,10 @@
+---
+title: MybatisPlus-笔记
+tag: Java
+categories:
+  - [后端,Java,MybatisPlus]
 
+---
 
 
 
@@ -46,7 +52,7 @@ Mybatis Plus （简称 MP ），是一个Mybatis的增强工具，只做增强�
 
 
 
-
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220312165107737.png"/>
 
 
 
@@ -54,21 +60,15 @@ Mybatis Plus （简称 MP ），是一个Mybatis的增强工具，只做增强�
 
 ## 2、Mybatis Plus 概览
 
-![image-20220312165107737](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220312165107737.png)
+
 
 
 
 ## 3、Mybatis Plus 特点
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220312170300239.png"/>
 
-
-![image-20220312170300239](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220312170300239.png)
-
-
-
-
-
-![image-20220312170359149](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220312170359149.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220312170359149.png"/>
 
 
 
@@ -321,7 +321,7 @@ mybatis-plus:
 
 
 
-![image-20220312183858390](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220312183858390.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220312183858390.png"/>
 
 
 
@@ -855,9 +855,9 @@ mybatis-plus:
 
 业务分库、主从复制，数据库分表。
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220313125426954.png"/>
 
 
-![image-20220313125426954](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220313125426954.png)
 
 
 
@@ -873,9 +873,7 @@ mybatis-plus:
 
 ` 12`bit 作为毫秒内的流水号（意味着每个节点在每毫秒可以产生 4096 个 ID）。
 
-
-
-![image-20220313125615813](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220313125615813.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220313125615813.png"/>
 
 
 
@@ -928,13 +926,9 @@ public class User {
 
 默认值设为0，若执行删除，则将给字段的值改为1。
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220313130651144.png"/>
 
-
-![image-20220313130651144](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220313130651144.png)
-
-
-
-
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220313131609740.png"/>
 
 
 
@@ -982,10 +976,6 @@ public class User {
 
 
 
-![image-20220313131609740](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220313131609740.png)
-
-
-
 
 
 
@@ -1000,13 +990,13 @@ public class User {
 
 注意：删除用的也是`QueryWrapper`
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220313183633024.png"/>
 
 
-![image-20220313183633024](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220313183633024.png)
 
 
 
-![image-20220313183655337](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220313183655337.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220313183655337.png"/>
 
 
 
@@ -1909,3 +1899,40 @@ public class FastAutoGeneratorTest {
 
 ```
 
+
+
+
+
+# 十二、Mybatis  X 插件
+
+
+
+
+
+## 1、安装Mybatis X 插件（IDEA版）
+
+
+
+<iframe style="height:500px;" src="//player.bilibili.com/player.html?aid=339472748&bvid=BV12R4y157Be&cid=700364944&page=54" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+
+
+## 2、MybatisX 插件快速生成代码
+
+
+
+<iframe style="height:500px;" src="//player.bilibili.com/player.html?aid=339472748&bvid=BV12R4y157Be&cid=700364976&page=55" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+## 3、MybatisX 插件快速CRUD
+
+
+
+<iframe style="height:500px;" src="//player.bilibili.com/player.html?aid=339472748&bvid=BV12R4y157Be&cid=700365032&page=56" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>

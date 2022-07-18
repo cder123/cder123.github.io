@@ -275,9 +275,9 @@ Python 中，<font color=red>没有</font> C、Java中的自增（`i++`）、自
 
 算术运算符有`+`(加)、`-`(减)、`*` (乘)、`/`(除)、`%`(模)、`**`幂、`//`整除
 
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220228110242019.png"/>
 
 
-![image-20220228110242019](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220228110242019.png)
 
 
 
@@ -358,7 +358,7 @@ not False # True
 
 
 
-![image-20220228113906469](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220228113906469.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220228113906469.png"/>
 
 
 
@@ -408,7 +408,7 @@ a is not  "张三"	# False
 
 
 
-![image-20220228114744950](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220228114744950.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220228114744950.png"/>
 
 
 
@@ -603,7 +603,7 @@ else:
 
 #### 5.1.1 数学函数
 
-![image-20220228121646183](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220228121646183.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220228121646183.png"/>
 
 
 
@@ -613,11 +613,11 @@ else:
 
 #### 5.1.2 三角函数
 
-![image-20220228121757370](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220228121757370.png)
-
-![image-20220228121817160](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220228121817160.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220228121757370.png"/>
 
 
+
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220228121817160.png"/>
 
 
 
@@ -625,7 +625,7 @@ else:
 
 导入`import random`包
 
-![image-20220302102847939](https://gitee.com/cder123/note-drawing-bed-01/raw/master/image-20220302102847939.png)
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220228122137965.png"/>
 
 
 
@@ -636,6 +636,10 @@ arr = [1,3,5,7]
 random.shuffle(arr) # 打乱次序，arr = [3,7,5,1]
 
 ```
+
+
+
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220302102847939.png"/>
 
 
 

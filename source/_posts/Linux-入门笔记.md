@@ -119,3 +119,35 @@ Nginx命令：
 - 将80端口改为8080端口：[更改端口](https://jingyan.baidu.com/article/86112f136573352736978744.html)
 - 然后在服务器控制台开放8080端口，即可使用浏览器访问页面
 
+
+
+
+
+## 5、最小化安装CentOS 7 后，安装桌面
+
+
+
+```shell
+vi /etc/resolv.conf
+
+
+nameserver 114.114.114.114
+
+
+yum groupinstall "X Window System"
+
+
+yum groupinstall "GNOME Desktop"
+
+
+ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target 
+
+
+reboot
+
+
+systemctl set-default graphical.target  //由命令行模式更改为图形界面模式
+systemctl set-default multi-user.target  //由图形界面模式更改为命令行模式
+
+```
+

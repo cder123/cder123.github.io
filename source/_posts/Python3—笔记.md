@@ -1,4 +1,4 @@
-﻿---
+---
 title: Python3—笔记
 tag: Python3
 categories:
@@ -534,13 +534,47 @@ person('Jack', 24, city='Beijing', job='Engineer')
 ### 2.1 Excel 速查表
 ![excel速查表](https://img-blog.csdnimg.cn/20201207203552904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 
-## 3. Python 爬虫
+
+
+
+
+
+
+## 3. Python 爬虫（基本）
 
 ### 3.1 常用的爬虫库
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201207203715257.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 
 ### 3.2 requests 库
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201207203809826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
+
+
+
+
+
+```python
+import requests
+url='http://item.jd.com/2967929.html'
+
+data={
+    'kw':"张三"
+}
+
+myProxy={
+    'http':'123.123.123.123:2345'
+}
+
+requests.get(url=url,params=data,proxies=myProxy)
+```
+
+
+
+
+
+
+
+
+
 #### 3.2.1 案例1	 京东商品详情页
 
 ```python
@@ -801,10 +835,16 @@ print(soup.prettify()) #输出清晰的树形结构
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201207211020405.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
 
-## 4、正则表达式【用于提取信息】
+## 4、正则表达式
+
+【用于提取信息】
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201208100448613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
+
+
+
 ### 4.1 正则表达式—思维导图
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020120810080011.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
  ### 4.2 常见的**原子类型**-正则表达式最基本的单位
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201208103436181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2NTc4NTky,size_16,color_FFFFFF,t_70)
@@ -826,11 +866,284 @@ print(soup.prettify()) #输出清晰的树形结构
 
 
 
+## 5、Selenium
 
 
-## 5、二维码制作
 
 
+
+文档：[Selenium with Python中文翻译文档 — Selenium-Python中文文档)](https://selenium-python-zh.readthedocs.io/en/latest/)
+
+
+
+
+
+### 5.1、下载、配置浏览器驱动
+
+
+
+> **注意**：浏览器版本号要与驱动版本对应。
+
+
+
+（1）下载：
+
+谷歌驱动下载网站：[chromedriver.storage.googleapis.com/index.html](http://chromedriver.storage.googleapis.com/index.html)
+
+火狐：[Directory Listing: /pub/firefox/releases/ (mozilla.org)](http://ftp.mozilla.org/pub/firefox/releases/)
+
+
+
+（2）配置
+
+将浏览器驱动解压后放入Python的安装目录（根目录）下。
+
+
+
+（3）安装Selenium
+
+```cmd
+pip install selenium
+```
+
+
+
+### 5.2、第一个Selenium示例
+
+
+
+
+
+```python
+# 导入Chrome浏览器的驱动
+from selenium import webdriver
+
+# 导入键盘按键类
+from selenium.webdriver.common.keys import Keys
+
+# 创建一个驱动对象，若没有将驱动放入python的安装目录，则需要在该构造器的参数中传入驱动的位置
+broswer = webdriver.Chrome()
+
+# 打开网站
+broswer.get("http://www.python.org")
+
+# 打印所请求的页面的代码
+print(broswer.page_source)
+
+# WebDriver 提供了大量的方法让你去查询页面中的元素，这些方法形如： find_element,find_elements
+# 找到 ID 属性值为 'kw' 的元素（此处找到的是input元素）
+elem = broswer.find_element(By.ID,value='kw')
+#elem = broswer.find_element(By.Name,value='kw')
+#elem = broswer.find_element(By.XPATH,value='//input[@id="kw"]')
+
+# 清除输入框的内容
+elem.clear()
+
+# 输入内容
+elem.send_keys("显卡")
+
+# 按下回车
+elem.send_keys(Keys.RETURN)
+
+# 关闭驱动
+broswer.close()
+
+```
+
+
+
+
+
+### 5.3、元素查找
+
+
+
+driver 的查找方法：从4.0版本开始需要导入`By`类指定查找方式，常见的By类的查找方式：
+
+```python
+class By:
+    ID = "id"
+    XPATH = "xpath"
+    LINK_TEXT = "link text"
+    PARTIAL_LINK_TEXT = "partial link text"
+    NAME = "name"
+    TAG_NAME = "tag name"
+    CLASS_NAME = "class name"
+    CSS_SELECTOR = "css selector"
+```
+
+
+
+实例：
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+broswer = webdriver.Chrome()
+elem = broswer.find_element(By.ID,'kw')
+```
+
+
+
+
+
+### 5.4、元素信息
+
+
+
+
+
+`elem.get_attribute('属性名')`
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+browser = webdriver.Chrome()
+url = "https://www.baidu.com/"
+browser.get(url)
+
+elem = browser.find_element(By.XPATH,value='//input[@id="kw"]')
+
+# 获取标签的属性值
+elem_class = elem.get_attribute('class')
+
+# 打印标签的class属性的值
+print(elem_class)
+
+elem.clear()
+elem.send_keys("显卡")
+elem.send_keys(Keys.RETURN)
+# browser.close()
+```
+
+
+
+### 5.5、交互案例
+
+
+
+需求：打开百度，输入周杰伦，点击搜索按钮，滚动到底部，点击下一页。
+
+
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+path='./webdriver.exe'
+browser = webdriver.Chrome(path)
+url="https://www.baidu.com"
+browser.get(url)
+
+elem_input = browser.find_element(By.ID,value="kw")
+
+elem_input.clear()
+elem_input.send_keys("周杰伦")
+
+elem_btn = browser.find_element(By.CLASS_NAME,value='btn self-btn bg s_btn')
+elem_btn.click()
+
+
+
+```
+
+
+
+
+
+### 5.6、Chrome Handleless
+
+
+
+由于原生的Selenium需要打开浏览器，使用界面，所以速度较慢，因此可以使用`Handleless`来进行无界面的操作。
+
+案例：
+
+```python
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.add_argument('--headless')
+options.add_argument('--disable-gpu')
+# 谷歌浏览器的安装位置
+options.binary_location = r'C:\Users\cyw\AppData\Local\Google\Chrome\Application\chrome.exe'
+
+browser = webdriver.Chrome(options=options)
+
+
+url="https://www.baidu.com"
+browser.get(url)
+
+elem_input = browser.find_element(By.ID,value="kw")
+
+elem_input.clear()
+elem_input.send_keys("张三")
+
+elem_btn = browser.find_element(By.ID,value='su')
+elem_btn.click()
+
+# 截图（保存在项目的根目录下）
+browser.save_screenshot("./abc.png")
+# browser.close()
+```
+
+
+
+封装成函数：
+
+```python
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+def initChrome(): 
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    # 修改为自己的Chrome浏览器的安装目录
+    options.binary_location = r'C:\Users\cyw\AppData\Local\Google\Chrome\Application\chrome.exe'
+    browser = webdriver.Chrome(options=options)
+    return browser
+```
+
+
+
+
+
+
+
+
+
+## 6. Scrapy 爬虫（网站级）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 7、实例
+
+
+
+### 1、二维码生成
 
 ```python
 from MyQR import myqr
@@ -849,6 +1162,70 @@ if __name__ == '__main__':
 ```
 
 
+
+### 2、姓名生成
+
+
+
+```python
+from random import randint
+
+
+firstName = [
+'赵','钱','孙','李','周','吴','郑','王','冯','陈','褚','卫','蒋','沈','韩','杨',
+'朱','秦','尤','许','何','吕','施','张','滕','殷','罗','毕','郝','邬','安','常'
+]
+
+lastName_m=['健','瀚','明','楷','玮','桦','冠','辉','杰','洋',
+'梓','铭','萧','涵','昊','楷','涛','琪','苑','羽'
+]
+
+lastName_f=['羽','莹','梅','秋','谷','梦','芊','琴','菡','曦'
+]
+
+
+def createFullName(sex,count):  
+    resList = []   
+    for i in range(count):
+        rst = []
+        rst.append(firstName[randint(0,len(firstName)-1)])
+        if sex == 'm':
+            rst.append(lastName_m[randint(0,len(lastName_m)-1)])
+        elif sex == 'f':
+            rst.append(lastName_f[randint(0,len(lastName_f)-1)])
+        else:
+            print("性别输入错误！")        
+        resList.append(''.join(rst))
+    print(resList)  
+    return resList          
+
+
+
+def save(fileName,resList=None):
+    with open('./'+fileName+'.txt','a+',encoding="utf8") as f:
+        for i in range(len(resList)):            
+            f.write(resList[i]+",\n")
+
+
+def randomUserName():
+    while True:
+        sex = input(">> 输入性别（m | f）：")
+        count = input(">> 请输入生成次数：")
+        resList = createFullName(sex,eval(count))
+        save('001',resList)
+        isFinish = input(">> 按q退出，任意键继续：")
+        if isFinish=='q':
+            break
+
+            
+def main():
+    randomUserName()
+
+main()	
+
+
+
+```
 
 
 
