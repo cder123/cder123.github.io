@@ -1,28 +1,15 @@
----
-title: SpringSecurity-RBAC权限控制
-tag: Java
-categories:
-  - [后端,Java,安全框架]
-
----
 
 
-
-
-
-
-
-<h1>SpringSecurity-RBAC权限控制</h1>
+<h1>RBAC-权限控制</h1>
 
 [toc]
 
 
 
-
-
 # 零、参考资料
 
-
+- [阮一峰-JWT](https://ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html)
+- [JWT介绍以及java-jwt的使用CSDN博客](https://blog.csdn.net/oscar999/article/details/102728303)
 
 - RBAC数据表设计图：[RBAC用户、角色、权限、组设计方案 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/63769951)
 
@@ -223,124 +210,187 @@ Authorization 授权：分配权限
 
 
 
+整合案例的目标：
+
+> - 浏览器地址栏无论输入什么地址，都会跳转到登录页（/login.html  |   /login）
+> - 登录页输入用户名和密码，正确后跳转到首页（/index.html）
+> - 有一个测试接口`/user/info`，只有`admin 或 HD`角色的用户才能访问，其他用户访问后只能跳转到`403错误页`。
+
+
+
 SQL：
 
 ```sql
-create database jwt_demo;
-use jwt_demo;
-CREATE TABLE `sys_user` (
-  `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_name` VARCHAR(64) NOT NULL DEFAULT 'NULL' COMMENT '用户名',
-  `nick_name` VARCHAR(64) NOT NULL DEFAULT 'NULL' COMMENT '昵称',
-  `password` VARCHAR(64) NOT NULL DEFAULT 'NULL' COMMENT '密码',
-  `status` CHAR(1) DEFAULT '0' COMMENT '账号状态（0正常 1停用）',
-  `email` VARCHAR(64) DEFAULT NULL COMMENT '邮箱',
-  `phonenumber` VARCHAR(32) DEFAULT NULL COMMENT '手机号',
-  `sex` CHAR(1) DEFAULT NULL COMMENT '用户性别（0男，1女，2未知）',
-  `avatar` VARCHAR(128) DEFAULT NULL COMMENT '头像',
-  `user_type` CHAR(1) NOT NULL DEFAULT '1' COMMENT '用户类型（0管理员，1普通用户）',
-  `create_by` BIGINT(20) DEFAULT NULL COMMENT '创建人的用户id',
-  `create_time` DATETIME DEFAULT NULL COMMENT '创建时间',
-  `update_by` BIGINT(20) DEFAULT NULL COMMENT '更新人',
-  `update_time` DATETIME DEFAULT NULL COMMENT '更新时间',
-  `del_flag` INT(11) DEFAULT '0' COMMENT '删除标志（0代表未删除，1代表已删除）',
-  PRIMARY KEY (`id`)
-) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表'
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tb_auth
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_auth`;
+CREATE TABLE `tb_auth`  (
+  `id` int NOT NULL,
+  `auth_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_auth
+-- ----------------------------
+INSERT INTO `tb_auth` VALUES (1, 'user:add');
+INSERT INTO `tb_auth` VALUES (2, 'user:del');
+INSERT INTO `tb_auth` VALUES (3, 'user:update');
+INSERT INTO `tb_auth` VALUES (4, 'user:get');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tb_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_menu`;
+CREATE TABLE `tb_menu`  (
+  `id` int NOT NULL,
+  `pid` int NULL DEFAULT NULL,
+  `level` tinyint NULL DEFAULT NULL,
+  `menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_menu
+-- ----------------------------
+INSERT INTO `tb_menu` VALUES (1, 0, 1, '用户管理', NULL);
+INSERT INTO `tb_menu` VALUES (2, 1, 2, '个人资料', NULL);
+INSERT INTO `tb_menu` VALUES (3, 1, 2, '全局设置', NULL);
+INSERT INTO `tb_menu` VALUES (4, 0, 1, '权限管理', NULL);
+INSERT INTO `tb_menu` VALUES (5, 0, 1, '职位管理', NULL);
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 
 
 
-/*Table structure for table `sys_menu` */
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
-DROP TABLE IF EXISTS `sys_menu`;
+-- ----------------------------
+-- Table structure for tb_role
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_role`;
+CREATE TABLE `tb_role`  (
+  `id` int NOT NULL,
+  `role_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE `sys_menu` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `menu_name` varchar(64) NOT NULL DEFAULT 'NULL' COMMENT '菜单名',
-  `path` varchar(200) DEFAULT NULL COMMENT '路由地址',
-  `component` varchar(255) DEFAULT NULL COMMENT '组件路径',
-  `visible` char(1) DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
-  `status` char(1) DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
-  `perms` varchar(100) DEFAULT NULL COMMENT '权限标识',
-  `icon` varchar(100) DEFAULT '#' COMMENT '菜单图标',
-  `create_by` bigint(20) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_by` bigint(20) DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `del_flag` int(11) DEFAULT '0' COMMENT '是否删除（0未删除 1已删除）',
-  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='菜单表';
+-- ----------------------------
+-- Records of tb_role
+-- ----------------------------
+INSERT INTO `tb_role` VALUES (1, 'admin');
+INSERT INTO `tb_role` VALUES (2, 'HRD');
+INSERT INTO `tb_role` VALUES (3, 'HR');
+INSERT INTO `tb_role` VALUES (4, 'normal');
 
-/*Table structure for table `sys_role` */
-
-DROP TABLE IF EXISTS `sys_role`;
-
-CREATE TABLE `sys_role` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) DEFAULT NULL,
-  `role_key` varchar(100) DEFAULT NULL COMMENT '角色权限字符串',
-  `status` char(1) DEFAULT '0' COMMENT '角色状态（0正常 1停用）',
-  `del_flag` int(1) DEFAULT '0' COMMENT 'del_flag',
-  `create_by` bigint(200) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_by` bigint(200) DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
-
-/*Table structure for table `sys_role_menu` */
-
-DROP TABLE IF EXISTS `sys_role_menu`;
-
-CREATE TABLE `sys_role_menu` (
-  `role_id` bigint(200) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
-  `menu_id` bigint(200) NOT NULL DEFAULT '0' COMMENT '菜单id',
-  PRIMARY KEY (`role_id`,`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-/*Table structure for table `sys_user` */
-
-DROP TABLE IF EXISTS `sys_user`;
-
-CREATE TABLE `sys_user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_name` varchar(64) NOT NULL DEFAULT 'NULL' COMMENT '用户名',
-  `nick_name` varchar(64) NOT NULL DEFAULT 'NULL' COMMENT '昵称',
-  `password` varchar(64) NOT NULL DEFAULT 'NULL' COMMENT '密码',
-  `status` char(1) DEFAULT '0' COMMENT '账号状态（0正常 1停用）',
-  `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
-  `phonenumber` varchar(32) DEFAULT NULL COMMENT '手机号',
-  `sex` char(1) DEFAULT NULL COMMENT '用户性别（0男，1女，2未知）',
-  `avatar` varchar(128) DEFAULT NULL COMMENT '头像',
-  `user_type` char(1) NOT NULL DEFAULT '1' COMMENT '用户类型（0管理员，1普通用户）',
-  `create_by` bigint(20) DEFAULT NULL COMMENT '创建人的用户id',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` bigint(20) DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `del_flag` int(11) DEFAULT '0' COMMENT '删除标志（0代表未删除，1代表已删除）',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
-
-/*Table structure for table `sys_user_role` */
-
-DROP TABLE IF EXISTS `sys_user_role`;
-
-CREATE TABLE `sys_user_role` (
-  `user_id` bigint(200) NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `role_id` bigint(200) NOT NULL DEFAULT '0' COMMENT '角色id',
-  PRIMARY KEY (`user_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+SET FOREIGN_KEY_CHECKS = 1;
 
 
 
-CREATE TABLE persistent_logins (
-	username VARCHAR ( 64 ) NOT NULL,
-	series VARCHAR ( 64 ) PRIMARY KEY,
-	token VARCHAR ( 64 ) NOT NULL,
-last_used TIMESTAMP NOT NULL 
-);
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tb_role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_role_menu`;
+CREATE TABLE `tb_role_menu`  (
+  `rid` int NOT NULL,
+  `mid` int NOT NULL,
+  PRIMARY KEY (`rid`, `mid`) USING BTREE,
+  INDEX `fk_mid`(`mid`) USING BTREE,
+  CONSTRAINT `fk_mid` FOREIGN KEY (`mid`) REFERENCES `tb_menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_rid` FOREIGN KEY (`rid`) REFERENCES `tb_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_role_menu
+-- ----------------------------
+INSERT INTO `tb_role_menu` VALUES (1, 1);
+INSERT INTO `tb_role_menu` VALUES (2, 1);
+INSERT INTO `tb_role_menu` VALUES (3, 1);
+INSERT INTO `tb_role_menu` VALUES (1, 2);
+INSERT INTO `tb_role_menu` VALUES (2, 2);
+INSERT INTO `tb_role_menu` VALUES (3, 2);
+INSERT INTO `tb_role_menu` VALUES (1, 3);
+INSERT INTO `tb_role_menu` VALUES (2, 3);
+INSERT INTO `tb_role_menu` VALUES (3, 3);
+INSERT INTO `tb_role_menu` VALUES (1, 4);
+INSERT INTO `tb_role_menu` VALUES (2, 4);
+INSERT INTO `tb_role_menu` VALUES (1, 5);
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tb_user
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_user`;
+CREATE TABLE `tb_user`  (
+  `id` int NOT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_user
+-- ----------------------------
+INSERT INTO `tb_user` VALUES (1, '张三', '$2a$10$jmBt9.QgxNECuqr7XcKVt.AOJ19HIL03nvG2byVRLBtEVhvDFx23u');
+INSERT INTO `tb_user` VALUES (2, '李四', '$2a$10$Ye3W1FTa9GAQVulFntQj.esYcXhQEjZtLGivj5XuEqcosJUQz1jM.');
+INSERT INTO `tb_user` VALUES (3, '王五', '$2a$10$k3WQcjeLfjqUYt1dXlQsvuML1B6pYH62oyqXPYGVwtq138JbqdSHG');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tb_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_user_role`;
+CREATE TABLE `tb_user_role`  (
+  `uid` int NOT NULL,
+  `rid` int NOT NULL,
+  PRIMARY KEY (`uid`, `rid`) USING BTREE,
+  INDEX `dk_rid`(`rid`) USING BTREE,
+  CONSTRAINT `dk_rid` FOREIGN KEY (`rid`) REFERENCES `tb_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_uid` FOREIGN KEY (`uid`) REFERENCES `tb_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_user_role
+-- ----------------------------
+INSERT INTO `tb_user_role` VALUES (1, 1);
+INSERT INTO `tb_user_role` VALUES (2, 2);
+INSERT INTO `tb_user_role` VALUES (3, 3);
+INSERT INTO `tb_user_role` VALUES (3, 4);
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 ```
 
 
@@ -364,27 +414,28 @@ last_used TIMESTAMP NOT NULL
 
 
 
-（2）在`resources/static`目录下创建`index.html`：
+（2）在`resources/static`目录下创建`login.html` 和 `index.html`：
 
-在正常不用 SpringSecurity 的时候，可以直接访问该首页，配置SpringSecurity 后，需要登录（可以在WebSecurityConfig的securityFilterChain方法中，通过loginPage来配置）
+（可以在WebSecurityConfig的securityFilterChain方法中，通过loginPage来配置）
 
-`index.html`:
+`resources/static/login.html`:
 
 ```html
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>登录</title>
 </head>
 <body>
+    <center><h2>登录</h2></center>
     <center>
-    <form method="post" action="/user/login">
-        <input type="text" name="userName" placeholder="用户名"> <br/>
-        <input type="text" name="password" placeholder="密码"> <br/>
-        <input type="submit" value="登录"> <br/>
-    </form>
-</center>
+        <form method="post" action="/login">
+            <input type="text" name="username" placeholder="用户名"> <br/>
+            <input type="text" name="pwd" placeholder="密码"> <br/>
+            <input type="submit" value="登录"> <br/>
+        </form>
+    </center>
 
 </body>
 </html>
@@ -392,7 +443,266 @@ last_used TIMESTAMP NOT NULL
 
 
 
-（3）在控制台找到自动生成的一个密码，用户名为`user`,直接在网页上登录（`http://localhost:8080/logout`可以退出登录）。
+
+
+`resources/static/index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+    <h1>首页</h1>
+    <h3>欢迎回来！</h3>
+
+<script>
+</script>
+    
+</body>
+</html>
+```
+
+
+
+（3）编写 数据库查询的POJO、Mapper：
+
+`MyRst`-实体类：
+
+```java
+package com.cyw.rbac01.pojo;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MyRst {
+    private Integer code;
+    private String msg;
+    private Object data;
+
+
+    public static MyRst ok(String msg){
+        return new MyRst(2000,msg,null);
+    }
+
+    public static MyRst ok(String msg,Object data){
+        return new MyRst(2000,msg,data);
+    }
+
+    public static MyRst error(String msg){
+        return new MyRst(4000,msg,null);
+    }
+}
+```
+
+
+
+`MyUser`-实体类：
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MyUser {
+    private Integer id;
+    private String username;
+    private String pwd;
+    private List<Role> roleList;
+}
+```
+
+
+
+`Role`-实体类：
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Role {
+    private Integer id;
+    private String roleName;
+    private List<Menu> menuList;
+}
+```
+
+
+
+`UserMapper`：
+
+```java
+@Mapper
+public interface UserMapper {
+    User getUserByUserName(String username);
+}
+```
+
+
+
+`UserMapper.xml`：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyw.rbac01.mapper.UserMapper">
+
+    <resultMap id="rstMap" type="com.cyw.rbac01.pojo.User">
+        <id property="id" column="uid"/>
+        <result property="username" column="user_name"/>
+        <result property="pwd" column="pwd"/>
+        <collection property="roleList" ofType="com.cyw.rbac01.pojo.Role">
+            <id property="id" column="rid"/>
+            <result property="roleName" column="role_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getUserByUserName" resultMap="rstMap">
+        select
+            *
+        from tb_user,tb_role,tb_user_role
+        where tb_user.id = tb_user_role.uid
+          and tb_role.id = tb_user_role.rid
+        and tb_user.user_name = #{usrename}
+    </select>
+
+
+</mapper>
+```
+
+
+
+（4）编写SpringSecurity的`UserDetailsService`接口的实现类：
+
+该实现类由SpringSecurity **自动管理** ，无需用户调用。
+
+```java
+package com.cyw.rbac01.service.impl;
+
+import com.cyw.rbac01.mapper.MenuMapper;
+import com.cyw.rbac01.mapper.UserMapper;
+import com.cyw.rbac01.pojo.Menu;
+import com.cyw.rbac01.pojo.Role;
+import com.cyw.rbac01.pojo.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service("UserDetailsService")
+public class UserDetailsServiceImpl implements UserDetailsService {
+    
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 1、从数据库中根据用户名查询用户数据（尤其是权限数据）
+        User userFromDB = userMapper.getUserByUserName(username);
+        if (userFromDB==null){
+            throw new UsernameNotFoundException("无此用户！");
+        }
+		
+        // 封装权限列表（此处封装了角色列表）
+        List<Role> roleList = userFromDB.getRoleList();
+        List<GrantedAuthority> permList = new ArrayList<GrantedAuthority>();
+
+        for (Role role : roleList) {
+            permList.add(new SimpleGrantedAuthority(role.getRoleName()));
+        }
+        
+        // 将数据库中的用户数据封装为Security框架的User类中，让框架知道用户正确的密码和权限
+        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(username,userFromDB.getPwd(),permList);
+        return userDetails;
+    }
+}
+```
+
+
+
+Security的配置类
+
+```java
+package com.cyw.rbac01.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+public class WebSecurityConfig {
+    @Autowired
+    private UserDetailsService userDetailService;
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.userDetailsService(userDetailService)
+                .formLogin()						// 开始登录功能的设置
+                .loginPage("/login.html")
+                .usernameParameter("username")
+                .passwordParameter("pwd")
+                .loginProcessingUrl("/login")		// 注意：要与登录表单的action地址一致
+                .defaultSuccessUrl("/index.html")	// 登录成功后要跳转到的页面
+                .permitAll()
+                .and()
+                .logout()							// 开始退出登录的设置
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login.html")
+                .permitAll()
+                .and()
+                .authorizeRequests()				// 限制所有请求
+                .antMatchers("/**")
+                .authenticated()
+                .and()
+                .exceptionHandling()				// 未授权页面的设置
+                .accessDeniedPage("/4xx.html")
+                .and()
+                .csrf()								// 关闭跨域
+                .disable()
+                .build();
+
+    }
+}
+```
+
+
+
+
 
 
 
@@ -1422,7 +1732,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
 
 
-## 1.6、授权-配置类
+## 1.6、授权-配置类（授权方法）
 
 
 
@@ -2326,4 +2636,1059 @@ public class SecurityConfig {
         <input type="submit" value="登录"> <br/>
     </form>
 ```
+
+
+
+
+
+## 2.1、Redis+Security 模拟短信登录
+
+
+
+Maven配置：
+
+```xml
+  		<dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+<!-- Redis 配置-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+```
+
+
+
+
+
+
+
+
+
+### 2.1.1、封装验证码工具类
+
+`SmsUtil`-封装Redis的验证码生成工具类：
+
+```java
+package com.cyw.backendmain.util;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
+
+
+@Component
+public class SmsUtil {
+    private static RedisTemplate redisTemplate;
+    private RedisBean redisBean = new RedisBean();
+
+    // 2小时
+    private long expire = 120;
+    private TimeUnit timeUnit = TimeUnit.MINUTES;
+
+    public SmsUtil() {
+        redisTemplate = RedisBean.redis;
+    }
+
+    /**
+     * 生成4位数的验证码
+     * @return
+     */
+    private int createCode() {
+        int code = (int) Math.ceil(Math.random() * 9000 + 1000);
+        return code;
+    }
+
+    /**
+     * 生成4位数的验证码
+     * @param phone
+     */
+    public String createCode(String phone) {
+        int code = createCode();
+        saveSms(phone,code);
+        return code+"";
+    }
+
+    /**
+     * 保存验证码到Redis
+     * @param phone
+     * @param checkCode
+     */
+    public void saveSms(String phone, int checkCode) {
+        redisTemplate.opsForValue().set("checkCode:" + phone, checkCode+"", expire, timeUnit);
+    }
+
+    /**
+     * 获取Redis中的验证码
+     * @param phone
+     * @return
+     */
+    public String getCode(String phone){
+        return (String)redisTemplate.opsForValue().get("checkCode:"+phone);
+    }
+
+    /**
+     * 删除Redis中的验证码
+     * @param phone
+     */
+    public void deleteSms(String phone) {
+        redisTemplate.delete("checkCode:" + phone);
+    }
+
+    /**
+     * 删除Redis中的多个验证码
+     * @param phones
+     */
+    public void deleteManySms(String... phones) {
+        for (String phone : phones) {
+            redisTemplate.delete(phone);
+        }
+    }
+
+    /**
+     * 设置Redis中的验证码的有效时长
+     * @param phone
+     */
+    public void setSmsExpire(String phone) {
+        redisTemplate.expire(phone, expire, timeUnit);
+    }
+
+    /**
+     * 设置Redis中的验证码的有效时长
+     * @param phone
+     * @param time
+     */
+    public void setSmsExpire(String phone, long time) {
+        redisTemplate.expire(phone, time, timeUnit);
+    }
+
+    /**
+     * 设置Redis中的验证码的有效时长
+     * @param phone
+     * @param time
+     * @param timeUnit
+     */
+    public void setSmsExpire(String phone, long time, TimeUnit timeUnit) {
+        redisTemplate.expire(phone, time, timeUnit);
+    }
+
+    /**
+     * 获取Redis中的验证码的有效时长
+     * @param phone
+     * @return
+     */
+    public long getSmsExpire(String phone) {
+        Long expire = redisTemplate.getExpire("checkCode:" + phone);
+        return expire;
+    }
+
+    /**
+     * 判断Redis中是否已存在验证码
+     * @param phone
+     * @return
+     */
+    public boolean hasSmsKey(String phone) {
+        return redisTemplate.hasKey("checkCode:" + phone);
+    }
+
+}
+
+```
+
+
+
+### 2.1.2、解决报错
+
+解决无法在过滤器中自动注入RedisTemplate对象的问题（会标红，但不影响使用）：
+
+```java
+package com.cyw.backendmain.util;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+
+@Component
+public class RedisBean {
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    public static StringRedisTemplate redis;
+
+    @PostConstruct
+    private void getRedisTemplate(){
+        redis=this.stringRedisTemplate;
+    }
+}
+
+```
+
+
+
+Redis配置：
+
+```java
+@Configuration
+public class RedisConfig {
+
+    /**
+     * 解决Redis乱码问题
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Bean
+    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+
+        //重点在这四行代码
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
+}
+```
+
+
+
+
+
+
+
+### 2.1.3、WebSecurityConfig
+
+
+
+`WebSecurityConfig`配置类：
+
+```java
+package com.cyw.backendmain.config;
+
+import com.cyw.backendmain.other.SmsCodeAuthenticationFilter;
+import com.cyw.backendmain.other.CustomAuthenticationFailureHandler;
+import com.cyw.backendmain.other.CustomAuthenticationSuccessHandler;
+import com.cyw.backendmain.other.SmsCodeAuthenticationProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import javax.annotation.Resource;
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class WebSecurityConfig  extends SecurityConfigurerAdapter {
+
+    @Resource
+    private UserDetailsService userDetailsServiceImpl;
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    /**
+     * 使用用户名密码登录时的密码加密器
+     * @return
+     */
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web -> web.ignoring();
+    }
+
+    /**
+     * SpringSecurity的核心配置
+     * @param http
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // 执行顺序：
+        //      Filter =>
+        //          AuthenticationManager【providerManager】 =>
+        //              provider =>
+        //                  userDetailsServiceImpl【我们自己对框架接口的实现类】
+        //                      返回User数据【框架的封装User类，是UserDetails接口的实现类】
+        //                  => 决策：登录成功或失败（两个处理器），返回给浏览器数据        //
+        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
+        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsServiceImpl);
+        ProviderManager providerManager = new ProviderManager(smsCodeAuthenticationProvider);
+        SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
+        smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+        smsCodeAuthenticationFilter.setAuthenticationManager(providerManager);
+        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
+        smsCodeAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
+        http.addFilterAt(smsCodeAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
+
+        
+        // 配置退出登录的规则
+        http.logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/index.html")
+                .permitAll();
+
+        // 配置未授权页面的规则
+        http.exceptionHandling().accessDeniedPage("/4xx.html");
+        
+        // 配置登录规则
+        http
+                .formLogin()
+                .usernameParameter("mobile")
+                // 自定义登录页
+                .loginPage("/index.html")
+                // 登录逻辑处理的 controller
+                .loginProcessingUrl("/login")
+                // 登录成功后跳转到的页面
+                .defaultSuccessUrl("/page/home.html")
+                .permitAll()
+                // 允许以上url通过
+                .and()
+                .authorizeHttpRequests()
+                .antMatchers("/sms/**", "/js/**", "/css/**","/login","/4xx.html")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .csrf()
+                .disable();
+        return http.build();
+    }
+}
+```
+
+
+
+### 2.1.4、SmsCodeAuthenticationFilter
+
+
+
+
+
+注意：该过滤器不能注入IOC容器，否则会报错。
+
+`SmsCodeAuthenticationFilter` 类：
+
+```java
+package com.cyw.backendmain.other;
+
+
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.cyw.backendmain.other.SmsCodeAuthenticationToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+@Slf4j
+public class SmsCodeAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    /**
+     * 是否仅 POST 方式
+     */
+    private boolean postOnly = true;
+
+    private StringRedisTemplate redisTemplate;
+
+    public SmsCodeAuthenticationFilter(StringRedisTemplate redisTemplate){
+        this.redisTemplate = redisTemplate;
+    }
+
+    public SmsCodeAuthenticationFilter(){
+
+    }
+
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        if (postOnly && !request.getMethod().equals("POST")) {
+            throw new AuthenticationServiceException(
+                    "不支持该请求方法: " + request.getMethod());
+        }
+
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+            StringBuffer sb=new StringBuffer();
+            String s=null;
+            while((s=br.readLine())!=null){
+                sb.append(s);
+            }
+            JSONObject jsonObject = JSONUtil.parseObj(sb.toString());
+            String mobile = jsonObject.getStr("mobile");
+            String checkCode = jsonObject.getStr("checkCode");
+            if (mobile == null) {
+                mobile = "";
+            }
+            mobile = mobile.trim();
+            SmsCodeAuthenticationToken authRequest = new SmsCodeAuthenticationToken(mobile, checkCode);
+            setDetails(request, authRequest);
+            // 传给Provider
+            return this.getAuthenticationManager().authenticate(authRequest);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected void setDetails(HttpServletRequest request, SmsCodeAuthenticationToken authRequest) {
+        authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
+    }
+
+    @Override
+    public void setPostOnly(boolean postOnly) {
+        this.postOnly = postOnly;
+    }
+}
+```
+
+
+
+### 2.1.5、SmsCodeAuthenticationProvider
+
+`SmsCodeAuthenticationProvider`类
+
+```java
+package com.cyw.backendmain.other;
+
+import com.cyw.backendmain.util.SmsUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+
+@Slf4j
+@Component
+public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
+    @Resource
+    private UserDetailsService userDetailsServiceImpl;
+
+    private SmsUtil smsUtil = new SmsUtil();
+
+
+    /**
+     * 执行短信验证码的登录逻辑（调用UserDetailsServiceImpl）
+     * 由SmsCodeAuthenticationFilter来提供 authenticationToken
+     * @param authentication
+     * @return
+     * @throws AuthenticationException
+     */
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
+        if(authenticationToken==null){
+            throw new BadCredentialsException("请检查手机号或验证码输入是否正确！");
+        }
+
+        // 获取前端的手机号
+        String mobile = (String) authenticationToken.getPrincipal();
+        String checkCode = authenticationToken.getCheckCode();
+        log.info("前端输入的手机号: "+mobile);
+        log.info("前端输入的验证码: "+checkCode);
+
+        // 校验验证码的是否一致
+        checkSmsCode(mobile,checkCode);
+        // 调用Service层，从数据库中查用户数据
+        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(mobile);
+        // 此时鉴权成功后，应当重新 new 一个拥有鉴权的 authenticationResult 返回
+        SmsCodeAuthenticationToken userToken = new SmsCodeAuthenticationToken(userDetails, userDetails.getAuthorities());
+        userToken.setDetails(authenticationToken.getDetails());
+        return userToken;
+    }
+
+    /**
+     * 验证短信验证码，参数是由本类的authenticate方法传入
+     * @param mobileInput
+     * @param checkCodeInput
+     */
+    private void checkSmsCode(String mobileInput,String checkCodeInput) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+        // 检查Redis中的是否有验证码，
+        // 有验证码，则比较，没有，则提示无验证码
+        boolean hasSmsKey = smsUtil.hasSmsKey(mobileInput);
+        if(!hasSmsKey){
+            throw new BadCredentialsException("该手机号未检测到验证码，请检查手机号输入是否正确！");
+        }
+        String checkCodeFromRedis = smsUtil.getCode(mobileInput);
+        if(!checkCodeFromRedis.equals(checkCodeInput)) {
+            throw new BadCredentialsException("验证码错误!");
+        }
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        // 判断 authentication 是不是 SmsCodeAuthenticationToken 的子类或子接口
+        return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
+    }
+
+    public UserDetailsService getUserDetailsService() {
+        return userDetailsServiceImpl;
+    }
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsServiceImpl = userDetailsService;
+    }
+}
+
+```
+
+
+
+### 2.1.6、SmsCodeAuthenticationToken
+
+`SmsCodeAuthenticationToken` 类：
+
+```java
+package com.cyw.backendmain.other;
+
+
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.SpringSecurityCoreVersion;
+import org.springframework.stereotype.Component;
+
+import java.util.Collection;
+
+
+public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
+
+    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+
+    /**
+     * 在 UsernamePasswordAuthenticationToken 中该字段代表登录的用户名，
+     * 在这里就代表登录的手机号码
+     */
+    private final Object principal;
+    private String checkCode;
+
+    /**
+     * 构建一个没有鉴权的 SmsCodeAuthenticationToken
+     */
+    public SmsCodeAuthenticationToken(Object principal) {
+        super(null);
+        this.principal = principal;
+        setAuthenticated(false);
+    }
+
+    /**
+     * 构建一个没有鉴权的 SmsCodeAuthenticationToken
+     */
+    public SmsCodeAuthenticationToken(Object principal,String checkCode) {
+        super(null);
+        this.principal = principal;
+        this.checkCode = checkCode;
+        setAuthenticated(false);
+    }
+
+    /**
+     * 构建拥有鉴权的 SmsCodeAuthenticationToken
+     */
+    public SmsCodeAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
+        super(authorities);
+        this.principal = principal;
+        super.setAuthenticated(true);
+    }
+
+    @Override
+    public Object getCredentials() {
+        return null;
+    }
+
+    @Override
+    public Object getPrincipal() {
+        return this.principal;
+    }
+
+    public String getCheckCode() {
+        return this.checkCode;
+    }
+
+    @Override
+    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+        if (isAuthenticated) {
+            throw new IllegalArgumentException(
+                    "Cannot set this token to trusted - use constructor which takes a GrantedAuthority list instead");
+        }
+
+        super.setAuthenticated(false);
+    }
+
+    @Override
+    public void eraseCredentials() {
+        super.eraseCredentials();
+    }
+}
+```
+
+
+
+### 2.1.7、登录成功-处理器：
+
+```java
+package com.cyw.backendmain.other;
+
+import com.cyw.backendmain.util.RedisBean;
+import com.cyw.backendmain.util.SmsUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Slf4j
+@Component
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+    @Autowired
+    private ObjectMapper objectMapper;
+    private SmsUtil smsUtil = new SmsUtil();
+
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        Authentication authentication)
+            throws IOException, ServletException {
+        log.info("登录成功！");
+        User userDetails = (User)authentication.getPrincipal();
+        // 这里的用户名就是数据库中的手机号
+        String username = userDetails.getUsername();
+        smsUtil.deleteSms(username);
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(authentication));
+    }
+}
+```
+
+
+
+
+
+### 2.1.8、登录失败-处理器
+
+```
+package com.cyw.backendmain.other;
+
+import com.cyw.backendmain.util.SmsUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Slf4j
+@Component
+public class CustomAuthenticationFailureHandler  implements AuthenticationFailureHandler {
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Resource
+    private SmsUtil smsUtil;
+
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request
+            , HttpServletResponse response
+            , AuthenticationException exception)
+            throws IOException, ServletException, JsonProcessingException {
+        log.info("登录失败！");
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(exception.getMessage()));
+    }
+}
+```
+
+
+
+### 2.1.9、控制层：
+
+```java
+package com.cyw.backendmain.controller;
+
+import com.cyw.backendmain.util.SmsUtil;
+import com.cyw.backendmain.vo.MyRst;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@Slf4j
+public class SmsController {
+    @Resource
+    private SmsUtil smsUtil;
+    
+    @RequestMapping("/sms/code")
+    public MyRst sms(@RequestParam("mobile") String mobile) {
+        if (mobile == null || "".equals(mobile) || mobile.length() != 11) {
+            return MyRst.fail("手机号格式错误！请重新输入！");
+        }
+        String code = smsUtil.createCode(mobile);
+        return MyRst.success("验证码生成成功！", code);
+    }
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+# 三、JWT 技术
+
+
+
+[阮一峰-JWT](https://ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html)
+
+
+
+## 1.1、JWT 概述
+
+
+
+> JWT 是什么？
+
+JWT （JSON Web Token）是通过数字签名的方式，在不同的终端之间安全传输JSON数据。
+
+
+
+
+
+
+
+<img src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220725171454587.png" />
+
+
+
+
+
+> JWT 的用途：
+
+JWT 一般可以作为一种认证授权的凭证，一旦用户登录，前端就可以接收到后端发送过来的 JWT Token，在之后的每个请求的请求头中，携带JWT Token，服务器在处理请求之前，需要先校验请求头中的 JWT Token。
+
+此外，JWT 可以用来在分布式系统中，解决Session共享困难的问题。
+
+
+
+
+
+> JWT 的结构：
+
+JWT 的Token 是一个String字符串，由三个部分组成（头部、载荷、签名），每个部分之间用小数点`.`分隔，一般使用`Base64`编码。
+
+
+
+（1）JWT Token 头部：
+
+```json
+{
+	"alg" : "HS256", # 加密算法(HMAC、SHA256、RSA)
+	"type" : "JWT"	 # 固定写法
+}
+```
+
+
+
+（2）JWT Token 载荷：
+
+```json
+{
+	"sub" : "123", 
+	"name" : "张三",    // 私有字段
+	"admin": true,	   // 私有字段
+}
+
+// 官方规定的7个字段（可选）
+// iss (issuer)：签发人
+// exp (expiration time)：过期时间
+// sub (subject)：主题
+// aud (audience)：受众
+// nbf (Not Before)：生效时间
+// iat (Issued At)：签发时间
+// jti (JWT ID)：编号
+```
+
+
+
+（3）JWT Token 签名，防篡改：（由头部、负载、自己定义的密钥等三部分，使用头部中的签名算法计算得到）
+
+```java
+// 后端
+// JWT签名
+String signature = HMACSHA256(
+    base64UrlEncode(header) + "." + base64UrlEncode(payload)
+    , secret);
+
+```
+
+
+
+## 1.2、JWT 使用
+
+
+
+[JWT介绍以及java-jwt的使用CSDN博客](https://blog.csdn.net/oscar999/article/details/102728303)
+
+ 
+
+
+
+<iframe height="550px" src="//player.bilibili.com/player.html?aid=839144769&bvid=BV1i54y1m7cP&cid=221620892&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+（1）引入Maven依赖：
+
+```xml
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+```
+
+
+
+（2）工具类：
+
+```java
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+（1）引入Maven依赖：
+
+```xml
+<!--引入JWT-->
+<dependency>
+    <groupId>com.auth0</groupId>
+    <artifactId>java-jwt</artifactId>
+    <version>3.10.0</version>
+</dependency>
+```
+
+
+
+（2）工具类：
+
+```java
+package com.cyw.rbac01.util;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
+import java.util.Date;
+import java.util.HashMap;
+
+public class JwtUtil {
+    // jwt的签名密钥（私有，不要外传）
+    private static final String tokenSecret = "123";
+    // 设为为5秒
+    private static final Date expireTime = new Date(System.currentTimeMillis()+5000);
+
+
+    // 创建JWT Token,传入jwt载荷的数据
+    public static String getToken(HashMap tokenData) {
+        String token = JWT.create()
+                .withClaim("tokenData",tokenData)
+                .withExpiresAt(expireTime)              //设置过期时间(单位：毫秒)
+                .sign(Algorithm.HMAC256(tokenSecret));  //使用HMAC算法，111111作为密钥加密
+        return token;
+    }
+    // 验证JWT Token的有效性
+    public static boolean verify(String token) {
+        try {
+            JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(tokenSecret)).build();
+            DecodedJWT decodedJWT = jwtVerifier.verify(token);
+//            String payload = decodedJWT.getPayload();
+//            System.out.println("解析后的jwt 载荷（）: ");
+//            System.out.println(payload);
+        } catch (JWTVerificationException exception) {
+            return false;
+        }
+        return true;
+    }
+
+}
+```
+
+
+
+（3）工具类测试：
+
+```java
+    @Test
+    public void test04(){
+        
+        HashMap map = new HashMap();
+        map.put("username", "张三");
+        map.put("age", "30");
+        
+        String tk = JwtUtil.getToken(map);
+        
+        // {"typ":"JWT","alg":"HS256"}
+        System.out.println(tk);	
+        
+        // 负载： {"tokenData":{"age":"30","username":"张三"},"exp":1658747306}
+        boolean verify = JwtUtil.verify(tk);        
+
+        System.out.println(verify);
+    }
+```
+
+
+
+
 
