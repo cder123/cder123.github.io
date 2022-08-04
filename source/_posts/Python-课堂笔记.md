@@ -1042,3 +1042,669 @@ arr2						# [1,2,['b',4]]
 
 
 
+
+
+
+
+# 二、Tkinter
+
+
+
+## 1、Tkinter 基本使用
+
+
+
+- https://zhuanlan.zhihu.com/p/75872830
+
+- [Tkinter教程（非常详细） (biancheng.net)](http://c.biancheng.net/tkinter/)
+
+
+
+
+
+### 1.1、主窗口
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    # 创建一个主窗体的对象
+    win = Tk()
+    
+    # 设置主窗体的左上角的标题
+    win.title("主窗体")
+    
+    # 设置主窗体的大小
+    win.geometry("400x300")
+    
+    # 让主窗体持续显示
+    win.mainloop()
+    
+
+if __name__ == '__main__':
+    main()
+```
+
+
+
+
+
+### 1.2、标签
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 创建一个标签对象，指定主窗体、显示文本、背景色、前景色（字体颜色）、字体及字体大小
+    lbl = Label(win,text="这是标签",bg="blue",fg="red",font=("Arial Bold", 25))    
+    
+    # 指定标签的存放位置
+    # ！！注意: 只有调用该方法后标签才能显示
+    lbl.grid(row=0,column=0)
+    
+    win.mainloop()
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+### 1.3、按钮
+
+
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    lbl = Label(win,text="这是标签",bg="blue",fg="red",font=("Arial Bold", 25),)
+    lbl.grid(row=0,column=0)
+
+	# 定义一个函数（用作按钮的事件）
+    def hello():
+        lbl.configure(text="按钮被点击了！")
+
+   	# 创建按钮，绑定点击事件
+    btn = Button(win,text="点击",bg="orange",command=hello)
+    btn.grid(row=1,column=2)
+
+    win.mainloop()
+
+
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+### 1.4、输入框
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    lbl = Label(win,text="这是标签",bg="blue",fg="red",font=("Arial Bold", 25),)
+    lbl.grid(row=0,column=0)
+
+    def hello():
+        lbl.configure(text="按钮被点击了！")
+    btn = Button(win,text="点击",bg="orange",command=hello)
+    btn.grid(row=1,column=2)
+
+    
+    # 创建一个输入框
+    entry = Entry(win,width=30)
+    # 设置放置的位置
+    entry.grid(row=1,column=0)
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+输入框+按钮+标签-案例：
+
+(1)效果：
+
+<img width="400px" src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220801085020401.png" />
+
+(2)代码：
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    # 主窗体
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 标签
+    lbl = Label(win,text="请输入：",bg="white",fg="black",font=("Arial Bold", 16),)
+    lbl.grid(row=0,column=0)
+
+    # 标签
+    rst_lbl = Label(win,text="结果为：",bg="white",fg="black",font=("Arial Bold", 16),)
+    rst_lbl.grid(row=1,column=1)
+
+    # 输入框
+    myEntry = Entry(win,width=30,)
+    myEntry.focus() # 自动聚焦
+    myEntry.grid(row=0,column=1)
+
+	# 按钮及其点击事件
+    def hello():
+        res = "结果为："+entry.get()
+        rst_lbl.configure(text=res)
+    btn = Button(win,text="点击",bg="orange",command=hello)
+    btn.grid(row=0,column=2)
+    
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+### 1.5、下拉框
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+from tkinter.ttk import Combobox
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 创建一个下拉框
+    combo = Combobox(win)
+    
+	# 将数据元组添加到下拉框
+    # ！！注意：'values'是固定写法，不能改
+    combo['values'] =(1,2,3,"下拉框")
+    
+    # 设置下拉框的默认选中值
+    combo.current(0)
+    # 获取当前被选中的值
+    curSelectVal = combo.get()
+    combo.grid(row=2,column=1)
+
+
+    win.mainloop()
+
+
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+### 1.6、复选框
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 创建选中状态
+    checkedState = BooleanVar() # 也可用 IntVar()，设置状态值时用0或1
+    checkedState.set(True)
+    
+    # 创建复选框
+    chk = Checkbutton(win,text="请选择",var=checkedState)
+    chk.grid(row=3,column=0)
+    
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+### 1.7、单选框
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300") 
+
+    
+    # 创建选中值的对象
+    selectValObj = StringVar()
+    # 设置默认的选中值
+    selectValObj.set("male")
+    
+    
+    # 创建被选中时，点击按钮调用的函数
+    def choosed():
+        print("单选框被点击了！",end=" ")
+        print(", 当前的选中的值为："+selectValObj.get())	
+
+        
+    # 创建2个单选框
+    radio1 = Radiobutton(win,text="男",value="male",variable=selectValObj,command=choosed)
+    radio2 = Radiobutton(win,text="女",value="female",variable=selectValObj,command=choosed)
+    radio1.grid(row=4,column=1)
+    radio2.grid(row=4,column=2)
+
+    
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+### 1.8、文本域
+
+
+
+```python
+from tkinter import *
+from tkinter import scrolledtext
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 创建文本域
+    txt = scrolledtext.ScrolledText(win,width=30,height=10)
+    txt.grid(row=5, column=0)
+    # 插入文本（）
+    txt.insert(INSERT, "在此插入文本！")
+    # 删除所有文本
+    txt.delete(1.0,END)
+
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+### 1.9、弹窗
+
+
+
+```python
+from tkinter import *
+from tkinter import messagebox
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    def getInfo():
+        messagebox.showinfo("弹窗标题", "弹窗内容")
+    btn2 = Button(win,text="开始弹窗",command=getInfo)
+    btn2.grid(row=5,column=0)
+
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+### 1.10、数字输入框
+
+
+
+相当于HTML标签中的 `<input type="number" />`
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 创建数字输入框
+    # sp = Spinbox(win,from_=1,to=100,width=10)
+    
+    # 创建数字输入框,指定点击上下箭头时切换到的值
+    # sp = Spinbox(win,values=(1,3,5,10),width=10)
+    # sp.grid(row=0,column=2)
+    
+    
+    # 指定默认值
+    defaultVal = IntVar()
+    defaultVal.set(25)
+    sp = Spinbox(win,from_=1,to=100,width=10,textvariable=defaultVal)
+    sp.grid(row=0,column=2)
+
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+### 1.11、进度条
+
+
+
+```python
+# Tkinter 教程：https://zhuanlan.zhihu.com/p/75872830
+
+from tkinter import *
+from tkinter.ttk import Progressbar
+
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 创建进度条的样式
+    style1 = ttk.Style()
+    style1.theme_use('default')
+    style1.configure("black.Horizontal.TProgressbar", background='black')
+
+    
+    # 创建进度条
+    bar = Progressbar(win,length=200,style="black.Horizontal.TProgressbar")
+
+    # 进度条到70%
+    bar['value'] = 70
+    
+
+    bar.grid(row=0,column=2)
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+### 1.12、文件对话框
+
+
+
+```python
+import os
+from tkinter import *
+from tkinter import filedialog
+
+def main():
+    win = Tk()
+    win.title("主窗体")
+    win.geometry("400x300")
+
+    # 单个文件
+    fileName = filedialog.askopenfilename()
+
+
+    # 单个文件,限制文件类型
+    fileName1 =  filedialog.askopenfilename(filetypes=(("文本文件","*.txt"),("所有文件","*.*")))
+
+
+    # 打开当前程序的所在目录
+    fileName2 =  filedialog.askopenfilename(initialdir=os.path.dirname(__file__))
+
+
+    # 多个文件
+    fileNames =  filedialog.askopenfilenames()
+
+
+    # 打开目录
+    dirName = filedialog.askdirectory()
+
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+## 2、案例
+
+
+
+### 2.1、随机人名生成工具
+
+
+
+该工具只完成了两个字的名字的生成。
+
+
+
+<img width="480" src="https://cyw-imgbed.oss-cn-hangzhou.aliyuncs.com/img/image-20220801133456930.png" />
+
+
+
+```python
+from tkinter import *
+from tkinter.ttk import *
+import random as rd
+from copy import *
+
+# 名
+lastNameList = ['而', '何', '乎', '乃', '其', '且', '若', '所', '为', '焉', '也', '以', '因', '于', '与', '则', '者', '之']
+
+
+
+
+def main():
+    win = Tk()
+    win.config(bg='#88CDD8')
+    win.title("主窗口")
+    win.geometry("600x500")
+    frame = Frame(win, relief=SUNKEN, borderwidth=2, width=450, height=250)
+    frame.pack(side=TOP, fill=BOTH, expand=1)
+
+    title = Label(frame, text="随机人名生成器", font=("YaHei", 18))
+    title.place(x=200, y=10)
+
+    firstNameInputTip = Label(frame, text="请选择姓氏：", font=("YaHei", 12))
+    firstNameInputTip.place(x=80, y=80)
+    firstNameCombo = Combobox(frame, width=5)
+    firstNameCombo.place(x=200, y=80)
+    firstNameCombo['values'] = ("赵", "钱", "孙", "李", "周", "吴", "郑", "王")
+    firstNameCombo.current(0)
+
+    sexTip = Label(frame, text="请选择性别：", font=("YaHei", 12))
+    sexTip.place(x=290, y=80)
+    selectVal = StringVar()
+    selectVal.set("male")
+    maleRadio = Radiobutton(frame, text="男", value="male", variable=selectVal)
+    femaleRadio = Radiobutton(frame, text="女", value="female", variable=selectVal)
+    maleRadio.place(x=400, y=80)
+    femaleRadio.place(x=450, y=80)
+
+    countTip = Label(frame, text="请选择生成个数：", font=("YaHei", 12))
+    countTip.place(x=80, y=110)
+    countVal = IntVar()
+    countVal.set(5)
+    sp = Spinbox(win,from_=1,to=100,width=10,textvariable=countVal)
+    sp.place(x=220,y=112)
+
+
+
+    resListBox = Listbox(frame,selectmode = MULTIPLE)
+    resListBox.place(x=80,y=140)
+
+    resCountLbl = Label(frame,text="总计（个）：0"+", 性别："+selectVal.get())
+    resCountLbl.place(x=250,y=150)
+
+
+
+    def getName(firstName, lastNameList=lastNameList, count=countVal.get()):
+        if count<1:
+            return None
+        resListBox.delete(0,count)
+        rawList = deepcopy(lastNameList)
+        res = set([])
+        idxList = rd.sample(range(0, len(rawList)), count)
+        for id in idxList:
+            res.add(firstName + rawList[id])
+        for i, item in enumerate(res):
+            resListBox.insert(i,item)
+        resCountLbl.configure(text="总计（个）：" + str(resListBox.size())+", 性别："+selectVal.get())
+
+    def clearName():
+        resListBox.delete(0,resListBox.size())
+        resCountLbl.configure(text="总计（个）：" + str(resListBox.size())+", 性别："+selectVal.get())
+
+    createFullNameBtn = Button(frame,text="随机生成",command=lambda: getName(firstNameCombo.get(),lastNameList=lastNameList,count=countVal.get()))
+    createFullNameBtn.place(x=340,y=110)
+
+    clearFullNameBtn = Button(frame,text="清空",command=clearName)
+    clearFullNameBtn.place(x=440,y=110)
+
+
+
+    win.mainloop()
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
+
+
+
+
+
+
+
+
+# 三、PyInstaller
+
+
+
+
+
+在**纯英文目录**下，安装：`pip install pyinstaller`
+
+
+
+```bash
+pyinstaller -D -p ./ -i ./logo.ico ./myUtils.py --noconsole
+
+-D:打包成多个文件
+-p：指定python安装包路径
+-i：指定图标，到网上下载一个图标,保存为logo.ico文件，
+myUtils.py：要打包的文件
+
+要打包的文件myUtils.py 与 要指定的图标logo.ico 必须放在同一个目录下
+-D与-F一一对应，-F是打包成一个单独的文件。
+最后一排加上--noconsole，就是无窗口运行。
+```
+

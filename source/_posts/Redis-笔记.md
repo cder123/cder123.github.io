@@ -1760,6 +1760,8 @@ public class PhoneCode {
 
 
 
+- [RedisTemplate操作Redis](https://blog.csdn.net/lydms/article/details/105224210)
+
 
 
 ## 1、Maven依赖
@@ -1810,6 +1812,8 @@ spring.redis.lettuce.pool.min-idle=0		# 最小连接
 
 
 
+教程：
+
 ```java
 @EnableCaching
 @Configuration
@@ -1822,7 +1826,8 @@ public class RedisConfig extends CachingConfigurerSupport {
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+          om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance ,
+                ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setConnectionFactory(factory);
 //key序列化方式
@@ -1841,7 +1846,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 //解决查询缓存转换异常的问题
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+         om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,
+                ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
         jackson2JsonRedisSerializer.setObjectMapper(om);
 // 配置序列化（解决乱码的问题）,过期时间600秒
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
@@ -1854,6 +1860,46 @@ public class RedisConfig extends CachingConfigurerSupport {
                 .build();
         return cacheManager;
     }
+}
+```
+
+
+
+
+
+解决乱码：
+
+```java
+@Configuration
+public class RedisConfig {
+
+    /**
+     * 解决Redis乱码问题
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Bean
+    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+
+        //重点在这四行代码
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
+
 }
 ```
 
@@ -1875,7 +1921,7 @@ public class RedisTestController {
     @GetMapping
     public String testRedis() {
         //设置值到redis
-        redisTemplate.opsForValue().set("name","学习java可看码农研究僧的博客地址，https://blog.csdn.net/weixin_47872288");
+        redisTemplate.opsForValue().set("name","学习aaa");
         //从redis获取值
         String name = (String)redisTemplate.opsForValue().get("name");
         return name;
@@ -2323,7 +2369,60 @@ RDB 就是在指定的<font style="color:red;">时间间隔</font>内，将内�
 
 
 
+。。。。。。。。。。
 
 
 
+
+
+
+
+
+
+# 报错解决
+
+
+
+## 1、Redis----(error) MISCONF
+
+
+
+```text
+错误：Redis----(error) MISCONF Redis is configured to save RDB snapshots
+
+
+解决方案：
+
+直接修改redis.conf配置文件，但是更改后需要重启redis。
+修改redis.conf文件：
+
+（1）vim打开redis-server配置的redis.conf文件，
+（2）使用快捷匹配模式：
+/stop-writes-on-bgsave-error定位到stop-writes-on-bgsave-error字符串所在位置，
+（3）把后面的yes设置为no。
+```
+
+
+
+
+
+## 2、解决SpringSecurity的自定义认证过滤器中无法注入 RedisTemplate的问题
+
+[解决SpringBoot项目，过滤器中注入redisTemplate(方案一)](https://blog.csdn.net/weixin_48568302/article/details/124429745)
+
+
+
+```java
+@Component
+public class RedisBean {
+    @Autowired
+    private RedisTemplate redisTemplate;
+ 
+    public static RedisTemplate redis;
+    @PostConstruct
+    public void getRedisTemplate(){
+        redis=this.redisTemplate;
+    }
+}
+```
 

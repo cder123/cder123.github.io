@@ -192,6 +192,11 @@ Principal 主体：登录系统来使用的人。
 
 Authentication 认证：证明自己是谁。（相当于登录功能）
 
+```java
+// 在非Security组件的地方访问用户数据AuthenticationToken就是用户数据（UserDetails的对象）
+AuthenticationToken SecurityContextHolder.getContext().getAuthentication();
+```
+
 
 
 
@@ -2709,12 +2714,11 @@ Maven配置：
 
 ### 2.1.1、封装验证码工具类
 
-`SmsUtil`-封装Redis的验证码生成工具类：
+`SmsUtil`-生成Redis的验证码生成工具类：
 
 ```java
 package com.cyw.backendmain.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -2821,9 +2825,9 @@ public class SmsUtil {
      * @param phone
      * @return
      */
-    public long getSmsExpire(String phone) {
+    public String getSmsExpire(String phone) {
         Long expire = redisTemplate.getExpire("checkCode:" + phone);
-        return expire;
+        return expire+"";
     }
 
     /**
@@ -2838,6 +2842,97 @@ public class SmsUtil {
 }
 
 ```
+
+
+
+
+
+短信配置：
+
+```yaml
+txsms:
+  appId: 1400714069
+  secretId: AKIDGMFtH5fYCblhOpz0oOioAJEwQhjVzGNF
+  secretKey: gR2QYR7jJk3IQTOBsUwJk6Khx52AD8qI
+  signName: 小cyw软工学习簿
+  templateId: 1490127
+```
+
+
+
+
+
+发送验证码的工具类：
+
+```java
+package com.cyw.backendmain.util;
+
+import com.tencentcloudapi.common.Credential;
+import com.tencentcloudapi.common.exception.TencentCloudSDKException;
+import com.tencentcloudapi.common.profile.ClientProfile;
+import com.tencentcloudapi.sms.v20210111.SmsClient;
+import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
+import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+
+@ConfigurationProperties(prefix = "txsms")
+@Data
+@Component
+public class SendSmsUtil {
+    private String appId;
+    private String secretId;
+    private String secretKey;
+    private String signName;
+    private String templateId;
+
+    /**
+     * @param checkCode      验证码
+     * @param expire         有效时长（分钟）
+     * @param phoneNumberSet 接收验证码的手机号数组（以+86开头）
+     * @return 执行结果
+     */
+    public String sendSms(String checkCode, String expire, String... phoneNumberSet) {
+        String rst = "";
+        try {
+            // 使用 secretId 和 secretKey
+            Credential cred = new Credential(this.secretId, this.secretKey);
+
+            // 固定写法
+            ClientProfile clientProfile = new ClientProfile();
+            clientProfile.setSignMethod("HmacSHA256");
+            SmsClient client = new SmsClient(cred, "ap-guangzhou", clientProfile);
+            SendSmsRequest req = new SendSmsRequest();
+
+            // 使用appId
+            req.setSmsSdkAppId(this.appId);
+            // 使用在腾讯云平台申请的短信签名（也就是验证码短信的中括号中的主体名）
+            req.setSignName(this.signName);
+            // 使用在腾讯云平台申请的短信内容模板的 ID
+            req.setTemplateId(this.templateId);
+            // 在短信模板中填充验证码和有效时间（模板有几个变量，数组元素个数就是几个）
+            String[] templateParamSet = {checkCode, expire};
+            req.setTemplateParamSet(templateParamSet);
+            // 设置要接收验证码的手机号数组
+            req.setPhoneNumberSet(phoneNumberSet);
+
+            // 开始发送验证码
+            SendSmsResponse res = client.SendSms(req);
+            rst = SendSmsResponse.toJsonString(res);
+        } catch (TencentCloudSDKException e) {
+            e.printStackTrace();
+        }
+        return rst;
+    }
+}
+
+```
+
+
+
+
 
 
 
@@ -2943,7 +3038,6 @@ import javax.annotation.Resource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig  extends SecurityConfigurerAdapter {
 
     @Resource
@@ -2991,7 +3085,7 @@ public class WebSecurityConfig  extends SecurityConfigurerAdapter {
         smsCodeAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
         http.addFilterAt(smsCodeAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
 
-        
+
         // 配置退出登录的规则
         http.logout().logoutUrl("/logout")
                 .logoutSuccessUrl("/index.html")
@@ -2999,7 +3093,7 @@ public class WebSecurityConfig  extends SecurityConfigurerAdapter {
 
         // 配置未授权页面的规则
         http.exceptionHandling().accessDeniedPage("/4xx.html");
-        
+
         // 配置登录规则
         http
                 .formLogin()
@@ -3014,7 +3108,7 @@ public class WebSecurityConfig  extends SecurityConfigurerAdapter {
                 // 允许以上url通过
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers("/sms/**", "/js/**", "/css/**","/login","/4xx.html")
+                .antMatchers("/sms/**", "/js/**", "/css/**","/login","/4xx.html","/error/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -3023,7 +3117,9 @@ public class WebSecurityConfig  extends SecurityConfigurerAdapter {
                 .disable();
         return http.build();
     }
+
 }
+
 ```
 
 
@@ -3044,19 +3140,11 @@ package com.cyw.backendmain.other;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.cyw.backendmain.other.SmsCodeAuthenticationToken;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -3089,6 +3177,7 @@ public class SmsCodeAuthenticationFilter extends UsernamePasswordAuthenticationF
                     "不支持该请求方法: " + request.getMethod());
         }
 
+        // 读取前端传过来的手机号和验证码
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
             StringBuffer sb=new StringBuffer();
@@ -3103,10 +3192,11 @@ public class SmsCodeAuthenticationFilter extends UsernamePasswordAuthenticationF
                 mobile = "";
             }
             mobile = mobile.trim();
-            SmsCodeAuthenticationToken authRequest = new SmsCodeAuthenticationToken(mobile, checkCode);
-            setDetails(request, authRequest);
+            // 构造一个空的用户信息交给provider操作
+            SmsCodeAuthenticationToken userAuthToken = new SmsCodeAuthenticationToken(mobile,checkCode,null,null);
+            this.setDetails(request, userAuthToken);
             // 传给Provider
-            return this.getAuthenticationManager().authenticate(authRequest);
+            return this.getAuthenticationManager().authenticate(userAuthToken);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -3114,8 +3204,8 @@ public class SmsCodeAuthenticationFilter extends UsernamePasswordAuthenticationF
         return null;
     }
 
-    protected void setDetails(HttpServletRequest request, SmsCodeAuthenticationToken authRequest) {
-        authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
+    protected void setDetails(HttpServletRequest request, SmsCodeAuthenticationToken userAuthToken) {
+        userAuthToken.setDetails(authenticationDetailsSource.buildDetails(request));
     }
 
     @Override
@@ -3135,6 +3225,7 @@ public class SmsCodeAuthenticationFilter extends UsernamePasswordAuthenticationF
 package com.cyw.backendmain.other;
 
 import com.cyw.backendmain.util.SmsUtil;
+import com.cyw.backendmain.vo.MyUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -3142,6 +3233,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
@@ -3184,10 +3276,9 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
         // 校验验证码的是否一致
         checkSmsCode(mobile,checkCode);
         // 调用Service层，从数据库中查用户数据
-        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(mobile);
-        // 此时鉴权成功后，应当重新 new 一个拥有鉴权的 authenticationResult 返回
-        SmsCodeAuthenticationToken userToken = new SmsCodeAuthenticationToken(userDetails, userDetails.getAuthorities());
-        userToken.setDetails(authenticationToken.getDetails());
+        MyUserDetails userDetails = (MyUserDetails)userDetailsServiceImpl.loadUserByUsername(mobile);
+         // 此时鉴权成功后，应当重新 new 一个拥有鉴权的 authenticationResult 返回
+        SmsCodeAuthenticationToken userToken = new SmsCodeAuthenticationToken(mobile,checkCode,userDetails, userDetails.getAuthorities());
         return userToken;
     }
 
@@ -3238,11 +3329,10 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 package com.cyw.backendmain.other;
 
 
+import com.cyw.backendmain.vo.MyUserDetails;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-import org.springframework.stereotype.Component;
-
 import java.util.Collection;
 
 
@@ -3255,33 +3345,27 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
      * 在这里就代表登录的手机号码
      */
     private final Object principal;
+    private MyUserDetails myUserDetails;
     private String checkCode;
 
     /**
      * 构建一个没有鉴权的 SmsCodeAuthenticationToken
      */
-    public SmsCodeAuthenticationToken(Object principal) {
-        super(null);
-        this.principal = principal;
-        setAuthenticated(false);
-    }
+//    public SmsCodeAuthenticationToken(Object principal,String checkCode) {
+//        super(null);
+//        this.principal = principal;
+//        this.checkCode = checkCode;
+//        setAuthenticated(false);
+//    }
 
     /**
-     * 构建一个没有鉴权的 SmsCodeAuthenticationToken
+     * 构建一个有鉴权的 SmsCodeAuthenticationToken
      */
-    public SmsCodeAuthenticationToken(Object principal,String checkCode) {
-        super(null);
-        this.principal = principal;
-        this.checkCode = checkCode;
-        setAuthenticated(false);
-    }
-
-    /**
-     * 构建拥有鉴权的 SmsCodeAuthenticationToken
-     */
-    public SmsCodeAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
+    public SmsCodeAuthenticationToken(Object principal,String checkCode,MyUserDetails myUserDetails, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
+        this.checkCode = checkCode;
         this.principal = principal;
+        this.myUserDetails = myUserDetails;
         super.setAuthenticated(true);
     }
 
@@ -3295,8 +3379,17 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
         return this.principal;
     }
 
+
     public String getCheckCode() {
         return this.checkCode;
+    }
+
+    public MyUserDetails getMyUserDetails() {
+        return myUserDetails;
+    }
+
+    public void setMyUserDetails(MyUserDetails myUserDetails) {
+        this.myUserDetails = myUserDetails;
     }
 
     @Override
@@ -3323,17 +3416,20 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
 ```java
 package com.cyw.backendmain.other;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.cyw.backendmain.pojo.MyUser;
+import com.cyw.backendmain.util.JwtUtil;
 import com.cyw.backendmain.util.RedisBean;
 import com.cyw.backendmain.util.SmsUtil;
+import com.cyw.backendmain.vo.MyRst;
+import com.cyw.backendmain.vo.MyUserDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -3351,13 +3447,24 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                                         HttpServletResponse response,
                                         Authentication authentication)
             throws IOException, ServletException {
+
         log.info("登录成功！");
-        User userDetails = (User)authentication.getPrincipal();
+        MyUserDetails userDetails = ((SmsCodeAuthenticationToken) authentication).getMyUserDetails();
+        // log.info("最终返回的的details: "+userDetails.toString());
+
         // 这里的用户名就是数据库中的手机号
-        String username = userDetails.getUsername();
+        String username = (String)authentication.getPrincipal();
+
+        // 生成JWT，设置到给前端的数据里
+        MyUser myUser = userDetails.getMyUser();
+        String token = JwtUtil.createToken(username);
+        myUser.setToken(token);
+        userDetails.setMyUser(myUser);
+
+        // 删除Redis中的验证码
         smsUtil.deleteSms(username);
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(authentication));
+        response.getWriter().write(objectMapper.writeValueAsString(MyRst.success("登录成功！",userDetails)));
     }
 }
 ```
@@ -3399,7 +3506,7 @@ public class CustomAuthenticationFailureHandler  implements AuthenticationFailur
     public void onAuthenticationFailure(HttpServletRequest request
             , HttpServletResponse response
             , AuthenticationException exception)
-            throws IOException, ServletException, JsonProcessingException {
+            throws IOException {
         log.info("登录失败！");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
@@ -3415,37 +3522,463 @@ public class CustomAuthenticationFailureHandler  implements AuthenticationFailur
 ```java
 package com.cyw.backendmain.controller;
 
+import com.cyw.backendmain.util.JwtUtil;
+import com.cyw.backendmain.util.SendSmsUtil;
 import com.cyw.backendmain.util.SmsUtil;
 import com.cyw.backendmain.vo.MyRst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @Slf4j
 public class SmsController {
-    @Resource
-    private SmsUtil smsUtil;
-    
+
+    private SmsUtil smsUtil = new SmsUtil();
+    @Autowired
+    private SendSmsUtil sendSmsUtil;
+
+    /**
+     * 生成短信验证码
+     * @param mobile
+     * @return
+     */
     @RequestMapping("/sms/code")
     public MyRst sms(@RequestParam("mobile") String mobile) {
         if (mobile == null || "".equals(mobile) || mobile.length() != 11) {
             return MyRst.fail("手机号格式错误！请重新输入！");
         }
         String code = smsUtil.createCode(mobile);
+        // 发送短信
+//        String rst = sendSmsUtil.sendSms(code, smsUtil.getSmsExpire(mobile), mobile);
+//        log.info("SMS调用结果："+rst);
         return MyRst.success("验证码生成成功！", code);
+//        return MyRst.success("验证码生成成功！");
+    }
+
+    /**
+     * 校验JWT令牌的有效性
+     * @param request
+     * @return
+     */
+    @GetMapping("/checkToken")
+    public boolean checkToken(HttpServletRequest request) {
+        String userToken = request.getHeader("Authentication");
+        return JwtUtil.checkToken(userToken);
     }
 }
 
+```
+
+
+
+
+
+
+
+## 2.2、Redis+Security 短信登录+密码登录
+
+
+
+该案例相比`案例2.1 Redis+Security 短信登录`的变动：
+
+> - SpringSecurity `配置文件`的变动
+> - `AuthenticationFilter`认证过滤器
+> - 新增一个密码登录的`Provider`
+> - `登录成功处理器`的变动
+
+
+
+
+
+（1）SpringSecurity  配置文件的变动：
+
+创建一个密码登录的 **Provider**，设置该 Provider 需要调用的 **UserDetailsService** 服务，将多种登录方式的 **provider列表** 交给**认证管理器**，认证管理器交给认证**过滤器管理**
+
+```java
+package com.cyw.backendmain.config;
+
+import com.cyw.backendmain.other.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig  extends SecurityConfigurerAdapter {
+
+    @Resource
+    private UserDetailsService userDetailsServiceImpl;
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    /**
+     * 使用用户名密码登录时的密码加密器
+     * @return
+     */
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web -> web.ignoring();
+    }
+
+    /**
+     * SpringSecurity的核心配置
+     * @param http
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // 执行顺序：
+        //      Filter =>
+        //          AuthenticationManager【providerManager】 =>
+        //              provider =>
+        //                  userDetailsServiceImpl【我们自己对框架接口的实现类】
+        //                      返回User数据【框架的封装User类，是UserDetails接口的实现类】
+        //                  => 决策：登录成功或失败（两个处理器），返回给浏览器数据        //
+
+        // 短信登录
+        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
+        
+        // 密码登录
+        PasswordAuthenticationProvider pwdAuthenticationProvider = new PasswordAuthenticationProvider();
+
+        // 分别设置两种登录方式需要调用的查询服务
+        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsServiceImpl);
+        pwdAuthenticationProvider.setUserDetailsService(userDetailsServiceImpl);
+
+        // 将多种登录方式的provider交给认证管理器
+        ArrayList<AuthenticationProvider> providerList = new ArrayList<>();
+        providerList.add(smsCodeAuthenticationProvider);
+        providerList.add(pwdAuthenticationProvider);
+        ProviderManager providerManager = new ProviderManager(providerList);
+
+        // 认证管理器交给认证过滤器管理
+        MyAuthenticationFilter myAuthenticationFilter = new MyAuthenticationFilter();
+        myAuthenticationFilter.setAuthenticationManager(providerManager);
+
+        // 配置登录成功和失败的处理器
+        myAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler);
+        myAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
+
+        http.addFilterAt(myAuthenticationFilter,UsernamePasswordAuthenticationFilter.class);
+
+
+        // 配置退出登录的规则
+        http.logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/index.html")
+                .permitAll();
+
+        // 配置未授权页面的规则
+        http.exceptionHandling().accessDeniedPage("/4xx.html");
+
+        // 配置登录规则
+        http
+                .formLogin()
+                .usernameParameter("mobile")
+                .passwordParameter("pwd")
+                // 自定义登录页
+                .loginPage("/index.html")
+                // 登录逻辑处理的 controller
+                .loginProcessingUrl("/login")
+                // 登录成功后跳转到的页面
+                .defaultSuccessUrl("/page/home.html")
+                .permitAll()
+                // 允许以上url通过
+                .and()
+                .authorizeHttpRequests()
+                .antMatchers("/sms/**", "/js/**", "/css/**","/login","/4xx.html","/error/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .cors()
+                .and()
+                .csrf()
+                .disable();
+        return http.build();
+    }
+}
+```
+
+
+
+（2）AuthenticationFilter 的变动：
+
+重载一个密码登录的`setDetails()`，
+
+在`attemptAuthentication()`方法中根据登录类型创建一个用于存放登录用户完整数据的令牌，
+
+将该空的令牌交给认证管理器，
+
+由认证管理器通过遍历`Provider列表`来选择一个合适的`Provider`（通过`provider`中的`supports()`来判断是否合适）调用`userDetailsService.loadUserByUsername()`进行数据库的查询。
+
+```java
+package com.cyw.backendmain.other;
+
+
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.cyw.backendmain.vo.PasswordAuthenticationToken;
+import com.cyw.backendmain.vo.SmsAuthenticationToken;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+@Slf4j
+public class MyAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    /**
+     * 是否仅 POST 方式
+     */
+    private boolean postOnly = true;
+
+    private StringRedisTemplate redisTemplate;
+
+    public MyAuthenticationFilter(StringRedisTemplate redisTemplate){
+        this.redisTemplate = redisTemplate;
+    }
+
+    public MyAuthenticationFilter(){
+
+    }
+
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        if (postOnly && !request.getMethod().equals("POST")) {
+            throw new AuthenticationServiceException(
+                    "不支持该请求方法: " + request.getMethod());
+        }
+
+        // 读取前端传过来的手机号和验证码
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+            StringBuffer sb=new StringBuffer();
+            String s=null;
+            while((s=br.readLine())!=null){
+                sb.append(s);
+            }
+            JSONObject jsonObject = JSONUtil.parseObj(sb.toString());
+            String loginType = jsonObject.getStr("loginType");
+            String mobile = jsonObject.getStr("mobile");
+            String pwd = jsonObject.getStr("pwd");
+            String checkCode = jsonObject.getStr("checkCode");
+            if (mobile == null) {
+                mobile = "";
+            }
+            if(loginType==null){
+                new Exception("登录方式错误，请使用短信验证码或密码登录！");
+            }
+            mobile = mobile.trim();
+			// 判断表单提交的数据中的登录类型
+            switch (loginType){
+                case "sms":{
+                    // 构造一个空的用户信息交给provider操作
+                    SmsAuthenticationToken authToken = new SmsAuthenticationToken(mobile,null,null,null);
+                    authToken.setCheckCode(checkCode);
+                    this.setDetails(request, authToken);
+                    return this.getAuthenticationManager().authenticate(authToken);
+                }
+                case "password":{
+                    PasswordAuthenticationToken authToken = new PasswordAuthenticationToken(mobile,null,null,null);
+                    authToken.setPwd(pwd);
+                    this.setDetails(request, authToken);
+                    return this.getAuthenticationManager().authenticate(authToken);
+                }
+                default:{
+                    new Exception("登录方式错误，请使用短信验证码或密码登录！");
+                }
+            }
+        } catch (IOException e) {            
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // 验证码登录
+    protected void setDetails(HttpServletRequest request, SmsAuthenticationToken userAuthToken) {
+        userAuthToken.setDetails(authenticationDetailsSource.buildDetails(request));
+    }
+    
+    // 密码登录
+    protected void setDetails(HttpServletRequest request, PasswordAuthenticationToken userAuthToken) {
+        userAuthToken.setDetails(authenticationDetailsSource.buildDetails(request));
+    }
+
+    @Override
+    public void setPostOnly(boolean postOnly) {
+        this.postOnly = postOnly;
+    }
+}
+```
+
+
+
+（3）密码登录的 provider：
+
+```java
+package com.cyw.backendmain.other;
+
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.cyw.backendmain.vo.PasswordAuthenticationToken;
+import com.cyw.backendmain.vo.SmsAuthenticationToken;
+import com.cyw.backendmain.vo.MyUserDetails;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+import javax.annotation.Resource;
+import java.util.Collection;
+
+@Slf4j
+@Component
+public class PasswordAuthenticationProvider implements AuthenticationProvider {
+    @Resource
+    private UserDetailsService userDetailsServiceImpl;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsServiceImpl = userDetailsService;
+    }
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        // 从Filter传入的用户输入的登录信息
+        PasswordAuthenticationToken unAuthToken = (PasswordAuthenticationToken) authentication;
+        String username = unAuthToken.getPrincipal();
+        String password = unAuthToken.getPwd();
+        if(StringUtils.isBlank(username)){
+            throw new UsernameNotFoundException("用户名(手机号)不可以为空");
+        }
+        if(StringUtils.isBlank(password)){
+            throw new BadCredentialsException("密码不可以为空");
+        }
+        //查询数据库获取用户信息
+        MyUserDetails userDetails = (MyUserDetails)userDetailsServiceImpl.loadUserByUsername(username);
+        //比较前端传入的密码明文和数据库中加密的密码是否相等
+        if (!bCryptPasswordEncoder.matches(password, userDetails.getPassword())) {
+            throw new BadCredentialsException("密码不正确");
+        }
+        PasswordAuthenticationToken authToken = new PasswordAuthenticationToken(username, password, userDetails, userDetails.getAuthorities());
+        return authToken;
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return PasswordAuthenticationToken.class.isAssignableFrom(authentication);
+    }
+}
+
+```
+
+
+
+（4）登录成功处理器：
+
+```java
+package com.cyw.backendmain.other;
+
+import com.cyw.backendmain.pojo.MyUser;
+import com.cyw.backendmain.util.JwtUtil;
+import com.cyw.backendmain.util.SmsUtil;
+import com.cyw.backendmain.vo.MyRst;
+import com.cyw.backendmain.vo.MyUserDetails;
+import com.cyw.backendmain.vo.PasswordAuthenticationToken;
+import com.cyw.backendmain.vo.SmsAuthenticationToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Slf4j
+@Component
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+    @Autowired
+    private ObjectMapper objectMapper;
+    private SmsUtil smsUtil = new SmsUtil();
+
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        Authentication authentication)
+            throws IOException, ServletException {
+
+        log.info("登录成功！");
+        MyUserDetails userDetails = null;
+        try {
+            // 密码登录
+            userDetails = ((PasswordAuthenticationToken) authentication).getMyUserDetails();
+            // 这里的用户名就是数据库中的手机号
+            String username = (String)authentication.getPrincipal();
+            // 生成JWT，设置到给前端的数据里
+            MyUser myUser = userDetails.getMyUser();
+            String token = JwtUtil.createToken(username);
+            myUser.setToken(token);
+            userDetails.setMyUser(myUser);
+
+        } catch (Exception e) {
+            // 短信登录
+            userDetails = ((SmsAuthenticationToken) authentication).getMyUserDetails();
+            // 这里的用户名就是数据库中的手机号
+            String username = (String)authentication.getPrincipal();
+            // 生成JWT，设置到给前端的数据里
+            MyUser myUser = userDetails.getMyUser();
+            String token = JwtUtil.createToken(username);
+            myUser.setToken(token);
+            userDetails.setMyUser(myUser);
+            // 删除Redis中的验证码
+            smsUtil.deleteSms(username);
+        }
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(MyRst.success("登录成功！",userDetails)));
+    }
+}
 ```
 
 
