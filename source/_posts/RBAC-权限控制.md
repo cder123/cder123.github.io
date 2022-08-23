@@ -209,6 +209,14 @@ Authorization 授权：分配权限
 
 
 
+### 1.1.3、Security Context Holder 对象
+
+
+
+`Security Context Holder `对象中，存放最后认证完的用户数据（包括权限）
+
+
+
 
 
 ## 1.2、SpringBoot 整合 SpringSecurity
@@ -1380,7 +1388,7 @@ SpringSecurity 的原理是利用了`过滤器链`
 
 - （1）自定义登录接口（可以考虑登录成功后的 JWT 存入Redis中）
 - （2）自定义查询数据库的方法
-- （3）自定义 JWT 认证过滤器（获取token、解析token、查询用户信息、存入security context holder对象中）
+- （3）自定义 JWT 认证过滤器（获取token、解析token、查询用户信息、存入<span style="color:red;">Security Context Holder</span>对象中）
 
 
 
